@@ -1,0 +1,28 @@
+
+‪#‎include‬ <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int main() {
+int T,L,B,i,area;
+scanf("%d",&T);
+while(T--)
+{
+scanf("%d%d",&L,&B);
+if(L>B)
+i=L;
+else
+i=B;
+while(i>0)
+{
+if(L%i == 0 && B % i == 0)
+{
+area = (L*B)/(i*i);
+break;
+}
+i--;
+}
+printf("%d\n",area);
+}
+return 0;
+}

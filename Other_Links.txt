@@ -1,0 +1,19 @@
+www.androidarsanal.com -> Android Libraries
+Android Ripple Attack -> RippleDrawable - Mask needs to be updated for an item to show ripple effect only for selected item
+SlidingTabLayout -> 
+
+Stackskills.com -> kpunith8@gmail.com -> PK@8.ancy
+deals.cultofandroid.com -> kpunith8@gmail.com -> PK@8.1ancy
+reddit.com -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
+codepen.io -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
+
+
+https://dzone.com/mobile-app-developer-tutorials-tools-news
+CloudBoost -> Library for storing images and downloading images 
+
+/* Multiple inputs */
+
+while(testCases > 0){
+
+	testCases--;	
+}

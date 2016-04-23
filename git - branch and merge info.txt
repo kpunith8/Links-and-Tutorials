@@ -1,0 +1,208 @@
+(Check this youtube video and linked Videos)
+https://www.youtube.com/watch?v=oFYyTZwMyAg
+
+
+Clone the git project into your local system:
+
+GO to the repository,
+
+$cd repository
+
+$ git branch // Lists all the branches in the local repository
+
+/*** Create new Branch and checkit to it
+
+$ (master)git checkout -b ACADPLY-2901  // -b creates the branch and checks to that branch
+
+/*** push the created branch to remote
+
+$ git push origin ACADPLY-2901 // Asks for username and password, Creates branch in remote repository
+
+
+/**** Make changes in the the local repo, that will be affected to ACADPLY-2901
+
+/*** After the changes add the files to ACADPLY-2901 and commit and push it.
+
+$ (ACADPLY-2901) git add .
+$ (ACADPLY-2901) git commit -m "Changes made"
+$ (ACADPLY-2901) git push origin ACADPLY-2901 // Pushes files to remote
+
+/*** Create Stable Branch as explained above
+$ (master) git checkout -b Stable_PK
+
+/*** Push it
+$ (master) git push origin Stable_PK // asks for username and password, creates branch in remote repository
+
+**** If you have 2 working branches and want to merge it and then push it to Stable_PK follow the below steps.
+
+
+/*** Merge it with another (Say, ACADPLY-2902)
+/*** merge the changes from ACADPLY-2902 to ACADPLY-2901
+
+$ (ACADPLY-2901) git merge ACADPLY-2902 
+
+/*** Push the changes to remote ACADPLY-2901 
+
+$(ACADPLY-2901) git push origin ACADPLY-2901
+
+/*** Pull from other branch 
+$ (ACADPLY-2901) git pull origin ACADPLY-2902 
+
+/****Finally merge your Stable_PK with updated changes from ACADPLY-2901 (already merged with ACADPLY-2902)
+$ (Stable_PK) git merge ACADPLY-2901
+
+/*** Finally push it to Stable_PK
+$ (Stable_PK) git push origin Stable_PK
+
+
+/**** If you have created branches in remote, pull it using
+$(master) git pull
+	It shows the follwing message
+	from https://<The_Link>
+		*[new branch] Sample -> origin/Sample
+	Already up-to-date
+
+/*** To make it visible in local, first checkout to that branch
+$(master) git checkout Sample
+
+$(Sample) git branch 
+	** It will now list the new brach pulled from master
+	
+
+**** Deleting created branch from remote and local ****
+
+$(master) git push origin :<brach_name>
+
+**NOTE** Though branches are deleted from remote repo, branch are shown in local repo to delete them in local repo use the following
+
+$ (master) git branch -d <brach_name>  
+	* -d option deletes the branch
+	*NOTE* use -D option if your branch is merged with master or use -d option
+
+----------------------------------------
+** Caching your GitHub password in Git 
+----------------------------------------
+
+If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username 
+and password every time it talks to GitHub.
+
+If you clone GitHub repositories using SSH, then you authenticate using SSH keys instead of a username and password.
+ For help setting up an SSH connection, see Generating SSH Keys.
+
+If you prefer working with the command line, you can also install a native Git shell, such as msysgit. 
+With msysgit, running the following in the command line will store your credentials:
+
+>	git config --global credential.helper wincred
+
+-------------------------------------------------------------------
+Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
+-------------------------------------------------------------------
+
+$ (branch) git show  <commit_hash>
+	* Shows the information about current commit if no arguments passed to it, if commit hash passed it shows more info about that commmit
+
+$ (branch) git blame <file_name_in_that_branch>
+	* For each line of the file, blame will find the last commit to edit the line and commit hash, author,date of commit
+
+----------------------------------------------------------------------------------------------------------------------------
+** Cherry-pick -- moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
+----------------------------------------------------------------------------------------------------------------------------
+
+$ (master) git show
+	-- copy the commit hash (copy first 6 or 7 chars, it is sufficient to pass it as argument to cherry-pick)
+
+$ (master) git checkout feature
+
+$ (feature) git cherry-pick <commit-hash> 
+
+	* It creates the an entirely new commit based off the original commit and its commit message and it doesn't delete the original commit
+
+Once the new commit is created in 'feature', delete the old commit in 'master' by running
+
+$ (master) git reset --hard HEAD^
+
+	-- HEAD 	== 	The Commit I'm currently sitting on
+	-- HEAD^ 	== 	The commit's parent
+	-- HEAD^^	==	This commi's grand parent
+	-- HEAD~5 	== 	Five commits back from the current commit, it is equivalent to HEAD^^^^^
+---------
+** Rebase 
+---------
+
+-- 	Command for changing the history
+-- 	Never change history when other people are working on your branch, unless they know you're doing so
+--	Never change history on 'master'
+--	Best Practice: Only change the history for commits that have not yet been pushed
+
+eg: 'master' has changed since I started my feature and I want to bring my branch up to date with master
+
+-- rebase finds the merge base, cherry-picks all the commits, and reassings the branch pointer 
+
+$ (feature) git rebase master
+
+ -- It may through error like commits are diverged and if you try to push it won't allow then force push the commit in the feature
+ 
+ $ (feature) git push -f
+ 	-- If it shows merge conflicts -> check the status of the branch
+
+ $(feature) git status  -> it shows the conflicts in the 'feature' if any  
+
+ if you are in the middle of rebase and got conflicts, resolve the conflicts manually (conflicts looks similar to merge conflicts, resolving merge conflicts creates new commit, while rebase is not), or you can cherry-pick to resolve conflicts, then run
+
+ $ (feature) git rebase --continue
+
+ if you want to rebase later and fix the conflict later, run
+
+ $ (feature) git rabase --abort
+
+--------
+** reflog - it shows commits in order of when you lasted referenced them
+--------
+
+If you are changing the history reflog is best command
+
+$(feature) git reset --hard <commit-hash> to reset the branch pointer to the commit
+
+------------------------
+Squashing and Splitting
+------------------------
+-- If you have forgotten to add files to this commit then
+
+$ (feature) git add missed-file.txt
+$ (feature) git commit --amend 
+	-- Makes a new commit with new file added, and replaces the most recent commit with new one. 
+
+If you want to squash more commits to one commit then use,
+
+$(feature) git rebase --interactive HEAD~5 
+	-- It opens the editor with last five commits showing the action to be performed on them, rename action 'pick' to 'squash' on the commits. 
+		(press 'i' in the keyboard  to edit the file in the editor and to save and quit the editor, press 'escape' button to come out of editing mode to normal mode then type :wq -> this commands will saves the file and quits the editor -- This editor behaves more like vi/vim editor in Linux)
+	-- Close the editor and it asks for new commit message, enter some message and save and quit the editor.
+
+-- Squashing commits changes history
+
+** Splitting commits into small commits
+$ (feature) git rebase --interactive
+
+	-- Change 'pick' to 'edit' for the commit to make changes to save and quit the editor,
+
+$ (feature) git rebase -i HEAD~3  -> git will pause in the rebase process to create new commits
+
+Then reset the commits using
+
+$ (feature) git reset HEAD^  -- Don't use --hard option it may change the commit
+$ (feature) git status - will show all the files in its parent commit
+-- Add the files separately or in one commit with message and run
+
+$ (feature) git rebase --continue
+
+
+
+
+
+
+
+-------------------------------
+** Git KT - 19-02-2016 - Tejas
+-------------------------------
+
