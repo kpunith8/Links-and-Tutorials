@@ -127,3 +127,46 @@ HTML, CSS, JQUERY -> freecodecamp.com
 	--	An easy way to append data to the end of an array is via the 'push()' function.
 
 	--	'pop()' is used to "pop" a value off of the end of an array. We can store this "popped off" value by assigning it to a variable
+
+	--	Use the '.shift()' function to remove the first item from an array.
+
+	--	'.unshift()' works exactly like '.push()', but instead of adding the element at the end of the array, unshift() adds the element at the 	beginning of the array.
+
+	--	var testObj = {
+	  		"hat": "ballcap",
+	  		"shirt": "jersey",
+	  		"shoes": "cleats"
+		};
+
+		Creating objects: testObj.hat; // has is the property 
+		or testObj["hat"]; 
+
+	--	Adding new property to Object ex: testObj as follows, testObj.trouser = "Slim";
+
+	--	Changing the property of the object ex: testObj.hat = "New Ball Cap";
+
+	--	Delete properties from objects like this:
+			ex: delete objName.propertyName;
+
+	--	Check if the property of a given object exists or not. We can use the '.hasOwnProperty(propname)' method of objects to determine if that 	 object has the given property name. .hasOwnProperty() returns true or false if the property is found or not.
+		ex: myObj.hasOwnProperty(propName);
+
+	--	Nested JSON Objects
+		var ourStorage = {
+			"desk": {
+			"drawer": "stapler"
+			},
+			"cabinet": {
+			"top drawer": {
+			"folder1": "a file",
+			"folder2": "secrets"
+			},
+			"bottom drawer": "soda"
+			}
+		}
+
+		Accessing nested JSON object,
+
+			ourStorage.cabinet["top drawer"].folder2; // "secrets"
+			ourStorage.desk.drawer; // "stapler"
+	
