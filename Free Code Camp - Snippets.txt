@@ -169,4 +169,43 @@ HTML, CSS, JQUERY -> freecodecamp.com
 
 			ourStorage.cabinet["top drawer"].folder2; // "secrets"
 			ourStorage.desk.drawer; // "stapler"
-	
+
+	-- 	Regular expressions are used to find certain words or patterns inside of strings.
+		ex: testString.match(expression);
+
+		For example, if we wanted to find the word the in the string 'The dog chased the cat', we could use the following regular expression: '/the/gi'
+
+		Let's break this down a bit:
+
+			'/' is the start of the regular expression.
+
+			'the' is the pattern we want to match.
+
+			'/' is the end of the regular expression.
+
+			'g' means global, which causes the pattern to return all matches in the string, not just the first one.
+
+			'i' means that we want to ignore the case (uppercase or lowercase) when searching for the pattern.	
+
+	--	We can use special selectors in Regular Expressions to select a particular type of value.
+
+		One such selector is the 'digit selector \d' which is used to 'retrieve one digit' (e.g. numbers 0 to 9) in a string.
+
+		In JavaScript, it is used like this: '/\d/g'.
+
+		Appending a plus sign (+) after the selector, e.g. '/\d+/g', allows this regular expression to 'match one or more digits'.
+
+		The trailing 'g' is short for 'global', which allows this regular expression to find all matches rather than stop at the first match.
+
+	--	We can also use regular expression selectors like '\s' to find 'whitespace' in a string.
+
+	--	'Invert' any match by using the 'uppercase version' of the regular expression selector. for ex: 'S' - Match anything that is not white 		space
+
+	--	Constructors in JavaScript, 'this' variable refers to the new object being created by the consturctor.
+			ex: var car = function() {
+				this.wheels = 2;
+				this.engines = 1;
+				this.seats = 2;
+			}
+
+	--	
