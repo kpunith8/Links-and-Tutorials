@@ -208,4 +208,83 @@ HTML, CSS, JQUERY -> freecodecamp.com
 				this.seats = 2;
 			}
 
-	--	
+	--	The 'map' method will iterate through every element of the array, creating a new array with values that have been modified by the   		callback function, and return it. Note that it does not modify the original array.
+
+		Usage:  var oldArray = [1,2,3,4,5];
+
+				var newArray = oldArray.map(function(val) { // adds 3 to each element of the array
+					return val + 3; 
+				});
+
+	--	The array method 'reduce' is used to 'iterate through an array and condense it into one value'.
+		To use 'reduce' you pass in a callback whose arguments are an accumulator (in this case, previousVal) and the current value (currentVal).
+		'reduce' has an 'optional second argument' which can be used to set the initial value of the accumulator. If no initial value is specified it will be the first array element and currentVal will start with the second array element.
+
+		Usage:	var singleVal = array.reduce(function(previousVal, currentVal) {
+  					return previousVal - currentVal;
+				}, 0);	
+
+	--	The 'filter' method is used to iterate through an array and filter out elements where a given condition is not true.
+		'filter' is passed a callback function which takes the current value (we've called that val) as an argument.
+
+		An example of using filter to remove array elements that are equal to five:
+
+		Usage:	array = array.filter(function(val) {
+  					return val !== 5;
+				});
+
+	--	Use the method 'sort' to easily sort the values in an array 'alphabetically' or 'numerically'.
+
+		Usage: sort method and a callback methood to sort the elemets in ascending order
+
+				var newArray = oldArray.sort(function(a,b){
+					return a - b;
+				});
+	
+	--	Use the method 'reverse' to reverse an array.
+
+	--	'concat' can be used to merge the contents of two arrays into one.			
+
+	--	Use the 'split' method to split a 'string into an array'.
+
+		Splitting an string with space, var newString = oldString.split(' ');
+
+	--	Use the 'join' method to join each element of an array into a string separated by whatever delimiter you provide as an argument.
+
+		ex: var joinMe = ["Split","me","into","an","array"];
+			var joinedString = ' ';
+
+			joinedString = joinMe.join(joinedString); // Joins the string with spaces
+
+	**	Algorithms:
+
+		 Palindrome: Remove all non-alphanumeric characters (punctuation, spaces and symbols) and turn everything lower case in order to check for palindromes.
+
+		 function palindrome(str) {
+
+		  var newStr = str.replace(/[^A-Za-z0-9]+/g,"").toLowerCase();
+		  var len = newStr.length;
+		    for ( var i = 0; i < Math.floor(len/2); i++ ) {
+		        if (newStr[i] !== newStr[len - 1 - i]) {
+		            return false;
+		        }
+		    }
+		    return true;
+		  }
+
+	-- Find the longest word in a string
+
+		function findLongestWord(str) {
+  
+		    var str1 = str.split(" ");
+		    var longest = 0;
+		    var word = null;
+		  
+		    for (var i = 0; i < str1.length; i++) {
+		        if (longest < str1[i].length) {
+		            longest = str1[i].length;
+		            word = str1[i];
+		        }
+		    }
+		    return word.length;
+		}
