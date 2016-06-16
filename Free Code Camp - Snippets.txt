@@ -288,3 +288,64 @@ HTML, CSS, JQUERY -> freecodecamp.com
 		    }
 		    return word.length;
 		}
+
+	-- Title case a sentence
+
+		function titleCase(str) {
+ 
+  			return str.replace(/\w\S*/g, function(txt) {
+		      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		  });
+		}
+
+	--	JSON data access using jQuery
+
+	$.getJSON("/json/cats.json", function(json) {
+		$(".message").html(JSON.stringify(json));
+	});
+
+	-- use the .forEach() method to loop through the data
+
+	var html = "";
+
+	json.forEach(function(val) {
+
+          html += "<div class = 'cat'>"
+
+          html += "<img src = '" + val.imageLink + "'>"
+
+          html += "</div>"
+
+        });
+
+    -- Code to access user location:
+
+      if (navigator.geolocation) {
+    	navigator.geolocation.getCurrentPosition(function(position) {
+    	$("#data").html("latitude: " + position.coords.latitude +     "<br>longitude: " + position.coords.longitude);
+  	});
+
+  	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

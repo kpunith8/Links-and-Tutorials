@@ -7,6 +7,17 @@ deals.cultofandroid.com -> kpunith8@gmail.com -> PK@8.1ancy
 reddit.com -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
 codepen.io -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
 
+genymotion -> kpunith8@gmail.com -> Apk@
+
+000webhost.com -> kpunith8@gmail.com -> puth@85ancy -> Database Password Changed -> Apk85 -> Change the data base password to access the data in scripts
+
+facebook -> Ap@05
+
+Udacity -> Android and Firebase tutorials
+
+
+Docker -> 
+
 
 https://dzone.com/mobile-app-developer-tutorials-tools-news
 CloudBoost -> Library for storing images and downloading images 
@@ -17,3 +28,4 @@ while(testCases > 0){
 
 	testCases--;	
 }
+

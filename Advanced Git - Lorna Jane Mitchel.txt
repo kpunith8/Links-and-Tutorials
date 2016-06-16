@@ -1,0 +1,53 @@
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit (feature/version-2)
+$ cd .git/
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git (GIT_DIR!)
+$ ls
+COMMIT_EDITMSG  FETCH_HEAD  HEAD  ORIG_HEAD  config  description  hooks/  index  info/  logs/  objects/  packed-refs  refs/
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git (GIT_DIR!)
+$ cd refs/
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs (GIT_DIR!)
+$ ls
+heads/  remotes/  tags/
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs (GIT_DIR!)
+$ cd heads/
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs/heads (GIT_DIR!)
+$ ls
+feature/  master
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs/heads (GIT_DIR!)
+$ cd master
+bash: cd: master: Not a directory
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs/heads (GIT_DIR!)
+$ cat master
+e044df44162f74d0e956e1c57c07f614b5c66a6f
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs/heads (GIT_DIR!)
+$ cd feature/
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs/heads/feature (GIT_DIR!)
+$ ls
+version-1  version-2
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs/heads/feature (GIT_DIR!)
+$ cat version-1
+7f7c740c4bb0b6ab3ae59df3e68aab155ddcfb4c
+
+PK043505@WIN1508396 MINGW32 ~/Desktop/LearnGit/.git/refs/heads/feature (GIT_DIR!)
+$ cat version-2
+e044df44162f74d0e956e1c57c07f614b5c66a6f
+
+Git alias
+
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+
+$git config --global alias.co 'commit -m '

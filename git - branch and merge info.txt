@@ -1,10 +1,36 @@
 (Check this youtube video and linked Videos)
 https://www.youtube.com/watch?v=oFYyTZwMyAg
 
+https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/merge-conflicts
+
+
+git config --global core.editor "vim"
+
+
+$ git fetch origin
+
+--	fetch only downloads new data from a remote repository - but it doesn't integrate any of this new data into your working files.
+	fetch will never manipulate, destroy, or screw up anything. This means you can never fetch often enough.
+
+$ git pull origin master -- it does 'git fetch' followed by 'git merge'
+
+--	updates current HEAD branch with the latest changes from the remote server. This means that pull not only downloads new data; it also directly integrates it into your current working copy files. 
+
+	This has a couple of consequences:
+
+	1)	Since "git pull" tries to merge remote changes with your local ones, a so-called "merge conflict" can occur.
+
+	2)	It is highly recommended to start a "git pull" only with a clean working copy. This means that you should not have any uncommitted local 	 changes before you pull.
+
+Resolving Merge Conflicts:
+--------------------------
+	--	if two people changed the same lines in that same file, or if one person decided to delete it while the other person decided to modify 
+		it, Git simply cannot know what is correct.
+
 
 Clone the git project into your local system:
 
-GO to the repository,
+Go to the repository,
 
 $cd repository
 
@@ -108,6 +134,8 @@ $ (branch) git blame <file_name_in_that_branch>
 ** Cherry-pick -- moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
 ----------------------------------------------------------------------------------------------------------------------------
 
+-- git cherry-pick doesn’t alter the existing history within a repository; instead, it adds to the history. As with other Git operations that introduce changes via the process of applying a diff, you may need to resolve conflicts to fully apply the changes from the given commit .
+
 $ (master) git show
 	-- copy the commit hash (copy first 6 or 7 chars, it is sufficient to pass it as argument to cherry-pick)
 
@@ -115,7 +143,7 @@ $ (master) git checkout feature
 
 $ (feature) git cherry-pick <commit-hash> 
 
-	* It creates the an entirely new commit based off the original commit and its commit message and it doesn't delete the original commit
+	* It creates an entirely new commit based off the original commit and its commit message and it doesn't delete the original commit
 
 Once the new commit is created in 'feature', delete the old commit in 'master' by running
 
@@ -125,9 +153,11 @@ $ (master) git reset --hard HEAD^
 	-- HEAD^ 	== 	The commit's parent
 	-- HEAD^^	==	This commi's grand parent
 	-- HEAD~5 	== 	Five commits back from the current commit, it is equivalent to HEAD^^^^^
+	
 ---------
 ** Rebase 
 ---------
+https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview
 
 -- 	Command for changing the history
 -- 	Never change history when other people are working on your branch, unless they know you're doing so
@@ -140,7 +170,7 @@ eg: 'master' has changed since I started my feature and I want to bring my branc
 
 $ (feature) git rebase master
 
- -- It may through error like commits are diverged and if you try to push it won't allow then force push the commit in the feature
+ -- It may throw error like commits are diverged and if you try to push it won't allow then force push the commit in the feature
  
  $ (feature) git push -f
  	-- If it shows merge conflicts -> check the status of the branch
@@ -160,6 +190,8 @@ $ (feature) git rebase master
 --------
 
 If you are changing the history reflog is best command
+
+$ git checkout <hash> 
 
 $(feature) git reset --hard <commit-hash> to reset the branch pointer to the commit
 
@@ -181,28 +213,27 @@ $(feature) git rebase --interactive HEAD~5
 
 -- Squashing commits changes history
 
-** Splitting commits into small commits
-$ (feature) git rebase --interactive
+--	Change the actions 'pick' from 'squash' for all the commits you wanted to squash them in to one
 
-	-- Change 'pick' to 'edit' for the commit to make changes to save and quit the editor,
+** Splitting commits into small commits
 
 $ (feature) git rebase -i HEAD~3  -> git will pause in the rebase process to create new commits
 
-Then reset the commits using
+	-- Change 'pick' to 'edit' for the commit to make changes to save and quit the editor,
+
+Then pop off the commit using,
 
 $ (feature) git reset HEAD^  -- Don't use --hard option it may change the commit
-$ (feature) git status - will show all the files in its parent commit
--- Add the files separately or in one commit with message and run
+ 
+ 	-- files added in that commit are in staged area and check with the command
+
+$ (feature) git status - will show all the files in its parent commit.
+
+If that commit contains more files then you can add one file and commit individually.
+
+$ (feature) git add <file1>
+$ (feature) git commit -m "Sample"
 
 $ (feature) git rebase --continue
 
-
-
-
-
-
-
--------------------------------
-** Git KT - 19-02-2016 - Tejas
--------------------------------
-
+Skipped 'bisect' command which tells which commit broke the build.
