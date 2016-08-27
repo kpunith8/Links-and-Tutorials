@@ -1,0 +1,3 @@
+IntelliJ Shortcuts:
+
+Ctrl+W -> To easily evaluate the value of any expression while debugging the program and press Alt+F8.

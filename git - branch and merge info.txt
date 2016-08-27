@@ -61,6 +61,9 @@ $ (master) git push origin Stable_PK // asks for username and password, creates 
 
 **** If you have 2 working branches and want to merge it and then push it to Stable_PK follow the below steps.
 
+$ git merge --no-ff myfeature 
+
+	- The --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature
 
 /*** Merge it with another (Say, ACADPLY-2902)
 /*** merge the changes from ACADPLY-2902 to ACADPLY-2901
@@ -237,3 +240,58 @@ $ (feature) git commit -m "Sample"
 $ (feature) git rebase --continue
 
 Skipped 'bisect' command which tells which commit broke the build.
+
+
+Squash commits into feature:
+---------------------------
+$ git rebase -i HEAD~5 (or you can get commit hash till which commit you want to rebase with), to see the commits, run $git log
+ <select commits to squash and enter commit message>
+
+once done force-push your changes to remote:
+
+$ git push -f origin <feature-branch>
+
+
+
+Before Cherry-picking a commit on build or target branch:
+---------------------------------------------------------
+
+$ git fetch origin build
+
+$ git reset --hard origin/build
+git 
+$ git cherry-pick "commit-hash" 
+
+get commit hash from the target branch
+
+if any conflicts, resolve manually and add them to index and continue the cherry-pick using,
+
+$ git cherry-pick --continue
+
+once done push changes to remote branch
+
+$ git push origin <build>
+
+
+To remove the commit:
+----------------------
+
+$ git rebase -i HEAD~2
+
+select <drop> in the next window except the one you needed, 
+
+$ git push -f origin <branch_name>
+
+
+Creating pull request to dev:
+-----------------------------
+
+-- 	pull the changes from dev to local - $(dev) git pull origin dev
+
+--	Go to your branch, rebase dev over your brnach
+	
+	--	$(feature) git rebase dev
+
+		if you get any conflicts resolve and continue the rebase, then force push the changes to your branch
+
+-- Once changes pushed, go to repo in the github, create pull request and get atleast 2 +1's

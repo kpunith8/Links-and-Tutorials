@@ -1,3 +1,9 @@
+Oracle Docs:
+
+https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions022.htm
+
+http://zippyopinion.com --> kpunith8@gmail.com -> Apk@ -> opinion to get vouchers
+
 www.androidarsanal.com -> Android Libraries
 Android Ripple Attack -> RippleDrawable - Mask needs to be updated for an item to show ripple effect only for selected item
 SlidingTabLayout -> 
@@ -15,9 +21,11 @@ facebook -> Ap@05
 
 Udacity -> Android and Firebase tutorials
 
+https://confengine.com/ -> Ak@85
 
 Docker -> 
 
+http://javacodegeeks.tradepub.com/
 
 https://dzone.com/mobile-app-developer-tutorials-tools-news
 CloudBoost -> Library for storing images and downloading images 
@@ -28,4 +36,31 @@ while(testCases > 0){
 
 	testCases--;	
 }
+
+https://www.hsph.harvard.edu/nutritionsource/
+
+https://examples.javacodegeeks.com/category/software-development/git/
+
+
+Multifly any number by 11:
+--------------------------
+
+4567 X 11
+
+Keep the last and first digit as is and add the 2 digits from right to left to get the number in between, add the carry to the sum of the next number.
+
+Answer:
+
+50237
+
+Square a number which is ending with 5:
+--------------------------------------
+
+45
+
+4 X (4+1) | 5 X 5
+------------------
+4X5|25
+------
+2025
 

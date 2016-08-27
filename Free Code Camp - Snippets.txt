@@ -325,7 +325,29 @@ HTML, CSS, JQUERY -> freecodecamp.com
     	$("#data").html("latitude: " + position.coords.latitude +     "<br>longitude: " + position.coords.longitude);
   	});
 
-  	
+--------------------------
+Object Oriented Javascript
+--------------------------
+
+Scopes:
+
+var hero = new aHero();
+
+var fn = function(){
+	var	foo = new Foo(); // If foo is assigned without var, by default it will create a global variable of type foo and it is not recommended
+
+	log	(foo);
+};
+
+variables with in the function scope has local scope and if variables decalred under any if(){} or other conditionals loops have a global access
+
+if(condition){
+	var firstName = "Punith";
+}
+
+log(firstName); // firstName is still has a global scope
+
+Lexical scope VS Execution context (in memory scopes)
 
 
 
