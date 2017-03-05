@@ -3,6 +3,10 @@ https://www.youtube.com/watch?v=oFYyTZwMyAg
 
 https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/merge-conflicts
 
+https://git-scm.com/book/en/v1/Git-Tools-Stashin_
+
+http://jebaird.com/2013/07/08/setting-up-kdiff3-as-the-default-merge-tool-for-git-on-windows.html
+https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 git config --global core.editor "vim"
 
@@ -32,6 +36,8 @@ Clone the git project into your local system:
 
 Go to the repository,
 
+http://jebaird.com/2013/07/08/setting-up-kdiff3-as-the-default-merge-tool-for-git-on-windows.html
+
 $cd repository
 
 $ git branch // Lists all the branches in the local repository
@@ -43,7 +49,6 @@ $ (master)git checkout -b ACADPLY-2901  // -b creates the branch and checks to t
 /*** push the created branch to remote
 
 $ git push origin ACADPLY-2901 // Asks for username and password, Creates branch in remote repository
-
 
 /**** Make changes in the the local repo, that will be affected to ACADPLY-2901
 
@@ -123,6 +128,11 @@ With msysgit, running the following in the command line will store your credenti
 
 >	git config --global credential.helper wincred
 
+Remove cached password from git:
+---------------------------------
+
+git config --global --unset credential.helper
+
 -------------------------------------------------------------------
 Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 -------------------------------------------------------------------
@@ -132,6 +142,10 @@ $ (branch) git show  <commit_hash>
 
 $ (branch) git blame <file_name_in_that_branch>
 	* For each line of the file, blame will find the last commit to edit the line and commit hash, author,date of commit
+
+// Specify the line range
+$ git blame -L 12,22 <file-name> 
+
 
 ----------------------------------------------------------------------------------------------------------------------------
 ** Cherry-pick -- moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
@@ -148,7 +162,7 @@ $ (feature) git cherry-pick <commit-hash>
 
 	* It creates an entirely new commit based off the original commit and its commit message and it doesn't delete the original commit
 
-Once the new commit is created in 'feature', delete the old commit in 'master' by running
+Once the new commit is created in the 'feature', delete the old commit in 'master' by running
 
 $ (master) git reset --hard HEAD^
 
@@ -242,24 +256,24 @@ $ (feature) git rebase --continue
 Skipped 'bisect' command which tells which commit broke the build.
 
 
-Squash commits into feature:
+Squash commits into one:
 ---------------------------
 $ git rebase -i HEAD~5 (or you can get commit hash till which commit you want to rebase with), to see the commits, run $git log
  <select commits to squash and enter commit message>
 
-once done force-push your changes to remote:
+once done force-push your changes to remote branch:
 
 $ git push -f origin <feature-branch>
 
 
 
-Before Cherry-picking a commit on build or target branch:
----------------------------------------------------------
+Cherry-picking a commit on build or target branch:
+--------------------------------------------------
 
 $ git fetch origin build
 
 $ git reset --hard origin/build
-git 
+
 $ git cherry-pick "commit-hash" 
 
 get commit hash from the target branch
@@ -278,7 +292,11 @@ To remove the commit:
 
 $ git rebase -i HEAD~2
 
-select <drop> in the next window except the one you needed, 
+Replace pick with drop before commit hash.
+
+(if any conflicts resolve them and continue the rebase) 
+
+Publish the changes forcefully,
 
 $ git push -f origin <branch_name>
 
@@ -288,10 +306,95 @@ Creating pull request to dev:
 
 -- 	pull the changes from dev to local - $(dev) git pull origin dev
 
---	Go to your branch, rebase dev over your brnach
+--	Go to your branch, rebase dev over your branch, make sure your commit in your feature branch are squashed into one commit and pushed to 
+	remote before rebasing dev to your branch
 	
 	--	$(feature) git rebase dev
 
 		if you get any conflicts resolve and continue the rebase, then force push the changes to your branch
+		$(feature) git push -f origin feature
 
 -- Once changes pushed, go to repo in the github, create pull request and get atleast 2 +1's
+
+
+Edit an incorrect commit message:
+---------------------------------
+
+$ git commit --amend -m "YOUR-NEW-COMMIT-MESSAGE"
+
+In case you’ve already pushed your commit to the remote branch then you need to force push the commit with this command:
+
+$ git push <remote> <branch> --force or $ git push -f origin <branch>
+
+To delete a remote branch:
+--------------------------
+
+$ git push origin --delete <branchName>
+
+
+Rename git branch locally and remotely:
+---------------------------------------
+
+$ git branch -m old_branch new_branch         # Rename branch locally    
+$ git push origin :old_branch                 # Delete the old branch    
+$ git push --set-upstream origin new_branch # Push the new branch, set local branch to track the new remote
+
+
+Deleting a remote tag:
+----------------------
+
+$ git tag -d <12345>
+
+$ git push origin :refs/tags/<12345>
+
+// git advanced merge:
+
+-- Ignoring the spaces 
+$ git merge -Xignore-space-change <branch-to-be-merged>
+
+-Xignore-all-space -> ignores all the spaces
+
+$ git show :1:hello.rb > hello.common.rb
+$ git show :2:hello.rb > hello.ours.rb
+$ git show :3:hello.rb > hello.theirs.rb
+
+Stage 1 is the common ancestor, stage 2 is your version and stage 3 is from the MERGE_HEAD
+
+
+Un-applying a Stash:
+--------------------
+You can reapply the one you just stashed by using the command shown in the help output of the original stash command:
+
+$ git stash apply
+
+If you want to apply one of the older stashes, you can specify it by naming it, like this: 
+
+$ git stash apply stash@{2}
+
+In some use case scenarios you might want to apply stashed changes, do some work, but then un-apply those changes that originally came from the stash. Git does not provide such a stash unapply command, but it is possible to achieve the effect by simply retrieving the patch associated with a stash and applying it in reverse:
+
+$ git stash show -p stash@{0} | git apply -R
+
+Again, if you don’t specify a stash, Git assumes the most recent stash:
+
+$ git stash show -p | git apply -R
+
+
+->	You may want to create an alias and effectively add a stash-unapply command to your Git. For example:
+
+$ git config --global alias.stash-unapply '!git stash show -p | git apply -R'
+
+$ git stash apply
+
+$ git stash-unapply
+
+
+Kdiff3
+-----
+
+$ git config --global merge.tool kdiff3
+
+$git config --global mergetool.kdiff3.cmd '"C:\\Program Files (x86)\\KDiff3\\kdiff3" $BASE $LOCAL $REMOTE -o $MERGED'
+
+A useful git command if you want to see the last committer on a branch. Helps if you want to clean up branches from your team in a large repos:
+git for-each-ref --format="%(align:30,left)%(color:yellow)%(authorname)%(end) %(align:30,left)%(color:red)%(refname:strip=3)%(end)" --sort=authorname refs/remotes'

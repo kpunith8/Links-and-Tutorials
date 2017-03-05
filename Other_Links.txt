@@ -1,3 +1,10 @@
+Apache port: localhost:4455/
+
+https://dev.to/
+
+https://alipchattopadhyay.wordpress.com/2016/10/17/my-agile-journey-an-inside-on-multi-vendor-multi-location-agile-practices/
+http://try.jquery.com/levels/2/sections/2
+
 Oracle Docs:
 
 https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions022.htm
@@ -12,6 +19,9 @@ Stackskills.com -> kpunith8@gmail.com -> PK@8.ancy
 deals.cultofandroid.com -> kpunith8@gmail.com -> PK@8.1ancy
 reddit.com -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
 codepen.io -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
+https://scotch.io/tutorials/learning-react-getting-started-and-concepts
+
+https://www.quora.com/What-are-some-computer-tricks-that-a-CS-student-must-know
 
 genymotion -> kpunith8@gmail.com -> Apk@
 
