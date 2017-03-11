@@ -208,6 +208,322 @@ JQuery
 			$('#outputDiv').html(data);
 		});
 
+----------------------------------
+Grunt: The JavaScript Task Runner:
+----------------------------------
+
+	-	Task-based command line build tool for JavaScript projects which makes performming repetative, but neccesary, task trivial
+	-	Validates css/html/JavaScript
+	-	Minify or compress CSS/Javascript
+	-	Compile CoffeeScript, TypeScript etc.,
+	-	Compile less to CSS
+
+	# Files required:
+
+		-	package.json metadata file which discribes the project
+			ex: package.json
+
+				{
+					"name" : "IntroductionToGrunt.js",
+					"version" : "0.1.0",
+					"devDependencies" : {
+						"grunt" : "~0.4.1"
+					}
+				}
+
+				Ref: https://www.nodejitsu.com/documentation/appendix/package-json/
+
+		-	Gruntfile.js -> configure or define GRUNT tasks
+			ex: Gruntfile.js
+
+				'use strict';
+				module.exports = function(grunt) {
+					grunt.initConfig({
+						pkg: grunt.file.readJSON('package.json')
+					});
+					uglify: {
+				      options: {
+				        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+				      },
+				      build: {
+				        src: 'src/<%= pkg.name %>.js',
+				        dest: 'build/<%= pkg.name %>.min.js'
+				      }
+				    }
+
+					// Load the plugin that provides the "uglify" task.
+					grunt.loadNpmTasks('grunt-contrib-uglify');
+
+					// Default task(s).
+					grunt.registerTask('default', ['uglify']);
+				};
+
+			- 	Run in commandline
+				$grunt taskName -v
+
+	# Installation:
+
+		-	First install node.js, install npm (node package manager), then install Grunt cli - command line interface, run,
+
+			$npm install -g grunt-cli // here -g means global (to make sure grunt is available in all the folders in the system)
+		
+		-	then, install grunt to local directory by running,
+		
+			$npm install grunt --save-dev // Saves to local directory
+
+	# Sample grunt example:
+
+		Download 'grunt-contrib-clean' to use it, use npm to download, once downloaded it adds it to package.json automatically/we can add it 
+		manually, add this to Gruntfile.js
+
+			use strict';
+
+			module.exports = function(grunt) {
+				grunt.initConfig({
+					pkg: grunt.file.readJSON('package.json')
+					clean: {
+					output: ['ToBeCleaned/*']
+					}
+				)};
+
+				grunt.loadNpmTasks('grunt-contrib-clean');
+
+				grunt.registerTask('default', ['clean']);
+			};
+
+		-	run using, $grunt default -v // -v says verbose mode
+
+	# Working with JavaScript:
+
+		-	Validating JS with JSHint 	-> 	$npm install -grunt-contrib-jshint --save-dev
+
+		-	Compressing JS with Uglify 	->	$npm install -grunt-contrib-uglify --save-dev , off/on mangling - feature to rename variables and 		methods to meaningfull names for development so that somebody can not interpret it easily.
+
+		-	Cleaning folders and files with clean	->	$npm install -grunt-contrib-clean --save-dev
+
+	# Using JSHint:
+
+		-	Load and register it, specify in Gruntfile.js,
+				grunt.loadNpmTasks('grunt-contrib-jshint'); then add it to registerTask
+				grunt.registerTask('default', ['typescript', 'jshint']); -- these will run sequentially
+
+		-	Then add the following entry to, grunt.initConfig({
+				jshint: {
+					options: {
+						force: true // It forcefully continues, can be removed when below options are set
+						'-W069': false, // failure due to the way typescript works with enums 
+						'W0004': false, // failure due to typescript inheritance
+						ignores: ['path/to/js-file-to-ignore'], // Can be a multiple files seperated by comma
+						reporterOutput: './jshint.txt' // Writing these erros to output file
+					},
+					files: ['./www/js/*.js']
+				},
+			});
+
+	# Using uglify:
+
+		-	Load and register it, specify in Gruntfile.js,
+				grunt.loadNpmTasks('grunt-contrib-uglify');
+				grunt.registerTask(default, ['typescript','uglify']);
+		
+		-	Add this entry to, grunt.initConfig({ 
+				uglify: {
+					development: {
+						files: {
+							'': [''] 	
+							// which will compress one file in the root folder, multiple files can be added seperated by comma, or
+							// The following files option can be used to scan the files as when they are added,
+								files : [{
+										expand: true,
+										cwd: './www/js/',
+										src: '**/*.js',
+										dest: './www/js/'
+									}]
+						}
+					},
+					options: {
+						mangle: false, // Keeps original variable names and method names intact
+						compress: {
+							drop_console: true // Which removes all the console.log() from the code, then compresses it
+						},
+						beautyfy: true // Helps in debugging the code, can be turned off before deploying
+					}
+				}
+			});
+
+	# Using clean:
+
+		-	Load and register it,
+
+				grunt.loadNpmTasks('grunt-contrib-clean');
+				grunt.registerTask(default, ['clean', typescript','uglify']); 	// 	can be specified first, since we need clean up every time 																		building it freshly
+
+		-	Add this entry to, grunt.initConfig({ 
+				clean: {
+					options: {
+
+					},
+					files: ['file/to/to/be/removed'],
+					folders: ['folder/to/remove']
+				}
+			});
+
+		-	A single task can be specified in the grunt command line, so that we can have control over the execution, ex: $grunt clean and with 	options, $grunt clean:folders
+
+	# Working with HTML and CSS:
+
+		-	Compressing HTML with contrib-htmlmin 	->	$npm install grunt-contrib-htmlmin, remove html comments, collapse white-space and tags, 	 remove redundant tag elements 
+
+		-	Validating HTML with htmlHint 			->	$npm install grunt-htmllhint, ensure unique tag id's, ensure valid attributes, tags are 	correct and valid
+
+		-	Converting less to css with contrib-less ->	$npm install grunt-contrib-less, modify less variables, compress
+
+		-	Validating CSS with contrib-csslint		->	$npm install grunt-contrib-csslint, configure rules (35 rules), use external config file
+
+		-	Compress CSS with cssmin				->	$npm install grunt-contrib-cssmin, compress, minify single/mutiple or concat to one file
+
+	# Using htmlHint: 
+
+		-	Add this entry to, grunt.initConfig({ 
+				htmlhint: {
+					templates: {
+						options: {
+							'attr-lower-case': true,
+							'attr-value-not-empty': true,
+							'tag-pair': true,
+							'tag-self-close': true,
+							'tagname-lowercase':true,
+							'id-class-value': true,
+							'id-class-unique': true,
+							'src-not-empty': true,
+							'img-alt-required': true
+						},
+						src: ['www/**/*.html']
+					}
+				}
+			});
+
+	# Using htmlmin:
+
+		-	Add this entry to, grunt.initConfig({ 
+				htmlmin: {
+					dev: {
+						options: {
+							removeEmptyAttributes: true,
+							removeEmptyElements: true,
+							removeRedundantAttributes: true,
+							removeComments: true,
+							removeOptionalTags: true,
+							collapseWhitespace: true
+						},
+						files: {
+							'www/template/sample.min.html' : ['www/template/sample.html']
+							// The following files option can be used to scan the files as when they are added,
+								files : [{
+										expand: true,
+										cwd: './www/html/',								
+										dest: './www/html/',
+										src: '[*.html]',
+										ext: '.min.html',
+										extDot: 'last'
+									}]
+						} 
+					}
+				}
+			});	
+
+	# Using less: Creates css from less
+
+		-	Add this entry to, grunt.initConfig({ 
+				less: {
+					development: {
+						options: {
+							cleancss: true,
+							compress: true,
+							modifyVars: {
+								"color-primary-dark-value": "NOT_BLUE" // value in a less file modified
+							}
+						},
+						files: { "www/css/main.css" : "www/css/main.less" }
+						// The following files option can be used to scan the files as when they are added,
+								files : [{
+										expand: true,
+										cwd: './www/css/',
+										dest: './www/css/',
+										src: '[*.less]',
+										ext: '.css',
+										extDot: 'last'
+									}]
+					}
+				}
+			});
+
+	# Using csslint: By default all the rules are enabled, to disable some, use external config file as specified in options using, csslintrc 					 option
+
+		-	Add this entry to, grunt.initConfig({ 
+				pkg: grunt.file.readJSON('package.json'),
+
+				csslint: {
+					strict: {
+						options: {
+							
+						},
+						src: ['www/css/sample.css']
+					},
+					laxed: {
+						options: {
+							'zero-units': false // passing external source as options can be done using,
+							csslintrc : 'lintrules.json'
+						},
+						src: ['www/css/sample.css']
+					}
+				}
+			});
+
+			Run laxed in command line as follows, $grnt csslint:laxed
+
+	# Using cssmin:
+
+		-	Add this entry to, grunt.initConfig({ 
+				pkg: grunt.file.readJSON('package.json'),
+
+				cssmin: {
+					min: {
+						options: {
+							"report": "gzip"
+						},
+						files: {
+							'www/css/sample.min.css': ['www/css/sample.css']
+						} 
+					}
+
+					// To use minify multiple files dynamically, use minify property rather than min option under cssmin (remove min property)
+					minify: {
+						expand: true,
+						cwd: './www/css/',
+						dest: './www/css/',
+						src: ["*.css", "!*.min.css"]', // To not to already minified files,  negate the file extension
+						ext: '.min.css',
+						extDot: 'last'			
+					},
+
+					// To create one minified css file
+					concat: {
+						options: {
+
+						},
+						files: {
+						 	'www/css/sample.min.css': ['www/css/*.css']
+						}
+					}
+
+				}
+			});
+
+	# Advanced grunt: Scaffholding and custom plugins
+
+		-	
+
 ---------------------
 Java Design patterns:
 ---------------------
@@ -219,7 +535,7 @@ Java Design patterns:
 		-	Factory
 		-	Abstract factory
 
-	>	Singleton:
+	# Singleton:
 			-	only one instance created
 			-	Gurantees control of a resource
 			-	Lazily loaded
@@ -284,8 +600,171 @@ Java Design patterns:
 		-	java.util.Calendar is not a singleton but is a prototype
 
 	>	Comparision with factory
-		-	no interface
-		-	
+		-	no interface / interface driven
+		-	Returns the same instance / returns multiple instances (multiple constructors)
+		-	Hard to unit test / testable
+
+	# Builder Pattern:
+		-	Handle complex constructors
+		-	Large number of parameters
+		-	immutability
+			Ex: StringBuilder, DocumentBuilder, Locale.Builder
+			constructing constructors with diffent params is called a "telescoping constructors"
+		-	Written with static inner class
+		-	Negates the need for exposed setters
+
+	Code example:
+	--------------
+		public class BuilderDemo {
+
+			private final String meat;
+			private final String condiments;
+
+			private BuilderDemo(Builder builder) {
+				this.meat = builder.meat;
+				this.condiments = builder.condiments;
+			}
+
+			public String getMeat() {
+				return meat;
+			}
+
+			public String getCondiments() {
+				return condiments;
+			}
+
+			private static class Builder {
+
+				private String meat;
+				private String condiments;
+
+				public Builder meat(String meat) {
+					this.meat = meat;
+					return this;
+				}
+
+				public Builder condiments(String condiments) {
+					this.condiments = condiments;
+					return this;
+				}
+
+				public BuilderDemo build() {
+					return new BuilderDemo(this);
+				}
+			}
+		}
+
+		// Demo
+			BuilderDemo.Builder builder = new BuilderDemo.Builder();
+			BuilderDemo obj = builder.meat("meat").condiments("condiments").build();
+			obj.getMeat(); // will return meat
+
+			or 
+			BuilderDemo object = new BuilderDemo.Builder().meat("meat").condiments("condiments").build();
+
+	# Prototype pattern:
+		-	To get the unique instance of the same object
+		-	Avoids costly creation
+		-	Avoids subclassing
+		-	Typically don't use keyword new
+		-	Utilizes interfaces
+			ex: clone() method on object
+		-	implements Clone/Clonable interface
+		-	each instance is unique
+
+	> pitfalls:
+		-	Sometimes not clear when to use
+		-	Used with other pattern; when pattern contains other pattern it's called a framework
+
+	# Factory pattern:
+		-	Doesn't expose instantiation logic
+		-	Defers instantiation to subclass
+		-	It exposes common interface
+			ex: Calendar, ResourceBundle, NumberFormat
+
+	Code Example:
+	------------
+		public abstract class Website {
+			protected List<Page> pages = new ArrayList<>();
+
+			// Add getter to pages
+
+			public Website() {
+				this.createWebsite();
+			}
+
+			public abstract void createWebsite(); // Factory method
+		}
+
+		public class Blog extends Website {
+
+			@override 
+			public void createWebsite() {
+				pages.add(new PostPage());
+				pages.add(new AboutPage());
+			}
+		}
+
+		// Factory class
+		public class WebsiteFactory {
+
+			public static Website getWebsite(String siteType) {
+
+				switch(siteType) {
+					case "blog": { 
+						return new Blog();
+					}
+
+					case "shop": {
+						return new Shop(); // Shop extending website abstract class
+					}
+
+					default: {
+						return null;
+					}
+				}
+			}
+		}
+
+		// Demo
+
+		public class Demo {
+
+			psvm() {
+				Website site = WebsiteFactory.getWebsite("blog");
+				sysout(site.getPages());
+			}
+		}
+
+	# Abstact Factory Pattern:
+		-	Factory of factories
+		-	Factory of releated objects
+		- 	Common interface, and deferring the instantiation to subclass
+			ex: DocumentBuilder, frameworks
+		-	Composition used
+
+------------------
+SOAP Web services: Simple Object Access Protocol
+------------------
+
+-	WSDL: Web service description/definition language
+- 	UUDI: Universal Description Discovery and Integration - registry where new web services are registered
+-	SEI: Service endpoint interface - data from XML is mapped to actual objects
+
+-	If javaEE installed we can import WSDL in command line using, "wsimport" keyword
+	$wsimport <WSDL-URI> // which will keep only .class files in the generated folder, if you want both .java and .class use the option,
+	$wsimport -keep -s src <URI> ; where src is the folder name// sample URI: http://www.webservicex.net/geoipservice.asmx?WSDL
+
+	# Download and run the glashFish server to deply the services
+
+	Once downloaded extract and go to /bin and run, C:/bin>asadmin start-domain ; then access it using localhost:4848 port by default and configure the same in eclipse; then create dynmic web project to get started
+
+	Annonate a class with @WebService and can be deployed as web service. Any public method in that class will be treated as Webmethod or can be annotated with @WebMethod
+
+
+
+
+
 
 
 
