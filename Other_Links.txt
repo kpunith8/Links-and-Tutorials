@@ -40,12 +40,6 @@ http://javacodegeeks.tradepub.com/
 https://dzone.com/mobile-app-developer-tutorials-tools-news
 CloudBoost -> Library for storing images and downloading images 
 
-/* Multiple inputs */
-
-while(testCases > 0){
-
-	testCases--;	
-}
 
 https://www.hsph.harvard.edu/nutritionsource/
 
@@ -74,3 +68,43 @@ Square a number which is ending with 5:
 ------
 2025
 
+ww.androidarsanal.com -> Android Libraries
+Android Ripple Attack -> RippleDrawable - Mask needs to be updated for an item to show ripple effect only for selected item
+SlidingTabLayout 
+
+
+http://www.lifehack.org/358847/30-websites-that-will-pay-you-for-things-you-already
+http://www.usertesting.com/
+
+swagbucks.com -> kpunith8@gmail.com -> Apk@85
+
+
+/**
+Important Links and Password Hints
+*/
+
+Stackskills.com -> kpunith8@gmail.com -> PK@8.5ancy
+deals.cultofandroid.com -> kpunith8@gmail.com -> PK@8.5ancy
+reddit.com -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
+codepen.io -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
+udacity.com -> kpunith8@gmail.com -> ph@85ancy
+sitepoint -> kpunith9@gmail.com -> PK@8.5an.cy
+
+bitbucket.com  -> kpunith8 	->  ph@ancy		-> kpunith8@gmail.com
+bitbucket.com  -> kpunith88	->	ph@an.cy 	-> kpunith9@gmail.com
+
+kwiksurveys -> kpunith8@gmail.com -> Apk@8
+http://www.wordstream.com/blog/ws/2014/11/10/best-online-survey-tools
+
+https://dzone.com/mobile-app-developer-tutorials-tools-news
+CloudBoost -> Library for storing images and downloading images 
+
+http://bigocheatsheet.com/
+
+oracle.com -> kpunith8@gmail.com -> Apk@85
+
+* Internet Download Accelerator
+
+http://www.grokkingandroid.com/xmpp-server-google-cloud-messaging/
+
+http://javapapers.com/android/android-chat-with-google-gcm-xmpp/

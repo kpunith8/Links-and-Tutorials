@@ -210,7 +210,7 @@ If you are changing the history reflog is best command
 
 $ git checkout <hash> 
 
-$(feature) git reset --hard <commit-hash> to reset the branch pointer to the commit
+$(feature) git reset --hard <commit-hash> (Commit hash in the form of HEAD@{3})to reset the branch pointer to the commit
 
 ------------------------
 Squashing and Splitting
@@ -338,7 +338,7 @@ Rename git branch locally and remotely:
 $ git branch -m old_branch new_branch         # Rename branch locally    
 $ git push origin :old_branch                 # Delete the old branch    
 $ git push --set-upstream origin new_branch # Push the new branch, set local branch to track the new remote
-
+`
 
 Deleting a remote tag:
 ----------------------
