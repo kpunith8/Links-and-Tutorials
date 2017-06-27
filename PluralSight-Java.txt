@@ -1,0 +1,285 @@
+---------------------
+Java Design patterns:
+---------------------
+
+>	Creational: Different types:
+		-	Singleton
+		-	Builder
+		-	Prototype
+		-	Factory
+		-	Abstract factory
+
+	# Singleton:
+			-	only one instance created
+			-	Gurantees control of a resource
+			-	Lazily loaded
+				ex: Runtime, Logger, Spring beams, graphic managers
+			-	Static in nature but not the class, since static classes are not thread safe, private instance and private constructor, no parameter required for construction
+
+	Code examples:
+	--------------
+	> 	Simple Singleton:
+
+		private static SingletonSample instance = new SingletonSample();
+
+		private SingletonSample() {
+
+		}
+
+		public static SingletonSample getInstance() {
+			return instance;
+		}
+
+	> 	Lazy Loading:
+
+		private static SingletonSample instance = null;
+
+		private SingletonSample() {
+
+		}
+
+		public static SingletonSample getInstance() {
+			if(instance == null) {
+				instance = new SingletonSample();
+			}
+
+			return instance;
+		}
+
+	> 	Thread safe:
+
+		private static SingletonSample instance = null;
+
+		private SingletonSample() {
+
+		}
+
+		public static SingletonSample getInstance() {
+			if(instance == null) {
+				synchronized(SingletonSample.class) {
+					if(instance == null) {
+						instance = new SingletonSample();
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		Can also be synchronized at the getInstance() method by making it synchronized, ex: public static synchronized SingletonSample getInstance() { }, this will make sure every time it's thread safe. To make sure there is no race condition we will use the above approach
+
+	> 	Pitfalls:
+		-	Difficult to write unit tests
+		- 	Not thread safe, if not carefull
+		-	java.util.Calendar is not a singleton but is a prototype
+
+	>	Comparision with factory
+		-	no interface / interface driven
+		-	Returns the same instance / returns multiple instances (multiple constructors)
+		-	Hard to unit test / testable
+
+	# Builder Pattern:
+		-	Handle complex constructors
+		-	Large number of parameters
+		-	immutability
+			Ex: StringBuilder, DocumentBuilder, Locale.Builder
+			constructing constructors with diffent params is called a "telescoping constructors"
+		-	Written with static inner class
+		-	Negates the need for exposed setters
+
+	Code example:
+	--------------
+		public class BuilderDemo {
+
+			private final String meat;
+			private final String condiments;
+
+			private BuilderDemo(Builder builder) {
+				this.meat = builder.meat;
+				this.condiments = builder.condiments;
+			}
+
+			public String getMeat() {
+				return meat;
+			}
+
+			public String getCondiments() {
+				return condiments;
+			}
+
+			private static class Builder {
+
+				private String meat;
+				private String condiments;
+
+				public Builder meat(String meat) {
+					this.meat = meat;
+					return this;
+				}
+
+				public Builder condiments(String condiments) {
+					this.condiments = condiments;
+					return this;
+				}
+
+				public BuilderDemo build() {
+					return new BuilderDemo(this);
+				}
+			}
+		}
+
+		// Demo
+			BuilderDemo.Builder builder = new BuilderDemo.Builder();
+			BuilderDemo obj = builder.meat("meat").condiments("condiments").build();
+			obj.getMeat(); // will return meat
+
+			or 
+			BuilderDemo object = new BuilderDemo.Builder().meat("meat").condiments("condiments").build();
+
+	# Prototype pattern:
+		-	To get the unique instance of the same object
+		-	Avoids costly creation
+		-	Avoids subclassing
+		-	Typically don't use keyword new
+		-	Utilizes interfaces
+			ex: clone() method on object
+		-	implements Clone/Clonable interface
+		-	each instance is unique
+
+	> pitfalls:
+		-	Sometimes not clear when to use
+		-	Used with other pattern; when pattern contains other pattern it's called a framework
+
+	# Factory pattern:
+		-	Doesn't expose instantiation logic
+		-	Defers instantiation to subclass
+		-	It exposes common interface
+			ex: Calendar, ResourceBundle, NumberFormat
+
+	Code Example:
+	------------
+		public abstract class Website {
+			protected List<Page> pages = new ArrayList<>();
+
+			// Add getter to pages
+
+			public Website() {
+				this.createWebsite();
+			}
+
+			public abstract void createWebsite(); // Factory method
+		}
+
+		public class Blog extends Website {
+
+			@override 
+			public void createWebsite() {
+				pages.add(new PostPage());
+				pages.add(new AboutPage());
+			}
+		}
+
+		// Factory class
+		public class WebsiteFactory {
+
+			public static Website getWebsite(String siteType) {
+
+				switch(siteType) {
+					case "blog": { 
+						return new Blog();
+					}
+
+					case "shop": {
+						return new Shop(); // Shop extending website abstract class
+					}
+
+					default: {
+						return null;
+					}
+				}
+			}
+		}
+
+		// Demo
+
+		public class Demo {
+
+			psvm() {
+				Website site = WebsiteFactory.getWebsite("blog");
+				sysout(site.getPages());
+			}
+		}
+
+	# Abstact Factory Pattern:
+		-	Factory of factories
+		-	Factory of releated objects
+		- 	Common interface, and deferring the instantiation to subclass
+			ex: DocumentBuilder, frameworks
+		-	Composition used
+
+------------------
+SOAP Web services: 
+------------------
+Simple Object Access Protocol
+
+-	WSDL: Web service description/definition language
+- 	UUDI: Universal Description Discovery and Integration - registry where new web services are registered
+-	SEI: Service endpoint interface - data from XML is mapped to actual objects
+
+-	If javaEE installed we can import WSDL in command line using, "wsimport" keyword
+	$wsimport <WSDL-URI> // which will keep only .class files in the generated folder, if you want both .java and .class use the option,
+	$wsimport -keep -s src <URI> ; where src is the folder name// sample URI: http://www.webservicex.net/geoipservice.asmx?WSDL
+
+	# Download and run the glashFish server to deply the services
+
+-	Once downloaded extract and go to /bin and run, C:/bin>asadmin start-domain ; then access it using localhost:4848 port by default and 			configure the same in eclipse; then create dynmic web project to get started
+
+-	Annonate a class with @WebService and can be deployed as web service. Any public method in that class will be treated as Webmethod or can be 	 annotated with @WebMethod, use, exclude=true option to exclude the particular method from the webservice.
+
+-	By default types of data used in the web service is imported from external link to WSDL under <types> tag, which can be avoided using the 		following annotation on class level, @SOAPBinding(style = Style.RPC), which will add <message> tag for both input and output response. By 		default style is Document. 
+
+	@WebResult(partName = "lookupOutput") specified on method -> to change <part> tag name for response, and @WebParam(partName = "lookupInput") specified before a parameters -> to change <part> tag name for request
+
+-	Interface (Serivie end point interface) can be created and interface can have all the annotations needed to perform the webservice,
+	once SEI is implemented add this @WebService(endpointInterface="fully qualified class name(package name ans interface class name)") to implemented class
+
+-	JAXB - Java Architecture for XML Binding - used to map custom objects like Collections to XML
+	if any class specified with @XmlRootElement annotation it needs no arg public constructor, JAXB uses it to initialize the object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+
+

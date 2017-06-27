@@ -1,0 +1,209 @@
+----------------------------------
+JavaScript objects and properties:
+----------------------------------
+
+> 	Define a property of an object:
+
+		var cat = {
+			name: {first: 'Fluffy', last: 'LaBeouf'},
+			color: 'White'
+		};
+
+		Object.defineProperty(cat, 'fullName', {
+			get: function() {
+				return this.name.first + ' ' + this.name.last;
+			},
+			set: function(value) {
+				var nameParts = value.split(' ');
+				this.name.first = nameParts[0];
+				this.name.last = nameParts[1];
+			}
+		});
+
+		Usage of getter and setter:
+
+		cat.fullName = 'Muffin Top';
+		display(cat.fullName);
+		display(cat.name.first);
+
+>	Prototypes:
+
+		Defining prototype to get the last element of an array:
+		
+		var arr = ['red', 'blue', 'green'];
+
+		var last = arr.last // given undefined because last property is not defined on JavaScript array, it can be added as follows,
+
+		Object.defineProperty(arr, 'last', { // Defines last property on arr object, if you want to do it on Array object, replace arr with 'Array.prototype'
+		get: function() {
+				return this[this.length-1];
+			}
+		});
+
+		var myFunc = function() {}; display(myFunc.prototype); returns an empty {}
+		var cat = {name: 'abc'}; display(cat); returns undefined, it has no prototype, it has __proto__ property, accessed using object.__proto__
+
+		A Funtion's prototype: is the object 'instance' that will become the prototype for all objects created using this function as a constructor.
+		An Object's prototype: is the object instance from which the object is inherited.
+
+		function Cat(name, color) {
+			this.name = name;
+			this.color = color;
+		}
+
+		Cat.prototype.age = 3, will add age prototype to cat function (Can also be created as, Cat.prototype = {age: 5};)
+
+		var fluffy = new Cat('Fluffy', 'White');
+		var muffin = new Cat('Muffin', 'Brown');
+
+		display(fluffy.age); display(muffin.age); // will display age '4' 
+
+		fluffy.age = 5; // it adds new property to fluffy object and display(fluffy.age) displays '5' 
+		and fluffy.__proto__.age will still display '4' since it's a prototype not an property
+
+	> Creating prototype chains:
+
+		Function Animal(voice) {
+			this.voice = voice || 'grunt';
+		}
+		// Making all the animals make sound
+		Animal.prototype.speak = function() {
+			display(this.voice);
+		}
+
+		// Adding animal prototype to Cat
+		Cat.prototype = Object.create(Animal.prototype);
+
+		fluffy.speak(); will display 'Grunt'
+
+		It can be called from Cat function as,
+		function Cat(name, color) {
+			Animal.call(this, 'Meow');
+			this.name = name;
+			this.color = color;
+		}
+
+		this will make Cat object as Animal and if you want it as Cat instance,
+		Cat.prototype.constructor = Cat
+
+		fluffy.__proto__ -> returns Cat; and fluffy.__proto__.__proto__-> returns Animal
+
+	> Creating prototypes with classes:
+
+		Class Animal {
+			constructor(voice) {
+				this.voice = voice || 'Grunt';
+			}
+
+			speak() = {
+				display(this.voice);
+			} 
+		}
+
+		Class Cat extends Animal {
+			constructor(name, color) {
+				super('Meow');
+				this.name = name;
+				this.color = color;
+			}
+		}
+
+-------
+JQuery
+-------
+
+>	Load JQuery from CDN if it fails add the script tag as follows,
+
+		<script>
+			window.JQuery || document.write('<script src="jquery.js"><\/script>')
+		</script>
+
+>	Selectors:
+
+		$('a[title="Programming"]') // selects <a> elememts that have a title attribute with the specified value
+		or
+		$('a[title]') // selects <a> elememts that have a title attribute
+
+		$(':input') // selects all input elements, including button, select, textares, button, images, radio and more
+		$(':input[type="radio"]') // Selects all radio buttons on the page, and 
+		$('input') selects only selects input fields
+
+		$('input[value^="sample"]') // Selects any input element whose value attribute begins with "sample" (Case sensitive), use $ to find ends with
+		and use * to find a word contains.
+
+		$('div:contains("my div")')
+
+		$('div:eq(0)') Finds the first div
+
+>	Interaction with DOM:
+
+		Iterating through nodes:
+
+			$('div').each(function(index) {
+				$(this).text(); // need to wrap JQuery object to this element
+			});
+
+			or 
+
+			$('div').each(function(index, element) {
+				$(element).text(); // No need to wrap JQuery object, element refers to this
+			});
+
+>	Appending or removing nodes:
+	
+		$('<span>(office)</span>').appendTo('.officePhone'); (or)
+
+		$('.officePhone').append('<span>(office)</span>');
+
+		prepend will add it to the begining of the elements
+
+		wrap() - Wrapping elements
+
+		<div class="state">Arizona</div>
+
+		$('.state').wrap('<div class="US_State"/>'); this will results in 
+
+			<div class="US_State">
+				<div class="state">Arizona</div>
+			</div>
+
+		.remove() is used to remove the nodes.
+
+		addClass(), removeClass(), toggleClass()
+
+>	Handling Events: Identifying event type, event.type -> returns a string
+	
+		Multiple events and handlers can be defined in on() using a map:
+
+		$('#MyTabe tr').on({
+			mouseenter: function() {
+				$(this).addClass('mouseEnter');
+			},
+			mouseleave: function() {
+				$(this).removeClass('mouseEnter');
+			},
+			mouseover: function() {
+				// Any other action
+			}
+		});
+
+		hover(moseenter, mouseleave);
+
+		toggle() // toggels through functions defined within
+
+>	Ajax in jQuery
+	
+		$.get() and $.post() : gets raw data from the server
+		$(selector).load() : Loads html data from the sever
+		$.getJSON() : get/post and return JSON
+		$.ajax() : core functionality
+
+		jQuery ajax functions work with REST API's and web services
+
+		$('#myDiv').load('../sample.html #myID'); // Which loads only #myID content from the sample.html
+
+		$.get(url, data, callback, datatype);
+		
+		$.get('sample.html', function(data){
+			$('#outputDiv').html(data);
+		});
