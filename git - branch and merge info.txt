@@ -10,6 +10,27 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 git config --global core.editor "vim"
 
+# Reset all the staged files:
+
+	$ git reset HEAD -- .
+
+# Adding an exisiting git project to github:
+	
+	$ git init
+
+	$ git add .
+
+	$ git commit -m "First commit"
+
+	$ git remote add origin <remote repository URL> // Sets the new remote
+	
+	$ git remote -v // Verifies the new remote URL
+
+	$ git push origin master
+
+# Pulling unrelated histories 
+	
+	$ git pull origin master --allow-unrelated-histories
 
 $ git fetch origin
 

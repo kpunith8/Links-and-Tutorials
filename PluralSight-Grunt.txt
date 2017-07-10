@@ -292,7 +292,7 @@ Grunt: The JavaScript Task Runner:
 						expand: true,
 						cwd: './www/css/',
 						dest: './www/css/',
-						src: ["*.css", "!*.min.css"]', // To not to already minified files,  negate the file extension
+						src: ["*.css", "!*.min.css"]', // To not to already minified files, negate the file extension
 						ext: '.min.css',
 						extDot: 'last'			
 					},
@@ -310,4 +310,108 @@ Grunt: The JavaScript Task Runner:
 				}
 			});
 
-	# Advanced grunt: Scaffholding and custom plugins
+# Advanced grunt: Scaffholding and custom plugins
+
+	# grunt init scaffholding: To automate project automation
+
+		$ npm install -g grunt-init
+
+		clone the git repository to local
+		$ git clone <url> %USERPROFILE%\.grunt-init\gruntfile
+
+		$ grunt-init gruntfile -> run this to scaffhold
+
+	# Custom inline tasks: Register the task to create a custom task
+		-	Use grunt.registerTask -- requires name and description, invoked via callback, can access external variables and 		libraries, can accept arguments in the callnback
+
+		ex: 
+
+		var fs = require('fs');
+
+		grunt.registerTask('checkFileSize', 'Task to check the file size', function(debug) {
+			var options =  this.options({
+					folderToScan: '';
+				});
+
+			if(this.args.length !== 0 && debug !== undefined) {
+				grunt.log.writeflags(options, 'Options');
+			}
+
+			grunt.file.recurse(options.folderToScan, function(abspath, rootdir, subdir, filename) {
+				if(grunt.file.isFile(abspath)) {
+					var stats = fs.statSync(absPath); -- fs is a node library to work with file system (import required)
+					var asBytes = stats.size / 1024;
+					grunt.log.writeln("Found file %s with size of %s kb", filename, asBytes);
+				}
+			});
+		});
+
+		-	To make custom tasks work like a normal grunt task 
+			grunt.initConfig ({
+				checkFileSize: {
+					options: {
+						folderToScan: './files';
+					}
+				}
+			});
+
+		-	Providing arguments to task, add debug parameter to checkFileSize function() and check it's populated.					Arguments can be passed as, 
+
+			$ grunt checkFileSize:true
+
+	# Creating Custom plugins:
+
+		-	Clone gruntplugin to local as specified above
+		-	run, $ grunt-init gruntplugin
+			Asks few questions, answer them, which created folder structure and required files for an plugin
+
+		-	Creates CheckFileSize.js -> add the following code,
+
+			'use strict';
+
+			module.exports = function(grunt) {
+					grunt.registerTask('checkFileSize', 'Task to check the file size', function() {
+					var options =  this.options({
+							folderToScan: '',
+							debug: false
+						});
+
+					if(debug !== undefined) {
+						grunt.log.writeflags(options, 'Options');
+					}
+
+					grunt.file.recurse(options.folderToScan, function(abspath, rootdir, subdir, filename) {
+						if(grunt.file.isFile(abspath)) {
+							var stats = fs.statSync(absPath); -- fs is a node library to work with file system (import required)
+							var asBytes = stats.size / 1024;
+							grunt.log.writeln("Found file %s with size of %s kb", filename, asBytes);
+						}
+					});
+				});
+			}
+
+		-	To use it, update the configuration file, GruntFile.js
+
+			CheckFileSize: {
+				options: {
+					folderToScan: './files',
+					debug: true					}
+			},
+
+			// Loads this plugin's tasks
+			grunt.loadTasks('tasks');
+
+		- 	Install the package before using it, run, $ npm install
+
+			grunt.fail.fatal(); // method used to write the error messages to IO
+
+		- 	Publishing to npm:
+
+			$ npm adduser - to add the user details
+			$ npm publish - to publish the plugin
+
+
+
+
+
+

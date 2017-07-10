@@ -113,7 +113,6 @@ JQuery
 -------
 
 >	Load JQuery from CDN if it fails add the script tag as follows,
-
 		<script>
 			window.JQuery || document.write('<script src="jquery.js"><\/script>')
 		</script>
@@ -175,7 +174,7 @@ JQuery
 	
 		Multiple events and handlers can be defined in on() using a map:
 
-		$('#MyTabe tr').on({
+		$('#MyTable tr').on({
 			mouseenter: function() {
 				$(this).addClass('mouseEnter');
 			},
