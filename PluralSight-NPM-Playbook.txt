@@ -65,7 +65,7 @@ package.json -> to track the dependencies, to create scripts
 
 # Updating npm itself:
 
-	$ npm install npm@latest -g -> Make sure you run in administrator privilege
+	$ npm install npm@latest -g -> Make sure you run in administrator privilege, @beta can be specified to get if any beta versions exist
 
 # Simple Scripts:
 	
@@ -77,4 +77,31 @@ package.json -> to track the dependencies, to create scripts
 		"uglify" : "uglify compress" -> can be run as, $ npm run uglify
 	}
 
-# 
+# Publish npm packages
+	
+	Signup in npmjs.org
+	Add the user in command line using,
+
+	$ npm adduser -> Prompts for username, password, and e-mail address
+
+	Create a git repo and set the project to reference to it, run npm publish to publish it
+
+	$ npm publish
+
+	create a tag for the version released in git repo
+
+# Update the package:
+	
+	$ npm version <patch/minor/major> -> To update the appropriate version
+
+	it commits and creates the tag for us.
+
+	and publish it again
+
+# Release a beta version:
+	
+	Update the version as, 1.1.0-beta.0
+
+	Push the changes to git, create a tag and publish it using,
+
+	$ npm publish --tag beta
