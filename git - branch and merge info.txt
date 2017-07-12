@@ -24,7 +24,7 @@ git config --global core.editor "vim"
 
 	$ git push origin master
 
-# Pulling unrelated histories 
+# Pulling unrelated histories:
 	
 	$ git pull origin master --allow-unrelated-histories
 
@@ -61,317 +61,282 @@ git config --global core.editor "vim"
 
 # Merge two branches without fast-forward:
 
-	$ git merge --no-ff myfeature 
+	$ git merge --no-ff <target-branch> 
 
 	The --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature
 
 	$ git merge <target-branch-to-merge-with>
 
-/**** If you have created branches in remote, pull it using
-$(master) git pull
-	It shows the follwing message
-	from https://<The_Link>
-		*[new branch] Sample -> origin/Sample
-	Already up-to-date
+# Deleting a branch from remote and local:
 
-/*** To make it visible in local, first checkout to that branch
-$(master) git checkout Sample
+	$(master) git push origin :<brach_name>
 
-$(Sample) git branch 
-	** It will now list the new brach pulled from master
-	
+	**NOTE: Though branches are deleted from remote repo, branch are still shown in local copy to delete them in local repo use the following
 
-**** Deleting created branch from remote and local ****
-
-$(master) git push origin :<brach_name>
-
-**NOTE** Though branches are deleted from remote repo, branch are shown in local repo to delete them in local repo use the following
-
-$ (master) git branch -d <brach_name>  
-	* -d option deletes the branch
+	$ (master) git branch -d <brach_name>  ->  -d option deletes the branch
 	*NOTE* use -D option if your branch is merged with master or use -d option
 
 ----------------------------------------
 ** Caching your GitHub password in Git 
 ----------------------------------------
 
-If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username 
-and password every time it talks to GitHub.
+	If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username 
+	and password every time it talks to GitHub.
 
-If you clone GitHub repositories using SSH, then you authenticate using SSH keys instead of a username and password.
- For help setting up an SSH connection, see Generating SSH Keys.
+	If you clone GitHub repositories using SSH, then you authenticate using SSH keys instead of a username and password.
+	 For help setting up an SSH connection, see Generating SSH Keys.
 
-If you prefer working with the command line, you can also install a native Git shell, such as msysgit. 
-With msysgit, running the following in the command line will store your credentials:
+	If you prefer working with the command line, you can also install a native Git shell, such as msysgit. 
+	With msysgit, running the following in the command line will store your credentials:
 
->	git config --global credential.helper wincred
+	>	git config --global credential.helper wincred
 
-Remove cached password from git:
----------------------------------
+	Remove cached password from git:
+	---------------------------------
 
-git config --global --unset credential.helper
+	git config --global --unset credential.helper
 
 -------------------------------------------------------------------
 Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 -------------------------------------------------------------------
 
-$ (branch) git show  <commit_hash>
-	* Shows the information about current commit if no arguments passed to it, if commit hash passed it shows more info about that commmit
+	$ git show  <commit_hash>
+		* Shows the information about current commit if no arguments passed to it, if commit hash passed it shows more info about that commmit
 
-$ (branch) git blame <file_name_in_that_branch>
-	* For each line of the file, blame will find the last commit to edit the line and commit hash, author,date of commit
+	$ git blame <file_name_in_that_branch>
+		* For each line of the file, blame will find the last commit to edit the line and commit hash, author,date of commit
 
-// Specify the line range
-$ git blame -L 12,22 <file-name> 
+	// Specify the line range
+	$ git blame -L 12,22 <file-name> 
 
+# Cherry-pick: moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
 
-----------------------------------------------------------------------------------------------------------------------------
-** Cherry-pick -- moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
-----------------------------------------------------------------------------------------------------------------------------
+	git cherry-pick doesn’t alter the existing history within a repository; instead, it adds to the history. As with other Git operations that introduce changes via the process of applying a diff, you may need to resolve conflicts to fully apply the changes from the given commit .
 
--- git cherry-pick doesn’t alter the existing history within a repository; instead, it adds to the history. As with other Git operations that introduce changes via the process of applying a diff, you may need to resolve conflicts to fully apply the changes from the given commit .
+	$ git show -> Will show the modified changes in the recent comment
 
-$ (master) git show
-	-- copy the commit hash (copy first 6 or 7 chars, it is sufficient to pass it as argument to cherry-pick)
+	$ git log --oneline -> Lists all the commits
+		-- copy the commit hash (copy first 6 or 7 chars, it is sufficient to pass it as argument to cherry-pick)
 
-$ (master) git checkout feature
+	$ git checkout <feature>
 
-$ (feature) git cherry-pick <commit-hash> 
+	$ git cherry-pick <commit-hash> 
 
-	* It creates an entirely new commit based off the original commit and its commit message and it doesn't delete the original commit
+		* It creates an entirely new commit based off the original commit and its commit message and it doesn't delete the original commit
 
-Once the new commit is created in the 'feature', delete the old commit in 'master' by running
+	Once the new commit is created in the 'feature', delete the old commit in 'master' by running
 
-$ (master) git reset --hard HEAD^
+	$ (master) git reset --hard HEAD^
 
-	-- HEAD 	== 	The Commit I'm currently sitting on
-	-- HEAD^ 	== 	The commit's parent
-	-- HEAD^^	==	This commi's grand parent
-	-- HEAD~5 	== 	Five commits back from the current commit, it is equivalent to HEAD^^^^^
+		-- HEAD 	== 	The Commit I'm currently sitting on
+		-- HEAD^ 	== 	The commit's parent
+		-- HEAD^^	==	This commi's grand parent
+		-- HEAD~5 	== 	Five commits back from the current commit, it is equivalent to HEAD^^^^^
 	
----------
-** Rebase 
----------
-https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview
+# Rebase: 
 
--- 	Command for changing the history
--- 	Never change history when other people are working on your branch, unless they know you're doing so
---	Never change history on 'master'
---	Best Practice: Only change the history for commits that have not yet been pushed
+	https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview
 
-eg: 'master' has changed since I started my feature and I want to bring my branch up to date with master
+	-- 	Command for changing the history
+	-- 	Never change history when other people are working on your branch, unless they know you're doing so
+	--	Never change history on 'master'
+	--	Best Practice: Only change the history for commits that have not yet been pushed
 
--- rebase finds the merge base, cherry-picks all the commits, and reassings the branch pointer 
+	eg: 'master' has changed since I started my feature and I want to bring my branch up to date with master
 
-$ (feature) git rebase master
+	-- rebase finds the merge base, cherry-picks all the commits, and reassings the branch pointer 
 
- -- It may throw error like commits are diverged and if you try to push it won't allow then force push the commit in the feature
+	$ git rebase master
+
+	 -- It may throw error like commits are diverged and if you try to push it won't allow then force push the commit in the feature
+	 
+	 $ git push -f <branch-name>
+	 	-- If it shows merge conflicts -> check the status of the branch
+
+	 $ git status  -> it shows the conflicts in the 'feature' if any  
+
+	 if you are in the middle of rebase and got conflicts, resolve the conflicts manually (conflicts looks similar to merge conflicts, resolving merge conflicts creates new commit, while rebase is not), or you can cherry-pick to resolve conflicts, then run
+
+	 $ (feature) git rebase --continue
+
+	 if you want to rebase later and fix the conflict later, run
+
+	 $ (feature) git rabase --abort
+
+# reflog: it shows commits in order of when you lasted referenced them
+
+	If you are changing the history reflog is best command
+
+	$ git checkout <hash> 
+
+	$(feature) git reset --hard <commit-hash> (Commit hash in the form of HEAD@{3})to reset the branch pointer to the commit
+
+# Squashing and Splitting: 
+
+	If you have forgotten to add files to this commit then
+
+	$ git add missed-file.txt
+	$ git commit --amend 
+	
+	Makes a new commit with new file added, and replaces the most recent commit with new one. 
+
+	If you want to squash more commits to one commit then use,
+
+	$ git rebase --interactive HEAD~5 
+		-- It opens the editor with last five commits showing the action to be performed on them, rename action 'pick' to 'squash' on the commits. 
+			(press 'i' in the keyboard  to edit the file in the editor and to save and quit the editor, press 'escape' button to come out of editing mode to normal mode then type :wq -> this commands will saves the file and quits the editor -- This editor behaves more like vi/vim editor in Linux)
+		-- Close the editor and it asks for new commit message, enter some message and save and quit the editor.
+
+# Squashing commits changes history
+
+	Change the actions 'pick' from 'squash' for all the commits you wanted to squash them into one
+
+# Splitting commits into small commits:
+
+	$ git rebase -i HEAD~3  -> git will pause in the rebase process to create new commits
+
+	Change 'pick' to 'edit' for the commit to make changes to save and quit the editor,
+
+	Then pop off the commit using,
+
+	$ git reset HEAD^  -> Don't use --hard option it may change the commit
  
- $ (feature) git push -f
- 	-- If it shows merge conflicts -> check the status of the branch
+ 		files added in that commit are in staged area and check with the command
 
- $(feature) git status  -> it shows the conflicts in the 'feature' if any  
-
- if you are in the middle of rebase and got conflicts, resolve the conflicts manually (conflicts looks similar to merge conflicts, resolving merge conflicts creates new commit, while rebase is not), or you can cherry-pick to resolve conflicts, then run
-
- $ (feature) git rebase --continue
-
- if you want to rebase later and fix the conflict later, run
-
- $ (feature) git rabase --abort
-
---------
-** reflog - it shows commits in order of when you lasted referenced them
---------
-
-If you are changing the history reflog is best command
-
-$ git checkout <hash> 
-
-$(feature) git reset --hard <commit-hash> (Commit hash in the form of HEAD@{3})to reset the branch pointer to the commit
-
-------------------------
-Squashing and Splitting
-------------------------
--- If you have forgotten to add files to this commit then
-
-$ (feature) git add missed-file.txt
-$ (feature) git commit --amend 
-	-- Makes a new commit with new file added, and replaces the most recent commit with new one. 
-
-If you want to squash more commits to one commit then use,
-
-$(feature) git rebase --interactive HEAD~5 
-	-- It opens the editor with last five commits showing the action to be performed on them, rename action 'pick' to 'squash' on the commits. 
-		(press 'i' in the keyboard  to edit the file in the editor and to save and quit the editor, press 'escape' button to come out of editing mode to normal mode then type :wq -> this commands will saves the file and quits the editor -- This editor behaves more like vi/vim editor in Linux)
-	-- Close the editor and it asks for new commit message, enter some message and save and quit the editor.
-
--- Squashing commits changes history
-
---	Change the actions 'pick' from 'squash' for all the commits you wanted to squash them in to one
-
-** Splitting commits into small commits
-
-$ (feature) git rebase -i HEAD~3  -> git will pause in the rebase process to create new commits
-
-	-- Change 'pick' to 'edit' for the commit to make changes to save and quit the editor,
-
-Then pop off the commit using,
-
-$ (feature) git reset HEAD^  -- Don't use --hard option it may change the commit
- 
- 	-- files added in that commit are in staged area and check with the command
-
-$ (feature) git status - will show all the files in its parent commit.
+	$ git status -> will show all the files in its parent commit.
 
 If that commit contains more files then you can add one file and commit individually.
 
-$ (feature) git add <file1>
-$ (feature) git commit -m "Sample"
+	$ git add <file1>
+	$ git commit -m "Sample"
 
-$ (feature) git rebase --continue
+	$ (git rebase --continue
 
-Skipped 'bisect' command which tells which commit broke the build.
+	Skipped 'bisect' command which tells which commit broke the build.
 
+# Squash commits into one:
 
-Squash commits into one:
----------------------------
-$ git rebase -i HEAD~5 (or you can get commit hash till which commit you want to rebase with), to see the commits, run $git log
- <select commits to squash and enter commit message>
+	$ git rebase -i HEAD~5 (or you can get commit hash till which commit you want to rebase with), to see the commits, run $git log
+	 <select commits to squash and enter commit message>
 
-once done force-push your changes to remote branch:
+	once done force-push your changes to remote branch:
 
-$ git push -f origin <feature-branch>
-
+	$ git push -f origin <feature-branch>
 
 
-Cherry-picking a commit on build or target branch:
---------------------------------------------------
+# Cherry-picking a commit on target branch:
 
-$ git fetch origin build
+	$ git fetch origin <branch-name>
 
-$ git reset --hard origin/build
+	$ git reset --hard origin/<branch-name>
 
-$ git cherry-pick "commit-hash" 
+	$ git cherry-pick "commit-hash" 
 
-get commit hash from the target branch
+		Get commit hash from the target branch, if any conflicts, resolve manually and add them to index and continue the cherry-pick using,
 
-if any conflicts, resolve manually and add them to index and continue the cherry-pick using,
+	$ git cherry-pick --continue
 
-$ git cherry-pick --continue
+	Once done push changes to remote branch,
 
-once done push changes to remote branch
-
-$ git push origin <build>
+	$ git push origin <build>
 
 
-To remove the commit:
-----------------------
+# To remove the commit:
 
-$ git rebase -i HEAD~2
+	$ git rebase -i HEAD~2
 
-Replace pick with drop before commit hash.
+	Replace pick with drop before commit hash.
 
-(if any conflicts resolve them and continue the rebase) 
+	(if any conflicts resolve them and continue the rebase) 
 
-Publish the changes forcefully,
+	Publish the changes forcefully,
 
-$ git push -f origin <branch_name>
+	$ git push -f origin <branch_name>
 
 
-Creating pull request to dev:
------------------------------
+# Creating pull request:
 
--- 	pull the changes from dev to local - $(dev) git pull origin dev
-
---	Go to your branch, rebase dev over your branch, make sure your commit in your feature branch are squashed into one commit and pushed to 
-	remote before rebasing dev to your branch
+	Go to your branch, rebase with master over your branch, make sure your commit in your feature branch are squashed into one commit and pushed to remote before rebasing dev to your branch
 	
-	--	$(feature) git rebase dev
+	$ git rebase master
 
-		if you get any conflicts resolve and continue the rebase, then force push the changes to your branch
-		$(feature) git push -f origin feature
+	if you get any conflicts resolve and continue the rebase, then force push the changes to your branch,
 
--- Once changes pushed, go to repo in the github, create pull request and get atleast 2 +1's
+	$ git push -f origin <branch-name>
 
+	Once changes pushed, go to repo in the github, create pull request 
 
-Edit an incorrect commit message:
----------------------------------
+# Edit an incorrect commit message:
 
-$ git commit --amend -m "YOUR-NEW-COMMIT-MESSAGE"
+	$ git commit --amend -m "YOUR-NEW-COMMIT-MESSAGE"
 
-In case you’ve already pushed your commit to the remote branch then you need to force push the commit with this command:
+	In case you’ve already pushed your commit to the remote branch then you need to force push the commit with this command:
 
-$ git push <remote> <branch> --force or $ git push -f origin <branch>
+	$ git push <remote> <branch> --force or $ git push -f origin <branch>
 
-To delete a remote branch:
---------------------------
+# To delete a remote branch:
 
 $ git push origin --delete <branchName>
 
 
-Rename git branch locally and remotely:
----------------------------------------
+# Rename git branch locally and remotely:
 
-$ git branch -m old_branch new_branch         # Rename branch locally    
-$ git push origin :old_branch                 # Delete the old branch    
-$ git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
+	$ git branch -m old_branch new_branch         # Rename branch locally    
+	$ git push origin :old_branch                 # Delete the old branch    
+	$ git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
 
-Deleting a remote tag:
-----------------------
+# Deleting a remote tag:
 
-$ git tag -d <12345>
+	$ git tag -d <12345>
 
-$ git push origin :refs/tags/<12345>
+	$ git push origin :refs/tags/<12345>
 
-// git advanced merge:
+# Advanced merge:
 
--- Ignoring the spaces 
-$ git merge -Xignore-space-change <branch-to-be-merged>
+	-- Ignoring the spaces 
+	$ git merge -Xignore-space-change <branch-to-be-merged>
 
--Xignore-all-space -> ignores all the spaces
+	-Xignore-all-space -> ignores all the spaces
 
-$ git show :1:hello.rb > hello.common.rb
-$ git show :2:hello.rb > hello.ours.rb
-$ git show :3:hello.rb > hello.theirs.rb
+	$ git show :1:hello.rb > hello.common.rb
+	$ git show :2:hello.rb > hello.ours.rb
+	$ git show :3:hello.rb > hello.theirs.rb
 
-Stage 1 is the common ancestor, stage 2 is your version and stage 3 is from the MERGE_HEAD
+	Stage 1 is the common ancestor, stage 2 is your version and stage 3 is from the MERGE_HEAD
 
+# Un-applying a Stash:
 
-Un-applying a Stash:
---------------------
-You can reapply the one you just stashed by using the command shown in the help output of the original stash command:
+	You can reapply the one you just stashed by using the command shown in the help output of the original stash command:
 
-$ git stash apply
+	$ git stash apply
 
-If you want to apply one of the older stashes, you can specify it by naming it, like this: 
+	If you want to apply one of the older stashes, you can specify it by naming it, like this: 
 
-$ git stash apply stash@{2}
+	$ git stash apply stash@{2}
 
-In some use case scenarios you might want to apply stashed changes, do some work, but then un-apply those changes that originally came from the stash. Git does not provide such a stash unapply command, but it is possible to achieve the effect by simply retrieving the patch associated with a stash and applying it in reverse:
+	In some use case scenarios you might want to apply stashed changes, do some work, but then un-apply those changes that originally came from the stash. Git does not provide such a stash unapply command, but it is possible to achieve the effect by simply retrieving the patch associated with a stash and applying it in reverse:
 
-$ git stash show -p stash@{0} | git apply -R
+	$ git stash show -p stash@{0} | git apply -R
 
-Again, if you don’t specify a stash, Git assumes the most recent stash:
+	Again, if you don’t specify a stash, Git assumes the most recent stash:
 
-$ git stash show -p | git apply -R
+	$ git stash show -p | git apply -R
 
+	You may want to create an alias and effectively add a stash-unapply command to your Git. For example:
 
-->	You may want to create an alias and effectively add a stash-unapply command to your Git. For example:
+	$ git config --global alias.stash-unapply '!git stash show -p | git apply -R'
 
-$ git config --global alias.stash-unapply '!git stash show -p | git apply -R'
+	$ git stash apply
 
-$ git stash apply
-
-$ git stash-unapply
+	$ git stash-unapply
 
 
-Kdiff3
------
+# Kdiff3 - Resolivng conflicts:
 
-$ git config --global merge.tool kdiff3
+	$ git config --global merge.tool kdiff3
 
-$git config --global mergetool.kdiff3.cmd '"C:\\Program Files (x86)\\KDiff3\\kdiff3" $BASE $LOCAL $REMOTE -o $MERGED'
+	$ git config --global mergetool.kdiff3.cmd '"C:\\Program Files (x86)\\KDiff3\\kdiff3" $BASE $LOCAL $REMOTE -o $MERGED'
 
-A useful git command if you want to see the last committer on a branch. Helps if you want to clean up branches from your team in a large repos:
-git for-each-ref --format="%(align:30,left)%(color:yellow)%(authorname)%(end) %(align:30,left)%(color:red)%(refname:strip=3)%(end)" --sort=authorname refs/remotes'
+# A useful git command if you want to see the last committer on a branch. Helps if you want to clean up branches from your team in a large repos:
+	
+	$ git for-each-ref --format="%(align:30,left)%(color:yellow)%(authorname)%(end) %(align:30,left)%(color:red)%(refname:strip=3)%(end)" --sort=authorname refs/remotes'
