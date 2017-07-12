@@ -206,3 +206,33 @@ JQuery
 		$.get('sample.html', function(data){
 			$('#outputDiv').html(data);
 		});
+
+------------------------------------------------
+* Building a JavaScript Environment: Cory House |
+------------------------------------------------
+
+# ember - fully opioniated library
+
+# Editor Selection:
+	
+	VSCode - JavaScript editor, other options - atom
+
+	EditorConfig - helps create a config for a editor
+	
+		Install the plugin before using in VS code, goto, editorconfig.org -> download the plugin -> copy the command and open VS code, 'Ctrl + SHift + p' to open the command pallate and paste the command and select to install
+
+		Create .editorconfig file in the project root.
+
+# Package managers:
+
+	Use 'node security platform' to check for package vulnerabilities, install it using,
+
+	$ npm instal --global nsp
+
+	Run this to check, using,
+
+	$ nsp check
+
+
+
+
