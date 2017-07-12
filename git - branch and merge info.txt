@@ -10,10 +10,6 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 git config --global core.editor "vim"
 
-# Reset all the staged files:
-
-	$ git reset HEAD -- .
-
 # Adding an exisiting git project to github:
 	
 	$ git init
@@ -32,83 +28,44 @@ git config --global core.editor "vim"
 	
 	$ git pull origin master --allow-unrelated-histories
 
-$ git fetch origin
+# Reset all the staged files:
 
---	fetch only downloads new data from a remote repository - but it doesn't integrate any of this new data into your working files.
+	$ git reset HEAD -- .
+
+# git fetch and pull:
+
+	$ git fetch origin
+
+	fetches new branches from a remote repository - but it doesn't integrate any of this new data into your working files.
 	fetch will never manipulate, destroy, or screw up anything. This means you can never fetch often enough.
 
-$ git pull origin master -- it does 'git fetch' followed by 'git merge'
+	$ git pull origin master -- it does 'git fetch' followed by 'git merge'
 
---	updates current HEAD branch with the latest changes from the remote server. This means that pull not only downloads new data; it also directly integrates it into your current working copy files. 
+	updates current HEAD branch with the latest changes from the remote server. This means that pull not only downloads new data; it also directly integrates it into your current working copy files. 
 
 	This has a couple of consequences:
 
-	1)	Since "git pull" tries to merge remote changes with your local ones, a so-called "merge conflict" can occur.
+		1)	Since "git pull" tries to merge remote changes with your local ones, a so-called "merge conflict" can occur.
 
-	2)	It is highly recommended to start a "git pull" only with a clean working copy. This means that you should not have any uncommitted local 	 changes before you pull.
+		2)	It is highly recommended to start a "git pull" only with a clean working copy. This means that you should not have any uncommitted local 	 changes before you pull.
 
-Resolving Merge Conflicts:
---------------------------
-	--	if two people changed the same lines in that same file, or if one person decided to delete it while the other person decided to modify 
-		it, Git simply cannot know what is correct.
+	$ git branch // Lists all the branches in the local repository
 
+# Create new Branch and switch to it:
 
-Clone the git project into your local system:
+	$ (master)git checkout -b <branch-name>  // -b creates the branch and checks to that branch
 
-Go to the repository,
+# push the created branch to remote:
 
-http://jebaird.com/2013/07/08/setting-up-kdiff3-as-the-default-merge-tool-for-git-on-windows.html
+	$ git push origin <branch-name>  // Asks for username and password, Creates branch in remote repository
 
-$cd repository
+# Merge two branches without fast-forward:
 
-$ git branch // Lists all the branches in the local repository
+	$ git merge --no-ff myfeature 
 
-/*** Create new Branch and checkit to it
+	The --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature
 
-$ (master)git checkout -b ACADPLY-2901  // -b creates the branch and checks to that branch
-
-/*** push the created branch to remote
-
-$ git push origin ACADPLY-2901 // Asks for username and password, Creates branch in remote repository
-
-/**** Make changes in the the local repo, that will be affected to ACADPLY-2901
-
-/*** After the changes add the files to ACADPLY-2901 and commit and push it.
-
-$ (ACADPLY-2901) git add .
-$ (ACADPLY-2901) git commit -m "Changes made"
-$ (ACADPLY-2901) git push origin ACADPLY-2901 // Pushes files to remote
-
-/*** Create Stable Branch as explained above
-$ (master) git checkout -b Stable_PK
-
-/*** Push it
-$ (master) git push origin Stable_PK // asks for username and password, creates branch in remote repository
-
-**** If you have 2 working branches and want to merge it and then push it to Stable_PK follow the below steps.
-
-$ git merge --no-ff myfeature 
-
-	- The --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature
-
-/*** Merge it with another (Say, ACADPLY-2902)
-/*** merge the changes from ACADPLY-2902 to ACADPLY-2901
-
-$ (ACADPLY-2901) git merge ACADPLY-2902 
-
-/*** Push the changes to remote ACADPLY-2901 
-
-$(ACADPLY-2901) git push origin ACADPLY-2901
-
-/*** Pull from other branch 
-$ (ACADPLY-2901) git pull origin ACADPLY-2902 
-
-/****Finally merge your Stable_PK with updated changes from ACADPLY-2901 (already merged with ACADPLY-2902)
-$ (Stable_PK) git merge ACADPLY-2901
-
-/*** Finally push it to Stable_PK
-$ (Stable_PK) git push origin Stable_PK
-
+	$ git merge <target-branch-to-merge-with>
 
 /**** If you have created branches in remote, pull it using
 $(master) git pull
@@ -358,8 +315,7 @@ Rename git branch locally and remotely:
 
 $ git branch -m old_branch new_branch         # Rename branch locally    
 $ git push origin :old_branch                 # Delete the old branch    
-$ git push --set-upstream origin new_branch # Push the new branch, set local branch to track the new remote
-`
+$ git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
 
 Deleting a remote tag:
 ----------------------
