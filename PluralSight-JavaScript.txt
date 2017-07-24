@@ -1,3 +1,7 @@
+# List of JavaScript Libraires to consider:
+
+	lodash, ember, expressjs, 
+
 ----------------------------------
 JavaScript objects and properties:
 ----------------------------------
@@ -232,6 +236,8 @@ JQuery
 	Run this to check, using,
 
 	$ nsp check
+
+	
 
 
 
