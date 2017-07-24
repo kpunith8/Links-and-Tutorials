@@ -1,0 +1,22 @@
+https://superuser.com/questions/570601/rename-profile-folder-on-windows-7-8
+
+Enable VT-x  in BIOS
+
+Install ADB interface:
+----------------------
+	Enable usb debugging in your phone
+	Connect to PC
+	Download  ADB installer -> https://forum.xda-developers.com/showthread.php?t=2588979
+	Install
+	Go to My Computer -> Manager -> Device Manager -> Select ADB interface -> Update driver -> Select from available -> Google Inc. -> Install the driver
+
+
+# udacity:
+
+	kpunith8@gmail.com
+	ph@85ancy
+
+# github.com
+
+	kpunith8
+	ph@85ancy
