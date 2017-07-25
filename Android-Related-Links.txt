@@ -1,22 +1,33 @@
-https://superuser.com/questions/570601/rename-profile-folder-on-windows-7-8
+# Courses to look-out for:
 
-Enable VT-x  in BIOS
+	React native
+	ReactJS
+	AngularJS
+	ExpressJS
+	NodeJS
 
-Install ADB interface:
-----------------------
-	Enable usb debugging in your phone
-	Connect to PC
-	Download  ADB installer -> https://forum.xda-developers.com/showthread.php?t=2588979
-	Install
-	Go to My Computer -> Manager -> Device Manager -> Select ADB interface -> Update driver -> Select from available -> Google Inc. -> Install the driver
+# Technologies to consider:
+	
+	ionic framework
+	phoneGap
+	Cordova
 
+# Install ADB interface:
 
-# udacity:
+	1)	Enable usb debugging in your phone
+	2)	Connect to PC
+	3)	Download  ADB installer -> https://forum.xda-developers.com/showthread.php?t=2588979
+	4)	Install
+	5)	Go to My Computer -> Manager -> Device Manager -> Select ADB interface -> Update driver -> Select from available drivers optoin-> Google Inc. -> Install the driver (Select the recent version if more than one entry found)
 
-	kpunith8@gmail.com
-	ph@85ancy
+## Credentials:
 
-# github.com
+	# udacity:
 
-	kpunith8
-	ph@85ancy
+		kpunith8@gmail.com
+		ph@85ancy
+
+	# github.com
+
+		kpunith8
+		ph@85ancy
