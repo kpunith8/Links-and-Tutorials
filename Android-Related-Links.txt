@@ -12,6 +12,10 @@
 	phoneGap
 	Cordova
 
+	babel - JavaScript compiler
+	webpack - JavaScript bundler
+	yarn/npm - package manager
+
 # Install ADB interface:
 
 	1)	Enable usb debugging in your phone

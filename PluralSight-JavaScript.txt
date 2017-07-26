@@ -237,8 +237,42 @@ JQuery
 
 	$ nsp check
 
+# Dev servers:
 	
+	http-server : Ultra-simple, single command serves current directory
+	live-server
+	express, koa, hafi
+	budo
+	webpack-server : hot reloading, serves from memory
+	browserSync : dedicated IP for sharing on LAN, all interactions remains in sync, great for cross device testing, integrates with webpack, gulp, browserify
 
+	Consider: express
+
+# Sharing work-in-progress:
+
+	localtunnel : share in local machine, install using npm, start the app then run using,
+		
+		usage: $ lt --port 3000
+
+	ngrok : secure tunnel to local machine, install ngrok, install authtoken, start the app
+		
+		usage: $ ./ngrok http 80
+
+	now : install, create the start script, 
+		
+		usage: $ now
+
+	surge : Quickly host static files to public URL, install 
+
+		usage: $ surge
+
+	Consider: localtunnel - add --subdomain option to include custom subdomain in the url
+
+			  ex: $ lt -port 3000 --subdomain punith // Will give link as follows, https://punith.localtunnel.me
+
+# Automation:
+	
+	
 
 
 
