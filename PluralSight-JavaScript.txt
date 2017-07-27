@@ -272,7 +272,61 @@ JQuery
 
 # Automation:
 	
+	grunt : 
+	gulp : in memory streams, code over configuration, 
+
+	* npm scripts : declared in scripts section of the package.json, can leverage your OS' command line, call separate node scripts, Convention based pre/post hooks, simpler debugging, no need for separate plugins
+
+	add rules to scripts section in package.json
+
+	packages used in scripts sections are not required to be installed globally.
+
+	"scripts": {
+	    "prestart": "node ./startMessage.js",
+	    "start": "node ./index.js",
+	    "security-check": "nsp check",
+	    "share": "lt --port 3000 --subdomain punith"
+  	},
+
+  Run user-defined scripts as follows, 
+
+  	$ npm run security-check
+
+  Running concurrent tasks,
+
+  	"scripts": {
+	    "prestart": "node ./startMessage.js",
+	    "start": "npm-run-all --parallel security-check open-source",
+	    "open-source": "node ./index.js",
+	    "security-check": "nsp check",
+	    "localtunnel": "lt --port 3000 --subdomain punith",
+	    "share": "npm-run-all --parallel open-source localtunnel"
+  	},
+
+  To silence the noise created in the command line, use 
+
+  	$ npm start -s // option to reduce the noise
+
+# Transpilling:
+
+	TypeScript : Enhanced autocomplete, readability, safer refactoring, additional non-standard features.
+
+	Elm : compiles down to js, clean syntax, immutable data structures, friendly erros, all errors are compile-time erros, interops with JS -> Deep learing curve required to adopt this
+
+	Babel : write standardized JS, leverage full JS eco system, use experimental features earlier, no type defs, annotations required, test, lint, great libs, safety, ES6 imports are statically analyzable
+
+		it offers two ways to configure:
+
+		package.json : place it in a section called "babel" : { },
+
+		.babelrc : Recommended - keep it in project root folder, not npm specific
+		compile using $ babel-node <file-name.js>
+
+# Bundling:
+
 	
+
+
 
 
 
