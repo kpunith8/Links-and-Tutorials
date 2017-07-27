@@ -324,7 +324,10 @@ JQuery
 
 # Bundling:
 
-	
+	To bundle the JavaScript that the browsers can inderstand
+
+	webpack - import css, images etc like JS, built-in hot reloading web server, bundle splitting, 
+
 
 
 

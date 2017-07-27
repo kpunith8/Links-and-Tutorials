@@ -2,7 +2,7 @@
 Grunt: The JavaScript Task Runner:
 ----------------------------------
 
-	-	Task-based command line build tool for JavaScript projects which makes performming repetative, but neccesary, task trivial
+	-	Task-based command line build tool for JavaScript projects which makes performing repetative, but neccesary, task trivial
 	-	Validates css/html/JavaScript
 	-	Minify or compress CSS/Javascript
 	-	Compile CoffeeScript, TypeScript etc.,
@@ -66,7 +66,7 @@ Grunt: The JavaScript Task Runner:
 		Download 'grunt-contrib-clean' to use it, use npm to download, once downloaded it adds it to package.json automatically/we can add it 
 		manually, add this to Gruntfile.js
 
-			use strict';
+			use 'strict';
 
 			module.exports = function(grunt) {
 				grunt.initConfig({
