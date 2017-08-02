@@ -250,49 +250,50 @@ JQuery
 
 # Sharing work-in-progress:
 
-	localtunnel : share in local machine, install using npm, start the app then run using,
+	- localtunnel : share in local machine, install using npm, start the app then run using,
 		
 		usage: $ lt --port 3000
 
-	ngrok : secure tunnel to local machine, install ngrok, install authtoken, start the app
+	- ngrok : secure tunnel to local machine, install ngrok, install authtoken, start the app
 		
 		usage: $ ./ngrok http 80
 
-	now : install, create the start script, 
+	  now : install, create the start script, 
 		
 		usage: $ now
 
-	surge : Quickly host static files to public URL, install 
+	- surge : Quickly host static files to public URL, install 
 
 		usage: $ surge
 
-	Consider: localtunnel - add --subdomain option to include custom subdomain in the url
+	- Consider: localtunnel; usage: $ lt --port 3000
 
-			  ex: $ lt -port 3000 --subdomain punith // Will give link as follows, https://punith.localtunnel.me
+		Add, --subdomain option to include custom subdomain in the url; usage: $ lt -port 3000 --subdomain punith // Will give link as follows, https://punith.localtunnel.me
 
 # Automation:
 	
-	grunt : 
-	gulp : in memory streams, code over configuration, 
+	- grunt
 
-	* npm scripts : declared in scripts section of the package.json, can leverage your OS' command line, call separate node scripts, Convention based pre/post hooks, simpler debugging, no need for separate plugins
+	- gulp : in memory streams, code over configuration, 
 
-	add rules to scripts section in package.json
+	- npm scripts : declared in scripts section of the package.json, can leverage your OS' command line, call separate node scripts, Convention based pre/post hooks, simpler debugging, no need for separate plugins
 
-	packages used in scripts sections are not required to be installed globally.
+	- add rules to scripts section in package.json
 
-	"scripts": {
-	    "prestart": "node ./startMessage.js",
-	    "start": "node ./index.js",
-	    "security-check": "nsp check",
-	    "share": "lt --port 3000 --subdomain punith"
-  	},
+	- packages used in scripts sections are not required to be installed globally.
 
-  Run user-defined scripts as follows, 
+		"scripts": {
+		    "prestart": "node ./startMessage.js",
+		    "start": "node ./index.js",
+		    "security-check": "nsp check",
+		    "share": "lt --port 3000 --subdomain punith"
+	  	},
 
-  	$ npm run security-check
+  - Run user-defined scripts as follows, 
 
-  Running concurrent tasks,
+  		$ npm run security-check
+
+  - Running concurrent tasks,
 
   	"scripts": {
 	    "prestart": "node ./startMessage.js",
@@ -303,31 +304,100 @@ JQuery
 	    "share": "npm-run-all --parallel open-source localtunnel"
   	},
 
-  To silence the noise created in the command line, use 
+  - To silence the noise created in the command line, use 
 
-  	$ npm start -s // option to reduce the noise
+  		$ npm start -s // option to reduce the noise
 
 # Transpilling:
 
-	TypeScript : Enhanced autocomplete, readability, safer refactoring, additional non-standard features.
+	- TypeScript : Enhanced autocomplete, readability, safer refactoring, additional non-standard features.
 
-	Elm : compiles down to js, clean syntax, immutable data structures, friendly erros, all errors are compile-time erros, interops with JS -> Deep learing curve required to adopt this
+	- Elm : compiles down to js, clean syntax, immutable data structures, friendly erros, all errors are compile-time erros, interops with JS -> Deep learing curve required to adopt this
 
-	Babel : write standardized JS, leverage full JS eco system, use experimental features earlier, no type defs, annotations required, test, lint, great libs, safety, ES6 imports are statically analyzable
+	- Babel : write standardized JS, leverage full JS eco system, use experimental features earlier, no type defs, annotations required, test, lint, great libs, safety, ES6 imports are statically analyzable
 
 		it offers two ways to configure:
 
 		package.json : place it in a section called "babel" : { },
 
 		.babelrc : Recommended - keep it in project root folder, not npm specific
-		compile using $ babel-node <file-name.js>
+		
+		- compile using $ babel-node <file-name.js>
 
 # Bundling:
 
-	To bundle the JavaScript that the browsers can inderstand
+	- To bundle the JavaScript that the browsers can inderstand
 
-	webpack - import css, images etc like JS, built-in hot reloading web server, bundle splitting, 
+	- webpack - import css, images etc like JS, built-in hot reloading web server, bundle splitting
 
+	- webpack.config.js file in the root folder required.
+
+	- To use it in node.js app, add the following,
+
+		import webpack from 'webpack';
+		import config from './webpack.config';
+
+		const compiler = webpack(config);
+
+		// Required to run webpack in express
+		app.use(require('webpack-dev-middleware')(compiler, {
+		    publicPath: config.output.publicPath
+		}));
+
+
+# Linting:
+	
+	- Enforces consistency - curly brace position, confirm/alert boxes in production code, trailing commas, declaring global variables, disallowing the usage of eval (potentially risky to use)
+
+	- Avoids mistakes - Extra paranthesis, overwritng a function, assignment in conditional, missing default case in switch, leaving debugger/console.log statements
+
+	- If any of this violated can fail the build while developing and deploying the code in production
+
+	- Linters to consider; JSLint, JS Hint, ES Lint
+
+	- Consider ES Lint - TS Lint supports the type script (consider if working on Type script)
+	
+	- Can be configured in package.json or create .eslintrc.json file in the project root folder
+
+	- eslintConfig section can be added in package.json
+
+	- @ github.com/dustinspecker/awesome-eslint - to get the available plugins for different JavaScript frameworks
+
+	- Use a preset - ES lint recommended list or start from scrath which fits the team standards or airbnb, standardjs presets
+
+	# Downsides:
+
+		- ESLint doesn't watch files, To watch files use (Upon save)
+			
+			- eslint-loader (if using webpack) - re-lints all files upon save
+			- eslint-watch - ESLint wrapper that adds the file watch - not tied to webpack, better warning/error formatting, displays clean message, easily lint tests and build scripts
+
+		- Doesn't support experimental JavaScript features, to use experimental features use,
+
+			- babel-eslint
+
+	# Need eslint, eslint-watch, eslint-plugin-import plugins to make it work.
+
+	- create a script in package.json as, 
+
+		"lint": "esw webpack.config.* src --color" // esw; eslist-watch executable which looks for config file and in src folder, folders can be specified by leaving a space
+
+		run it as; $ npm run lint
+
+	- To disable a lint in a file, use the following comment in file,
+
+		/* eslint-disable no-console */
+
+	- To disable in lint in a line, use the follwing in the line,
+
+		// eslint-disable-line no-console
+
+	- To watch the files use the following,
+
+		 "lint:watch": "npm run lint -- --watch" -> run it as; npm run lint:watch, add the lint:watch to start script of npm
+
+# Testing and continuous integration:
+	
 
 
 
