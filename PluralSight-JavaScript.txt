@@ -396,7 +396,7 @@ JQuery
 
 		 "lint:watch": "npm run lint -- --watch" -> run it as; $ npm run lint:watch, add the lint:watch to start script of npm
 
-# Testing and continuous integration:
+# Testing and Continuous integration:
 
 	- Testing Framework: 
 
@@ -422,6 +422,21 @@ JQuery
 		add this in scripts section of package.json
 
 		"test": "mocha --reporter progress src/testSetup.js \"src/**/*.test.js\""
+
+# Continuous integration:
+	
+	- travis: Linux based
+	- appveyor: window based
+	- Jenkins
+	- circleCI
+	- Semaphore
+	- snapCI
+
+	- travis
+
+# HTTP Calls:
+
+	- 
 
 	
 
