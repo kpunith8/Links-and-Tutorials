@@ -353,7 +353,7 @@ JQuery
 
 	- If any of this violated can fail the build while developing and deploying the code in production
 
-	- Linters to consider; JSLint, JS Hint, ES Lint
+	- Linters to consider: JSLint, JS Hint, ES Lint
 
 	- Consider ES Lint - TS Lint supports the type script (consider if working on Type script)
 	
@@ -394,9 +394,35 @@ JQuery
 
 	- To watch the files use the following,
 
-		 "lint:watch": "npm run lint -- --watch" -> run it as; npm run lint:watch, add the lint:watch to start script of npm
+		 "lint:watch": "npm run lint -- --watch" -> run it as; $ npm run lint:watch, add the lint:watch to start script of npm
 
 # Testing and continuous integration:
+
+	- Testing Framework: 
+
+		mocha, jasmine (has assertion library built in), Tape (Minimal configuration), AVA (runs impacted unit tests, new), Jest (from facebook - popular for react developers - wrapper over Jasmine) - Consider -> Mocha
+
+	- Assertion Library: Mocha doesn't have assertion library built
+
+		chai.js, should.js, expect.js - Consider -> chai.js
+
+	- Helper Library: 
+
+		JSDOM - simulate the browser's dom - can run DOM related tests, without a browser
+		cheerio - jQuery for the server, Query virtual DOM using jQuery selectors
+
+	- Where to run tests:
+
+		Browser: karma, Testem
+		Headless Browsers: PhantomJS - has no visible interface
+		In memory DOM: JSDOM - 9.8.0 used in the project
+
+	- mocha + chai + jsdom(9.8.0)
+		
+		add this in scripts section of package.json
+
+		"test": "mocha --reporter progress src/testSetup.js \"src/**/*.test.js\""
+
 	
 
 
