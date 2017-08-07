@@ -291,6 +291,14 @@ $ git push origin --delete <branchName>
 
 	$ git push origin :refs/tags/<12345>
 
+# Fetching tags from remote:
+
+	$ git fetch --tags
+
+# Creating a branch from tag:
+
+	$ git checkout -b <newbranch> v1.0
+
 # Advanced merge:
 
 	-- Ignoring the spaces 
