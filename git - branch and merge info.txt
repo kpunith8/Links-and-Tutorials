@@ -297,7 +297,7 @@ $ git push origin --delete <branchName>
 
 # Creating a branch from tag:
 
-	$ git checkout -b <newbranch> v1.0
+	$ git checkout -b <newbranch> 1.0
 
 # Advanced merge:
 
