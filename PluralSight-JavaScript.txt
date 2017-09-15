@@ -2,6 +2,16 @@
 
 	lodash, ember, expressjs, 
 
+# CSS:
+	
+	flexbox
+
+# Tools:
+
+	scratchpad.io
+	jsonplaceholder -> Fake Online REST API for Testing and Prototyping
+	https://ckeditor.com/ - WYSIWYG editor
+
 ----------------------------------
 JavaScript objects and properties:
 ----------------------------------
@@ -326,7 +336,7 @@ JQuery
 
 # Bundling:
 
-	- To bundle the JavaScript that the browsers can inderstand
+	- To bundle the JavaScript that the browsers can understand
 
 	- webpack - import css, images etc like JS, built-in hot reloading web server, bundle splitting
 
@@ -436,7 +446,30 @@ JQuery
 
 # HTTP Calls:
 
-	- 
+	- Node: http, request
+	- Browser: XMLHttpRequest(xhr), jQuery, Fetch
+	- Node and Browser: isomorphic-fetch, xhr, SuperAgent, Axios
+
+	Demo: Fetch
+
+	- Mocking HTTP:
+
+		Nock - to mock http calls
+		Static JSON
+		Create developement server: api-mock, JSON server, JSON schema faker (To use dynamic data)
+
+	- Declare schema: JSON Schema Faker
+	- Generate random data: faker.js, chance.js, randexp.js
+	- Serve data via API:  JSON Server
+
+# Production build:
+
+	- Minification: Speeding page loads, saving bandwidth
+		- Shortens variable names and funciton names, removes comments, removes white spaces and new lines
+		- tree shaking / dead code elimination (webpack does this)
+
+
+
 
 	
 
