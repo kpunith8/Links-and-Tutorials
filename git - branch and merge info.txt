@@ -13,7 +13,7 @@ git config --global core.editor "vim"
 # Adding an exisiting git project to github:
 	
 	$ git init
-
+\
 	$ git add .
 
 	$ git commit -m "First commit"
