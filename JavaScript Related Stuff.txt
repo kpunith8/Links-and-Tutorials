@@ -1,0 +1,46 @@
+Removing npm from local cache & local folder of npm packages:
+user/<username>/AppData/Roaming/npm or npm-cache
+
+** JavaScript testing libraries:
+
+Jest and TestCafe
+
+** Tools selected by Cerner:
+
+* font-awesome for icons
+
+* add 'debugger;' text in the source code, so that chrome developer takes to that point when debugging. Remove them once done debugging
+
+React
+SASS - Syntactically Awesome Style Sheets
+CSS Modules
+
+Toaster library to notify
+
+lint errors and fixes Fixes:
+----------------------------
+
+no-undef lint error fix: can be added global section of webpack.config
+
+https://github.com/chaijs/type-detect/issues/98
+
+lint error while using single return statement in arrow function:
+
+unexpected block statement surrounding arrow body
+
+
+// Converting array to JSON Data
+
+function convertToJson(items) {
+	return JSON.parse(JSON.stringify(items));
+}
+
+// get the data from event object
+
+saveUserData(event) {
+	var field = event.target.name;
+	var value = event.target.value;
+	this.state.author[field] = value;
+
+	return this.setState({ author: this.state.author});
+}

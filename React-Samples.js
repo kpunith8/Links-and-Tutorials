@@ -1,9 +1,10 @@
+// Sample-1: Samer Buna - Plural sight course
 // Grid system and deleting an item in the list using React
 
 const Stars = (props) => {
 	return(
   	<div className="col-5">
-  	  {_.range(props.numberOfStars).map(i => 
+  	  {_.range(props.numberOfStars).map(i =>
       	<i key={i} className="fa fa-star"></i>
       )}
   	</div>
@@ -18,10 +19,11 @@ const Button = (props) => {
   );
 }
 
+
 const Answer = (props) => {
 	return(
   	<div className="col-5">
-			{props.selectedNumbers.map((number, i) => 
+			{props.selectedNumbers.map((number, i) =>
         	<span className="used" key={i} onClick={() => props.unselectNumber(number)}>
           	{number}
           </span>
@@ -36,11 +38,11 @@ const Numbers = (props) => {
     	return 'selected';
     }
   }
-  
+
 	return(
   	<div className="card text-center">
     	<div>
-        {Numbers.list.map((number, i) => 
+        {Numbers.list.map((number, i) =>
         	<span key={i} className={numberClassName(number)} id="number"
           	onClick={() => props.selectNumber(number)}>
           {number}
@@ -65,14 +67,14 @@ const List = (props) => {
 	deleteItem = (item) => {
   	props.delete(item);
   };
-  
+
   addItem = (item)  => {
-  
+
     	this.setState(prevState => ({
     	newList: prevState.newList.concat(item)
     }));
   };
-  
+
   const listItems = props.data.map((number, key) =>
     <li onClick={addItem.bind(this, number)}>{number}<span className="fa fa-window-close" onClick=	   {deleteItem.bind(this, number)}> </span></li>
     );
@@ -83,11 +85,11 @@ const newItems = this.state.newList.map((number, key) =>
 
 	return(
   	<div className="list">
-    	<ul>{listItems}</ul> 
-      <ul>{newItems}</ul> 
+    	<ul>{listItems}</ul>
+      <ul>{newItems}</ul>
       </div>
-    
-    
+
+
   );
 }
 
@@ -104,28 +106,28 @@ class Game extends React.Component {
   	};
   	this.delete = this.delete.bind(this);
   }
-  
+
   delete = (item) => {
   	this.setState(prevState => ({
     	data: prevState.data.filter(number => number !=item)
     }));
   }
-  
+
   selectNumber = (clickedNumber) => {
   	if(this.state.selectedNumbers.indexOf(clickedNumber) >=0) { return; }
-  	
+
     this.setState(prevState => ({
     	selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
     }));
   };
-  
+
   unselectNumber = (clickedNumber) => {
   	this.setState(prevState => ({
     	selectedNumbers: prevState.selectedNumbers
       													.filter(number => number !== clickedNumber)
     }));
   };
-  
+
 	render() {
   	return(
     	<div className="container">
@@ -166,7 +168,7 @@ class Game extends React.Component {
           </div>
         </div>
     </div>
-      
+
     );
   }
 }
@@ -260,3 +262,74 @@ background-color: cyan;
 }
 
 ====================================================================================================
+React Routes:
+-------------
+"use strict";
+
+var React = require('react');
+
+var Router = require('react-router');
+var DefaultRoute = Router.DefaultRoute;
+var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+var Redirect = Router.Redirect;
+
+var routes = (
+  <Route name="app" path="/" handler={require('./components/app')}>
+    <DefaultRoute handler={require('./components/homePage')} />
+    <Route name="authors" handler={require('./components/authors/authorPage')} />
+    <Route name="addAuthor" path="author" handler={require('./components/authors/manageAuthorPage')} />
+    <Route name="manageAuthor" path="author/:id" handler={require('./components/authors/manageAuthorPage')} />
+    <Route name="about" handler={require('./components/about/aboutPage')} />
+    <NotFoundRoute handler={require('./components/notFoundPage')} />
+    <Redirect from="about-us" to="about" />
+    <Redirect from="awthurs" to="authors" />
+    <Redirect from="about/*" to="about" />
+  </Route>
+);
+
+module.exports = routes;
+
+============
+React Forms: Cory House
+------------
+
+> use mixins to refer other components,
+
+> use statics to make transitions to one page to another, and ask save the user data before transition to another page, using
+dirty state.
+
+	mixins: [
+		Router.Navigation
+	],
+
+	statics: {
+		willTransitionFrom: function(transition, component) {
+			if (component.state.dirty && !confirm('Leave without saving?')) {
+				transition.abort();
+			}
+		}
+	},
+
+	this.transitionTo('authors'); // will take to the name of the page mentioned in Router
+
+-----
+Flux:
+-----
+
+> Not a framework, name for the pattern for unidirectional dataflows
+> State update happens from centralized dispatcher to applications data store
+> Deals with actions and data changes
+> Action -> Dispatcher -> Store -> React View -> Action (unidirectional)
+
+	> Action - Action performed - Has payload and data - makes ajax calls - uses web API
+	> Dispatcher - Centralized list of callbacks - Notifies everyone who cares - only one dispatcher for an app -
+		Distributes actions to the stores
+	> Store - Holds the app state, logic, data retrieval - contains models - an app can have one or more stores -
+		registers callbacks with dispatcher - uses Nodes EventEmitter
+	> View - Holds the data in state - sends data to children as props
+
+API:
+	> register(function, callback)
+	> unregister(string id)
+	> 
