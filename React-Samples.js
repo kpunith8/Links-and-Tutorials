@@ -1,6 +1,6 @@
-// Sample-1: Samer Buna - Plural sight course
+// Sample-1: Samer Buna - Plural sight course - ES6 way
+// library used: font awesome, underscore, bootstrap
 // Grid system and deleting an item in the list using React
-
 const Stars = (props) => {
 	return(
   	<div className="col-5">
@@ -76,7 +76,8 @@ const List = (props) => {
   };
 
   const listItems = props.data.map((number, key) =>
-    <li onClick={addItem.bind(this, number)}>{number}<span className="fa fa-window-close" onClick=	   {deleteItem.bind(this, number)}> </span></li>
+    <li onClick={addItem.bind(this, number)}>{number}<span className="fa fa-window-close"
+			onClick={deleteItem.bind(this, number)}> </span></li>
     );
 
 const newItems = this.state.newList.map((number, key) =>
@@ -88,8 +89,6 @@ const newItems = this.state.newList.map((number, key) =>
     	<ul>{listItems}</ul>
       <ul>{newItems}</ul>
       </div>
-
-
   );
 }
 
@@ -185,10 +184,9 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, mountNode);
 
-=============================================================================================
-
+====================
 // CSS for sample-1
-
+====================
 .mountNode {
   color: #333;
 }
@@ -261,7 +259,7 @@ height: 100px;
 background-color: cyan;
 }
 
-====================================================================================================
+-------------
 React Routes:
 -------------
 "use strict";
@@ -316,7 +314,6 @@ dirty state.
 -----
 Flux:
 -----
-
 > Not a framework, name for the pattern for unidirectional dataflows
 > State update happens from centralized dispatcher to applications data store
 > Deals with actions and data changes
@@ -330,6 +327,8 @@ Flux:
 	> View - Holds the data in state - sends data to children as props
 
 API:
-	> register(function, callback)
+	> register(function callback)
 	> unregister(string id)
-	> 
+	> waitFor(array<string> ids) - update this store first
+	> dispatch(object payload)
+	> isDispatching()
