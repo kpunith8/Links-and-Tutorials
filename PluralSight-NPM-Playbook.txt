@@ -9,7 +9,7 @@ package.json -> to track the dependencies, to create scripts
 	$ npm init -> asks series of questions, answer them to create package.json
 
 # setting defaults:
-	
+
 	$ npm set init-author-name 'Punith K'
 	$ npm set init-author-email 'abc@abc.com'
 
@@ -20,7 +20,7 @@ package.json -> to track the dependencies, to create scripts
 	$ ls ~/.npmrc -> all config data stored here
 
 # To install a package only for developement and not for production use, -D or --save-dev flag while installing, it will put the package to 'DevDependencies' section of the package.json
-	
+
 	$ npm install --save-dev/D karma (karma is an testing package)
 
 # Installing specific versions:
@@ -42,7 +42,7 @@ package.json -> to track the dependencies, to create scripts
 	$ npm list --depth 0 --long true -> To get more details about the package, '--dev true' flag to list dev dependencies, '--prod true' flag to get production dependencies
 
 # Uninstall and remove a dependeny from package.json
-	
+
 	$ npm uninstall <package-name> --save or can use $ npm rm/un/r <package-name>, add '-g' flag to uninstall the global package
 
 # Updating the packages:
@@ -50,7 +50,7 @@ package.json -> to track the dependencies, to create scripts
 	$ npm update
 
 # Installing from git repo and gist:
-	
+
 	$ npm install <path-to-git/path-to-custom-url>
 
 	$ npm install gist:<gist-hash> --save
@@ -66,13 +66,13 @@ package.json -> to track the dependencies, to create scripts
 # Updating npm itself:
 
 	$ npm install npm@latest -g -> Make sure you run in administrator privilege, @beta can be specified to get if any beta versions exist
-	
-	for ex: 
-	
+
+	for ex:
+
 		$ npm install -g npm@latest-3 -> installs the latest npm version 3, in this case it gets 3.10.10
-		
+
 # Simple Scripts:
-	
+
 	Use scripts section to use default, test and start scripts
 	for ex:
 	"scripts" : {
@@ -82,7 +82,7 @@ package.json -> to track the dependencies, to create scripts
 	}
 
 # Publish npm packages
-	
+
 	Signup in npmjs.org
 	Add the user in command line using,
 
@@ -95,7 +95,7 @@ package.json -> to track the dependencies, to create scripts
 	create a tag for the version released in git repo
 
 # Update the package:
-	
+
 	$ npm version <patch/minor/major> -> To update the appropriate version
 
 	it commits and creates the tag for us.
@@ -103,7 +103,7 @@ package.json -> to track the dependencies, to create scripts
 	and publish it again
 
 # Release a beta version:
-	
+
 	Update the version as, 1.1.0-beta.0
 
 	Push the changes to git, create a tag and publish it using,

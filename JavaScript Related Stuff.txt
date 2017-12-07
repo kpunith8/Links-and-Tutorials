@@ -1,46 +1,80 @@
 Removing npm from local cache & local folder of npm packages:
 user/<username>/AppData/Roaming/npm or npm-cache
 
-** JavaScript testing libraries:
+-------------------
+# List of libraries:
+-------------------
+* webpack (bundler)
+* gulp (task runner like npm), gulp-connect(runs a local web dev server), gulp-open(opens a URL in the browser)
+* browserify (bundles JS), reactify (transforms JSX to JS), vinyl-source-stream (Use conventional text streams with gulp)
+* React - UI library - facebook
+* SASS - Syntactically Awesome Style Sheets
+* CSS Modules
+* Toaster library to notify
 
-Jest and TestCafe
-
-** Tools selected by Cerner:
+# React testing libraries:
+-------------------------
+* Jest, Enzyme and TestCafe (night watch)
 
 * font-awesome for icons
 
+-------------
+Other tweaks:
+-------------
+
 * add 'debugger;' text in the source code, so that chrome developer takes to that point when debugging. Remove them once done debugging
-
-React
-SASS - Syntactically Awesome Style Sheets
-CSS Modules
-
-Toaster library to notify
 
 lint errors and fixes Fixes:
 ----------------------------
 
-no-undef lint error fix: can be added global section of webpack.config
+* no-undef lint error fix: can be added global section of webpack.config
 
-https://github.com/chaijs/type-detect/issues/98
+	https://github.com/chaijs/type-detect/issues/98
 
-lint error while using single return statement in arrow function:
+* lint error while using single return statement in arrow function:
 
-unexpected block statement surrounding arrow body
+	unexpected block statement surrounding arrow body
+
+--------------------------------
+* Converting array to JSON Data
+
+	function convertToJson(items) {
+		return JSON.parse(JSON.stringify(items));
+	}
+
+* Get the data from event object
+
+	saveUserData(event) {
+		var field = event.target.name;
+		var value = event.target.value;
+		this.state.author[field] = value;
+
+		return this.setState({ author: this.state.author});
+	}
+
+* Passing Parameters to function from render:
+
+	onClick={() => this.deleteRow(index)}
+
+* unique Array: Pass concatenated array as input
+
+	uniqueArray (arrArg) {
+	  return arrArg.filter((elem, pos, arr) => {
+	    return arr.indexOf(elem) == pos;
+	  });
+	}
+
+(or)
+
+ES-5:
+	array1 = array1.filter(function(val) {
+	  return array2.indexOf(val) == -1;
+	});
+
+ES6:
+	array1 = array1.filter(val => !array2.includes(val));
 
 
-// Converting array to JSON Data
+* Sorting array based on Parameters:
 
-function convertToJson(items) {
-	return JSON.parse(JSON.stringify(items));
-}
-
-// get the data from event object
-
-saveUserData(event) {
-	var field = event.target.name;
-	var value = event.target.value;
-	this.state.author[field] = value;
-
-	return this.setState({ author: this.state.author});
-}
+	array.sort((last, first) => last.displayValue > first.displayValue);

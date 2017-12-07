@@ -1,3 +1,12 @@
+Links:
+-----
+
+> Testing react components:
+
+https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
+
+https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
+
 // Sample-1: Samer Buna - Plural sight course - ES6 way
 // library used: font awesome, underscore, bootstrap
 // Grid system and deleting an item in the list using React
@@ -12,13 +21,12 @@ const Stars = (props) => {
 }
 
 const Button = (props) => {
-	return(
+	return(1
   	<div className="col-2">
     	<button>=</button>
     </div>
   );
 }
-
 
 const Answer = (props) => {
 	return(
@@ -167,7 +175,6 @@ class Game extends React.Component {
           </div>
         </div>
     </div>
-
     );
   }
 }
@@ -332,3 +339,34 @@ API:
 	> waitFor(array<string> ids) - update this store first
 	> dispatch(object payload)
 	> isDispatching()
+
+> filter array:
+
+function searchMovies(query) {
+	return map.filter((movie) => {
+		return movie.title.includes(query);
+	});
+}
+
+---------------
+snapshot tests:
+---------------
+> Add serializer in the top of the test file to make the snapshot look better,
+
+expect.addSnapshotSerializer({
+	test: (val) => val.title && val.age,
+	print: (val) => `${val.title} ${val.age}`
+});
+
+> Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
+
+	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
+	for ex: expect.addSnapshotSerializer(enzymeSerializer);
+
+> Validating props of an array:
+
+		orderDisplays: PropTypes.arrayOf(PropTypes.shape({
+		    identifier: PropTypes.number.isRequired,
+		    displayValue: PropTypes.string.isRequired,
+		    required: PropTypes.bool.isRequired
+		  })),
