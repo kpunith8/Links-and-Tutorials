@@ -1,11 +1,16 @@
 Links:
 -----
 
-> Testing react components:
+edgecoders.com
 
 https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
 
 https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
+
+// shouldComponentUpdate(nextProps, nextState) usage
+https://egghead.io/lessons/react-component-lifecycle-updating
+
+http://lucybain.com/blog/2017/react-js-when-to-rerender/
 
 // Sample-1: Samer Buna - Plural sight course - ES6 way
 // library used: font awesome, underscore, bootstrap
@@ -348,25 +353,73 @@ function searchMovies(query) {
 	});
 }
 
----------------
-snapshot tests:
----------------
-> Add serializer in the top of the test file to make the snapshot look better,
-
-expect.addSnapshotSerializer({
-	test: (val) => val.title && val.age,
-	print: (val) => `${val.title} ${val.age}`
-});
-
-> Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
-
-	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
-	for ex: expect.addSnapshotSerializer(enzymeSerializer);
-
 > Validating props of an array:
 
-		orderDisplays: PropTypes.arrayOf(PropTypes.shape({
+		order: PropTypes.arrayOf(PropTypes.shape({
 		    identifier: PropTypes.number.isRequired,
 		    displayValue: PropTypes.string.isRequired,
 		    required: PropTypes.bool.isRequired
 		  })),
+
+> Updating the state based on the condition in setState()
+
+	this.setState(prevState => {(
+		if(prevState.usedNumbers.length === 9) {
+			return { doneStatus: 'Done!' };
+		}
+	)});
+
+	-- prevState contains all the state of the components it holds,
+
+	-- prevState passed to an function can be destructured to process
+
+	ex: decideTheGame = ({param1, param2}) => {...};
+
+		this.setState(prevState => {(
+			if(this.decideTheGame(prevState)) {
+				return { doneStatus: 'Done!' };
+			}
+		)});
+
+	> Update the state 'twice', calling setState in a callback is not allowed, setState accepts callback function, once state updated
+
+		this.setState(prevState => {(
+
+		)}, this.updateAnotherState);
+
+	> possibleCombination by Samer Buna - https://gist.github.com/samerbuna/aa1f011a6e42d6deba46
+
+		var possibleCombinationSum = function(arr, n) {
+		  if (arr.indexOf(n) >= 0) { return true; }
+		  if (arr[0] > n) { return false; }
+		  if (arr[arr.length - 1] > n) {
+		    arr.pop();
+		    return possibleCombinationSum(arr, n);
+		  }
+		  var listSize = arr.length;
+			var combinationsCount = (1 << listSize);
+
+		  for (var i = 1; i < combinationsCount ; i++ ) {
+		    var combinationSum = 0;
+		    for (var j=0 ; j < listSize ; j++) {
+		      if (i & (1 << j)) { combinationSum += arr[j]; }
+		    }
+		    if (n === combinationSum) { return true; }
+		  }
+		  return false;
+	};
+
+	---------------
+	snapshot tests:
+	---------------
+	> Add serializer in the top of the test file to make the snapshot look better,
+
+	expect.addSnapshotSerializer({
+		test: (val) => val.title && val.age,
+		print: (val) => `${val.title} ${val.age}`
+	});
+
+	> Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
+
+		import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
+		for ex: expect.addSnapshotSerializer(enzymeSerializer);

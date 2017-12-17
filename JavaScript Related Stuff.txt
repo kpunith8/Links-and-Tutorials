@@ -78,3 +78,7 @@ ES6:
 * Sorting array based on Parameters:
 
 	array.sort((last, first) => last.displayValue > first.displayValue);
+
+* checking for npm packages,
+
+	npm install > npm list > npm dedupe > npm prune > npm run prod-build
