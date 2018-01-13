@@ -1,6 +1,8 @@
 Removing npm from local cache & local folder of npm packages:
 user/<username>/AppData/Roaming/npm or npm-cache
 
+https://www.webcodegeeks.com/html5/html5-internationalization-example/
+
 -------------------
 # List of libraries:
 -------------------
@@ -36,6 +38,11 @@ lint errors and fixes Fixes:
 	unexpected block statement surrounding arrow body
 
 --------------------------------
+
+* Filter the array based on type:
+
+const requiredOrders = orders.filter(order => order.required);
+
 * Converting array to JSON Data
 
 	function convertToJson(items) {

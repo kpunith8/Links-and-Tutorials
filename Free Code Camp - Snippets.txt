@@ -12,15 +12,15 @@ HTML, CSS, JQUERY -> freecodecamp.com
 	</style>
 	-- Here class .b overrides class .a since it is placed next to a. Irrespective of the class order
 
-->	If an element has an id as its attribute id in the style sheet takes precedence over class.	
+->	If an element has an id as its attribute id in the style sheet takes precedence over class.
 
--> 	inline style in HTML Overrides all the CSS declarations in style element. 
+-> 	inline style in HTML Overrides all the CSS declarations in style element.
 
 ->	!important keyword will override all CSS declaration, it makes to consider only the .pink-text class all others are ignored
-	
+
 	.pink-text {
-   	 	color: pink !important;
-  	}
+  color: pink !important;
+}
 
 ------------
 * Bootstrap:
@@ -32,18 +32,18 @@ HTML, CSS, JQUERY -> freecodecamp.com
 
 	<div class="row">
 		<div class="col-xs-8"> <button> or any elementr </div>
-		<div class="col-xs-4"> any html element </div> 
+		<div class="col-xs-4"> any html element </div>
 	</div>
 
-	col-md-* for medium resolution devices ex: Laptop, col-xs-* for small resolution devices ex: Mobiles, col-sm-* for small devices, 
+	col-md-* for medium resolution devices ex: Laptop, col-xs-* for small resolution devices ex: Mobiles, col-sm-* for small devices,
 	and col-lg-* for high resolution screen devices.
 
-->	'Font Awesome' is a convenient library of icons. These icons are vector graphics, stored in the '.svg' file format. These icons are treated 
+->	'Font Awesome' is a convenient library of icons. These icons are vector graphics, stored in the '.svg' file format. These icons are treated
 	just like fonts. You can specify their size using pixels, and they will assume the font size of their parent HTML elements.
 
 	You can add Font Awesome to any app just by including it by adding the following code to the top of your HTML
 
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/> 
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
 	Usage: <button class="btn btn-block btn-primary"><i class="fa fa-thumbs-up"></i> Like</button>
 
@@ -64,12 +64,12 @@ HTML, CSS, JQUERY -> freecodecamp.com
 
 		ex: $("button").prop("disabled", true);
 
-->	jQuery has a function called '.html()' that lets you add HTML tags and text within an element. Any content previously within the 
+->	jQuery has a function called '.html()' that lets you add HTML tags and text within an element. Any content previously within the
 	element will be completely replaced with the content you provide using this function.
 
 		ex: $("h3").html("<em>jQuery Playground</em>");
 
-	jQuery also has a similar function called '.text()' that only alters text without adding tags. In other words, this function will not 
+	jQuery also has a similar function called '.text()' that only alters text without adding tags. In other words, this function will not
 	evaluate any HTML tags passed to it, but will instead treat it as text you want to replace with.
 
 	jQuery has a function called '.remove()' that will remove an HTML element entirely.
@@ -92,7 +92,7 @@ HTML, CSS, JQUERY -> freecodecamp.com
 
 		ex: $("#right-well").children().css("color", "orange"); -- Chages the color of #right-well's children to orange.
 
-	jQuery uses CSS Selectors to target elements. target:nth-child(n) css selector allows you to select all the nth elements 
+	jQuery uses CSS Selectors to target elements. target:nth-child(n) css selector allows you to select all the nth elements
 	with the target class or element type.
 
 		ex: $(".target:nth-child(3)").addClass("animated bounce");
@@ -138,8 +138,8 @@ HTML, CSS, JQUERY -> freecodecamp.com
 	  		"shoes": "cleats"
 		};
 
-		Creating objects: testObj.hat; // has is the property 
-		or testObj["hat"]; 
+		Creating objects: testObj.hat; // has is the property
+		or testObj["hat"];
 
 	--	Adding new property to Object ex: testObj as follows, testObj.trouser = "Slim";
 
@@ -185,7 +185,7 @@ HTML, CSS, JQUERY -> freecodecamp.com
 
 			'g' means global, which causes the pattern to return all matches in the string, not just the first one.
 
-			'i' means that we want to ignore the case (uppercase or lowercase) when searching for the pattern.	
+			'i' means that we want to ignore the case (uppercase or lowercase) when searching for the pattern.
 
 	--	We can use special selectors in Regular Expressions to select a particular type of value.
 
@@ -213,7 +213,7 @@ HTML, CSS, JQUERY -> freecodecamp.com
 		Usage:  var oldArray = [1,2,3,4,5];
 
 				var newArray = oldArray.map(function(val) { // adds 3 to each element of the array
-					return val + 3; 
+					return val + 3;
 				});
 
 	--	The array method 'reduce' is used to 'iterate through an array and condense it into one value'.
@@ -222,7 +222,7 @@ HTML, CSS, JQUERY -> freecodecamp.com
 
 		Usage:	var singleVal = array.reduce(function(previousVal, currentVal) {
   					return previousVal - currentVal;
-				}, 0);	
+				}, 0);
 
 	--	The 'filter' method is used to iterate through an array and filter out elements where a given condition is not true.
 		'filter' is passed a callback function which takes the current value (we've called that val) as an argument.
@@ -240,10 +240,10 @@ HTML, CSS, JQUERY -> freecodecamp.com
 				var newArray = oldArray.sort(function(a,b){
 					return a - b;
 				});
-	
+
 	--	Use the method 'reverse' to reverse an array.
 
-	--	'concat' can be used to merge the contents of two arrays into one.			
+	--	'concat' can be used to merge the contents of two arrays into one.
 
 	--	Use the 'split' method to split a 'string into an array'.
 
@@ -275,11 +275,11 @@ HTML, CSS, JQUERY -> freecodecamp.com
 	-- Find the longest word in a string
 
 		function findLongestWord(str) {
-  
+
 		    var str1 = str.split(" ");
 		    var longest = 0;
 		    var word = null;
-		  
+
 		    for (var i = 0; i < str1.length; i++) {
 		        if (longest < str1[i].length) {
 		            longest = str1[i].length;
@@ -292,7 +292,7 @@ HTML, CSS, JQUERY -> freecodecamp.com
 	-- Title case a sentence
 
 		function titleCase(str) {
- 
+
   			return str.replace(/\w\S*/g, function(txt) {
 		      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		  });
@@ -348,26 +348,3 @@ if(condition){
 log(firstName); // firstName is still has a global scope
 
 Lexical scope VS Execution context (in memory scopes)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

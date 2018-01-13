@@ -1,9 +1,9 @@
 # List of JavaScript Libraires to consider:
 
-	lodash, ember, expressjs, 
+	lodash, ember, expressjs,
 
 # CSS:
-	
+
 	flexbox
 
 # Tools:
@@ -16,7 +16,7 @@
 JavaScript objects and properties:
 ----------------------------------
 
-> 	Define a property of an object:
+> Define a property of an object:
 
 		var cat = {
 			name: {first: 'Fluffy', last: 'LaBeouf'},
@@ -43,7 +43,7 @@ JavaScript objects and properties:
 >	Prototypes:
 
 		Defining prototype to get the last element of an array:
-		
+
 		var arr = ['red', 'blue', 'green'];
 
 		var last = arr.last // given undefined because last property is not defined on JavaScript array, it can be added as follows,
@@ -70,9 +70,9 @@ JavaScript objects and properties:
 		var fluffy = new Cat('Fluffy', 'White');
 		var muffin = new Cat('Muffin', 'Brown');
 
-		display(fluffy.age); display(muffin.age); // will display age '4' 
+		display(fluffy.age); display(muffin.age); // will display age '4'
 
-		fluffy.age = 5; // it adds new property to fluffy object and display(fluffy.age) displays '5' 
+		fluffy.age = 5; // it adds new property to fluffy object and display(fluffy.age) displays '5'
 		and fluffy.__proto__.age will still display '4' since it's a prototype not an property
 
 	> Creating prototype chains:
@@ -111,7 +111,7 @@ JavaScript objects and properties:
 
 			speak() = {
 				display(this.voice);
-			} 
+			}
 		}
 
 		Class Cat extends Animal {
@@ -138,7 +138,7 @@ JQuery
 		$('a[title]') // selects <a> elememts that have a title attribute
 
 		$(':input') // selects all input elements, including button, select, textares, button, images, radio and more
-		$(':input[type="radio"]') // Selects all radio buttons on the page, and 
+		$(':input[type="radio"]') // Selects all radio buttons on the page, and
 		$('input') selects only selects input fields
 
 		$('input[value^="sample"]') // Selects any input element whose value attribute begins with "sample" (Case sensitive), use $ to find ends with
@@ -156,14 +156,14 @@ JQuery
 				$(this).text(); // need to wrap JQuery object to this element
 			});
 
-			or 
+			or
 
 			$('div').each(function(index, element) {
 				$(element).text(); // No need to wrap JQuery object, element refers to this
 			});
 
 >	Appending or removing nodes:
-	
+
 		$('<span>(office)</span>').appendTo('.officePhone'); (or)
 
 		$('.officePhone').append('<span>(office)</span>');
@@ -174,7 +174,7 @@ JQuery
 
 		<div class="state">Arizona</div>
 
-		$('.state').wrap('<div class="US_State"/>'); this will results in 
+		$('.state').wrap('<div class="US_State"/>'); this will results in
 
 			<div class="US_State">
 				<div class="state">Arizona</div>
@@ -185,7 +185,7 @@ JQuery
 		addClass(), removeClass(), toggleClass()
 
 >	Handling Events: Identifying event type, event.type -> returns a string
-	
+
 		Multiple events and handlers can be defined in on() using a map:
 
 		$('#MyTable tr').on({
@@ -205,18 +205,18 @@ JQuery
 		toggle() // toggels through functions defined within
 
 >	Ajax in jQuery
-	
+
 		$.get() and $.post() : gets raw data from the server
 		$(selector).load() : Loads html data from the sever
 		$.getJSON() : get/post and return JSON
 		$.ajax() : core functionality
 
-		jQuery ajax functions work with REST API's and web services
+		jQuery ajax functions work with REST APIs and web services
 
 		$('#myDiv').load('../sample.html #myID'); // Which loads only #myID content from the sample.html
 
 		$.get(url, data, callback, datatype);
-		
+
 		$.get('sample.html', function(data){
 			$('#outputDiv').html(data);
 		});
@@ -228,11 +228,11 @@ JQuery
 # ember - fully opioniated library
 
 # Editor Selection:
-	
+
 	VSCode - JavaScript editor, other options - atom
 
 	EditorConfig - helps create a config for a editor
-	
+
 		Install the plugin before using in VS code, goto, editorconfig.org -> download the plugin -> copy the command and open VS code, 'Ctrl + SHift + p' to open the command pallate and paste the command and select to install
 
 		Create .editorconfig file in the project root.
@@ -247,8 +247,8 @@ JQuery
 
 	$ nsp check
 
-# Dev servers:
-	
+ Dev servers:
+
 	http-server : Ultra-simple, single command serves current directory
 	live-server
 	express, koa, hafi
@@ -261,18 +261,18 @@ JQuery
 # Sharing work-in-progress:
 
 	- localtunnel : share in local machine, install using npm, start the app then run using,
-		
+
 		usage: $ lt --port 3000
 
 	- ngrok : secure tunnel to local machine, install ngrok, install authtoken, start the app
-		
+
 		usage: $ ./ngrok http 80
 
-	  now : install, create the start script, 
-		
+	  now : install, create the start script,
+
 		usage: $ now
 
-	- surge : Quickly host static files to public URL, install 
+	- surge : Quickly host static files to public URL, install
 
 		usage: $ surge
 
@@ -280,13 +280,13 @@ JQuery
 
 		Add, --subdomain option to include custom subdomain in the url; usage: $ lt -port 3000 --subdomain punith // Will give link as follows, https://punith.localtunnel.me
 
-# Automation:
-	
-	- grunt
+> Automation:
 
-	- gulp : in memory streams, code over configuration, 
+	grunt
 
-	- npm scripts : declared in scripts section of the package.json, can leverage your OS' command line, call separate node scripts, Convention based pre/post hooks, simpler debugging, no need for separate plugins
+gulp : in memory streams, code over configuration,
+
+	- npm scripts : declared in scripts section of the package.json, can leverage your OS command line, call separate node scripts, Convention based pre/post hooks, simpler debugging, no need for separate plugins
 
 	- add rules to scripts section in package.json
 
@@ -299,7 +299,7 @@ JQuery
 		    "share": "lt --port 3000 --subdomain punith"
 	  	},
 
-  - Run user-defined scripts as follows, 
+  - Run user-defined scripts as follows,
 
   		$ npm run security-check
 
@@ -314,7 +314,7 @@ JQuery
 	    "share": "npm-run-all --parallel open-source localtunnel"
   	},
 
-  - To silence the noise created in the command line, use 
+  - To silence the noise created in the command line, use
 
   		$ npm start -s // option to reduce the noise
 
@@ -331,7 +331,7 @@ JQuery
 		package.json : place it in a section called "babel" : { },
 
 		.babelrc : Recommended - keep it in project root folder, not npm specific
-		
+
 		- compile using $ babel-node <file-name.js>
 
 # Bundling:
@@ -356,7 +356,7 @@ JQuery
 
 
 # Linting:
-	
+
 	- Enforces consistency - curly brace position, confirm/alert boxes in production code, trailing commas, declaring global variables, disallowing the usage of eval (potentially risky to use)
 
 	- Avoids mistakes - Extra paranthesis, overwritng a function, assignment in conditional, missing default case in switch, leaving debugger/console.log statements
@@ -366,7 +366,7 @@ JQuery
 	- Linters to consider: JSLint, JS Hint, ES Lint
 
 	- Consider ES Lint - TS Lint supports the type script (consider if working on Type script)
-	
+
 	- Can be configured in package.json or create .eslintrc.json file in the project root folder
 
 	- eslintConfig section can be added in package.json
@@ -378,7 +378,7 @@ JQuery
 	# Downsides:
 
 		- ESLint doesn't watch files, To watch files use (Upon save)
-			
+
 			- eslint-loader (if using webpack) - re-lints all files upon save
 			- eslint-watch - ESLint wrapper that adds the file watch - not tied to webpack, better warning/error formatting, displays clean message, easily lint tests and build scripts
 
@@ -388,7 +388,7 @@ JQuery
 
 	# Need eslint, eslint-watch, eslint-plugin-import plugins to make it work.
 
-	- create a script in package.json as, 
+	- create a script in package.json as,
 
 		"lint": "esw webpack.config.* src --color" // esw; eslist-watch executable which looks for config file and in src folder, folders can be specified by leaving a space
 
@@ -408,7 +408,7 @@ JQuery
 
 # Testing and Continuous integration:
 
-	- Testing Framework: 
+	- Testing Framework:
 
 		mocha, jasmine (has assertion library built in), Tape (Minimal configuration), AVA (runs impacted unit tests, new), Jest (from facebook - popular for react developers - wrapper over Jasmine) - Consider -> Mocha
 
@@ -416,7 +416,7 @@ JQuery
 
 		chai.js, should.js, expect.js - Consider -> chai.js
 
-	- Helper Library: 
+	- Helper Library:
 
 		JSDOM - simulate the browser's dom - can run DOM related tests, without a browser
 		cheerio - jQuery for the server, Query virtual DOM using jQuery selectors
@@ -428,13 +428,13 @@ JQuery
 		In memory DOM: JSDOM - 9.8.0 used in the project
 
 	- mocha + chai + jsdom(9.8.0)
-		
+
 		add this in scripts section of package.json
 
 		"test": "mocha --reporter progress src/testSetup.js \"src/**/*.test.js\""
 
 # Continuous integration:
-	
+
 	- travis: Linux based
 	- appveyor: window based
 	- Jenkins
@@ -468,12 +468,112 @@ JQuery
 		- Shortens variable names and funciton names, removes comments, removes white spaces and new lines
 		- tree shaking / dead code elimination (webpack does this)
 
+----------------------------------
+* ES6: Fundamentals: mark-zamoyta:
+-----------------------------------
+ > Check the broweser compatability list for ES6 - http://kangax.github.io/
 
+> let and const have block scoping
 
+> Invoking the function with in function
 
-	
+	var invoice = {
+		number: 123,
+		process: function() {
+			return () => console.log(this.number);
+		}
+	};
 
+	invoice.process()(); - returns 123
 
+> It is not allowed to bind new object to the arrow function or call or apply methods on new object
 
+> putting arrow symbol on next line throws, Syntax error: 'unexpected token =>'
 
+	for ex: var getPrice = ()
+						=> 100;
 
+> Default Function Parameters:
+	var sample = function(product = 100, type='software') {}
+
+	passing product as undefined sets default value 100
+
+	var getTotal = function(price, tax= price * 0.75) { // accepts price passed to the function to compute tax, function or variables in the context can be
+		// passed to the function for ex: tax = price * getTax()
+		console.log(tax);
+	}
+
+> Spread and Rest Operator (...) - array manipulation:
+
+	... used as rest symbol before the argument, for ex, var sample = function(price, ...categories) {}; and can be used as, sample.(1, 'software', 'hardware');
+
+	... also used as spread operator, it accepts the array and splits into list of params
+
+	..."45678" -> will be spread into 4,5,6,7, and 8 individual character
+
+> Object Lliteral Extensions:
+
+	var price = 5.99, quantity = 10;
+
+	var productView = {
+		price,
+		quantity,
+		calculateValue() { // Passing function name as string is allowed for ex: "calculate value" () -> Can be accessed using, productView["calucalate value"]()
+			return this.price * this.quantity // No longer requires funciton keyword
+		}
+	};
+
+	It returns object as follows, { price: 5.99, quantity: 10 } - it doesnot require ':' to be spcified to set the value to the object
+
+> for ... of Loops - Loops through elements of an array and characters of a string
+
+	ex: for (var item of categories) { // categories = [,,]; -> returns 'undefined undefined'; since elements with in array ends with comma in JavaScript
+		console.log(item);
+	}
+
+> Octal and Binary Literals:
+
+	Use '0o10' or '0O10' - for octals and '0b10' or '0B10' - for binaries
+
+> Template Literals:
+
+	let number = '1350';
+	console.log(`Number is: ${number}`); // Allows to write content into multiple lines without \n and maintains tabs and newlines
+	console.log(`Number is: ${"INV-" + number}`); // returns INV-1350, expressions are allowed within the { }
+
+	interpolation takes place first before the function calls
+
+	Tagged function literals - ex: processInvoice `template`; // processInvoice is a function with one parameter
+	let invoiceNumber = '1350';
+	let amount = '2000';
+
+	processInvoice `Invoice: ${invoiceNumber} for ${amount}`;
+
+	processInvoice(segments, ...values) {
+		console.log(segments); // returns ["invoice: ", " for ", ""]
+		console.log(values); // returns [1350, 2000]
+	}
+
+> Destructuring: arrys and objects
+
+	ex:
+		let salary = ['32', '50', '75'];
+		let [low, average, high] = salary; // skip the elements by specifying , between elements for ex: [low, , high] -
+																			 // second elemnts is not assigned to any variable
+
+		console.log(average); // returns 50
+
+	Objects can be assigned to another name as follows, {high: newHigh, average:newAvg} = salary; where salary = {high: 25, average: 20};
+
+> Classes and Modules:
+
+	Modules, variables and functions can be exported
+
+	importing statements are hoisted to top
+
+	export let moduleId = 99; which can be imported as id as follows, import { moduleId as id } from 'module.js'; // If we try to aceess
+	// moduleId thwos runtime error: moduleId is undefined
+
+	We can also import default module names as alias using, import { default as myProjectName } from 'module.js';
+
+	We can also export { projectId as default, projectName }; when imported projectId is imported as default.

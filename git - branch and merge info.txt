@@ -8,24 +8,32 @@ https://git-scm.com/book/en/v1/Git-Tools-Stashin_
 http://jebaird.com/2013/07/08/setting-up-kdiff3-as-the-default-merge-tool-for-git-on-windows.html
 https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
-git config --global core.editor "vim"
+	git config --global core.editor "vim"
+
+	Git-bash by default only supports 260 character file paths. This has been fixed since git-bash 1.9, but it's not turned on by default.
+
+	You need to make the following global setting:
+	git config --global core.longpaths true
+
+	If you're having issues cloning long file paths try the following:
+	git clone -c core.longpaths=true <your.url.here>
 
 # Adding an exisiting git project to github:
-	
+
 	$ git init
-\
+
 	$ git add .
 
 	$ git commit -m "First commit"
 
 	$ git remote add origin <remote repository URL> // Sets the new remote
-	
+
 	$ git remote -v // Verifies the new remote URL
 
 	$ git push origin master
 
 # Pulling unrelated histories:
-	
+
 	$ git pull origin master --allow-unrelated-histories
 
 # Reset all the staged files:
@@ -41,7 +49,7 @@ git config --global core.editor "vim"
 
 	$ git pull origin master -- it does 'git fetch' followed by 'git merge'
 
-	updates current HEAD branch with the latest changes from the remote server. This means that pull not only downloads new data; it also directly integrates it into your current working copy files. 
+	updates current HEAD branch with the latest changes from the remote server. This means that pull not only downloads new data; it also directly integrates it into your current working copy files.
 
 	This has a couple of consequences:
 
@@ -61,7 +69,7 @@ git config --global core.editor "vim"
 
 # Merge two branches without fast-forward:
 
-	$ git merge --no-ff <target-branch> 
+	$ git merge --no-ff <target-branch>
 
 	The --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature
 
@@ -77,16 +85,16 @@ git config --global core.editor "vim"
 	*NOTE* use -D option if your branch is merged with master or use -d option
 
 ----------------------------------------
-** Caching your GitHub password in Git 
+** Caching your GitHub password in Git
 ----------------------------------------
 
-	If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username 
+	If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username
 	and password every time it talks to GitHub.
 
 	If you clone GitHub repositories using SSH, then you authenticate using SSH keys instead of a username and password.
 	 For help setting up an SSH connection, see Generating SSH Keys.
 
-	If you prefer working with the command line, you can also install a native Git shell, such as msysgit. 
+	If you prefer working with the command line, you can also install a native Git shell, such as msysgit.
 	With msysgit, running the following in the command line will store your credentials:
 
 	>	git config --global credential.helper wincred
@@ -107,7 +115,7 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 		* For each line of the file, blame will find the last commit to edit the line and commit hash, author,date of commit
 
 	// Specify the line range
-	$ git blame -L 12,22 <file-name> 
+	$ git blame -L 12,22 <file-name>
 
 # Cherry-pick: moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
 
@@ -120,7 +128,7 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 
 	$ git checkout <feature>
 
-	$ git cherry-pick <commit-hash> 
+	$ git cherry-pick <commit-hash>
 
 		* It creates an entirely new commit based off the original commit and its commit message and it doesn't delete the original commit
 
@@ -132,8 +140,8 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 		-- HEAD^ 	== 	The commit's parent
 		-- HEAD^^	==	This commi's grand parent
 		-- HEAD~5 	== 	Five commits back from the current commit, it is equivalent to HEAD^^^^^
-	
-# Rebase: 
+
+# Rebase:
 
 	https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview
 
@@ -144,16 +152,16 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 
 	eg: 'master' has changed since I started my feature and I want to bring my branch up to date with master
 
-	-- rebase finds the merge base, cherry-picks all the commits, and reassings the branch pointer 
+	-- rebase finds the merge base, cherry-picks all the commits, and reassings the branch pointer
 
 	$ git rebase master
 
 	 -- It may throw error like commits are diverged and if you try to push it won't allow then force push the commit in the feature
-	 
+
 	 $ git push -f <branch-name>
 	 	-- If it shows merge conflicts -> check the status of the branch
 
-	 $ git status  -> it shows the conflicts in the 'feature' if any  
+	 $ git status  -> it shows the conflicts in the 'feature' if any
 
 	 if you are in the middle of rebase and got conflicts, resolve the conflicts manually (conflicts looks similar to merge conflicts, resolving merge conflicts creates new commit, while rebase is not), or you can cherry-pick to resolve conflicts, then run
 
@@ -167,23 +175,23 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 
 	If you are changing the history reflog is best command
 
-	$ git checkout <hash> 
+	$ git checkout <hash>
 
 	$(feature) git reset --hard <commit-hash> (Commit hash in the form of HEAD@{3})to reset the branch pointer to the commit
 
-# Squashing and Splitting: 
+# Squashing and Splitting:
 
 	If you have forgotten to add files to this commit then
 
 	$ git add missed-file.txt
-	$ git commit --amend 
-	
-	Makes a new commit with new file added, and replaces the most recent commit with new one. 
+	$ git commit --amend
+
+	Makes a new commit with new file added, and replaces the most recent commit with new one.
 
 	If you want to squash more commits to one commit then use,
 
-	$ git rebase --interactive HEAD~5 
-		-- It opens the editor with last five commits showing the action to be performed on them, rename action 'pick' to 'squash' on the commits. 
+	$ git rebase --interactive HEAD~5
+		-- It opens the editor with last five commits showing the action to be performed on them, rename action 'pick' to 'squash' on the commits.
 			(press 'i' in the keyboard  to edit the file in the editor and to save and quit the editor, press 'escape' button to come out of editing mode to normal mode then type :wq -> this commands will saves the file and quits the editor -- This editor behaves more like vi/vim editor in Linux)
 		-- Close the editor and it asks for new commit message, enter some message and save and quit the editor.
 
@@ -200,7 +208,7 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 	Then pop off the commit using,
 
 	$ git reset HEAD^  -> Don't use --hard option it may change the commit
- 
+
  		files added in that commit are in staged area and check with the command
 
 	$ git status -> will show all the files in its parent commit.
@@ -230,7 +238,7 @@ If that commit contains more files then you can add one file and commit individu
 
 	$ git reset --hard origin/<branch-name>
 
-	$ git cherry-pick "commit-hash" 
+	$ git cherry-pick "commit-hash"
 
 		Get commit hash from the target branch, if any conflicts, resolve manually and add them to index and continue the cherry-pick using,
 
@@ -247,7 +255,7 @@ If that commit contains more files then you can add one file and commit individu
 
 	Replace pick with drop before commit hash.
 
-	(if any conflicts resolve them and continue the rebase) 
+	(if any conflicts resolve them and continue the rebase)
 
 	Publish the changes forcefully,
 
@@ -257,14 +265,14 @@ If that commit contains more files then you can add one file and commit individu
 # Creating pull request:
 
 	Go to your branch, rebase with master over your branch, make sure your commit in your feature branch are squashed into one commit and pushed to remote before rebasing dev to your branch
-	
+
 	$ git rebase master
 
 	if you get any conflicts resolve and continue the rebase, then force push the changes to your branch,
 
 	$ git push -f origin <branch-name>
 
-	Once changes pushed, go to repo in the github, create pull request 
+	Once changes pushed, go to repo in the github, create pull request
 
 # Edit an incorrect commit message:
 
@@ -281,8 +289,8 @@ $ git push origin --delete <branchName>
 
 # Rename git branch locally and remotely:
 
-	$ git branch -m old_branch new_branch         # Rename branch locally    
-	$ git push origin :old_branch                 # Delete the old branch    
+	$ git branch -m old_branch new_branch         # Rename branch locally
+	$ git push origin :old_branch                 # Delete the old branch
 	$ git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
 
 # Deleting a remote tag:
@@ -301,7 +309,7 @@ $ git push origin --delete <branchName>
 
 # Advanced merge:
 
-	-- Ignoring the spaces 
+	-- Ignoring the spaces
 	$ git merge -Xignore-space-change <branch-to-be-merged>
 
 	-Xignore-all-space -> ignores all the spaces
@@ -318,7 +326,7 @@ $ git push origin --delete <branchName>
 
 	$ git stash apply
 
-	If you want to apply one of the older stashes, you can specify it by naming it, like this: 
+	If you want to apply one of the older stashes, you can specify it by naming it, like this:
 
 	$ git stash apply stash@{2}
 
@@ -346,5 +354,5 @@ $ git push origin --delete <branchName>
 	$ git config --global mergetool.kdiff3.cmd '"C:\\Program Files (x86)\\KDiff3\\kdiff3" $BASE $LOCAL $REMOTE -o $MERGED'
 
 # A useful git command if you want to see the last committer on a branch. Helps if you want to clean up branches from your team in a large repos:
-	
+
 	$ git for-each-ref --format="%(align:30,left)%(color:yellow)%(authorname)%(end) %(align:30,left)%(color:red)%(refname:strip=3)%(end)" --sort=authorname refs/remotes'

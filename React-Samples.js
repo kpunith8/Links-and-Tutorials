@@ -1,6 +1,6 @@
 Links:
 -----
-
+fullstackreact.com
 edgecoders.com
 
 https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
@@ -9,6 +9,15 @@ https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slic
 
 // shouldComponentUpdate(nextProps, nextState) usage
 https://egghead.io/lessons/react-component-lifecycle-updating
+
+componentWillReceiveProps(nextProps) {
+    console.log('Recieves the next props' + JSON.stringify(nextProps));
+    this.updateOrderDisplays(nextProps);
+  }
+
+  updateOrderDisplays(nextProps) {
+    this.setState({ orderDisplays: nextProps.orderDisplays });
+  }
 
 http://lucybain.com/blog/2017/react-js-when-to-rerender/
 
@@ -387,6 +396,8 @@ function searchMovies(query) {
 
 		)}, this.updateAnotherState);
 
+	>
+
 	> possibleCombination by Samer Buna - https://gist.github.com/samerbuna/aa1f011a6e42d6deba46
 
 		var possibleCombinationSum = function(arr, n) {
@@ -409,17 +420,41 @@ function searchMovies(query) {
 		  return false;
 	};
 
-	---------------
-	snapshot tests:
-	---------------
-	> Add serializer in the top of the test file to make the snapshot look better,
+------------------------------
+Advanced React.js -> samerbuna
+------------------------------
+> To add dependencies in yarn use, $ yarn add <package-name>
+> use nodemon npm package for file changes in windows
+> add "nodemon lib/server.js" under scripts in package.json and run it using, $yarn dev
+> Use babel to transfile, add babel to package.json as follows,
+  "babel": {
+    "presets": ["react", "env", "stage-2"]
+  }
 
-	expect.addSnapshotSerializer({
-		test: (val) => val.title && val.age,
-		print: (val) => `${val.title} ${val.age}`
-	});
+  install following packages to make it work,
+  $ yarn add babel-cli babel-preset-react babel-preset-env babel-preset-stage-2
 
-	> Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
+  Update dev script to transfile on file changes, "nodemon --exec babel-node lib/server.js"
 
-		import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
-		for ex: expect.addSnapshotSerializer(enzymeSerializer);
+> Use webpack to specify the bundle
+
+> Find the time taken to process the webpack, use
+  $ time yarn webpack
+
+> 
+
+
+---------------
+snapshot tests:
+---------------
+> Add serializer in the top of the test file to make the snapshot look better
+
+  expect.addSnapshotSerializer({
+	   test: (val) => val.title && val.age,
+	   print: (val) => `${val.title} ${val.age}`
+   });
+
+> Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
+
+	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
+	for ex: expect.addSnapshotSerializer(enzymeSerializer);
