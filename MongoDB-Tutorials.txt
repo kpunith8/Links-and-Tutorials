@@ -1,3 +1,10 @@
+MongoDB: NoSQL database
+------------------------
+> RDBMS issues:
+	Scalability - Replication or sharding takes more time, higher latency, tables are locked down, and one writes hence higher latency
+
+> No schema in MongoDB, single document write scope, each document is in a collection
+
 Mongo DB setup:
 ---------------
 @ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
@@ -5,10 +12,19 @@ Mongo DB setup:
 # Download and install monogoDB
 
 # MongoDB requires a data directory to store all data. MongoDB’s default data directory path is the absolute path \data\db on the drive from which you start MongoDB.
+- If no data/db exists create one in the installation path and run monogod demon - it starts the server
 
 # If you have to installed the MongoDB at a different location, then you need to specify an alternate path for \data\db by setting the path dbpath in mongod.exe. For the same, issue the following commands.
 
-	$ mongod.exe --dbpath "d:\set-up\mongodb\data" 
+	- create mongod.conf file with the following properties,
+			dbpath=\mongodb\db
+			logpath=\mongodb\mongo-sever.log
+			verbose=vvvvv -- one v being least verbose, 5 v's being most verbose
+
+	- run it as,
+		$ mongod -f c:\sample\mongod.conf
+
+	$ mongod.exe --dbpath "d:\set-up\mongodb\data"
 
 # To start MongoDB, run mongod.exe. For example, from the Command Prompt:
 
@@ -71,7 +87,7 @@ Mongo DB setup:
 
 
 #	List all the db's and see the collections
-	
+
 	$ db -- show the db currently in use
 	$ show dbs -- shows the list of databases
 	$ use <db name>
@@ -85,4 +101,3 @@ Mongo DB setup:
 
 		$ use myNewDatabase
 		$ db.myCollection.insertOne( { x: 1 } );
-

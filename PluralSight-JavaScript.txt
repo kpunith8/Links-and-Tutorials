@@ -471,7 +471,7 @@ gulp : in memory streams, code over configuration,
 ----------------------------------
 * ES6: Fundamentals: mark-zamoyta:
 -----------------------------------
- > Check the broweser compatability list for ES6 - http://kangax.github.io/
+> Check the broweser compatability list for ES6 - http://kangax.github.io/
 
 > let and const have block scoping
 
@@ -511,7 +511,7 @@ gulp : in memory streams, code over configuration,
 
 	..."45678" -> will be spread into 4,5,6,7, and 8 individual character
 
-> Object Lliteral Extensions:
+> Object Literal Extensions:
 
 	var price = 5.99, quantity = 10;
 
@@ -554,7 +554,7 @@ gulp : in memory streams, code over configuration,
 		console.log(values); // returns [1350, 2000]
 	}
 
-> Destructuring: arrys and objects
+> Destructuring: arrays and objects:
 
 	ex:
 		let salary = ['32', '50', '75'];
@@ -577,3 +577,245 @@ gulp : in memory streams, code over configuration,
 	We can also import default module names as alias using, import { default as myProjectName } from 'module.js';
 
 	We can also export { projectId as default, projectName }; when imported projectId is imported as default.
+
+	Classes are not hoisted
+
+> New types and Object Extensions:
+	- Symbols:
+
+		It is unique identifier, and not visible while inspecting an elements, and used for debugging purposes.
+		can be constructed using,
+		let eventSymbol = Symbol('resize-event');
+
+		Symbol.for('event'); -- Returns the symbol registered with event, creates one if not exist
+		Symbols can be used as property of an object and can be declared within [],
+		for ex:
+			let article = {
+				title: 'Title',
+				[Symbol.for('article')]: 'My Article'
+			};
+
+			and can be accessed as, article[Symbol.for('article')]; - returns 'My Article'
+
+		Object.getOwnPropertySymbols(article); -> returns symbols in a article object as follows, [Symbol(article)]
+
+	- Well-known symbols;
+
+		Symbol.toStringTag is a well-known symbol
+		Blog.prototype[Symbol.toStringTag] = 'Blog Class';
+		let blog = new Blog();
+		console.log(blog.toString()); -- returns [object Blog Class] // This is an example of meta-programming
+
+	> Object Extensions:
+
+		Object.setPrototypeOf(a, b); -- adds all the props of b to a
+
+		Object.assign(target, a, b); -- here target is an empty object, paramenters of a and b are populated to target object
+			If both a and b have the same property then b`s property overloads the a`s property.
+			for ex: a = { a: 1}; b = { a: 5, b: 6 }; c = { c: 10 };
+				let target = {};
+				Object.assign(target, a, b); -- target returns, { a: 5, b: 6 }
+
+				Object.defineProperty(b, 'c', {
+					value: 10,
+					enumerable: false // Properties are enumerable by default
+				});
+
+				Object.assign(target, a, b); -- target has,  { a: 5, b: 6 } because of enumerable set to false
+
+				Object.setPrototypeOf(b, c);
+				Object.assign(target, a, b); -- returns,  { a: 5, b: 6 } - assign will not look through prototype chain
+
+		Object.is(object, object); -- compares two objects,
+		Object.is(amount, total); -- returns false, here amount = 0, total = -0; in javascirpt these two are equal
+
+	> String extensions:
+
+		Add unicode strings within a string as, \u{1f3c4} - astral plane values (1f3c4 returns surfer emoji)
+
+		String.fromCodePoint(0x1f3c4); -- Gives surfer emoji
+
+		String.raw`${title} \u{1f3c4}\n`; -- returns interpolated text for title and does not process other characters, it returns raw text
+
+		string.repeat(10); -- repeats the string specified number of timers
+
+	> Number Extensions:
+
+		Number.isInteger(), Number.parseInt(), Number.isSafeInteger(), and so on..
+		Number.EPSILON, Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER - constants
+
+	> Math Extensions:
+
+		Math.sign(0);
+		Math.cbrt(22);
+
+	> RegExp Extensions:
+
+		pattern = /900/yg;
+		pattern.lastIndex - last index can be set using y flag, pattern.flags - returns the flags set to the pattern (gimuy are the different flags passed to the pattern)
+
+> Iterators, Generators, and Promises:
+
+	> Iterators:
+
+		let ids = [9000, 9001, 9002];
+		let id = ids[Symbol.iterator](); -- ids[Symbol.iterator] returns function
+		it.next(); -- returns {done: false, value: 9000}
+
+	> Generators: yields
+
+		function *process() { // It does not exist in the function stack, we need iterators to call generators mulitple times, * says its a generator
+			yield 8000;
+			yield 8001;
+		}
+
+		let it = process();
+		it.next(); -> next() kicks off the generator and then can be passed a value to next as parameter and generator yields, let result = yield;
+		yield also can be used in arrays as follows, let arr = [yield, yield, yield]; and can be set by using it.next() as it.next(1); it.next(100);
+
+		yield has low precedence; array can also be yielded, yield [1,2,3]; - entire array is yielded when iterated,
+		To yield the each array items with in a array use, yield* [1,2,3]; -- it yields 1, 2, 3 as seperate yields, yield* is known as 'iterator delegation'.
+
+		* it.throw('foo'); it can be called on generators, it cathces the error and terminates the iterator (Generator should have try catch logic)
+		if no try catch specified, it.throw('foo'); throws exception: foo on iterating through yield.
+		for ex:
+			function *process() {
+				yield 900;
+				yield 901;
+				yield 902;
+			}
+
+			let it = process();
+			it.next(); -- returns 900
+			it.throw('foo'); -- returns Exception: foo
+			it.next(); -- returns (execution terminates )
+
+		* it.return('foo'); -- returns {value: "foo", done: true}, calling it.next(); -- returns {value: undefined, done: true} though generator has yield
+
+> Promises: is an object waiting for an async action to complete
+
+	function doAsync() {
+		let p = new Promise(function(resolve, reject) {
+			setTimeout(function() {
+				resolve();
+			}, 2000);
+		});
+
+		return p;
+	}
+
+	use, 'then' function on promise to reject and resolve the promise,
+	doAsync().then(function(value) {
+		console.log('fulfilled...');
+	},
+	function(reason) {
+		console.log('rejected...');
+	});
+
+	then function can be chained, we can also call 'catch' function on promise
+	doAsync.catch(function(reason) {
+		console.log(reason);
+	});
+
+	Promise.all([p1, p2]).then(...); -- It accepts two promises, completes both
+	Promise.race([p1, p2]).then(...); -- First completed promise is returned
+
+> Arrays and Collections:
+
+	> Array Extensions:
+
+		Array.of(9000); - has only one item in ES6, but in ES5 creating array like, Array(1000) - leads to array of size 1000
+		Array.from(array, v => v + 100);
+		array.fill(900, startIndex(inclusive), endIndex(exclusive)); - fills each element of array with 900 (replaces the existing element in the array), specifying index will start from that index
+		array.find(value => value > 50); - it won't scan the whole array, returns the first occurance matching the condition
+		array.findIndex(function(value, index, array) {
+			return value === this;
+		}, 700);
+		array.copyWithin(copyToIndex, copyFromIndex);
+		...array.entries(); - returns [0, item1], [1, item2] ...
+		...array.keys(); - returns index value of an array 0 1 2 ...
+		...array.values(); - returns the values of an array1
+
+	> Array Buffer and Typed Array:
+
+		Array Buffer is an array of 8 bit bytes
+		new ArrayBuffer(1024); - buffer.byteLength - returns 1024
+
+	> Map and WeekMap:
+
+		let emp = { name: 'Jake' };
+		let emp1 = { name: 'Janet'};
+
+		let employees = new Map();
+		employees.set(emp, 'ABC');
+		employees.set(emp1, 'CDE');
+
+		employees.get(emp); -> returns ABC, .delete(obj) - to delete, .length to get the length of the map, .clear() - clears the map, .entries()
+		let arr = [
+			[emp, 'ABC'],
+			[emp1, 'CDE']
+		];
+		let employees = new Map(arr); -> it accepts array of objects as well
+
+		.has(obj); -- returns boolean if obj exists
+
+		[...employess.values()]; -> returns all the values in the map
+
+		let emp = new WeakMap(); -> it is not possiblr to call .length property on weakmap because object references are garbage collected.
+
+	> Set and WeakSet: Unique values exist in the collection
+
+		let perks = new Set(); -- it accepts array an an argument to create the set
+		set.add('Car');
+		set.add('Vacation');
+
+		perks.size; -> returns 2
+
+		perks.has('Car'); -- returns boolean if value exists keys(), values(), entries() supported in set
+
+	> Subclassing: extending the existing Objects in JS - It helps add user defined functions
+
+		class Perks extends Array {
+		}
+
+		let a = Perks.from([5, 10, 15]); - method from is taken from Array
+
+> The Reflect API: DSL - Domain Specific Language
+
+	Object Construction and method calls - Reflect is an Object
+	Reflect.construct(target, argumentList[, newTarget]);
+
+	Reflect.construct(Resturant, ['abc', cde]); -- arguments should be passed as an array
+
+	Reflect.apply(Resturant.prototype.show, {id: 99});
+
+	Reflect.getPrototypeOf(Resturant);
+	Reflect.setPrototypeOf(r, setup); -- sets the property setup to r
+
+	Reflect.get(r, 'id'); - gets the id from r
+	Reflect.set(r, 'id', 100, alt); - sets the id on r, alt is new object and assign the 100 to id prop in alt object
+	Reflect.has(r, 'id'); - true if the property exists
+	Reflect.ownKeys(r); - array of properties in the r
+	Reflect.defineProperty(r, 'id', {value: 100, enumerable: true});
+	Reflect.deleteProperty(r, 'id');
+	Reflect.getOwnPropertyDescriptor(r, 'id'); - -- Returns descriptor object, which contains, configurable, enumerable, writable and value property with values
+
+	Reflect.preventExtensions(target); -- prevents adding new property to target object
+	Reflect.isExtensible(target); -- to check whether target is extensible
+
+> The Proxi API: its an object wraps an another object - used for security in the application, use it for profiling
+
+	var p = new Proxt(employeeObject, {
+		get: function(target, prop, reciever) {
+			 if(prop === 'salary') return 'denied';
+				 return Reflect.get(target, prop, reciever);
+		}
+	});
+
+	p.salary -- returns
+
+	var p = new Proxt(getIdProperty, {
+		apply: function(target, prop, reciever) {
+			return Reflect.apply(target, prop, reciever);
+		}
+	});

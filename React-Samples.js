@@ -3,6 +3,9 @@ Links:
 fullstackreact.com
 edgecoders.com
 
+https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
+
+
 https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
 
 https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
@@ -441,7 +444,12 @@ Advanced React.js -> samerbuna
 > Find the time taken to process the webpack, use
   $ time yarn webpack
 
-> 
+>
+
+-----------------------------
+React and Redux - Cory House:
+-----------------------------
+> Four ways to create React Components, ES5 createClass, ES6 class, ES6 stateless function, ES5 stateless function
 
 
 ---------------
