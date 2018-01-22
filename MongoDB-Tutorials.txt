@@ -1,40 +1,50 @@
-MongoDB: NoSQL database
-------------------------
+MongoDB: NoSQL database - document database:
+--------------------------------------------
+> Links and references:
+
+	- https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+
+> Shortcuts: mongo shell
+
+	- ctrl + k - delete the chars to its right
+	- ctrl + l - clear the screen
+	- ctrl + left arrow (or) right arrow, to jump a word in the command line
+
 > RDBMS issues:
 	Scalability - Replication or sharding takes more time, higher latency, tables are locked down, and one writes hence higher latency
 
 > No schema in MongoDB, single document write scope, each document is in a collection
 
-Mongo DB setup:
----------------
-@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+> Mongo DB setup:
 
-# Download and install monogoDB
+	- Download and install monogoDB
 
-# MongoDB requires a data directory to store all data. MongoDB’s default data directory path is the absolute path \data\db on the drive from which you start MongoDB.
-- If no data/db exists create one in the installation path and run monogod demon - it starts the server
+	- MongoDB requires a data directory to store all data. MongoDB’s default data directory path is the absolute path \data\db on the drive from which you start MongoDB.
+	- If no data/db exists create one in the installation path and run monogod demon - it starts the server
 
-# If you have to installed the MongoDB at a different location, then you need to specify an alternate path for \data\db by setting the path dbpath in mongod.exe. For the same, issue the following commands.
+	- If you have to installed the MongoDB at a different location, then you need to specify an alternate path for \data\db by setting the path dbpath in mongod.exe. For the same, issue the following commands.
 
-	- create mongod.conf file with the following properties,
+	- Create mongod.conf file with the following properties,
+
 			dbpath=\mongodb\db
 			logpath=\mongodb\mongo-sever.log
 			verbose=vvvvv -- one v being least verbose, 5 v's being most verbose
 
 	- run it as,
-		$ mongod -f c:\sample\mongod.conf
+		$mongod -f c:\sample\mongod.conf
 
-	$ mongod.exe --dbpath "d:\set-up\mongodb\data"
+		or path can be set in command line as follws,
+		$mongod.exe --dbpath "d:\set-up\mongodb\data"
 
-# To start MongoDB, run mongod.exe. For example, from the Command Prompt:
+  - Start MongoDB, run mongod.exe. For example, from the Command Prompt:
 
-	$ "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe"
+	  $C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe
 
-# To connect to MongoDB through the mongo.exe shell, open another Command Prompt.
+  - To connect to MongoDB through the mongo.exe shell, open another Command Prompt.
 
-	$ "C:\Program Files\MongoDB\Server\3.4\bin\mongo.exe"
+	   $C:\Program Files\MongoDB\Server\3.4\bin\mongo.exe
 
-# Configure a Windows Service for MongoDB Community Edition:
+> Configure as a Windows Service:
 
 	1.	Open an Administrator command prompt
 
@@ -53,8 +63,7 @@ Mongo DB setup:
 
 		The file must set systemLog.path. Include additional configuration options as appropriate.
 
-		For example, create a file at "C:\Program Files\MongoDB\Server\3.4\mongod.cfg" that specifies both systemLog.path and storage.dbPath:
-
+		For example, create a file at "C:\Program Files\MongoDB\Server\3.4\mongod.cfg" that specifies both systemLog.path and storage.dbPath
 			systemLog:
 			    destination: file
 			    path: c:\data\log\mongod.log
@@ -62,14 +71,14 @@ Mongo DB setup:
 			    dbPath: c:\data\db
 
 	4.	Install the MongoDB service.
-
 		Important: Run all of the following commands in Command Prompt with “Administrative Privileges”.
+		Install the MongoDB service by starting mongod.exe with the --install option and
+		the --config option to specify the previously created configuration file.
 
-		Install the MongoDB service by starting mongod.exe with the --install option and the --config option to specify the previously created configuration file.
+		$ "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --config(-f) "C:\Program Files\MongoDB\Server\3.4\mongod.cfg"  --install
 
-		$ "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --config "C:\Program Files\MongoDB\Server\3.4\mongod.cfg"         --install
-
-		If needed, you can install services for multiple instances of mongod.exe or mongos.exe. Install each service with a unique --serviceName and --serviceDisplayName. Use multiple instances only when sufficient system resources exist and your system design requires it.
+		If needed, you can install services for multiple instances of mongod.exe or mongos.exe.
+		Install each service with a unique --serviceName and --serviceDisplayName. Use multiple instances only when sufficient system resources exist and your system design requires it.
 
 	5.	Start the MongoDB service.
 
@@ -79,14 +88,17 @@ Mongo DB setup:
 
 		To stop the MongoDB service use the following command:
 
-			$ net stop MongoDB
+			$net stop MongoDB
 
 		To remove the MongoDB service use the following command:
+			$C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe --remove
 
-			$ "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --remove
+	- list the service Running:
+
+		$net start | findstr mongo
 
 
-#	List all the db's and see the collections
+>	List all the db's and see the collections
 
 	$ db -- show the db currently in use
 	$ show dbs -- shows the list of databases
@@ -101,3 +113,107 @@ Mongo DB setup:
 
 		$ use myNewDatabase
 		$ db.myCollection.insertOne( { x: 1 } );
+
+> Create Replica set of the DB:
+
+	Primary DB: one and only writable database
+	Secondary DB: read only instances, if Primary fails, secondary becomes Primary
+	Arbiter DB: It provides an additional vote if secondary wants to become primary, secondary needs majority of > 50 % votes
+
+	Create a batch file, in the root directory:
+
+		cd \sample\
+
+		mkdir \sample\db1
+		mkdir \sample\db2
+		mkdir \sample\db3
+
+		@REM Primary
+		start "a" mongod --dbpath ./db1 --port 30000 --replSet "demo"
+
+		@REM Secondary
+		start "a" mongod --dbpath ./db2 --port 40000 --replSet "demo"
+
+		@REM Arbiter
+		start "a" mongod --dbpath ./db3 --port 50000 --replSet "demo"
+
+	or run the each instance separately, $start "a" mongod --dbpath ./db3 --port 50000 --replSet "demo"
+
+	- mongo --port 30000
+	- db.getMongo() - returns the port number db connected to
+
+ - create demoConfig as, mongo shell interprets as javascript interpreter
+
+   $ var demoConfig = { _id: "demo",
+										 	members: [
+												{
+													"_id": 0,
+													"host": "localhost: 30000",
+													"priority": 10
+												},
+												{
+													"_id": 1,
+													"host": "localhost: 40000",
+												},
+												{
+													"_id": 2,
+													"host": "localhost: 50000",
+													arbiterOnly: true
+												}
+											]
+										};
+
+	- initialise the replica set:
+		$rs.initiate(demoConfig)
+
+> Mongo Shell:
+
+	$mongo localhost/admin --eval "db.runCommand({logRotate: 1})" -- To rotate the same log file, printjson() method used to print it as json to output
+
+	We can also pass JavaScript scripts as input to the shell,
+	write a script to calculate the count of users, create userCount.js as follows,
+	```
+		var userCount = funtion() {
+			var count = db.Users.count();
+			var entry = {_id: Date(), n: count};
+			db.UserCountHistory.save(entry);
+			print("\nToday's user count: " + entry.n);
+		};
+
+		userCount();
+	```
+	Run this script as follows,
+	$mongo userCount.js
+
+	Add dropDatabase prototype a script so that dropping the db will show a message, save it as, safer.js
+	```
+		DB.prototype.dropDatabase = function() {
+			print("Don't delete it");
+		}
+
+		db.dropDatabase = DB.prototype.dropDatabase;
+	```
+	run it as,
+	$mongo safer.js --shell -> --shell option helps stay in the shell
+
+	- set EDITOR to edit the content in command line, $set EDITOR="C:\Program Files\editor.exe"
+	- then run, $edit myProgram
+
+	- To run the script whenever shell loads, put the script to .mongorc.js file which will reside in users/<user-name>/.mongorc.js, which will be useful
+		production. add safer.js file content to mongorc.js file and it won't allow dropping database in production
+
+	- To not load the mongorc.js file to enforce it, run the following command as follows
+		$mongo --norc -> it will be useful during development to not to run mongorc.js file every time shell loads
+
+		In the production we can disable the dropDatabase and shuttingDown the server, add the following lines to mongorc.js file to enforce it,
+
+		```
+			var _no_ = function() { print('Not Allowed!');}
+			DB.prototype.dropDatabase = _no_;
+			db.dropDatabase = db.prototype.dropDatabase;
+
+			DB.prototype.shutdownServer = _no_;
+			db.shutdownServer = db.prototype.shutdownServer;
+		```
+
+> Storing Data:
