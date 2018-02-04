@@ -107,7 +107,7 @@ MongoDB: NoSQL database - document database:
 
 	choose your collection and type the following to see all contents of that collection:
 
-	$ db.collectionName.find()
+	$ db.collectionName.find().pretty() - pretty to get proper Structure data
 
 	#	The following creates both the database 'myNewDatabase' and the collection 'myCollection' during the insertOne() operation:
 
@@ -217,3 +217,97 @@ MongoDB: NoSQL database - document database:
 		```
 
 > Storing Data:
+
+	- mongo uses memory mapped file
+	- Stored as BSON - Binary JSON - Data storage serialization format - Overhead of marshalling data to disk and usage of data in the server is efficient
+	- Rules to store data:
+		A document must have an _id field, size of document is 16MB
+
+	- $show collections - to list all the collections within the database,
+	- _id can be of any type, and can be complex object as well, array cannot be used as a datatype to _id
+	- If no _id specified while inserting data to collection, mongodb inserts ObjectId() - which is unique and has following properties,
+		ObjectId().getTimestamp() - returns ISODate()
+	- It allows to use the same _id for inserting multiple documents but it over writes the data of the _id which is already exists with the new data,
+		it updates the fields as well - it happens if save() function is used, if insert() function used, it errors out the duplicate key error
+
+	> update command is atomic with in a document - no two users can update:
+
+		- db.foo.update(query, update, options);
+
+		- db.test.update({ _id:1 }, { $inc: { x:1 } }) -> $inc - increments the value by 1
+
+		- db.test.update({ _id: 1 }, { $set: { y:10 } }) -> $set - sets new field to the test collection
+
+		- db.test.update({ _id: 1 }, { $unset: { y: '' or 0 }) -> unsets the field in the collection passed to $unset
+
+		- $rename: { 'Naem': 'Name'} - Updates the field name
+
+		- $push: { things: "one" } - pushes new array to the collection
+
+		- $addToSet: { things: "one" } - Adds the unique items to array
+
+		- $pull: { things: 'three'} - removes all instance of an item in an array, 'three' items in a things will be pulled out of an array
+
+		- $pop: {things: 1} - removes the last element in the array, -1 removes the first element in the array
+
+	> Multi-Update:
+
+		- db.foo.update({}, { $push: { things: 4 }, { multi: true }); - Updates things with 4 in all the documents
+
+		- db.foo.update({things: 2}, { $push: { things: 42 }, { multi: true }); -- Updates only the array has 2 in it
+
+	> findAndModify({
+			query: <document>,
+			update: <document>,
+			upsert: <boolean>, -> true - inserts new document if update criteria fails
+			remove: <boolean>, -> true - removes the document matching the update criteria
+			new: <boolean>, -> true - returns the document after updating with changes
+			sort: <document>, -> Query order
+			fields: <document>,
+		});
+
+		mod {
+			"query": { "things": 1 },
+			update: { "$set": { "touched": true } },
+			"sort": { "_id": -1 } -> -1 - Descending order, 1 - Ascending order
+		}
+
+> Finding Documents: db.foo.find(query, projection);
+
+	- db.foo.find({_id: 1}, {_id: 1, name: 0}); -> returns only id field matching the query, projection can be set to 0 to not show the field names, and multiple
+		fields can be seperated by comma, here name field is not shown in the output
+
+	- db.foo.find({_id: {$gt: 5}}); -> Returns the ids greater than 5, $lt - less than, {$gt:2, $lt: 6} - range - comma between the criteria acts as AND
+
+	- db.foo.find({_id: {$not: {$gt: 5}}}) -> Negating
+
+	- db.foo.find({_id: {$in: [1,3] } }); -> $nin for not in
+
+	- db.foo.find({tags: 'cute'}, {name: 1}); - case sensitive search
+
+	- db.foo.find({tags: {$in: ['cute', 'ocean']}}); - $all: ['cute', 'ocean'] to get both cute and ocean tags, can use dot notation to access nested fields
+		{"info:canFly": true, "info:type": 'bird'}
+
+	- checking for null on dot notation, will return one with null and one without that property exists in the document.
+
+	- db.foo.find({"info:canFly": { $exists: true }}); -> checks for the property canFly exists in the document
+
+	- find() returns cursor object, which can be iterated using forEach and can run hasNext() and size() operations on it
+
+	-  db.foo.find({}).sort({name: 1}); -> 1 - Ascending and -1 - Descending order
+
+	- limit(3) - can be used to limit the number of documents to be displayed or fetched
+
+	- findOne({}) - fetch only one record - it has no cursor
+
+> Indexing:
+
+	- Regular indexing (B-Tree), Geo indexing, text indexing, hashed indexed (sharding), TTL - time to leave indexing
+
+	- db.foo.ensureIndex(keys, options);
+
+	- explain() function on cursor will tell whether it has index or not, cursor property tells whether it is indexed or basicCursor
+
+	- db.animals.ensureIndex({name: 1}); - 1 means Ascending order alphabetically and -1 for Descending order
+
+	- db.system.indexes.find({ns: 'test.animals'}, {key: 1}) -> ns - name space

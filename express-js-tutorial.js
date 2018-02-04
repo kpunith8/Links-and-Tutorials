@@ -16,3 +16,7 @@ app.listen(port, function(err) {
 		open('http://localhost:' + port);
 	}
 });
+
+> RESTfull services with Node.js and express:
+
+	HATEOAS - Hypermedia as the Engine of Application State

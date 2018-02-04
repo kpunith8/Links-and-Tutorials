@@ -446,12 +446,6 @@ Advanced React.js -> samerbuna
 
 >
 
------------------------------
-React and Redux - Cory House:
------------------------------
-> Four ways to create React Components, ES5 createClass, ES6 class, ES6 stateless function, ES5 stateless function
-
-
 ---------------
 snapshot tests:
 ---------------

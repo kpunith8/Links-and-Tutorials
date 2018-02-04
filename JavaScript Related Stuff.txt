@@ -3,6 +3,8 @@ user/<username>/AppData/Roaming/npm or npm-cache
 
 https://www.webcodegeeks.com/html5/html5-internationalization-example/
 
+https://scrimba.com/g/gflexbox
+
 -------------------
 # List of libraries:
 -------------------
@@ -13,6 +15,7 @@ https://www.webcodegeeks.com/html5/html5-internationalization-example/
 * SASS - Syntactically Awesome Style Sheets
 * CSS Modules
 * Toaster library to notify
+* nock - mocking http calls
 
 # React testing libraries:
 -------------------------
