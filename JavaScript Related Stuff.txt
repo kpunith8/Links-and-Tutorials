@@ -16,9 +16,13 @@ https://scrimba.com/g/gflexbox
 * CSS Modules
 * Toaster library to notify
 * nock - mocking http calls
+* GraphQL - relay - apolo
+	graphcool -> serverless GraphQL
+* reactstrap - wrapper for Bootstrap 4.0 for react
+* axios
 
 * ORM for node.js - LoveField - for Mysql - https://google.github.io/lovefield/
-	sequelize - ORM 
+	sequelize - ORM
 
 # React testing libraries:
 --------------------------
@@ -95,3 +99,18 @@ ES6:
 * checking for npm packages,
 
 	npm install > npm list > npm dedupe > npm prune > npm run prod-build
+
+
+
+	const list = [
+		 {
+			 name: 'Amy Farha',
+			 avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+			 subtitle: 'Vice President'
+		 },
+		 {
+			 name: 'Chris Jackson',
+			 avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+			 subtitle: 'Vice Chairman'
+		 },
+	 ];

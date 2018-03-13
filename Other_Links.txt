@@ -1,3 +1,5 @@
+Flutter for android development using dart programming
+
 https://www.mybrainsolutions.com/
 
 Apache port: localhost:4455/
@@ -35,6 +37,12 @@ Udacity -> Android and Firebase tutorials
 
 https://confengine.com/ -> Ak@85
 
+> Slack: kpunith8@gmail.com
+
+https://reactnativetraining.slack.com/ -> Ap@24
+> expo.io
+
+kpunith8@gmail.com -> kpunith8 -> Ak@25485
 Docker ->
 
 heroku.com -> kpunith8@gmail.com -> Apk@85

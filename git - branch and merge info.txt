@@ -8,6 +8,8 @@ https://git-scm.com/book/en/v1/Git-Tools-Stashin_
 http://jebaird.com/2013/07/08/setting-up-kdiff3-as-the-default-merge-tool-for-git-on-windows.html
 https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
+# Git Configuration:
+
 	git config --global core.editor "vim"
 
 	Git-bash by default only supports 260 character file paths. This has been fixed since git-bash 1.9, but it's not turned on by default.
@@ -17,6 +19,10 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 	If you're having issues cloning long file paths try the following:
 	git clone -c core.longpaths=true <your.url.here>
+
+# Filename too long in git for windows
+
+	$ git config --system core.longpaths true
 
 # Adding an exisiting git project to github:
 

@@ -1,0 +1,25 @@
+# Libraries to consider:
+
+  1. react-navigation - for TabNavigation, Drawer and other stuff
+  2. native-base - Javascript based UI for react-native-elements
+
+# Ways to create react-native apps:
+
+  1.  Using react-native-cli -> requires android studio needs to be installed
+      $ npm install -g react-native-cli
+
+      Create an app using,
+      $ react-native init AwesomeProject
+
+      Run the project in emulator or device
+      $ react-native run-android
+
+  2.  Using create-react-native-app (CRNA) - Doesn't require android studio, but needs expo client on devices to be tested
+      Needs to be in the same Wi-Fi network to run the app and test it
+      check expo.io for documentation, apps can be created using expo and other libraries,
+
+      Create an app using,
+      $ create-react-native-app SampleApp
+
+      Run the project in emulator,
+      $ npm run android
