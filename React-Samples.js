@@ -312,6 +312,64 @@ var routes = (
 
 module.exports = routes;
 
+> react-router-dom v4 sample:
+
+  > App component:
+
+    import ReactRouter from 'react-router-dom';
+    import Router from ReactRouter.BrowserRouter;
+    import Switch from ReactRouter.Switch;
+
+    App extends React.Component {
+      render() {
+        return(
+          <Router>
+            <div className="container">
+              <Nav /> -- Component to show the content
+              <Switch> // Switch to hande the special request coming to route other than specified one
+                <Route exact path='/' component={Home} />
+                <Route path='/battle' component={Battle} />
+                <Route path='/popular' component={Popular} />
+                <Route render = {function() {
+                    return (<p>Page Not Found</p>);
+                  }}/>
+              </Switch>
+            </div>
+          </Router>
+        );
+      }
+    }
+
+  > Nav component:
+
+    import React from 'react';
+    import ReactRouter from 'react-router-dom';
+    import NavLink from ReactRouter.NavLink;
+
+    const Nav = () => {
+      return(
+        <ul className='nav'>
+          <li>
+            <NavLink exact activeClassName='active' to='/' >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName='active' to='/battle' >
+              Battle
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName='active' to='/popular' >
+              popular
+            </NavLink>
+          </li>
+        </ul>
+      );
+    };
+
+    export default Nav;
+
 ============
 React Forms: Cory House
 ------------
@@ -460,3 +518,48 @@ snapshot tests:
 
 	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
 	for ex: expect.addSnapshotSerializer(enzymeSerializer);
+
+-------------------------------
+> React and Redux: Dan Abramov:
+-------------------------------
+  https://egghead.io/lessons/javascript-redux-simplifying-the-arrow-functions
+  use node-uuid v4
+
+  // Instead of return in the body cover the return in ()
+  export const addToDo = (text) => ({
+    type: 'SET_FILTER',
+    text,
+  });
+
+  create store can take persisted state as second parameter, - done in entry point
+
+  todoApp is imported from
+  const store = createStore(todoApp, persistedState);
+  render(
+    <Provider store = {store}>
+        <Router routes = {routes} history={browserHistory} />
+    </Provider>,
+    document.getElementById('app')
+  );
+
+
+// React-Ajax call using jQuery
+  var data = {};
+    data.name = 'Punith';
+    data.id = 1;
+    data.age = 38;
+    data.sex = 'male';
+
+    jquery.ajax({
+      url: 'http://localhost:3000/users',
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function (data) {
+          console.log('Update successfull');
+          console.log(JSON.stringify(data));
+      }.bind(this),
+        error: function (xhr, status, err) {
+        console.log(err);
+      }
+    });

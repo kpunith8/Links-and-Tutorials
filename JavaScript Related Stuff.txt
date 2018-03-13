@@ -5,9 +5,9 @@ https://www.webcodegeeks.com/html5/html5-internationalization-example/
 
 https://scrimba.com/g/gflexbox
 
--------------------
+--------------------
 # List of libraries:
--------------------
+--------------------
 * webpack (bundler)
 * gulp (task runner like npm), gulp-connect(runs a local web dev server), gulp-open(opens a URL in the browser)
 * browserify (bundles JS), reactify (transforms JSX to JS), vinyl-source-stream (Use conventional text streams with gulp)
@@ -17,8 +17,11 @@ https://scrimba.com/g/gflexbox
 * Toaster library to notify
 * nock - mocking http calls
 
+* ORM for node.js - LoveField - for Mysql - https://google.github.io/lovefield/
+	sequelize - ORM 
+
 # React testing libraries:
--------------------------
+--------------------------
 * Jest, Enzyme and TestCafe (night watch)
 
 * font-awesome for icons
