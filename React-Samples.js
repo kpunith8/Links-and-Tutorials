@@ -1,17 +1,19 @@
-Links:
------
-fullstackreact.com
-edgecoders.com
+# Links:
 
-https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
+  fullstackreact.com
+  edgecoders.com
+
+  https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
 
 
-https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
+  https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
 
-https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
+  https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
 
-// shouldComponentUpdate(nextProps, nextState) usage
-https://egghead.io/lessons/react-component-lifecycle-updating
+  // shouldComponentUpdate(nextProps, nextState) usage
+  https://egghead.io/lessons/react-component-lifecycle-updating
+
+  http://lucybain.com/blog/2017/react-js-when-to-rerender/
 
 componentWillReceiveProps(nextProps) {
     console.log('Recieves the next props' + JSON.stringify(nextProps));
@@ -21,8 +23,6 @@ componentWillReceiveProps(nextProps) {
   updateOrderDisplays(nextProps) {
     this.setState({ orderDisplays: nextProps.orderDisplays });
   }
-
-http://lucybain.com/blog/2017/react-js-when-to-rerender/
 
 // Sample-1: Samer Buna - Plural sight course - ES6 way
 // library used: font awesome, underscore, bootstrap
@@ -208,80 +208,79 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, mountNode);
 
-====================
-// CSS for sample-1
-====================
-.mountNode {
-  color: #333;
-}
+# CSS for sample-1
 
-.fa-star {
-margin: 0.5em;
-font-size: 24px;
-}
+  .mountNode {
+    color: #333;
+  }
 
-.fa-window-close {
-margin: 5px;
-float: right;
-}
+  .fa-star {
+  margin: 0.5em;
+  font-size: 24px;
+  }
 
-li {
-background: #cce5ff;
-margin: 1px;
-padding: 10px;
-}
+  .fa-window-close {
+  margin: 5px;
+  float: right;
+  }
+
+  li {
+  background: #cce5ff;
+  margin: 1px;
+  padding: 10px;
+  }
 
 
-#number {
-display: inline-block;
-margin: 0.5em;
-text-align: center;
-background-color: #ccc;
-width: 24px;
-border-radius: 50%;
-cursor: pointer;
-}
+  #number {
+  display: inline-block;
+  margin: 0.5em;
+  text-align: center;
+  background-color: #ccc;
+  width: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  }
 
-.selected {
-background-color: #eee;
-color: #ddd;
-cursor: not-allowed;
-}
+  .selected {
+  background-color: #eee;
+  color: #ddd;
+  cursor: not-allowed;
+  }
 
-.used {
-background-color: #aaddaa;
-color: #99bb99;
-cursor: not-allowed;
-}
+  .used {
+  background-color: #aaddaa;
+  color: #99bb99;
+  cursor: not-allowed;
+  }
 
-ul {
-list-style-type: none;
-margin: 0;
-padding: 0;
-}
-.left {
-height: 200px;
-background-color:#88f66d;
-}
-.right {
-height: 200px;
-background-color: #f06488;
-}
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  }
+  .left {
+  height: 200px;
+  background-color:#88f66d;
+  }
+  .right {
+  height: 200px;
+  background-color: #f06488;
+  }
 
-.orders {
-height: 80px;
-background-color: gray;
-}
+  .orders {
+  height: 80px;
+  background-color: gray;
+  }
 
-.search {
-height: 20px;
-background-color: blue;
-}
+  .search {
+  height: 20px;
+  background-color: blue;
+  }
 
-.result {
-height: 100px;
-background-color: cyan;
-}
+  .result {
+  height: 100px;
+  background-color: cyan;
+  }
 
 -------------
 React Routes:
@@ -370,60 +369,57 @@ module.exports = routes;
 
     export default Nav;
 
-============
-React Forms: Cory House
-------------
+# React Forms: Cory House
 
-> use mixins to refer other components,
+  > use mixins to refer other components,
 
-> use statics to make transitions to one page to another, and ask save the user data before transition to another page, using
-dirty state.
+  > use statics to make transitions to one page to another, and ask save the user data before transition to another page, using
+  dirty state.
 
-	mixins: [
-		Router.Navigation
-	],
+  	mixins: [
+  		Router.Navigation
+  	],
 
-	statics: {
-		willTransitionFrom: function(transition, component) {
-			if (component.state.dirty && !confirm('Leave without saving?')) {
-				transition.abort();
-			}
-		}
-	},
+  	statics: {
+  		willTransitionFrom: function(transition, component) {
+  			if (component.state.dirty && !confirm('Leave without saving?')) {
+  				transition.abort();
+  			}
+  		}
+  	},
 
-	this.transitionTo('authors'); // will take to the name of the page mentioned in Router
+  	this.transitionTo('authors'); // will take to the name of the page mentioned in Router
 
------
-Flux:
------
-> Not a framework, name for the pattern for unidirectional dataflows
-> State update happens from centralized dispatcher to applications data store
-> Deals with actions and data changes
-> Action -> Dispatcher -> Store -> React View -> Action (unidirectional)
+# Flux:
 
-	> Action - Action performed - Has payload and data - makes ajax calls - uses web API
-	> Dispatcher - Centralized list of callbacks - Notifies everyone who cares - only one dispatcher for an app -
-		Distributes actions to the stores
-	> Store - Holds the app state, logic, data retrieval - contains models - an app can have one or more stores -
-		registers callbacks with dispatcher - uses Nodes EventEmitter
-	> View - Holds the data in state - sends data to children as props
+  > Not a framework, name for the pattern for unidirectional dataflows
+  > State update happens from centralized dispatcher to applications data store
+  > Deals with actions and data changes
+  > Action -> Dispatcher -> Store -> React View -> Action (unidirectional)
 
-API:
-	> register(function callback)
-	> unregister(string id)
-	> waitFor(array<string> ids) - update this store first
-	> dispatch(object payload)
-	> isDispatching()
+  	> Action - Action performed - Has payload and data - makes ajax calls - uses web API
+  	> Dispatcher - Centralized list of callbacks - Notifies everyone who cares - only one dispatcher for an app -
+  		Distributes actions to the stores
+  	> Store - Holds the app state, logic, data retrieval - contains models - an app can have one or more stores -
+  		registers callbacks with dispatcher - uses Nodes EventEmitter
+  	> View - Holds the data in state - sends data to children as props
 
-> filter array:
+  API:
+  	> register(function callback)
+  	> unregister(string id)
+  	> waitFor(array<string> ids) - update this store first
+  	> dispatch(object payload)
+  	> isDispatching()
 
-function searchMovies(query) {
-	return map.filter((movie) => {
-		return movie.title.includes(query);
-	});
-}
+# filter array:
 
-> Validating props of an array:
+  function searchMovies(query) {
+  	return map.filter((movie) => {
+  		return movie.title.includes(query);
+  	});
+  }
+
+# Validating props of an array:
 
 		order: PropTypes.arrayOf(PropTypes.shape({
 		    identifier: PropTypes.number.isRequired,
@@ -431,7 +427,7 @@ function searchMovies(query) {
 		    required: PropTypes.bool.isRequired
 		  })),
 
-> Updating the state based on the condition in setState()
+# Updating the state based on the condition in setState()
 
 	this.setState(prevState => {(
 		if(prevState.usedNumbers.length === 9) {
@@ -457,7 +453,7 @@ function searchMovies(query) {
 
 		)}, this.updateAnotherState);
 
-	>
+
 
 	> possibleCombination by Samer Buna - https://gist.github.com/samerbuna/aa1f011a6e42d6deba46
 
@@ -481,47 +477,42 @@ function searchMovies(query) {
 		  return false;
 	};
 
-------------------------------
-Advanced React.js -> samerbuna
-------------------------------
-> To add dependencies in yarn use, $ yarn add <package-name>
-> use nodemon npm package for file changes in windows
-> add "nodemon lib/server.js" under scripts in package.json and run it using, $yarn dev
-> Use babel to transfile, add babel to package.json as follows,
-  "babel": {
-    "presets": ["react", "env", "stage-2"]
-  }
 
-  install following packages to make it work,
-  $ yarn add babel-cli babel-preset-react babel-preset-env babel-preset-stage-2
+# Advanced React.js -> samerbuna
 
-  Update dev script to transfile on file changes, "nodemon --exec babel-node lib/server.js"
+  > To add dependencies in yarn use, $ yarn add <package-name>
+  > use nodemon npm package for file changes in windows
+  > add "nodemon lib/server.js" under scripts in package.json and run it using, $yarn dev
+  > Use babel to transfile, add babel to package.json as follows,
+    "babel": {
+      "presets": ["react", "env", "stage-2"]
+    }
 
-> Use webpack to specify the bundle
+    install following packages to make it work,
+    $ yarn add babel-cli babel-preset-react babel-preset-env babel-preset-stage-2
 
-> Find the time taken to process the webpack, use
-  $ time yarn webpack
+    Update dev script to transfile on file changes, "nodemon --exec babel-node lib/server.js"
 
->
+  > Use webpack to specify the bundle
 
----------------
-snapshot tests:
----------------
-> Add serializer in the top of the test file to make the snapshot look better
+  > Find the time taken to process the webpack, use
+    $ time yarn webpack
 
-  expect.addSnapshotSerializer({
-	   test: (val) => val.title && val.age,
-	   print: (val) => `${val.title} ${val.age}`
-   });
+# snapshot tests:
+  > Add serializer in the top of the test file to make the snapshot look better
 
-> Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
+    expect.addSnapshotSerializer({
+  	   test: (val) => val.title && val.age,
+  	   print: (val) => `${val.title} ${val.age}`
+     });
 
-	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
-	for ex: expect.addSnapshotSerializer(enzymeSerializer);
+  > Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
 
--------------------------------
-> React and Redux: Dan Abramov:
--------------------------------
+  	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
+  	for ex: expect.addSnapshotSerializer(enzymeSerializer);
+
+# React and Redux: Dan Abramov:
+
   https://egghead.io/lessons/javascript-redux-simplifying-the-arrow-functions
   use node-uuid v4
 
@@ -543,7 +534,7 @@ snapshot tests:
   );
 
 
-// React-Ajax call using jQuery
+# React-Ajax call using jQuery
   var data = {};
     data.name = 'Punith';
     data.id = 1;
@@ -563,3 +554,188 @@ snapshot tests:
         console.log(err);
       }
     });
+
+    By: Samer Buna
+
+    https://gist.github.com/samerbuna
+
+    edgecoders.com
+
+    jscomplete.com/repl
+
+
+    Class can change the state of a class not the props of the class.
+
+    class MyComponent extends React.Component {
+    	render() {
+    		return ();
+    	}
+    }
+
+    // Example ran in jscomplete - communicating with other componets and usage of props
+
+    class Button extends React.Component {
+      state = {counter: 0};
+
+      handleClick = () => {
+      	this.props.onClickFunction(this.props.incrementValue);
+      };
+
+      render() {
+      	return(
+        	<button onClick={this.handleClick}>
+          	+{this.props.incrementValue}
+          </button>
+        );
+      }
+    }
+
+    const Result = (props) => {
+      	return(
+        	<div>{props.counter}</div>
+        );
+      };
+
+    class App extends React.Component {
+      state = {counter: 0};
+
+      incrementCounter = (incrementValue) => {
+      	this.setState((prevState) => ({
+          counter: prevState.counter + incrementValue
+        }));
+      }
+
+      render() {
+        	return(
+            <div>
+              <Button incrementValue={1} onClickFunction={this.incrementCounter}/>
+              <Button incrementValue={5} onClickFunction={this.incrementCounter}/>
+              <Button incrementValue={7} onClickFunction={this.incrementCounter}/>
+              <Button incrementValue={100} onClickFunction={this.incrementCounter}/>
+              <Result counter={this.state.counter}/>
+            </div>
+          );
+      }
+    }
+
+    ReactDOM.render(<App />, mountNode);
+
+  # Other React stuf:
+
+    go to -> https://api.github.com/ grab the user_url and put in browser and specify the username and get the avatar
+    url
+
+    css style can be used with style={{display: 'inline-block', marginLeft:10}}
+
+    To get the data from a input field:
+
+    ref = {(input) => this.userInput = input} -> one way of getting the data from the input and can be accessed using
+     'this.userInput.value'
+
+
+    // Second example working with data - Add Github users using github api
+
+    const Card = (props) => {
+    	return(
+      	<div style={{margin: '1em'}}>
+        	<img width="75" src={props.avatar_url} />
+          <div style={{display: 'inline-block', marginLeft: 10}}>
+          	<div style={{fontSize: '1.25em', fontWeight: 'bold'}}>{props.name}</div>
+            <div>{props.company}</div>
+          </div>
+        </div>
+      );
+    };
+
+    class Form extends React.Component {
+    	state = { userName: ''};
+
+    	handleSubmit = (event) => {
+      	event.preventDefault();
+        axios.get(`https://api.github.com/users/${this.state.userName}`)
+        .then(resp => {
+        	this.props.onSubmit(resp.data);
+          this.setState({userName: ''});
+        });
+      };
+
+    	render() {
+      	return(
+          <form onSubmit={this.handleSubmit}>
+          	<input type="text"
+          	value={this.state.userName}
+            onChange={(event) => this.setState({ userName: event.target.value })}
+            placeholder="Github username" required/>
+
+          	<button type="submit">Add User</button>
+          </form>
+        );
+      }
+    }
+
+    class App extends React.Component {
+      state = {
+      	cards: []
+      };
+
+      addNewCard = (cardInfo) => {
+      	this.setState((prevState) => ({
+        	cards: prevState.cards.concat(cardInfo)
+        }));
+      };
+
+      render() {
+      	return(
+        	<div>
+        		<Form onSubmit={this.addNewCard}/>
+          	<CardList cards={this.state.cards} />
+          </div>
+        );
+      }
+    }
+
+    const CardList = (props) => {
+    	return(
+      	<div>
+        	{props.cards.map(card => <Card key={card.id} {...card} />)} { /* ... spread operator */ }
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, mountNode);
+
+    // React official site - example for key and constructing UI
+
+    function Blog(props) {
+      const sidebar = (
+        <ul>
+          {props.posts.map((post) =>
+            <li key={post.id}>
+              {post.title}
+            </li>
+          )}
+        </ul>
+      );
+      const content = props.posts.map((post) =>
+        <div key={post.id}>
+          <h3>{post.title}</h3>
+          <p>{post.content}</p>
+        </div>
+      );
+      return (
+        <div>
+          {sidebar}
+          <hr />
+          {content}
+        </div>
+      );
+    }
+
+    const posts = [
+      {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+      {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+    ];
+    ReactDOM.render(
+      <Blog posts={posts} />,
+      document.getElementById('root')
+    

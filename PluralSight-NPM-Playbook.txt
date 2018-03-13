@@ -1,8 +1,8 @@
 # npm shortcuts:
 
-https://docs.npmjs.com/misc/config
+	https://docs.npmjs.com/misc/config
 
-package.json -> to track the dependencies, to create scripts
+	package.json -> to track the dependencies, to create scripts
 
 # Creating package.json:
 
@@ -109,3 +109,12 @@ package.json -> to track the dependencies, to create scripts
 	Push the changes to git, create a tag and publish it using,
 
 	$ npm publish --tag beta
+
+# checking for npm packages,
+
+	npm install > npm list > npm dedupe > npm prune > npm run prod-build
+
+# Removing npm from local cache & local folder of npm packages:
+	user/<username>/AppData/Roaming/npm or npm-cache
+
+	$ npm cache verify

@@ -1,7 +1,16 @@
 # Libraries to consider:
 
-  1. react-navigation - for TabNavigation, Drawer and other stuff
-  2. native-base - Javascript based UI for react-native-elements
+  1.  react-navigation - for TabNavigation, Drawers and other stuff
+  2.  native-base - Javascript based UI for react-native-elements
+  3.  consider react-native-elements for UI - Adding features
+
+# Links:
+
+  1.  http://www.reactnativeexpress.com
+
+# Youtube Channels:
+
+  1.  Unsure Programmer
 
 # Ways to create react-native apps:
 

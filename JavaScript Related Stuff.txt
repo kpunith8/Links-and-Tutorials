@@ -1,106 +1,101 @@
-Removing npm from local cache & local folder of npm packages:
-user/<username>/AppData/Roaming/npm or npm-cache
+# Links:
 
-https://www.webcodegeeks.com/html5/html5-internationalization-example/
+	https://www.webcodegeeks.com/html5/html5-internationalization-example/
+	https://scrimba.com/g/gflexbox
 
-https://scrimba.com/g/gflexbox
-
---------------------
 # List of libraries:
---------------------
-* webpack (bundler)
-* gulp (task runner like npm), gulp-connect(runs a local web dev server), gulp-open(opens a URL in the browser)
-* browserify (bundles JS), reactify (transforms JSX to JS), vinyl-source-stream (Use conventional text streams with gulp)
-* React - UI library - facebook
-* SASS - Syntactically Awesome Style Sheets
-* CSS Modules
-* Toaster library to notify
-* nock - mocking http calls
-* GraphQL - relay - apolo
-	graphcool -> serverless GraphQL
-* reactstrap - wrapper for Bootstrap 4.0 for react
-* axios
 
-* ORM for node.js - LoveField - for Mysql - https://google.github.io/lovefield/
-	sequelize - ORM
+	* webpack (bundler)
+	* gulp (task runner like npm), gulp-connect(runs a local web dev server), gulp-open(opens a URL in the browser)
+	* browserify (bundles JS), reactify (transforms JSX to JS), vinyl-source-stream (Use conventional text streams with gulp)
+	* React - UI library - facebook
+	* SASS - Syntactically Awesome Style Sheets
+	* CSS Modules
+	* Toaster library to notify
+	* nock - mocking http calls
+	* GraphQL - relay - apolo
+		graphcool -> serverless GraphQL
+	* reactstrap - wrapper for Bootstrap 4.0 for react
+	* axios
+
+	* ORM for node.js - LoveField - for Mysql - https://google.github.io/lovefield/
+		sequelize - ORM
 
 # React testing libraries:
---------------------------
-* Jest, Enzyme and TestCafe (night watch)
 
-* font-awesome for icons
+	* Jest, Enzyme and TestCafe (night watch)
 
--------------
-Other tweaks:
--------------
-
-* add 'debugger;' text in the source code, so that chrome developer takes to that point when debugging. Remove them once done debugging
-
-lint errors and fixes Fixes:
-----------------------------
-
-* no-undef lint error fix: can be added global section of webpack.config
-
-	https://github.com/chaijs/type-detect/issues/98
-
-* lint error while using single return statement in arrow function:
-
-	unexpected block statement surrounding arrow body
-
---------------------------------
-
-* Filter the array based on type:
-
-const requiredOrders = orders.filter(order => order.required);
-
-* Converting array to JSON Data
-
-	function convertToJson(items) {
-		return JSON.parse(JSON.stringify(items));
-	}
-
-* Get the data from event object
-
-	saveUserData(event) {
-		var field = event.target.name;
-		var value = event.target.value;
-		this.state.author[field] = value;
-
-		return this.setState({ author: this.state.author});
-	}
-
-* Passing Parameters to function from render:
-
-	onClick={() => this.deleteRow(index)}
-
-* unique Array: Pass concatenated array as input
-
-	uniqueArray (arrArg) {
-	  return arrArg.filter((elem, pos, arr) => {
-	    return arr.indexOf(elem) == pos;
-	  });
-	}
-
-(or)
-
-ES-5:
-	array1 = array1.filter(function(val) {
-	  return array2.indexOf(val) == -1;
-	});
-
-ES6:
-	array1 = array1.filter(val => !array2.includes(val));
+	* font-awesome for icons
 
 
-* Sorting array based on Parameters:
+# Other tweaks:
 
-	array.sort((last, first) => last.displayValue > first.displayValue);
+	* add 'debugger;' text in the source code, so that chrome developer takes to that point when debugging. Remove them once done debugging
 
-* checking for npm packages,
-
-	npm install > npm list > npm dedupe > npm prune > npm run prod-build
+# lint errors and fixes Fixes:
 
 
+	* no-undef lint error fix: can be added global section of webpack.config
+
+		https://github.com/chaijs/type-detect/issues/98
+
+	* lint error while using single return statement in arrow function:
+
+		unexpected block statement surrounding arrow body
+
+# Code Snippets
+
+
+
+
+	* Filter the array based on type:
+
+	const requiredOrders = orders.filter(order => order.required);
+
+	* Converting array to JSON Data
+
+		function convertToJson(items) {
+			return JSON.parse(JSON.stringify(items));
+		}
+
+	* Get the data from event object
+
+		saveUserData(event) {
+			var field = event.target.name;
+			var value = event.target.value;
+			this.state.author[field] = value;
+
+			return this.setState({ author: this.state.author});
+		}
+
+	* Passing Parameters to function from render:
+
+		onClick={() => this.deleteRow(index)}
+
+	* unique Array: Pass concatenated array as input
+
+		uniqueArray (arrArg) {
+		  return arrArg.filter((elem, pos, arr) => {
+		    return arr.indexOf(elem) == pos;
+		  });
+		}
+
+	(or)
+
+	ES-5:
+		array1 = array1.filter(function(val) {
+		  return array2.indexOf(val) == -1;
+		});
+
+	ES6:
+		array1 = array1.filter(val => !array2.includes(val));
+
+
+	* Sorting array based on Parameters:
+
+		array.sort((last, first) => last.displayValue > first.displayValue);
+
+# other Info:
 
 	const list = [
 		 {

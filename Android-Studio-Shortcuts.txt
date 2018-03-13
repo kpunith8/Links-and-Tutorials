@@ -1,3 +1,0 @@
-Ctrl + N -> Open any class quickly in the editor
-Alt + F7 -> To access any files
-Shift + F6 -> Refactor/Rename

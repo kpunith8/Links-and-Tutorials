@@ -1,29 +1,39 @@
 Flutter for android development using dart programming
 
-https://www.mybrainsolutions.com/
+  https://www.mybrainsolutions.com/
 
-Apache port: localhost:4455/
+  Apache port: localhost:4455/
 
-https://dev.to/
+  https://dev.to/
 
-https://alipchattopadhyay.wordpress.com/2016/10/17/my-agile-journey-an-inside-on-multi-vendor-multi-location-agile-practices/
-http://try.jquery.com/levels/2/sections/2
+  https://alipchattopadhyay.wordpress.com/2016/10/17/my-agile-journey-an-inside-on-multi-vendor-multi-location-agile-practices/
+  http://try.jquery.com/levels/2/sections/2
 
-Oracle Docs:
+  Oracle Docs:
 
-https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions022.htm
+  https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions022.htm
 
-http://zippyopinion.com --> kpunith8@gmail.com -> Apk@ -> opinion to get vouchers
+  http://zippyopinion.com --> kpunith8@gmail.com -> Apk@ -> opinion to get vouchers
 
 www.androidarsanal.com -> Android Libraries
 Android Ripple Attack -> RippleDrawable - Mask needs to be updated for an item to show ripple effect only for selected item
 SlidingTabLayout ->
 
-Stackskills.com -> kpunith8@gmail.com -> PK@8.ancy
-deals.cultofandroid.com -> kpunith8@gmail.com -> PK@8.1ancy
-reddit.com -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
-codepen.io -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
-https://scotch.io/tutorials/learning-react-getting-started-and-concepts
+  Stackskills.com -> kpunith8@gmail.com -> PK@8.ancy
+  deals.cultofandroid.com -> kpunith8@gmail.com -> PK@8.1ancy
+  reddit.com -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
+  codepen.io -> kpunith8@gmail.com -> kpunith8 -> PK@8.ay
+  https://scotch.io/tutorials/learning-react-getting-started-and-concepts
+
+# udacity:
+
+  kpunith8@gmail.com
+  ph@85ancy
+
+# github.com
+
+  kpunith8
+  ph@85ancy
 
 https://www.quora.com/What-are-some-computer-tricks-that-a-CS-student-must-know
 
@@ -41,8 +51,8 @@ https://confengine.com/ -> Ak@85
 
 https://reactnativetraining.slack.com/ -> Ap@24
 > expo.io
-
 kpunith8@gmail.com -> kpunith8 -> Ak@25485
+
 Docker ->
 
 heroku.com -> kpunith8@gmail.com -> Apk@85

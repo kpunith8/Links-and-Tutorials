@@ -56,14 +56,14 @@ Grunt: The JavaScript Task Runner:
 		-	First install node.js, install npm (node package manager), then install Grunt cli - command line interface, run,
 
 			$npm install -g grunt-cli // here -g means global (to make sure grunt is available in all the folders in the system)
-		
+
 		-	then, install grunt to local directory by running,
-		
+
 			$npm install grunt --save-dev // Saves to local directory
 
 	# Sample grunt example:
 
-		Download 'grunt-contrib-clean' to use it, use npm to download, once downloaded it adds it to package.json automatically/we can add it 
+		Download 'grunt-contrib-clean' to use it, use npm to download, once downloaded it adds it to package.json automatically/we can add it
 		manually, add this to Gruntfile.js
 
 			use 'strict';
@@ -101,7 +101,7 @@ Grunt: The JavaScript Task Runner:
 				jshint: {
 					options: {
 						force: true // It forcefully continues, can be removed when below options are set
-						'-W069': false, // failure due to the way typescript works with enums 
+						'-W069': false, // failure due to the way typescript works with enums
 						'W0004': false, // failure due to typescript inheritance
 						ignores: ['path/to/js-file-to-ignore'], // Can be a multiple files seperated by comma
 						reporterOutput: './jshint.txt' // Writing these erros to output file
@@ -115,12 +115,12 @@ Grunt: The JavaScript Task Runner:
 		-	Load and register it, specify in Gruntfile.js,
 				grunt.loadNpmTasks('grunt-contrib-uglify');
 				grunt.registerTask(default, ['typescript','uglify']);
-		
-		-	Add this entry to, grunt.initConfig({ 
+
+		-	Add this entry to, grunt.initConfig({
 				uglify: {
 					development: {
 						files: {
-							'': [''] 	
+							'': ['']
 							// which will compress one file in the root folder, multiple files can be added seperated by comma, or
 							// The following files option can be used to scan the files as when they are added,
 								files : [{
@@ -148,7 +148,7 @@ Grunt: The JavaScript Task Runner:
 				grunt.loadNpmTasks('grunt-contrib-clean');
 				grunt.registerTask(default, ['clean', typescript','uglify']); 	// 	can be specified first, since we need clean up every time 																		building it freshly
 
-		-	Add this entry to, grunt.initConfig({ 
+		-	Add this entry to, grunt.initConfig({
 				clean: {
 					options: {
 
@@ -162,7 +162,7 @@ Grunt: The JavaScript Task Runner:
 
 	# Working with HTML and CSS:
 
-		-	Compressing HTML with contrib-htmlmin 	->	$npm install grunt-contrib-htmlmin, remove html comments, collapse white-space and tags, 	 remove redundant tag elements 
+		-	Compressing HTML with contrib-htmlmin 	->	$npm install grunt-contrib-htmlmin, remove html comments, collapse white-space and tags, 	 remove redundant tag elements
 
 		-	Validating HTML with htmlHint 			->	$npm install grunt-htmllhint, ensure unique tag id's, ensure valid attributes, tags are 	correct and valid
 
@@ -172,9 +172,9 @@ Grunt: The JavaScript Task Runner:
 
 		-	Compress CSS with cssmin				->	$npm install grunt-contrib-cssmin, compress, minify single/mutiple or concat to one file
 
-	# Using htmlHint: 
+	# Using htmlHint:
 
-		-	Add this entry to, grunt.initConfig({ 
+		-	Add this entry to, grunt.initConfig({
 				htmlhint: {
 					templates: {
 						options: {
@@ -195,7 +195,7 @@ Grunt: The JavaScript Task Runner:
 
 	# Using htmlmin:
 
-		-	Add this entry to, grunt.initConfig({ 
+		-	Add this entry to, grunt.initConfig({
 				htmlmin: {
 					dev: {
 						options: {
@@ -211,20 +211,20 @@ Grunt: The JavaScript Task Runner:
 							// The following files option can be used to scan the files as when they are added,
 								files : [{
 										expand: true,
-										cwd: './www/html/',								
+										cwd: './www/html/',
 										dest: './www/html/',
 										src: '[*.html]',
 										ext: '.min.html',
 										extDot: 'last'
 									}]
-						} 
+						}
 					}
 				}
-			});	
+			});
 
 	# Using less: Creates css from less
 
-		-	Add this entry to, grunt.initConfig({ 
+		-	Add this entry to, grunt.initConfig({
 				less: {
 					development: {
 						options: {
@@ -250,13 +250,13 @@ Grunt: The JavaScript Task Runner:
 
 	# Using csslint: By default all the rules are enabled, to disable some, use external config file as specified in options using, csslintrc 					 option
 
-		-	Add this entry to, grunt.initConfig({ 
+		-	Add this entry to, grunt.initConfig({
 				pkg: grunt.file.readJSON('package.json'),
 
 				csslint: {
 					strict: {
 						options: {
-							
+
 						},
 						src: ['www/css/sample.css']
 					},
@@ -274,7 +274,7 @@ Grunt: The JavaScript Task Runner:
 
 	# Using cssmin:
 
-		-	Add this entry to, grunt.initConfig({ 
+		-	Add this entry to, grunt.initConfig({
 				pkg: grunt.file.readJSON('package.json'),
 
 				cssmin: {
@@ -284,7 +284,7 @@ Grunt: The JavaScript Task Runner:
 						},
 						files: {
 							'www/css/sample.min.css': ['www/css/sample.css']
-						} 
+						}
 					}
 
 					// To use minify multiple files dynamically, use minify property rather than min option under cssmin (remove min property)
@@ -294,7 +294,7 @@ Grunt: The JavaScript Task Runner:
 						dest: './www/css/',
 						src: ["*.css", "!*.min.css"]', // To not to already minified files, negate the file extension
 						ext: '.min.css',
-						extDot: 'last'			
+						extDot: 'last'
 					},
 
 					// To create one minified css file
@@ -324,7 +324,7 @@ Grunt: The JavaScript Task Runner:
 	# Custom inline tasks: Register the task to create a custom task
 		-	Use grunt.registerTask -- requires name and description, invoked via callback, can access external variables and 		libraries, can accept arguments in the callnback
 
-		ex: 
+		ex:
 
 		var fs = require('fs');
 
@@ -346,7 +346,7 @@ Grunt: The JavaScript Task Runner:
 			});
 		});
 
-		-	To make custom tasks work like a normal grunt task 
+		-	To make custom tasks work like a normal grunt task
 			grunt.initConfig ({
 				checkFileSize: {
 					options: {
@@ -355,7 +355,7 @@ Grunt: The JavaScript Task Runner:
 				}
 			});
 
-		-	Providing arguments to task, add debug parameter to checkFileSize function() and check it's populated.					Arguments can be passed as, 
+		-	Providing arguments to task, add debug parameter to checkFileSize function() and check it's populated.					Arguments can be passed as,
 
 			$ grunt checkFileSize:true
 
@@ -409,9 +409,3 @@ Grunt: The JavaScript Task Runner:
 
 			$ npm adduser - to add the user details
 			$ npm publish - to publish the plugin
-
-
-
-
-
-
