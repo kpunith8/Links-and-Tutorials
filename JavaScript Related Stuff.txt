@@ -2,6 +2,7 @@
 
 	https://www.webcodegeeks.com/html5/html5-internationalization-example/
 	https://scrimba.com/g/gflexbox
+	https://scotch.io/@codebeast
 
 # List of libraries:
 
@@ -27,13 +28,11 @@
 
 	* font-awesome for icons
 
-
 # Other tweaks:
 
-	* add 'debugger;' text in the source code, so that chrome developer takes to that point when debugging. Remove them once done debugging
+	* add 'debugger' text in the source code, so that chrome developer takes to that point when debugging. Remove them once done debugging
 
 # lint errors and fixes Fixes:
-
 
 	* no-undef lint error fix: can be added global section of webpack.config
 
@@ -44,9 +43,6 @@
 		unexpected block statement surrounding arrow body
 
 # Code Snippets
-
-
-
 
 	* Filter the array based on type:
 

@@ -133,7 +133,7 @@ Java Design patterns:
 			BuilderDemo obj = builder.meat("meat").condiments("condiments").build();
 			obj.getMeat(); // will return meat
 
-			or 
+			or
 			BuilderDemo object = new BuilderDemo.Builder().meat("meat").condiments("condiments").build();
 
 	# Prototype pattern:
@@ -172,7 +172,7 @@ Java Design patterns:
 
 		public class Blog extends Website {
 
-			@override 
+			@override
 			public void createWebsite() {
 				pages.add(new PostPage());
 				pages.add(new AboutPage());
@@ -185,7 +185,7 @@ Java Design patterns:
 			public static Website getWebsite(String siteType) {
 
 				switch(siteType) {
-					case "blog": { 
+					case "blog": {
 						return new Blog();
 					}
 
@@ -217,8 +217,20 @@ Java Design patterns:
 			ex: DocumentBuilder, frameworks
 		-	Composition used
 
+# JUnit:
+
+	public class ConsoleRunner {
+		psvm() {
+			JUnitCore junit = new JUnitCore();
+			junit.addListener(System.out);
+
+			junit.run(<UnitTest.class>);
+		}
+	}
+
+
 ------------------
-SOAP Web services: 
+SOAP Web services:
 ------------------
 Simple Object Access Protocol
 
@@ -236,7 +248,7 @@ Simple Object Access Protocol
 
 -	Annonate a class with @WebService and can be deployed as web service. Any public method in that class will be treated as Webmethod or can be 	 annotated with @WebMethod, use, exclude=true option to exclude the particular method from the webservice.
 
--	By default types of data used in the web service is imported from external link to WSDL under <types> tag, which can be avoided using the 		following annotation on class level, @SOAPBinding(style = Style.RPC), which will add <message> tag for both input and output response. By 		default style is Document. 
+-	By default types of data used in the web service is imported from external link to WSDL under <types> tag, which can be avoided using the 		following annotation on class level, @SOAPBinding(style = Style.RPC), which will add <message> tag for both input and output response. By 		default style is Document.
 
 	@WebResult(partName = "lookupOutput") specified on method -> to change <part> tag name for response, and @WebParam(partName = "lookupInput") specified before a parameters -> to change <part> tag name for request
 
@@ -245,41 +257,3 @@ Simple Object Access Protocol
 
 -	JAXB - Java Architecture for XML Binding - used to map custom objects like Collections to XML
 	if any class specified with @XmlRootElement annotation it needs no arg public constructor, JAXB uses it to initialize the object
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
-
-
-
