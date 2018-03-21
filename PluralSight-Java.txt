@@ -228,6 +228,8 @@ Java Design patterns:
 		}
 	}
 
+	infinitest - for continuos integration 
+
 
 ------------------
 SOAP Web services:

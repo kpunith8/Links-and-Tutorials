@@ -1,0 +1,55 @@
+## Pluralsight - Docker - intro:
+
+# Installation on Windows 10
+
+  > Enable Hyper-V feature in Control Panel -> Programs and Features -> Turn windows features on or off -> Check - Hyper-V
+  > If Hyper-V is not running, enable Intel VT/VT-x or AMD-V in BIOS
+
+# Basic commands:
+
+  $ docker info ; Displays all the information about the docker images, containers and more details.s
+  $ docker version ; lists the sever and docker version installed on the system
+  $ docker run <container-name> ; to run the docker container
+  $ docker ps ; lists the container running and stopped in the docker
+  $ docker ps -a ; lists the container running
+  $ docker images ; lists the images
+
+  > Installing the docker gives the client and the daemon
+  > Client makes API calls to daemon
+  > Daemon implements the Docker Remote API
+  > Docker hub is the default public registry
+  > The daemon pull the images that it doesn't already have
+
+# Containers and Images:
+
+  > Images: Stopped Containers, no images - no containers
+  > Containers: Running images
+
+  $ docker pull alpine -> pulls the alpine image from the docker hub registry
+  $ docker pull ubuntu -> to pull the latest ubuntu image
+
+  $ docker images ; lists all the images in the local system
+
+  $ docker rmi <image-name:tag-name or hashcode> ; to remove the image\
+
+# Container Life Cycle:
+
+  $ docker start <container>
+  $ docker stop <container>
+  $ docker rm <container>
+
+  $ docker run  -d --name web -p 80:8080 <name-of-the-docker>
+    -d ; runs in the detatch mode
+    -p 80:8080 ; specifies the port name
+  $ docker start/stop <name-of-the-image>
+
+  $ docker run -it --name temp ubuntu@latest /bin/bash
+    -it ; tells to run in interactive mode in the command line and starts bash from ubuntu image pulled to local
+
+    come out from interactive mode without killing the container by exit command use, Ctrl + P + Q
+
+  $ docker stop $(docker ps -aq) ; all the dockers -q to be quite - which gives all the containers
+
+# Swarm mode and microservices:
+
+  > 
