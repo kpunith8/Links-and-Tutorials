@@ -1,9 +1,0 @@
-
-/********* JUnit Test in RCP application *******/
-
-https://resheim.net/2014/12/unit-testing-eclipse-rcp-applications.html
-
-
-Add a new source folder for tests, src-test
-Exclude this in build.properties by adding src.excludes = src-test/
-Add Junit libraries to the build path. Go to Project properties > Java Build Path > Libraries. Add “Junit 4”.
