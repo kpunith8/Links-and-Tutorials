@@ -217,7 +217,7 @@ Java Design patterns:
 			ex: DocumentBuilder, frameworks
 		-	Composition used
 
-# JUnit:
+# JUnit - 4:
 
 	public class ConsoleRunner {
 		psvm() {
@@ -228,7 +228,11 @@ Java Design patterns:
 		}
 	}
 
-	infinitest - for continuos integration 
+	infinitest - for continuos integration
+
+# JUnit - 5:
+
+	>  Junits should be, Automated, repeatable, fast
 
 
 ------------------
