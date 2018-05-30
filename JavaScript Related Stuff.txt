@@ -4,6 +4,7 @@
 	https://scrimba.com/g/gflexbox
 	https://scotch.io/@codebeast
 	http://www.material-ui.com/#/
+	https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays
 
 # List of libraries:
 
@@ -107,3 +108,27 @@
 			 subtitle: 'Vice Chairman'
 		 },
 	 ];
+
+	# Debouncing the search to happen after certain amount time use lodash.debounce to accomplish that
+
+		doSearch = debounce(() => {
+
+		}, 300);
+
+		handleSearch = (event) => {
+			this.setState({ searchTerm: event.target.value}, () => {
+				this.doSearch();
+			});
+		}
+
+	# Perform search on object using lodash.pickby
+
+		render() {
+			let { articles, searchTerm } = this.state;
+			if (searchTerm) {
+				articles = pickBy(articles, (value) => {
+					return value.title.match(searchTerm) ||
+						value.body.match(searchTerm);
+				});
+			}
+		}

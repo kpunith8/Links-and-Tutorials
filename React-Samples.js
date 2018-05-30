@@ -1,10 +1,11 @@
 # Links:
 
   fullstackreact.com
+  https://gist.github.com/samerbuna
   edgecoders.com
+  jscomplete.com/repl
 
   https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
-
 
   https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
 
@@ -15,7 +16,7 @@
 
   http://lucybain.com/blog/2017/react-js-when-to-rerender/
 
-componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     console.log('Recieves the next props' + JSON.stringify(nextProps));
     this.updateOrderDisplays(nextProps);
   }
@@ -27,186 +28,186 @@ componentWillReceiveProps(nextProps) {
 // Sample-1: Samer Buna - Plural sight course - ES6 way
 // library used: font awesome, underscore, bootstrap
 // Grid system and deleting an item in the list using React
-const Stars = (props) => {
-	return(
-  	<div className="col-5">
-  	  {_.range(props.numberOfStars).map(i =>
-      	<i key={i} className="fa fa-star"></i>
-      )}
-  	</div>
-  );
-}
-
-const Button = (props) => {
-	return(1
-  	<div className="col-2">
-    	<button>=</button>
-    </div>
-  );
-}
-
-const Answer = (props) => {
-	return(
-  	<div className="col-5">
-			{props.selectedNumbers.map((number, i) =>
-        	<span className="used" key={i} onClick={() => props.unselectNumber(number)}>
-          	{number}
-          </span>
+  const Stars = (props) => {
+  	return(
+    	<div className="col-5">
+    	  {_.range(props.numberOfStars).map(i =>
+        	<i key={i} className="fa fa-star"></i>
         )}
-    </div>
-  );
-}
+    	</div>
+    );
+  }
 
-const Numbers = (props) => {
-	const numberClassName = (number) => {
-  	if(props.selectedNumbers.indexOf(number) >= 0) {
-    	return 'selected';
+  const Button = (props) => {
+  	return(1
+    	<div className="col-2">
+      	<button>=</button>
+      </div>
+    );
+  }
+
+  const Answer = (props) => {
+  	return(
+    	<div className="col-5">
+  			{props.selectedNumbers.map((number, i) =>
+          	<span className="used" key={i} onClick={() => props.unselectNumber(number)}>
+            	{number}
+            </span>
+          )}
+      </div>
+    );
+  }
+
+  const Numbers = (props) => {
+  	const numberClassName = (number) => {
+    	if(props.selectedNumbers.indexOf(number) >= 0) {
+      	return 'selected';
+      }
+    }
+
+  	return(
+    	<div className="card text-center">
+      	<div>
+          {Numbers.list.map((number, i) =>
+          	<span key={i} className={numberClassName(number)} id="number"
+            	onClick={() => props.selectNumber(number)}>
+            {number}
+            </span>
+          )}
+        </div>
+      </div>
+      );
+  }
+
+  const NewList = (props) => {
+  	return(
+    	<div className="list">
+      	<ul>{props.data}</ul>
+      </div>
+    );
+  }
+
+  const List = (props) => {
+  	this.state = { newList: [] };
+
+  	deleteItem = (item) => {
+    	props.delete(item);
+    };
+
+    addItem = (item)  => {
+
+      	this.setState(prevState => ({
+      	newList: prevState.newList.concat(item)
+      }));
+    };
+
+    const listItems = props.data.map((number, key) =>
+      <li onClick={addItem.bind(this, number)}>{number}<span className="fa fa-window-close"
+  			onClick={deleteItem.bind(this, number)}> </span></li>
+      );
+
+  const newItems = this.state.newList.map((number, key) =>
+      <li >{number}</li>
+      );
+
+  	return(
+    	<div className="list">
+      	<ul>{listItems}</ul>
+        <ul>{newItems}</ul>
+        </div>
+    );
+  }
+
+  // Will be used to store global variables
+  Numbers.list = _.range(1, 10);
+
+  class Game extends React.Component {
+  	constructor() {
+    	super();
+    	this.state = {
+    	selectedNumbers: [],
+      numberOfStars: 1 + Math.floor(Math.random() * 9),
+      data: [1,2,3,4,5]
+    	};
+    	this.delete = this.delete.bind(this);
+    }
+
+    delete = (item) => {
+    	this.setState(prevState => ({
+      	data: prevState.data.filter(number => number !=item)
+      }));
+    }
+
+    selectNumber = (clickedNumber) => {
+    	if(this.state.selectedNumbers.indexOf(clickedNumber) >=0) { return; }
+
+      this.setState(prevState => ({
+      	selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
+      }));
+    };
+
+    unselectNumber = (clickedNumber) => {
+    	this.setState(prevState => ({
+      	selectedNumbers: prevState.selectedNumbers
+        													.filter(number => number !== clickedNumber)
+      }));
+    };
+
+  	render() {
+    	return(
+      	<div className="container">
+        	<h3>Play Nine</h3>
+          <hr />
+          <div className="row">
+          	<Stars numberOfStars={this.state.numberOfStars}/>
+          	<Button />
+          	<Answer selectedNumbers={this.state.selectedNumbers}
+            	unselectNumber={this.unselectNumber} />
+          </div>
+          <br />
+          <Numbers selectedNumbers={this.state.selectedNumbers}
+          	selectNumber={this.selectNumber} />
+          <List delete={this.delete} data={this.state.data} />
+          <div className="container">
+            <div className="row">
+              <div className="col-6 left">
+                <div className="row">
+                  <div className="col orders">
+                    orders
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col search">
+                    search
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col result">
+                    result
+                  </div>
+                </div>
+              </div>
+              <div className="col-6 right">
+              col-6
+              </div>
+            </div>
+          </div>
+      </div>
+      );
     }
   }
 
-	return(
-  	<div className="card text-center">
-    	<div>
-        {Numbers.list.map((number, i) =>
-        	<span key={i} className={numberClassName(number)} id="number"
-          	onClick={() => props.selectNumber(number)}>
-          {number}
-          </span>
-        )}
-      </div>
-    </div>
-    );
-}
-
-const NewList = (props) => {
-	return(
-  	<div className="list">
-    	<ul>{props.data}</ul>
-    </div>
-  );
-}
-
-const List = (props) => {
-	this.state = { newList: [] };
-
-	deleteItem = (item) => {
-  	props.delete(item);
-  };
-
-  addItem = (item)  => {
-
-    	this.setState(prevState => ({
-    	newList: prevState.newList.concat(item)
-    }));
-  };
-
-  const listItems = props.data.map((number, key) =>
-    <li onClick={addItem.bind(this, number)}>{number}<span className="fa fa-window-close"
-			onClick={deleteItem.bind(this, number)}> </span></li>
-    );
-
-const newItems = this.state.newList.map((number, key) =>
-    <li >{number}</li>
-    );
-
-	return(
-  	<div className="list">
-    	<ul>{listItems}</ul>
-      <ul>{newItems}</ul>
-      </div>
-  );
-}
-
-// Will be used to store global variables
-Numbers.list = _.range(1, 10);
-
-class Game extends React.Component {
-	constructor() {
-  	super();
-  	this.state = {
-  	selectedNumbers: [],
-    numberOfStars: 1 + Math.floor(Math.random() * 9),
-    data: [1,2,3,4,5]
-  	};
-  	this.delete = this.delete.bind(this);
-  }
-
-  delete = (item) => {
-  	this.setState(prevState => ({
-    	data: prevState.data.filter(number => number !=item)
-    }));
-  }
-
-  selectNumber = (clickedNumber) => {
-  	if(this.state.selectedNumbers.indexOf(clickedNumber) >=0) { return; }
-
-    this.setState(prevState => ({
-    	selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
-    }));
-  };
-
-  unselectNumber = (clickedNumber) => {
-  	this.setState(prevState => ({
-    	selectedNumbers: prevState.selectedNumbers
-      													.filter(number => number !== clickedNumber)
-    }));
-  };
-
-	render() {
-  	return(
-    	<div className="container">
-      	<h3>Play Nine</h3>
-        <hr />
-        <div className="row">
-        	<Stars numberOfStars={this.state.numberOfStars}/>
-        	<Button />
-        	<Answer selectedNumbers={this.state.selectedNumbers}
-          	unselectNumber={this.unselectNumber} />
+  class App extends React.Component {
+  	render() {
+    	return(
+      	<div>
+        	<Game />
         </div>
-        <br />
-        <Numbers selectedNumbers={this.state.selectedNumbers}
-        	selectNumber={this.selectNumber} />
-        <List delete={this.delete} data={this.state.data} />
-        <div className="container">
-          <div className="row">
-            <div className="col-6 left">
-              <div className="row">
-                <div className="col orders">
-                  orders
-                </div>
-              </div>
-              <div className="row">
-                <div className="col search">
-                  search
-                </div>
-              </div>
-              <div className="row">
-                <div className="col result">
-                  result
-                </div>
-              </div>
-            </div>
-            <div className="col-6 right">
-            col-6
-            </div>
-          </div>
-        </div>
-    </div>
-    );
+      );
+    }
   }
-}
 
-class App extends React.Component {
-	render() {
-  	return(
-    	<div>
-      	<Game />
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<App />, mountNode);
+  ReactDOM.render(<App />, mountNode);
 
 # CSS for sample-1
 
@@ -478,38 +479,42 @@ module.exports = routes;
 	};
 
 
-# Advanced React.js -> samerbuna
+# Advanced React.js => samerbuna:
 
-  > To add dependencies in yarn use, $ yarn add <package-name>
-  > use nodemon npm package for file changes in windows
-  > add "nodemon lib/server.js" under scripts in package.json and run it using, $yarn dev
-  > Use babel to transfile, add babel to package.json as follows,
+  - To add dependencies in yarn use, $ yarn add <package-name>
+  - use nodemon npm package for file changes in windows
+  - add "nodemon lib/server.js" under scripts in package.json and run it using, $yarn dev
+  - Use babel to transfile, add babel to package.json as follows,
     "babel": {
       "presets": ["react", "env", "stage-2"]
     }
 
-    install following packages to make it work,
-    $ yarn add babel-cli babel-preset-react babel-preset-env babel-preset-stage-2
+  - install following packages to make it work,
+      $ yarn add babel-cli babel-preset-react babel-preset-env babel-preset-stage-2
 
-    Update dev script to transfile on file changes, "nodemon --exec babel-node lib/server.js"
+      Update dev script to transfile on file changes, "nodemon --exec babel-node lib/server.js"
 
-  > Use webpack to specify the bundle
+  - Use webpack to specify the bundle
 
-  > Find the time taken to process the webpack, use
-    $ time yarn webpack
+  - Find the time taken to process the webpack, use
+      $ time yarn webpack
 
-# snapshot tests:
-  > Add serializer in the top of the test file to make the snapshot look better
+> Snapshot tests:
+  - Add serializer in the top of the test file to make the snapshot look better
 
     expect.addSnapshotSerializer({
   	   test: (val) => val.title && val.age,
   	   print: (val) => `${val.title} ${val.age}`
      });
 
-  > Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
+  - Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
 
-  	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
-  	for ex: expect.addSnapshotSerializer(enzymeSerializer);
+    	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
+    	for ex: expect.addSnapshotSerializer(enzymeSerializer);
+
+> Context API:
+
+  - 
 
 # React and Redux: Dan Abramov:
 
@@ -534,7 +539,8 @@ module.exports = routes;
   );
 
 
-# React-Ajax call using jQuery
+# React-Ajax call using jQuery:
+
   var data = {};
     data.name = 'Punith';
     data.id = 1;
@@ -555,22 +561,7 @@ module.exports = routes;
       }
     });
 
-    By: Samer Buna
-
-    https://gist.github.com/samerbuna
-
-    edgecoders.com
-
-    jscomplete.com/repl
-
-
-    Class can change the state of a class not the props of the class.
-
-    class MyComponent extends React.Component {
-    	render() {
-    		return ();
-    	}
-    }
+  - Class can change the state of a class not the props of the class.
 
     // Example ran in jscomplete - communicating with other componets and usage of props
 
@@ -738,4 +729,3 @@ module.exports = routes;
     ReactDOM.render(
       <Blog posts={posts} />,
       document.getElementById('root')
-    

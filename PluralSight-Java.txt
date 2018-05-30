@@ -234,6 +234,11 @@ Java Design patterns:
 
 	>  Junits should be, Automated, repeatable, fast
 
+# TDD in Java: Mike Nolan
+
+	> Tools: plugins for eclipse: eclEmma for code coverage, m2e tools maven integaration, H2 Database
+	
+
 # Java-The-Complete_Reference-9th-Edition: Find the samples in local eclipse workspace:
 
 	> Enum:
@@ -505,9 +510,69 @@ Java Design patterns:
 			- Generic Method:
 
 				- The type parameters are declared before the return type of the method
-					static <T extends Comparable<T>, V extends T> boolean isIn(T x, V[] y) { }
+						ex: static <T extends Comparable<T>, V extends T> boolean isIn(T x, V[] y) { }
 
-				- 
+				- Generic Constructors:
+
+					It is possible for constructors to be generic, even if their class is not.
+					ex:
+						class GenCons {
+							private double val;
+
+								<T extends Number> GenCons(T arg) {
+									val = arg.doubleValue();
+								}
+								void showval() {
+									System.out.println("val: " + val);
+								}
+							}
+
+				- Generic Interfaces:
+					ex:
+					interface MinMax<T extends Comparable<T>>
+					{
+							T min();
+							T max();
+					}
+
+					Implementation:
+					class MyClass<T extends Comparable<T>> implements MinMax<T>
+					{
+							T[] vals;
+
+							MyClass(T[] o)
+							{
+								vals = o;
+							}
+
+							// Return the minimum value in vals.
+							public T min() {
+								T v = vals[0];
+								for(int i=1; i < vals.length; i++)
+								if(vals[i].compareTo(v) < 0) v = vals[i];
+								return v;
+							}
+
+							// Return the maximum value in vals.
+							public T max() {
+								T v = vals[0];
+								for(int i=1; i < vals.length; i++)
+								if(vals[i].compareTo(v) > 0) v = vals[i];
+								return v;
+							}
+						}
+
+> Java Fundamentals: The core platform, Jim Wilson:
+
+	> Streams: Ordered sequence of data
+		- Provides common I/O model
+		- 2 Categories:
+				Byte streams - binary data - InputStream
+				Text streams - Unicode data - Read
+
+		- Reading and Writing:
+
+
 
 
 ------------------

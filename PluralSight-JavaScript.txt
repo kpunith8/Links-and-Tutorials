@@ -821,6 +821,6 @@ gulp : in memory streams, code over configuration,
 	});
 
 
-# ES-6 : Traversy Media/free code camp - YouTube
+# ES-6 : scrimba.com: Dylan, Israel
 
 	>

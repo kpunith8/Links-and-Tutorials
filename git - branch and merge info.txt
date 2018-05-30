@@ -298,7 +298,6 @@ If that commit contains more files then you can add one file and commit individu
 
 $ git push origin --delete <branchName>
 
-
 # Rename git branch locally and remotely:
 
 	$ git branch -m old_branch new_branch         # Rename branch locally
