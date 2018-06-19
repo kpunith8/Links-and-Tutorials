@@ -94,7 +94,7 @@
 
 		array.sort((last, first) => last.displayValue > first.displayValue);
 
-# other Info:
+# Other react Info:
 
 	const list = [
 		 {
@@ -132,3 +132,7 @@
 				});
 			}
 		}
+
+	# Checking performance in chrome for a react app:
+
+		- Open performance tab in chrome debugger tool and add localhost:3000/?react_perf

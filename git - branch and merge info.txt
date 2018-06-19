@@ -20,9 +20,11 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 	If you're having issues cloning long file paths try the following:
 	git clone -c core.longpaths=true <your.url.here>
 
-# Filename too long in git for windows
+	Filename too long in git for windows:
+		$ git config --system core.longpaths true
 
-	$ git config --system core.longpaths true
+	Set merge conflicts style which shows ours and theirs in the merge conflict which is easier to resolve merge conflict
+	$ git config --global merge.conflictstyle diff3
 
 # Adding an exisiting git project to github:
 
@@ -95,6 +97,22 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 	$ (master) git branch -d <brach_name>  ->  -d option deletes the branch
 	*NOTE* use -D option if your branch is merged with master or use -d option
+
+# Undoing things:
+
+	Unstaging a file:
+		$ git reset HEAD CONTRIBUTING.md
+
+	Unmodifying a Modified File:
+		$ git checkout -- CONTRIBUTING.md
+
+# Git alias: Help type less in the command line
+	$ git config --global alias.co checkout
+	$ git config --global alias.br branch
+	$ git config --global alias.ci commit
+	$ git config --global alias.st status
+
+	$ git config --global alias.unstage 'reset HEAD --'
 
 ----------------------------------------
 ** Caching your GitHub password in Git
@@ -183,13 +201,27 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 
 	 $ (feature) git rabase --abort
 
-# reflog: it shows commits in order of when you lasted referenced them
+# Data Recovery: reflog
 
-	If you are changing the history reflog is best command
+		-	Git silently records what your HEAD is every time you change it.
+		-	Each time you commit or change branches, the reflog is updated.
 
-	$ git checkout <hash>
+			$ git log -g  #which will give you a normal log output for your reflog.
 
-	$(feature) git reset --hard <commit-hash> (Commit hash in the form of HEAD@{3})to reset the branch pointer to the commit
+			$ git branch <recovey-branch> <commit-hash-to-be-recovered-from-the-reflog>
+
+		if you want to reset to particular commit to get the data:
+
+			$(feature) git reset --hard <commit-hash> (Commit hash in the form of HEAD@{3})to reset the branch pointer to the commit
+
+		If you delete the recovery branch and from .git/logs/ as follows:
+
+			$ git branch -D <recover-branch>
+			$ rm -Rf .git/logs/
+
+			To recover from use fsck utility to recover the data:
+
+				$ git fsck --full #it shows you all objects that aren’t pointed to by another object
 
 # Squashing and Splitting:
 
