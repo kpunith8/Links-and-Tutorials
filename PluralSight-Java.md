@@ -1,296 +1,294 @@
----------------------
-Java Design patterns:
----------------------
+# Java Design Patterns
+## Creational:
 
->	Creational: Different types:
-		-	Singleton
-		-	Builder
-		-	Prototype
-		-	Factory
-		-	Abstract factory
+Different types:
+- Singleton
+- Builder
+- Prototype
+- Factory
+- Abstract factory
 
-	# Singleton:
-			-	only one instance created
-			-	Gurantees control of a resource
-			-	Lazily loaded
-				ex: Runtime, Logger, Spring beams, graphic managers
-			-	Static in nature but not the class, since static classes are not thread safe, private instance and private constructor, no parameter required for construction
+### Singleton:
+- only one instance created
+-	Gurantees controlling a resource
+-	Lazily loaded `eg:` `Runtime`, `Logger`, Spring beams, graphic managers
+-	Static in nature but not the class, since static classes are not thread safe, private instance and private constructor, no parameter required for construction
 
-	Code examples:
-	--------------
-	> 	Simple Singleton:
+#### Simple Singleton:
 
-		private static SingletonSample instance = new SingletonSample();
+```java
+private static SingletonSample instance = new SingletonSample();
 
-		private SingletonSample() {
+private SingletonSample() {
+}
 
-		}
+public static SingletonSample getInstance() {
+	return instance;
+}
+```
+#### Lazy Loading:
+```java
+private static SingletonSample instance = null;
 
-		public static SingletonSample getInstance() {
-			return instance;
-		}
+private SingletonSample() {
+}
 
-	> 	Lazy Loading:
+public static SingletonSample getInstance() {
+	if(instance == null) {
+		instance = new SingletonSample();
+	}
 
-		private static SingletonSample instance = null;
+	return instance;
+}
+```
+#### Thread safe:
+```java
+private static SingletonSample instance = null;
 
-		private SingletonSample() {
+private SingletonSample() {
+}
 
-		}
-
-		public static SingletonSample getInstance() {
+public static SingletonSample getInstance() {
+	if(instance == null) {
+		synchronized(SingletonSample.class) {
 			if(instance == null) {
 				instance = new SingletonSample();
 			}
-
-			return instance;
-		}
-
-	> 	Thread safe:
-
-		private static SingletonSample instance = null;
-
-		private SingletonSample() {
-
-		}
-
-		public static SingletonSample getInstance() {
-			if(instance == null) {
-				synchronized(SingletonSample.class) {
-					if(instance == null) {
-						instance = new SingletonSample();
-					}
-				}
-			}
-
-			return instance;
-		}
-
-		Can also be synchronized at the getInstance() method by making it synchronized, ex: public static synchronized SingletonSample getInstance() { }, this will make sure every time it's thread safe. To make sure there is no race condition we will use the above approach
-
-	> 	Pitfalls:
-		-	Difficult to write unit tests
-		- 	Not thread safe, if not carefull
-		-	java.util.Calendar is not a singleton but is a prototype
-
-	>	Comparision with factory
-		-	no interface / interface driven
-		-	Returns the same instance / returns multiple instances (multiple constructors)
-		-	Hard to unit test / testable
-
-	# Builder Pattern:
-		-	Handle complex constructors
-		-	Large number of parameters
-		-	immutability
-			Ex: StringBuilder, DocumentBuilder, Locale.Builder
-			constructing constructors with diffent params is called a "telescoping constructors"
-		-	Written with static inner class
-		-	Negates the need for exposed setters
-
-	Code example:
-	--------------
-		public class BuilderDemo {
-
-			private final String meat;
-			private final String condiments;
-
-			private BuilderDemo(Builder builder) {
-				this.meat = builder.meat;
-				this.condiments = builder.condiments;
-			}
-
-			public String getMeat() {
-				return meat;
-			}
-
-			public String getCondiments() {
-				return condiments;
-			}
-
-			private static class Builder {
-
-				private String meat;
-				private String condiments;
-
-				public Builder meat(String meat) {
-					this.meat = meat;
-					return this;
-				}
-
-				public Builder condiments(String condiments) {
-					this.condiments = condiments;
-					return this;
-				}
-
-				public BuilderDemo build() {
-					return new BuilderDemo(this);
-				}
-			}
-		}
-
-		// Demo
-			BuilderDemo.Builder builder = new BuilderDemo.Builder();
-			BuilderDemo obj = builder.meat("meat").condiments("condiments").build();
-			obj.getMeat(); // will return meat
-
-			or
-			BuilderDemo object = new BuilderDemo.Builder().meat("meat").condiments("condiments").build();
-
-	# Prototype pattern:
-		-	To get the unique instance of the same object
-		-	Avoids costly creation
-		-	Avoids subclassing
-		-	Typically don't use keyword new
-		-	Utilizes interfaces
-			ex: clone() method on object
-		-	implements Clone/Clonable interface
-		-	each instance is unique
-
-	> pitfalls:
-		-	Sometimes not clear when to use
-		-	Used with other pattern; when pattern contains other pattern it's called a framework
-
-	# Factory pattern:
-		-	Doesn't expose instantiation logic
-		-	Defers instantiation to subclass
-		-	It exposes common interface
-			ex: Calendar, ResourceBundle, NumberFormat
-
-	Code Example:
-	------------
-		public abstract class Website {
-			protected List<Page> pages = new ArrayList<>();
-
-			// Add getter to pages
-
-			public Website() {
-				this.createWebsite();
-			}
-
-			public abstract void createWebsite(); // Factory method
-		}
-
-		public class Blog extends Website {
-
-			@override
-			public void createWebsite() {
-				pages.add(new PostPage());
-				pages.add(new AboutPage());
-			}
-		}
-
-		// Factory class
-		public class WebsiteFactory {
-
-			public static Website getWebsite(String siteType) {
-
-				switch(siteType) {
-					case "blog": {
-						return new Blog();
-					}
-
-					case "shop": {
-						return new Shop(); // Shop extending website abstract class
-					}
-
-					default: {
-						return null;
-					}
-				}
-			}
-		}
-
-		// Demo
-
-		public class Demo {
-
-			psvm() {
-				Website site = WebsiteFactory.getWebsite("blog");
-				sysout(site.getPages());
-			}
-		}
-
-	# Abstact Factory Pattern:
-		-	Factory of factories
-		-	Factory of releated objects
-		- 	Common interface, and deferring the instantiation to subclass
-			ex: DocumentBuilder, frameworks
-		-	Composition used
-
-# JUnit - 4:
-
-	public class ConsoleRunner {
-		psvm() {
-			JUnitCore junit = new JUnitCore();
-			junit.addListener(System.out);
-
-			junit.run(<UnitTest.class>);
 		}
 	}
 
-	infinitest - for continuos integration
+	return instance;
+}
+```
+Can also be synchronized at the getInstance() method by making it synchronized
+```java
+public static synchronized SingletonSample getInstance() {
 
-# JUnit - 5:
+}
+```
+this will make sure every time it's thread safe. To make sure there is no race condition we will use the above approach
 
-	>  Junits should be, Automated, repeatable, fast
+* Pitfalls:
+	-	Difficult to write unit tests
+	- Not thread safe, if not carefull
+	-	java.util.Calendar is not a singleton but is a prototype
 
-# TDD in Java: Mike Nolan
 
-	> Tools: plugins for eclipse: eclEmma for code coverage, m2e tools maven integaration, H2 Database
-	
+* Comparision with factory:
+	-	no interface / interface driven
+	-	Returns the same instance / returns multiple instances (multiple constructors)
+	-	Hard to unit test / testable
 
-# Java-The-Complete_Reference-9th-Edition: Find the samples in local eclipse workspace:
+### Builder:
+-	Handle complex constructors
+-	Large number of parameters
+-	Immutable `eg:` `StringBuilder`, `DocumentBuilder`, `Locale.Builder`
+- Constructing constructors with diffent params is called a `telescoping constructors`
+-	Written with static inner class
+-	Negates the need for exposed setters
 
-	> Enum:
+```java
+public class BuilderDemo {
 
-		- An enumeration can have constructors, methods, and instance variables.
-			ex:
-				enum User {
-					ADMIN, NORMAL, GROUP
-				}
+	private final String meat;
+	private final String condiments;
 
-		- The identifiers ADMIN, NORMAL are called enumeration constants.
-		- Each is implicitly declared as a public, static final member of User.
-		- These constants are self-typed.
-		- Once you have defined an enumeration, you can create a variable of that type.
-		-  Even though enumerations define a class type. Do not instantiate an enum using 'new''. Instead, you declare and use an enumeration variable in much the same way as you do one
-			of the primitive types.
-				ex: User admin = User.ADMIN;
+	private BuilderDemo(Builder builder) {
+		this.meat = builder.meat;
+		this.condiments = builder.condiments;
+	}
 
-		- Two enumeration constants 'can be compared for equality' by using the == relational operator.
-				ex: if (admin == User.ADMIN)
+	public String getMeat() {
+		return meat;
+	}
 
-		- An enumeration value can also be used to control a 'switch statement'.
-				ex: switch(User) {
-					case ADMIN: break;
-					case GROUP: break;
-				}
+	public String getCondiments() {
+		return condiments;
+	}
 
-		- All enumerations automatically contain two predefined methods: values() and valueOf().
-				Their general forms are shown here:
+	private static class Builder {
+		private String meat;
+		private String condiments;
 
-				public static enum-type [] values();
-				public static enum-type valueOf(String str);
+		public Builder meat(String meat) {
+			this.meat = meat;
+			return this;
+		}
 
-				ex: User.valueOf("ADMIN"); -- returns ADMIN
-						User allUsers[] = User.values(); // returns all the values of User as an array
+		public Builder condiments(String condiments) {
+			this.condiments = condiments;
+			return this;
+			}
 
-		-	When you define a constructor for an enum, the constructor is called when each enumeration constant is created.
-			ex:
-				// Use an enum constructor, instance variable, and method.
-				enum Apple {
-					Jonathan(10), GoldenDel(9), RedDel(12), Winesap(15), Cortland(8);
-					private int price; // price of each apple
-					// Constructor
-					Apple(int price) { price = price; }
-					int getPrice() { return price; }
-				}
+		public BuilderDemo build() {
+			return new BuilderDemo(this);
+		}
+	}
+}
 
-		- Here are two restrictions that apply to enumerations.
-			- An enumeration 'cannot inherit another class'.
-			- An enum 'cannot be a superclass'. This means that an enum can’t be extended.
+// Demo
+BuilderDemo.Builder builder = new BuilderDemo.Builder();
+BuilderDemo obj = builder.meat("meat").condiments("condiments").build();
+obj.getMeat(); // will return meat
+// or
+BuilderDemo object = new BuilderDemo.Builder().meat("meat").condiments("condiments").build();
+```
 
-		- Obtain a value that indicates an enumeration constant’s position in the list of
+### Prototype:
+-	To get the unique instance of the same object
+-	Avoids costly creation
+-	Avoids subclassing
+-	Typically don't use keyword new
+-	Utilizes interfaces
+`eg:` `clone()` method on `Object`
+-	Implements Clone/Clonable interface
+-	Each instance is unique
+
+* pitfalls:
+	-	Sometimes not clear when to use
+	-	Used with other pattern; when pattern contains other pattern it's called a framework
+
+### Factory:
+-	Doesn't expose instantiation logic
+-	Defers instantiation to subclass
+-	It exposes common interface
+`eg:` `Calendar`, `ResourceBundle`, `NumberFormat`
+
+```java
+public abstract class Website {
+	protected List<Page> pages = new ArrayList<>();
+
+	// Add getter to pages
+
+	public Website() {
+		this.createWebsite();
+	}
+
+	public abstract void createWebsite(); // Factory method
+	}
+
+	public class Blog extends Website {
+		@override
+		public void createWebsite() {
+			pages.add(new PostPage());
+			pages.add(new AboutPage());
+		}
+	}
+
+// Factory class
+public class WebsiteFactory {
+
+	public static Website getWebsite(String siteType) {
+		switch(siteType) {
+			case "blog":
+				return new Blog();
+				break;
+
+			case "shop":
+				return new Shop(); // Shop extending website abstract class
+			break;
+
+			default:
+				return null;
+				break;
+		}
+	}
+}
+
+// Demo
+public class Demo {
+	psvm() {
+		Website site = WebsiteFactory.getWebsite("blog");
+		sysout(site.getPages());
+	}
+}
+```
+
+### Abstact Factory Pattern:
+-	Factory of factories
+-	Factory of releated objects
+- Common interface, and deferring the instantiation to subclass
+`eg:` `DocumentBuilder`, `frameworks`
+-	Composition used
+
+# JUnit - 4:
+```java
+public class ConsoleRunner {
+	psvm() {
+		JUnitCore junit = new JUnitCore();
+		junit.addListener(System.out);
+
+		junit.run(<UnitTest.class>);
+	}
+}
+```
+infinitest - for continuos integration
+
+# Java-The-Complete-Reference-9th-Edition: Find the samples in local eclipse workspace:
+
+## Enum:
+
+- An enumeration can have constructors, methods, and instance variables. `eg:`
+```java
+enum User {
+	ADMIN, NORMAL, GROUP
+}
+```
+
+- The identifiers ADMIN, NORMAL are called enumeration constants.
+- Each is implicitly declared as a public, static final member of User.
+- These constants are self-typed.
+- Once you have defined an enumeration, you can create a variable of that type.
+-  Even though enumerations define a class type. Do not instantiate an enum using 'new''. Instead, you declare and use an enumeration variable in much the same way as you do one
+of the primitive types.
+`eg:`
+```java
+User admin = User.ADMIN;
+```
+- Two enumeration constants `can be compared for equality` by using the `==` relational operator.
+`eg:`
+```java
+if (admin == User.ADMIN)
+```
+- An enumeration value can also be used to control a `switch` statement. `eg:`
+```java
+switch(User) {
+	case ADMIN: break;
+	case GROUP: break;
+}
+```
+- All enumerations automatically contain two predefined methods: `values()` and `valueOf()`.
+Their general forms are shown here:
+```java
+public static enum-type [] values();
+public static enum-type valueOf(String str);
+```
+```java
+User.valueOf("ADMIN"); // returns ADMIN
+User allUsers[] = User.values(); // returns all the values of User as an array
+```
+-	When you define a constructor for an enum, the constructor is called when each enumeration constant is created.`eg:`
+```java
+enum Apple {
+	Jonathan(10), GoldenDel(9), RedDel(12), Winesap(15),Cortland(8);
+
+	private int price; // price of each apple
+
+	// Constructor
+	Apple(int price) {
+		price = price;
+	}
+
+	int getPrice() {
+		return price;
+	}
+}
+```
+- Here are `two` restrictions that apply to enumerations.
+	- An enumeration `cannot inherit another class`
+	- An enum 'cannot be a superclass'. This means that an enum can’t be extended.
+
+- Obtain a value that indicates an enumeration constant’s position in the list of
 			constants using 'ordinal() method'.
 
   > Type Wrappers: Object representation of primitive data types
@@ -473,7 +471,7 @@ Java Design patterns:
 				- NOTE: JDK 8 adds the annotations Repeatable and Native to java.lang.annotation.
 				 	Repeatable supports repeatable annotations, Native annotates a field that can be accessed by native code.
 
-	> Generics:
+# Generics:
 
 		- Generics means parameterized types, and are type safe. With generics, all casts are automatic
 							and implicit.
@@ -562,44 +560,63 @@ Java Design patterns:
 							}
 						}
 
-> Java Fundamentals: The core platform, Jim Wilson:
+# Rest Services using JAX-RS: Koushik - Java Brain
 
-	> Streams: Ordered sequence of data
-		- Provides common I/O model
-		- 2 Categories:
-				Byte streams - binary data - InputStream
-				Text streams - Unicode data - Read
+	- Use @Context UriInfo and @Context HtppHeaders to get additions info of the query params.
 
-		- Reading and Writing:
+	- Use @BeanParam to get all param in single class, instead of using,
 
+			@GET
+		 	public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
+						 @QueryParam("size") int size) {}
 
+		  -	Create class to assingn these params as follows,
+				class FilterBean
+				{
+					private @QueryParam("year") int year;
+					private @QueryParam("start") int start;
+					private @QueryParam("size") int size;
 
+					// Write getters and setters for each query params
+				}
 
-------------------
-SOAP Web services:
-------------------
-Simple Object Access Protocol
+			- Replace the above call as follows,
 
--	WSDL: Web service description/definition language
-- 	UUDI: Universal Description Discovery and Integration - registry where new web services are registered
--	SEI: Service endpoint interface - data from XML is mapped to actual objects
+				@GET
+				public List<Message> getMessages(@BeanParam FilterBean filterBean)
+				{
+					// access them using,
+					filterBean.getYear();
+				}
 
--	If javaEE installed we can import WSDL in command line using, "wsimport" keyword
-	$wsimport <WSDL-URI> // which will keep only .class files in the generated folder, if you want both .java and .class use the option,
-	$wsimport -keep -s src <URI> ; where src is the folder name// sample URI: http://www.webservicex.net/geoipservice.asmx?WSDL
+		- Implementing sub-resources: ex: /messages/{messageId}/comments/{commentId}
 
-	# Download and run the glashFish server to deply the services
+			-
 
--	Once downloaded extract and go to /bin and run, C:/bin>asadmin start-domain ; then access it using localhost:4848 port by default and 			configure the same in eclipse; then create dynmic web project to get started
+# SOAP Web services:
 
--	Annonate a class with @WebService and can be deployed as web service. Any public method in that class will be treated as Webmethod or can be 	 annotated with @WebMethod, use, exclude=true option to exclude the particular method from the webservice.
+	# Simple Object Access Protocol
 
--	By default types of data used in the web service is imported from external link to WSDL under <types> tag, which can be avoided using the 		following annotation on class level, @SOAPBinding(style = Style.RPC), which will add <message> tag for both input and output response. By 		default style is Document.
+		-	WSDL: Web service description/definition language
+		- UUDI: Universal Description Discovery and Integration - registry where new web services are registered
+		-	SEI: Service endpoint interface - data from XML is mapped to actual objects
 
-	@WebResult(partName = "lookupOutput") specified on method -> to change <part> tag name for response, and @WebParam(partName = "lookupInput") specified before a parameters -> to change <part> tag name for request
+		-	If javaEE installed we can import WSDL in command line using, "wsimport" keyword
+			$wsimport <WSDL-URI> // which will keep only .class files in the generated folder, if you want both .java and .class use the option,
+			$wsimport -keep -s src <URI> ; where src is the folder name// sample URI: http://www.webservicex.net/geoipservice.asmx?WSDL
 
--	Interface (Serivie end point interface) can be created and interface can have all the annotations needed to perform the webservice,
-	once SEI is implemented add this @WebService(endpointInterface="fully qualified class name(package name ans interface class name)") to implemented class
+			# Download and run the glashFish server to deply the services
 
--	JAXB - Java Architecture for XML Binding - used to map custom objects like Collections to XML
-	if any class specified with @XmlRootElement annotation it needs no arg public constructor, JAXB uses it to initialize the object
+		-	Once downloaded extract and go to /bin and run, C:/bin>asadmin start-domain ; then access it using localhost:4848 port by default and 			configure the same in eclipse; then create dynmic web project to get started
+
+		-	Annonate a class with @WebService and can be deployed as web service. Any public method in that class will be treated as Webmethod or can be 	 annotated with @WebMethod, use, exclude=true option to exclude the particular method from the webservice.
+
+		-	By default types of data used in the web service is imported from external link to WSDL under <types> tag, which can be avoided using the 		following annotation on class level, @SOAPBinding(style = Style.RPC), which will add <message> tag for both input and output response. By 		default style is Document.
+
+			@WebResult(partName = "lookupOutput") specified on method -> to change <part> tag name for response, and @WebParam(partName = "lookupInput") specified before a parameters -> to change <part> tag name for request
+
+		-	Interface (Serivie end point interface) can be created and interface can have all the annotations needed to perform the webservice,
+			once SEI is implemented add this @WebService(endpointInterface="fully qualified class name(package name ans interface class name)") to implemented class
+
+		-	JAXB - Java Architecture for XML Binding - used to map custom objects like Collections to XML
+			if any class specified with @XmlRootElement annotation it needs no arg public constructor, JAXB uses it to initialize the object

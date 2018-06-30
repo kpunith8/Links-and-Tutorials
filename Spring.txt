@@ -72,7 +72,7 @@
       - or use @Scopr(ConfigurableBeanFactory.SCOPE_SINGLETON) - using Java constant
       - in xml specify scope="singleton" in <bean />
 
-  - Prototype -> per request, unique object, and oppsoite to singleton, mention prototype instead of singleton as scope
+  - Prototype -> per request, unique object, and opposite to singleton, mention prototype instead of singleton as scope
 
 > Properties:
 
@@ -83,5 +83,5 @@
         <property name="dbUserName" value="${dbUserName}" />
       </bean>
 
-  - Jaca Configuration:
+  - Java Configuration:
     - add @PropertySource("app.properties") to

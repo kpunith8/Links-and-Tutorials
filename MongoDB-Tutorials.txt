@@ -28,7 +28,7 @@ MongoDB: NoSQL database - document database:
 
 			dbpath=\mongodb\db
 			logpath=\mongodb\mongo-sever.log
-			verbose=vvvvv -- one v being least verbose, 5 v's being most verbose
+			verbose=vvvvv -> one v being least verbose, 5 v's being most verbose
 
 	- run it as,
 		$mongod -f c:\sample\mongod.conf
@@ -113,6 +113,9 @@ MongoDB: NoSQL database - document database:
 
 		$ use myNewDatabase
 		$ db.myCollection.insertOne( { x: 1 } );
+
+	# Remove a record - $ db.collectionName.remove("objectID");
+	# drop a collection - $ db.collectionName.drop()
 
 > Create Replica set of the DB:
 
