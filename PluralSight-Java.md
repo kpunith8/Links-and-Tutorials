@@ -239,7 +239,7 @@ enum User {
 - Each is implicitly declared as a public, static final member of User.
 - These constants are self-typed.
 - Once you have defined an enumeration, you can create a variable of that type.
--  Even though enumerations define a class type. Do not instantiate an enum using 'new''. Instead, you declare and use an enumeration variable in much the same way as you do one
+-  Even though enumerations define a class type. Do not instantiate an enum using `new`. Instead, you declare and use an enumeration variable in much the same way as you do one
 of the primitive types.
 `eg:`
 ```java
@@ -288,335 +288,329 @@ enum Apple {
 	- An enumeration `cannot inherit another class`
 	- An enum 'cannot be a superclass'. This means that an enum can’t be extended.
 
+
 - Obtain a value that indicates an enumeration constant’s position in the list of
 			constants using 'ordinal() method'.
 
-  > Type Wrappers: Object representation of primitive data types
+## Type Wrappers: Object representation of primitive data types
 
-		- The type wrappers are Double, Float, Long, Integer, Short, Byte, Character, and Boolean.
-			- Character can be created using,
-					Character(char ch);
-			   	char charValue() - returns the char contained in it.
+- The type wrappers are Double, Float, Long, Integer, Short, Byte, Character, and Boolean.
+- Character can be created using,
+```java
+Character(char ch);
+char charValue() // returns the char contained in it.
+```
 
-			- Boolean can be created using,
-					Boolean(boolean boolValue);
-					Boolean(String boolString); // TRUE or true as a string
+- Boolean can be created using
+```java
+Boolean(boolean boolValue);
+Boolean(String boolString); // TRUE or true as a string
+```
+```java
+boolean booleanValue(); // returns the boolean value containg it.
+```
+- `Byte`, `Short`, `Integer`, `Long`, `Float`, and `Double`. All of the numeric type wrappers inherit the abstract class `Number`.
+```java
+Integer(int num);
+Integer(String str);
+```
+If `str` does not contain a valid numeric value, then a `NumberFormatException` is thrown.
 
-					boolean booleanValue() - returns the boolean value containg it.
+- All of the type wrappers override `toString()`. It returns the human-readable form of the
+value contained within the wrapper.
+- The process of encapsulating a value within an object is called `boxing`. `eg:`
+```java
+Integer integer = new Integer(100);
+```
+- The process of extracting a value from a type wrapper is called `unboxing`. `eg:`
+```java
+int ii = i.intValue();
+```
+- JDK-5 introduced `auto-boxing` and `auto-unboxing` to avoid boxing and unboxing manually.
 
-			- Byte, Short, Integer, Long, Float, and Double. All of the numeric type wrappers inherit the abstract class Number.
-					Integer(int num);
-					Integer(String str);
-					If str does not contain a valid numeric value, then a 'NumberFormatException' is thrown.
+	- `Auto-boxing`, no longer necessary to manually construct an object in order to wrap a primitive type. `eg:`
+	```java
+	Integer iOb = 100; // autobox an int
+	```
+	- `Auto-unboxing` is the process by which the value of a
+	boxed object is automatically extracted (unboxed) from a type wrapper when its value is needed. There is no need to call a method such as `intValue()` or` doubleValue()`. `eg:`
+	```java
+	int i = iOb; // auto-unboxing
+	Integer iOb, iOb2;
+	```
+	- Autoboxing and auto-unboxing in expressions:
+	```java
+	int i;
+	iOb = 100;
 
-			- All of the type wrappers 'override toString()'. It returns the human-readable form of the
-				value contained within the wrapper.
+	System.out.println("Original value of iOb: " + iOb);
 
-			- The process of encapsulating a value within an object is called 'boxing'.
-				ex:
-					Integer i = new Integer(100);
+	// The following automatically unboxes iOb,
+	// performs the increment, and then reboxes
+	// the result back into iOb.
+	++iOb;
+	System.out.println("After ++iOb: " + iOb);
 
-			- The process of extracting a value from a type wrapper is called 'unboxing'.
-				ex:
-					int ii = i.intValue();
+	// Here, iOb is unboxed, the expression is
+	// evaluated, and the result is reboxed and
+	// assigned to iOb2.
+	iOb2 = iOb + (iOb / 3);
 
-			- JDK-5 introduced autoboxing and auto-unboxing to avoid boxing and unboxing manually.
+	System.out.println("iOb2 after expression: " + iOb2);
+	// The same expression is evaluated, but the
+	// result is not reboxed.
+	i = iOb + (iOb / 3);
+	```
 
-				- 'Autoboxing', no longer necessary to manually construct an object in order to
-					wrap a primitive type.
-					ex:
-						Integer iOb = 100; // autobox an int
+## Annotations (Metadata):
 
-				- 'Auto-unboxing' is the process by which the value of a
-					boxed object is automatically extracted (unboxed) from a type wrapper when its value
-					is needed. There is no need to call a method such as intValue() or doubleValue().
-					ex:
-						int i = iOb; // auto-unboxing
+- To add supplemental information to source file, it does not change the actions of an program.
 
-						Integer iOb, iOb2;
+- Annotation is created based on interface `eg:`
+```java
+@interface MyAnnotation {
+	String str();
+	int val();
+}
+```
+```java
+// Annotate a method.
+@MyAnno(str = "Annotation Example", val = 100)
+	public static void myMethod() {
+}
+```
+- An annotation cannot include an `extends` clause. However, all annotation types automatically extend the Annotation interface.
 
-				- Autoboxing and auto-unboxing in expressions:
-					int i;
-					iOb = 100;
-					System.out.println("Original value of iOb: " + iOb);
-					// The following automatically unboxes iOb,
-					// performs the increment, and then reboxes
-					// the result back into iOb.
-					++iOb;
-					System.out.println("After ++iOb: " + iOb);
-					// Here, iOb is unboxed, the expression is
-					// evaluated, and the result is reboxed and
-					// assigned to iOb2.
-					iOb2 = iOb + (iOb / 3);
-					System.out.println("iOb2 after expression: " + iOb2);
-					// The same expression is evaluated, but the
-					// result is not reboxed.
-					i = iOb + (iOb / 3);
+- `classes`, `methods`, `fields`, `parameters`, and `enum` constants can be annotated in `JDK 8`.
 
-	> Annotations (Metadata):
+- A retention policy determines at what point an annotation is discarded. Java defines three
+such policies, which are encapsulated within the `java.lang.annotation.RetentionPolicy` enumeration. They are `SOURCE`, `CLASS`, and `RUNTIME`.
 
-		- To add supplemental information to source file, it does not change the actions of an program.
-		- annotation created based on interface
-			ex:
-				// A simple annotation type.
-				@interface MyAnno {
-					String str();
-					int val();
+- An annotation with a retention policy of SOURCE is retained only in the source file and is discarded during compilation.
+
+- An annotation with a retention policy of `CLASS` is stored in the `.class` file during compilation. However, it is not available through the JVM during run time.
+
+- An annotation with a retention policy of `RUNTIME` is stored in the `.class` file during compilation and is available through the JVM during run time. Thus, `RUNTIME` retention offers the greatest annotation persistence.
+> NOTE: An annotation on a local variable declaration is not retained in the `.class` file.
+
+- Default is CLASS rentention policy, if nothing specified
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnno {
+	String str();
+	int val();
+}
+```
+- `Reflection` is the feature that enables information about a class to be obtained at run time.
+
+- The methods `getAnnotation()` and `getAnnotations()` are defined by the `AnnotatedElement` interface, which is defined in `java.lang.reflect` package. This interface supports reflection for annotations and is implemented by the classes `Method`,
+`Field`, `Constructor`, `Class`, and `Package`, among others.
+
+- In addition to `getAnnotation()` and `getAnnotations()`, `AnnotatedElement` defines several other methods.
+
+	Two have been available since JDK 5.
+	 - `Annotation[] getDeclaredAnnotations()` It returns all non-inherited annotations present in the invoking object.
+
+	 - `isAnnotationPresent()`, which has this general form:
+		`boolean isAnnotationPresent(Class<? extends Annotation>   annoType)` It returns true if the annotation specified by annoType is associated with the invoking object, returns false otherwise.
+
+	 - And `JDK 8` adds,
+		`getDeclaredAnnotation()`, `getAnnotationsByType()`, and `getDeclaredAnnotationsByType()`. Of these, the last two
+		automatically work with a repeated annotation.
+
+
+- Default values: annotation members can have default values that will be used if no value is specified when the annotation is applied. `eg:`
+```java
+// An annotation type declaration that includes defaults.
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnno {
+	String str() default "Testing";
+	int val() default 9000;
+}
+```
+
+- A marker annotation is a special kind of annotation that contains no members. `eg:`
+```java
+// A marker annotation.
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyMarker { }
+```
+- The best way to determine if a marker annotation is present is to use the method `isAnnotationPresent()`.
+```java
+Method m = ob.getClass().getMethod("myMeth");
+if(m.isAnnotationPresent(MyMarker.class))
+```
+- A single-member annotation contains only one member.
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@interface MySingle {
+	int value(); // this variable name must be value
+}
+```
+```java
+class Single {
+	// Annotate a method using a single-member annotation.
+	@MySingle(100)
+	public static void myMeth() {
+	}
+}
+```
+- The Built-In Annotations:
+
+- Java defines many built-in annotations. Most are specialized, but nine are general purpose.
+- `Four` are from `java.lang.annotation`: `@Retention`, `@Documented(marker)`, `@Target`, and `@Inherited`.
+
+- `Five` are from `java.lang`:` @Override`, `@Deprecated`, `@FunctionalInterface`, `@SafeVarargs`, and `@SuppressWarnings` (All are marker annotations except `@SuppressWarnings`)
+
+- `@Target({ ElementType.FIELD, ElementType.LOCAL_VARIABLE })`
+`ElementType` specifies the types of declarations to which the annotation can be applied. Possible types are:
+		- ANNOTATION_TYPE - Another annotation
+		- CONSTRUCTOR - Constructor
+		- FIELD - Field
+		- LOCAL_VARIABLE - Local variable
+		- METHOD - Method
+		- PACKAGE - Package
+		- PARAMETER Parameter
+		- TYPE - Class, interface, or enumeration
+		- TYPE_PARAMETER - Type parameter (Added in `JDK 8`)
+		- TYPE_USE - Type use (Added in `JDK 8`)
+
+> NOTE: JDK 8 adds the annotations `Repeatable` and `Native` to `java.lang.annotation`. Repeatable supports repeatable annotations, Native annotates a field that can be accessed by native code.
+
+## Generics:
+
+- Generics means parameterized types, and are type safe. With generics, all casts are automatic	and implicit.
+
+- When declaring an instance of a generic type, the type argument passed to the type
+parameter must be a reference type. You cannot use a primitive type, such as int or char.
+
+- Bounded Types: Limits the types that can be passed to a type parameter.
+
+- When specifying a type parameter, you can create an upper bound that declares the superclass from which all type arguments
+must be derived. This is accomplished through the use of an extends clause when specifying
+the type parameter, as shown here: <T extends superclass>
+
+- When specifying a bound that has a class and an interface, or multiple interfaces, use the & operator to connect them.
+`eg:`
+```java
+class Gen<T extends MyClass & MyInterface> {
+}
+```
+
+- In this case, the class type must be specified first
+
+- The wildcard argument is specified by the ?, and it represents an unknown type.
+`boolean sameAvg(Stats<?> ob)` - here Stats<?> matches any Stats objects.
+
+	- Bounded Wildcards:
+
+		- Wildcard arguments can be bounded in much the same way that a type parameter can be
+		bounded. A bounded wildcard is especially important when you are creating a generic type
+		that will operate on a class hierarchy.
+
+		`Coords<? extends ThreeD>`
+
+		- specify a lower bound for a wildcard by adding a super clause to a wildcard
+		declaration. Here is its general form:
+		`<? super subclass>`
+
+	- Generic Method:
+
+		- The type parameters are declared before the return type of the method
+		`eg:`
+		```java
+		static <T extends Comparable<T>, V extends T> boolean isIn(T x, V[] y) {
+		}
+		```
+	- Generic Constructors:
+
+		- It is possible for constructors to be generic, even if their class is not.
+		`eg:`
+		```java
+		class GenCons {
+			private double val;
+
+			<T extends Number> GenCons(T arg) {
+				val = arg.doubleValue();
+			}
+
+			void showval() {
+				System.out.println("val: " + val);
+			}
+		}
+		```
+
+	- Generic Interfaces: `eg:`
+		```java
+		interface MinMax<T extends Comparable<T>>
+		{
+			T min();
+			T max();
+		}
+		```
+		```java
+		class MyClass<T extends Comparable<T>> implements MinMax<T>
+		{
+			T[] vals;
+
+			MyClass(T[] o)
+			{
+				vals = o;
+			}
+
+			// Return the minimum value in vals.
+			public T min() {
+				T v = vals[0];
+
+				for(int i=1; i < vals.length; i++) {
+					if(vals[i].compareTo(v) < 0) v = vals[i];
+						return v;
 				}
+			}
 
-				// Annotate a method.
-				@MyAnno(str = "Annotation Example", val = 100)
-				public static void myMeth() { ... }
-
-		- An annotation cannot include an extends clause. However, all annotation types
-			automatically extend the Annotation interface.
-	  - classes, methods, fields, parameters, and enum constants can be annotated in JDK 8.
-
-		- A retention policy determines at what point an annotation is discarded. Java defines three
-			such policies, which are encapsulated within the 'java.lang.annotation.RetentionPolicy'
-			enumeration. They are SOURCE, CLASS, and RUNTIME.
-
-				- An annotation with a retention policy of SOURCE is retained only in the source file
-					and is discarded during compilation.
-
-				- An annotation with a retention policy of CLASS is stored in the .class file during
-					compilation. However, it is not available through the JVM during run time.
-
-				- An annotation with a retention policy of RUNTIME is stored in the .class file during
-					compilation and is available through the JVM during run time. Thus, RUNTIME retention
-					offers the greatest annotation persistence.
-
-				- NOTE: An annotation on a local variable declaration is not retained in the .class file.
-
-			ex: Default is CLASS rentention policy, if nothing specified
-				@Retention(RetentionPolicy.RUNTIME)
-				@interface MyAnno {
-					String str();
-					int val();
+			// Return the maximum value in vals.
+			public T max() {
+				T v = vals[0];
+				for(int i=1; i < vals.length; i++) {
+					if(vals[i].compareTo(v) > 0) v = vals[i];
+						return v;
 				}
+			}
+		  ```
 
-		   	- Reflection is the feature that enables information about a class to be obtained at run time.
+# Rest Services using JAX-RS: `Koushik` - `Java Brain`
 
-			 	- The methods getAnnotation() and getAnnotations() are defined by the AnnotatedElement interface,
-			 		which is defined in java.lang.reflect. This interface supports reflection for annotations and is implemented by the classes Method,
-					Field, Constructor, Class, and Package, among others.
-				- In addition to getAnnotation() and getAnnotations(), AnnotatedElement defines several
-					other methods.
+- Use `@Context UriInfo` and` @Context HtppHeaders` to get additions info of the query params.
 
-					Two have been available since JDK 5.
-						Annotation[] getDeclaredAnnotations()
-							It returns all non-inherited annotations present in the invoking object.
+- Use` @BeanParam` to get all param in single class, instead of using,
+```java
+@GET
+public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
+@QueryParam("size") int size)
+{
+}
+```
 
-						isAnnotationPresent( ), which has this general form:
-							boolean isAnnotationPresent(Class<? extends Annotation> annoType)
-							It returns true if the annotation specified by annoType is associated with the invoking object.
-							It returns false otherwise.
+	-	Create a class to assign these params as follows,
+	```java
+	class FilterBean
+	{
+		private @QueryParam("year") int year;
+		private @QueryParam("start") int start;
+		private @QueryParam("size") int size;
 
-					and JDK 8 adds,
-						getDeclaredAnnotation(), getAnnotationsByType(), and getDeclaredAnnotationsByType(). Of these, the last two
-						automatically work with a repeated annotation.
+		// Write getters and setters for each query params
+	}
+	```
+- Replace the above call as follows,
+```java
+@GET			
+public List<Message> getMessages(@BeanParam FilterBean filterBean)
+{
+	// access them using
+	filterBean.getYear();
+	}
+```
 
-			- Default values: annotation members can have default values that will be used if no value is specified
-				when the annotation is applied.
-
-					ex:
-						// An annotation type declaration that includes defaults.
-						@Retention(RetentionPolicy.RUNTIME)
-						@interface MyAnno {
-							String str() default "Testing";
-							int val() default 9000;
-						}
-
-			- A marker annotation is a special kind of annotation that contains no members
-				ex:
-				// A marker annotation.
-				@Retention(RetentionPolicy.RUNTIME)
-				@interface MyMarker { }
-
-				- The best way to determine if a marker annotation is present is to use the method isAnnotationPresent().
-					Method m = ob.getClass().getMethod("myMeth");
-					if(m.isAnnotationPresent(MyMarker.class))
-
-			- A single-member annotation contains only one member.
-					@Retention(RetentionPolicy.RUNTIME)
-					@interface MySingle {
-					int value(); // this variable name must be value
-					}
-
-					class Single {
-						// Annotate a method using a single-member annotation.
-						@MySingle(100)
-						public static void myMeth() { }
-					}
-
-			- The Built-In Annotations:
-
-				- Java defines many built-in annotations. Most are specialized, but nine are general purpose.
-					- Four are from java.lang.annotation: @Retention, @Documented(marker), @Target, and @Inherited.
-					- Five are from java.lang: @Override, @Deprecated, @FunctionalInterface, @SafeVarargs, and @SuppressWarnings (All are marker annotations except @SuppressWarnings)
-					- @Target({ ElementType.FIELD, ElementType.LOCAL_VARIABLE })
-						ElementType specifies the types of declarations to which the annotation can be applied.
-						Possible types are:
-							ANNOTATION_TYPE Another annotation
-							CONSTRUCTOR Constructor
-							FIELD Field
-							LOCAL_VARIABLE Local variable
-							METHOD Method
-							PACKAGE Package
-							PARAMETER Parameter
-							TYPE Class, interface, or enumeration
-							TYPE_PARAMETER Type parameter (Added by JDK 8.)
-							TYPE_USE Type use (Added by JDK 8.)
-
-				- NOTE: JDK 8 adds the annotations Repeatable and Native to java.lang.annotation.
-				 	Repeatable supports repeatable annotations, Native annotates a field that can be accessed by native code.
-
-# Generics:
-
-		- Generics means parameterized types, and are type safe. With generics, all casts are automatic
-							and implicit.
-
-		- When declaring an instance of a generic type, the type argument passed to the type
-			parameter must be a reference type. You cannot use a primitive type, such as int or char.
-
-		- Bounded Types: Limits the types that can be passed to a type parameter.
-
-			- When specifying a type parameter, you can create an upper bound that declares the superclass from which all type arguments
-				must be derived. This is accomplished through the use of an extends clause when specifying
-				the type parameter, as shown here: <T extends superclass>
-
-			- When specifying a bound that has a class and an interface, or multiple interfaces, use the & operator to connect them.
-					For example, class Gen<T extends MyClass & MyInterface> { // ... }
-
-					- In this case, the class type must be specified first
-
-			- The wildcard argument is specified by the ?, and it represents an unknown type.
-				boolean sameAvg(Stats<?> ob) - here Stats<?> matches any Stats objects.
-
-				Bounded Wildcards:
-
-				- Wildcard arguments can be bounded in much the same way that a type parameter can be
-					bounded. A bounded wildcard is especially important when you are creating a generic type
-					that will operate on a class hierarchy.
-
-					Coords<? extends ThreeD>
-
-				- specify a lower bound for a wildcard by adding a super clause to a wildcard
-					declaration. Here is its general form:
-						<? super subclass>
-
-			- Generic Method:
-
-				- The type parameters are declared before the return type of the method
-						ex: static <T extends Comparable<T>, V extends T> boolean isIn(T x, V[] y) { }
-
-				- Generic Constructors:
-
-					It is possible for constructors to be generic, even if their class is not.
-					ex:
-						class GenCons {
-							private double val;
-
-								<T extends Number> GenCons(T arg) {
-									val = arg.doubleValue();
-								}
-								void showval() {
-									System.out.println("val: " + val);
-								}
-							}
-
-				- Generic Interfaces:
-					ex:
-					interface MinMax<T extends Comparable<T>>
-					{
-							T min();
-							T max();
-					}
-
-					Implementation:
-					class MyClass<T extends Comparable<T>> implements MinMax<T>
-					{
-							T[] vals;
-
-							MyClass(T[] o)
-							{
-								vals = o;
-							}
-
-							// Return the minimum value in vals.
-							public T min() {
-								T v = vals[0];
-								for(int i=1; i < vals.length; i++)
-								if(vals[i].compareTo(v) < 0) v = vals[i];
-								return v;
-							}
-
-							// Return the maximum value in vals.
-							public T max() {
-								T v = vals[0];
-								for(int i=1; i < vals.length; i++)
-								if(vals[i].compareTo(v) > 0) v = vals[i];
-								return v;
-							}
-						}
-
-# Rest Services using JAX-RS: Koushik - Java Brain
-
-	- Use @Context UriInfo and @Context HtppHeaders to get additions info of the query params.
-
-	- Use @BeanParam to get all param in single class, instead of using,
-
-			@GET
-		 	public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
-						 @QueryParam("size") int size) {}
-
-		  -	Create class to assingn these params as follows,
-				class FilterBean
-				{
-					private @QueryParam("year") int year;
-					private @QueryParam("start") int start;
-					private @QueryParam("size") int size;
-
-					// Write getters and setters for each query params
-				}
-
-			- Replace the above call as follows,
-
-				@GET
-				public List<Message> getMessages(@BeanParam FilterBean filterBean)
-				{
-					// access them using,
-					filterBean.getYear();
-				}
-
-		- Implementing sub-resources: ex: /messages/{messageId}/comments/{commentId}
-
-			-
-
-# SOAP Web services:
-
-	# Simple Object Access Protocol
-
-		-	WSDL: Web service description/definition language
-		- UUDI: Universal Description Discovery and Integration - registry where new web services are registered
-		-	SEI: Service endpoint interface - data from XML is mapped to actual objects
-
-		-	If javaEE installed we can import WSDL in command line using, "wsimport" keyword
-			$wsimport <WSDL-URI> // which will keep only .class files in the generated folder, if you want both .java and .class use the option,
-			$wsimport -keep -s src <URI> ; where src is the folder name// sample URI: http://www.webservicex.net/geoipservice.asmx?WSDL
-
-			# Download and run the glashFish server to deply the services
-
-		-	Once downloaded extract and go to /bin and run, C:/bin>asadmin start-domain ; then access it using localhost:4848 port by default and 			configure the same in eclipse; then create dynmic web project to get started
-
-		-	Annonate a class with @WebService and can be deployed as web service. Any public method in that class will be treated as Webmethod or can be 	 annotated with @WebMethod, use, exclude=true option to exclude the particular method from the webservice.
-
-		-	By default types of data used in the web service is imported from external link to WSDL under <types> tag, which can be avoided using the 		following annotation on class level, @SOAPBinding(style = Style.RPC), which will add <message> tag for both input and output response. By 		default style is Document.
-
-			@WebResult(partName = "lookupOutput") specified on method -> to change <part> tag name for response, and @WebParam(partName = "lookupInput") specified before a parameters -> to change <part> tag name for request
-
-		-	Interface (Serivie end point interface) can be created and interface can have all the annotations needed to perform the webservice,
-			once SEI is implemented add this @WebService(endpointInterface="fully qualified class name(package name ans interface class name)") to implemented class
-
-		-	JAXB - Java Architecture for XML Binding - used to map custom objects like Collections to XML
-			if any class specified with @XmlRootElement annotation it needs no arg public constructor, JAXB uses it to initialize the object
+- Implementing sub-resources: `eg:` `/messages/{messageId}/comments/{commentId}`
+	- How
