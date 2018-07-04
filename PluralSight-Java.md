@@ -604,13 +604,10 @@ public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("star
 	```
 - Replace the above call as follows,
 ```java
-@GET			
+@GET
 public List<Message> getMessages(@BeanParam FilterBean filterBean)
 {
 	// access them using
 	filterBean.getYear();
-	}
+}
 ```
-
-- Implementing sub-resources: `eg:` `/messages/{messageId}/comments/{commentId}`
-	- How
