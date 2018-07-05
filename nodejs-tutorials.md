@@ -72,3 +72,25 @@ process.stdin.on('readable', () => {
   > 0xE2 // prints nothing with String decoder
   > 0xAC // prints euro symbol
 ```
+- `arguments` will have all the arguments in the source file, console.log() them to see
+- Identify whether a source can be run as script or required in other files use `require.main === module`.
+```javascript
+// print.js
+const print = (stars, header) => {
+    console.log('*'.repeat(stars));
+    console.log(header);
+    console.log('*'.repeat(stars));
+};
+if (require.main === module)
+{
+    // Accepts the command line arguments and pass it to the print function as script.
+    print(process.argv[2], process.argv[3]);
+} else {
+    // export the module if it can be required by other files
+    module.exports = print;
+}
+```
+Can be executed as either from being required or from the command line using,
+`$ npm print.js 5 Hello`
+
+- Event Loop - En entity that handles external events and converts them to callback invocations.

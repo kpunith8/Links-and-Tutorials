@@ -820,7 +820,19 @@ gulp : in memory streams, code over configuration,
 		}
 	});
 
+## Asynchronous JS:
+```javascript
+window.onload = function() {
+	var http = XMLHttpRequest();
 
-# ES-6 : scrimba.com: Dylan, Israel
+	http.onreadystatechange = function() {
+		if (http.readyState === 4 && http.status === 200) {
+				console.log(JSON.parse(http.response)); // JSON.parse converts to JavaScript object
+		}
+	};
 
-	>
+	http.open('GET', 'data/source.json', true); // true for asyn calls
+	http.send();
+};
+```
+- Callback functions: 
