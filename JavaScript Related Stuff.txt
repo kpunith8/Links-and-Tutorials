@@ -22,7 +22,6 @@
 	* reactstrap - wrapper for Bootstrap 4.0 for react
 	* axios
 
-
 	* ORM for node.js - LoveField - for Mysql - https://google.github.io/lovefield/
 		sequelize - ORM
 

@@ -1,3 +1,28 @@
+# Node.js - Addision Wesley
+
+```javascript
+$ node debug server.js // Opens the file in debug mode
+
+$ isFinite(2323.44); // returns true
+
+$ isNaN(parseInt("asdf")); // returns true, parses string to a integer
+
+$ 5 + 3 + "some text"; // returns '8 some text'
+
+$ "" + 5 + 3 + "some text"; // returns '53 some text'
+
+$ /[aA]{2,}/; // considers it as regular expression, it can also be created using
+
+$ new RegExp("[aA]{2,}");
+
+$ "aaoo".search(/[aA]{2,}/); // searches for 2 or more a's in the given string, returns 0
+
+$ Object.keys(user).length; // returns the number of keys in user object
+
+$ 
+```
+
+
 # Advanced node: Samer Buna - Plural sight:
 
 ## Architecture:

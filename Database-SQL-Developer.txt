@@ -1,6 +1,6 @@
 SQL Developer: Oracle PL/SQL:
 -----------------------------
-> Shortcuts:
+- Shortcuts:
 
   - F9 : To execute the query
   - ctrl + shift + <1-10> : To add a bookmark in the editor (maximum of 10 bookmarks can be added) - right click on bookmark and select toggle bookmark to remove it
@@ -8,7 +8,7 @@ SQL Developer: Oracle PL/SQL:
 
 
 
-> Connecting to DB:
+- Connecting to DB:
 
   - TNSNAMES.ORA - configuration file that has addresses
   - TNS_ADMIN system variable needs to be set in windows environment variables to use '.ora' files, specify the path where '.ora' file resides, this can
@@ -16,7 +16,7 @@ SQL Developer: Oracle PL/SQL:
 
   - It can used in while connecting to db, connections can be exported and imported
 
-> Browsing the DB, Creating, and Modifying Objects:
+- Browsing the DB, Creating, and Modifying Objects:
 
   - Add Foreign key to the table - Select the table -> in the Worksheet - select constraints tab -> select actions -> constraint --> Add foreign key
 

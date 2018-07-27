@@ -1,17 +1,3 @@
-# List of JavaScript Libraires to consider:
-
-	lodash, ember, expressjs,
-
-# CSS:
-
-	flexbox
-
-# Tools:
-
-	scratchpad.io
-	jsonplaceholder -> Fake Online REST API for Testing and Prototyping
-	https://ckeditor.com/ - WYSIWYG editor
-
 ----------------------------------
 JavaScript objects and properties:
 ----------------------------------
@@ -835,4 +821,41 @@ window.onload = function() {
 	http.send();
 };
 ```
-- Callback functions: 
+
+## Regular expressions: https://regex101.com/
+
+- `/text/gi` - `g` specifies all matches in the file or object, `i` specifies for case insensitive.
+
+- `/[ti]ext/g` - matches `t` or `i` as first character in the text.
+
+- `/[^aeiou]man/g` - excludes `a or e or i or o or u` from the first character being matched.
+
+- `/[a-zA-Z]man/g` - first character can be any character and can be case insensitive. It can be any range a-f, k-q and can be number
+	range as well 0-9, 1-6; To make the whole sentence case insensitive add `i` flag to it or it applies to first character.
+
+- `/[0-9]+/g` - matches at between one and unlimited numbers for ex: 123030330030003.....
+
+- `/[0-9]{11}/g` - matches exact 11 numbers.
+
+- `/[0-9]{11, 15}/g` - matches between 11 to 15(inclusive) numbers.
+
+- `/[0-9]{5, }/g` - Matches at least 5 and any number, not less than 5.
+
+- `\d` - matches any digit, `\w` - matches any word character (a-z, A-Z, 0-9, and _'s),
+	`\s` - match a white space, `\t` - matches only tabs
+
+- `/\d{3}\w{10}` - matches 3 digits followed by 10 word characters.
+
+- `+` - at lease one or more
+
+- `?` - zero-or-one qualifier (makes a preceding char optional)
+
+- `.` - any character whatsoever (except new line character)
+
+- `*` - zero-or-more qualifier
+
+- `^[a-z]{5}$` - it takes only 5 characters, in the beginning and ending with 5 characters, doesn't matches anything else
+	ex: `abcde` - matched not the `abc` or  `abdjdkjdjd`
+
+	`[a-z]{5}$` - matches 5 characters at the end
+-

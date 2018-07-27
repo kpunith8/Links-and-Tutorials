@@ -1,11 +1,25 @@
 # Youtube Channel:
-
-Web developement:
-
-	Traversy Media
-	codedamn
-	slidenerd
-	derekbanas
-
+	Web developement:
+		Traversy Media
+		codedamn
+		slidenerd
+		derekbanas
+		KepowOb - Kevin Powell - CSS
+		The Net Ninja - node and monogodb and mix
 
 http://osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/
+
+scss tutorials:
+advanced SQL
+advanced mongo
+
+# List of JavaScript Libraires to consider:
+	lodash, ember, expressjs,
+
+# CSS:
+	flexbox, grid
+
+# Tools:
+	scratchpad.io
+	jsonplaceholder -> Fake Online REST API for Testing and Prototyping
+	https://ckeditor.com/ - WYSIWYG editor

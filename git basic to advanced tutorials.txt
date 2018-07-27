@@ -23,7 +23,7 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 	Filename too long in git for windows:
 		$ git config --system core.longpaths true
 
-	Set merge conflicts style which shows ours and theirs in the merge conflict which is easier to resolve merge conflict
+	Set merge conflicts style which shows `ours` and `theirs` in the merge conflict which is easier to resolve merge conflict
 	$ git config --global merge.conflictstyle diff3
 
 # Adding an exisiting git project to github:
@@ -114,15 +114,24 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 	$ git config --global alias.unstage 'reset HEAD --'
 
-----------------------------------------
-** Caching your GitHub password in Git
-----------------------------------------
+## Passing parameters to git alias
+	$ git config --global alias.ra ra="!f() {\
+		git branch -D $1 \
+		}; f"
+
+# Remove untracked files:
+	$ git reset --hard -> will just resets the staged changes for the given commit-hash
+
+	$ git clean -df -> -d for untraced directories and -f for untracked files
+
+
+# Caching your GitHub password in Git
 
 	If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username
 	and password every time it talks to GitHub.
 
 	If you clone GitHub repositories using SSH, then you authenticate using SSH keys instead of a username and password.
-	 For help setting up an SSH connection, see Generating SSH Keys.
+	For help setting up an SSH connection, see Generating SSH Keys.
 
 	If you prefer working with the command line, you can also install a native Git shell, such as msysgit.
 	With msysgit, running the following in the command line will store your credentials:
@@ -134,9 +143,7 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 	git config --global --unset credential.helper
 
--------------------------------------------------------------------
-Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
--------------------------------------------------------------------
+# Advanced git commands - David Baumgold - Advanced git - PyCon - 2015
 
 	$ git show  <commit_hash>
 		* Shows the information about current commit if no arguments passed to it, if commit hash passed it shows more info about that commmit
@@ -147,7 +154,7 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 	// Specify the line range
 	$ git blame -L 12,22 <file-name>
 
-# Cherry-pick: moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
+## Cherry-pick: moving commits to other branches (if the commits are moved to 'master branch' instead of 'feature branch')
 
 	git cherry-pick doesn’t alter the existing history within a repository; instead, it adds to the history. As with other Git operations that introduce changes via the process of applying a diff, you may need to resolve conflicts to fully apply the changes from the given commit .
 
@@ -171,7 +178,7 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 		-- HEAD^^	==	This commi's grand parent
 		-- HEAD~5 	== 	Five commits back from the current commit, it is equivalent to HEAD^^^^^
 
-# Rebase:
+## Rebase:
 
 	https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview
 
@@ -201,7 +208,7 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 
 	 $ (feature) git rabase --abort
 
-# Data Recovery: reflog
+## Data Recovery: reflog
 
 		-	Git silently records what your HEAD is every time you change it.
 		-	Each time you commit or change branches, the reflog is updated.
@@ -223,7 +230,7 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 
 				$ git fsck --full #it shows you all objects that aren’t pointed to by another object
 
-# Squashing and Splitting:
+## Squashing and Splitting:
 
 	If you have forgotten to add files to this commit then
 
@@ -239,11 +246,11 @@ Advanced git commands -David Baumgold - Advanced git - PyCon - 2015
 			(press 'i' in the keyboard  to edit the file in the editor and to save and quit the editor, press 'escape' button to come out of editing mode to normal mode then type :wq -> this commands will saves the file and quits the editor -- This editor behaves more like vi/vim editor in Linux)
 		-- Close the editor and it asks for new commit message, enter some message and save and quit the editor.
 
-# Squashing commits changes history
+## Squashing commits changes history
 
 	Change the actions 'pick' from 'squash' for all the commits you wanted to squash them into one
 
-# Splitting commits into small commits:
+## Splitting commits into small commits:
 
 	$ git rebase -i HEAD~3  -> git will pause in the rebase process to create new commits
 
@@ -266,7 +273,7 @@ If that commit contains more files then you can add one file and commit individu
 
 	Skipped 'bisect' command which tells which commit broke the build.
 
-# Squash commits into one:
+## Squash commits into one:
 
 	$ git rebase -i HEAD~5 (or you can get commit hash till which commit you want to rebase with), to see the commits, run $git log
 	 <select commits to squash and enter commit message>
@@ -276,7 +283,7 @@ If that commit contains more files then you can add one file and commit individu
 	$ git push -f origin <feature-branch>
 
 
-# Cherry-picking a commit on target branch:
+## Cherry-picking a commit on target branch:
 
 	$ git fetch origin <branch-name>
 
@@ -293,7 +300,7 @@ If that commit contains more files then you can add one file and commit individu
 	$ git push origin <build>
 
 
-# To remove the commit:
+## Remove the commit:
 
 	$ git rebase -i HEAD~2
 
@@ -306,7 +313,7 @@ If that commit contains more files then you can add one file and commit individu
 	$ git push -f origin <branch_name>
 
 
-# Creating pull request:
+## Creating pull request:
 
 	Go to your branch, rebase with master over your branch, make sure your commit in your feature branch are squashed into one commit and pushed to remote before rebasing dev to your branch
 
@@ -318,7 +325,7 @@ If that commit contains more files then you can add one file and commit individu
 
 	Once changes pushed, go to repo in the github, create pull request
 
-# Edit an incorrect commit message:
+## Edit an incorrect commit message: --amend
 
 	$ git commit --amend -m "YOUR-NEW-COMMIT-MESSAGE"
 
@@ -326,9 +333,17 @@ If that commit contains more files then you can add one file and commit individu
 
 	$ git push <remote> <branch> --force or $ git push -f origin <branch>
 
-# To delete a remote branch:
+	If you want to add a new file to the last commit, then add the file to the staging, then add the file,
+	$ git add <filename>
+	then do,
+	$ git commit --amend so that the newly added file is part of the last commit
 
-$ git push origin --delete <branchName>
+	To check whether it is part of the last commit, run
+	$ git log --stat
+
+# Delete a remote branch:
+
+	$ git push origin --delete <branchName>
 
 # Rename git branch locally and remotely:
 
@@ -336,17 +351,18 @@ $ git push origin --delete <branchName>
 	$ git push origin :old_branch                 # Delete the old branch
 	$ git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
 
-# Deleting a remote tag:
+# Tags:
+
+## Deleting a remote tag:
 
 	$ git tag -d <12345>
-
 	$ git push origin :refs/tags/<12345>
 
-# Fetching tags from remote:
+## Fetching tags from remote:
 
 	$ git fetch --tags
 
-# Creating a branch from tag:
+## Creating a branch from tag:
 
 	$ git checkout -b <newbranch> 1.0
 
@@ -396,6 +412,40 @@ $ git push origin --delete <branchName>
 
 	$ git config --global mergetool.kdiff3.cmd '"C:\\Program Files (x86)\\KDiff3\\kdiff3" $BASE $LOCAL $REMOTE -o $MERGED'
 
+		Here, $BASE - Base file state before making changes (initial content of the file when branched out from parent branch)
+					$LOCAL - Base branch to which the rebasing is made
+					$REMOTE - File in the current branch
+					$MERGED - The output file with resolved changes from $LOCAL and $REMOTE
+
 # A useful git command if you want to see the last committer on a branch. Helps if you want to clean up branches from your team in a large repos:
 
 	$ git for-each-ref --format="%(align:30,left)%(color:yellow)%(authorname)%(end) %(align:30,left)%(color:red)%(refname:strip=3)%(end)" --sort=authorname refs/remotes'
+
+# Git Tips and Tricks:
+	Refer: https://github.com/git-tips/tips
+
+- Checkout to last checked out branch
+	$ git checkout -
+
+- To whether a branch is merged with master or default branch
+	$ git branch --merged -> to check merged branches
+
+	$ git branch --merged master -> to check branches merged with master
+
+	$ git branch --no-merged -> to check un-merged branches
+
+-  Grab a file from another branch without switching branches
+	$ git checkout <target-branch> -- <path/to/file>
+
+- Search log with particular text string in a log
+	$ git log -S'<search-string>'
+
+- Add the modified and un-committed files to the previous commit without changing the commit message, new files should
+	be added to the staging.
+	$ git commit -a --amend -C HEAD
+
+- List all branches and their upstreams, as well as last commit on branch
+	$ git branch -vv
+
+- List all the files changed in a commit:
+	$ git show --pretty="" --name-only <commit-hash>

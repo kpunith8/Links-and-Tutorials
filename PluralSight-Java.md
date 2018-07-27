@@ -611,3 +611,12 @@ public List<Message> getMessages(@BeanParam FilterBean filterBean)
 	filterBean.getYear();
 }
 ```
+
+## JUnit:
+```java
+@Rule
+public ExpectedException thrown = ExpectedException.none();
+
+thrown.expect(IllegalArgumentException.class);
+thrown.expectMessage(HIGHER_BOUND_FLAG_NOT_FOUND_ERROR);
+```
