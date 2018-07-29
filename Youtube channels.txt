@@ -13,6 +13,8 @@ scss tutorials:
 advanced SQL
 advanced mongo
 
+styled-components
+
 # List of JavaScript Libraires to consider:
 	lodash, ember, expressjs,
 

@@ -19,9 +19,107 @@ $ "aaoo".search(/[aA]{2,}/); // searches for 2 or more a's in the given string, 
 
 $ Object.keys(user).length; // returns the number of keys in user object
 
-$ 
+let arr = ['cat', 'mat', 'bat'];
+arr[10] = 'rat';
+
+// Though it has empty elements from index 3 to 10 it prints as empty elements with 7 empty items
+console.log('Lenght of array,', arr.length, ' and has,', arr);
+
+// It deletes the item in the array and leave the index undefined
+console.log('Remove mat from array,', delete arr[1], ', After deleting,', arr);
+
+// use splice() to deletes the item and re-arrange the index
+console.log('Remove 2 items from the array,', arr.splice(1, 2)); // starting from index 1 and removes 2 items
+
+// unshift() adds items at the begining and shift() removes from the begining
+// pop() - pops from the end of an array and push() - pushes items at the end
+
+// Prototypal inheritance
+function Shape() {
+  this.x = 0;
+  this.y = 0;
+
+  this.move = function(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+function Square() {
+}
+
+Square.prototype = new Shape();
+Square.prototype.__proto__ = Shape.prototype;
+Square.prototype.width = 0;
+
+Square.prototype.area = function() {
+  return this.width * this.width;
+}
+
+let square = new Square();
+sq.move(15, 15);
+sq.width = 15;
+console.log('ares of sqaure', sq.area());
 ```
 
+- Node.js globals
+  - global object
+  - process object  
+
+- Synchronous and async programming
+
+```javascript
+// Async programming
+// setTimeout(() => {
+//   console.log('Running after 2 seconds');
+// }, 2000); // can be changed to any number, in milliseconds, 1000 - for 1 second
+
+// console.log('waiting for job to complete');
+
+// Reading file asynchronously
+var fs = require('fs');
+var buf = new Buffer.alloc(100000);
+
+fs.open('test.txt', 'r', (err, handle) => {
+  fs.read(handle, buf, 0, 100000, null, (err, length) => {
+    console.log(buf.toString('utf-8', 0, length));
+    fs.close(handle, () => { });
+  });
+});
+
+// understanding this, returning call backs from a function
+function FileObject() {
+  this.fileName = '';
+
+  // callback(err, boolean)
+  this.fileExists = function (callback) {
+    // This is to solve this reference after calling asnyc calls, also can be solved using arrow functions
+    // let self = this;
+    console.log('About to open:', this.fileName);
+
+    fs.open(this.fileName, 'r', (err, handle) => { // use arrow functions, =>
+      if (err) {
+        console.log('Can\'t open:', this.fileName);
+        callback(err);
+        return;
+      }
+
+      fs.close(handle, () => { });
+      callback(null, true);
+    });
+  }
+}
+
+let fileObject = new FileObject();
+fileObject.fileName = 'test txt';
+fileObject.fileExists((err, exists) => {
+  if (err) {
+    console.log('Error openening file:', JSON.stringify(err));
+  } else {
+    console.log('File exists:', exists);
+  }
+});
+```
 
 # Advanced node: Samer Buna - Plural sight:
 
