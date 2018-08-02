@@ -491,7 +491,7 @@ gulp : in memory streams, code over configuration,
 
 > Spread and Rest Operator (...) - array manipulation:
 
-	... used as rest symbol before the argument, for ex, var sample = function(price, ...categories) {}; and can be used as, sample.(1, 'software', 'hardware');
+	... used as rest symbol before the argument, for ex, var sample = function(price, ...categories) {}; and can be used as, sample(1, 'software', 'hardware');
 
 	... also used as spread operator, it accepts the array and splits into list of params
 
@@ -558,7 +558,7 @@ gulp : in memory streams, code over configuration,
 	importing statements are hoisted to top
 
 	export let moduleId = 99; which can be imported as id as follows, import { moduleId as id } from 'module.js'; // If we try to aceess
-	// moduleId thwos runtime error: moduleId is undefined
+	// moduleId throws runtime error: moduleId is undefined
 
 	We can also import default module names as alias using, import { default as myProjectName } from 'module.js';
 
