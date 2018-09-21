@@ -19,10 +19,12 @@ MongoDB: NoSQL database - document database:
 
 	- Download and install monogoDB
 
-	- MongoDB requires a data directory to store all data. MongoDB’s default data directory path is the absolute path \data\db on the drive from which you start MongoDB.
+	- MongoDB requires a data directory to store all data.
+		MongoDB’s default data directory path is the absolute path `\data\db` in the drive from which you start MongoDB.
 	- If no data/db exists create one in the installation path and run monogod demon - it starts the server
 
-	- If you have to installed the MongoDB at a different location, then you need to specify an alternate path for \data\db by setting the path dbpath in mongod.exe. For the same, issue the following commands.
+	- If you have to installed the MongoDB at a different location, then you need to specify,
+	  an alternate path for \data\db by setting the path dbpath in mongod.exe. For the same, issue the following commands.
 
 	- Create mongod.conf file with the following properties,
 
@@ -100,9 +102,9 @@ MongoDB: NoSQL database - document database:
 
 >	List all the db's and see the collections
 
-	$ db -- show the db currently in use
-	$ show dbs -- shows the list of databases
-	$ use <db name>
+	$ db  - shows the db currently in use
+	$ show dbs - shows the list of databases
+	$ use <db_name> - to select the database name
 	$ show collections
 
 	choose your collection and type the following to see all contents of that collection:
@@ -243,15 +245,11 @@ MongoDB: NoSQL database - document database:
 
 		- db.test.update({ _id: 1 }, { $unset: { y: '' or 0 }) -> unsets the field in the collection passed to $unset
 
-		- $rename: { 'Naem': 'Name'} - Updates the field name
-
-		- $push: { things: "one" } - pushes new array to the collection
-
-		- $addToSet: { things: "one" } - Adds the unique items to array
-
-		- $pull: { things: 'three'} - removes all instance of an item in an array, 'three' items in a things will be pulled out of an array
-
-		- $pop: {things: 1} - removes the last element in the array, -1 removes the first element in the array
+			- $rename: { 'Naem': 'Name'} - Updates the field name
+			- $push: { things: "one" } - pushes new array to the collection
+			- $addToSet: { things: "one" } - Adds the unique items to array
+			- $pull: { things: 'three'} - removes all instance of an item in an array, 'three' items in a things will be pulled out of an array
+			- $pop: {things: 1} - removes the last element in the array, -1 removes the first element in the array
 
 	> Multi-Update:
 

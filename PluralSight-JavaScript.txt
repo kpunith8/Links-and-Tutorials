@@ -454,6 +454,23 @@ gulp : in memory streams, code over configuration,
 		- Shortens variable names and funciton names, removes comments, removes white spaces and new lines
 		- tree shaking / dead code elimination (webpack does this)
 
+
+# Writing arrow functions better way
+
+	const arrowFunc = (data) => {
+		return {
+			type: 'ACTION_1',
+			payload: data,
+		};
+	};
+
+	Instead of using return type enclose it in a () as follows
+
+	const arrowFunc = (data) => ({
+		type: 'ACTION_1',
+		payload: data,
+	});
+
 ----------------------------------
 * ES6: Fundamentals: mark-zamoyta:
 -----------------------------------
@@ -496,6 +513,9 @@ gulp : in memory streams, code over configuration,
 	... also used as spread operator, it accepts the array and splits into list of params
 
 	..."45678" -> will be spread into 4,5,6,7, and 8 individual character
+
+	It can also be used to create the new object without mutating, for ex: {...person, addPowers: 'superman'}; person object added
+	with the addPowers property and returns the new object without mutating person object
 
 > Object Literal Extensions:
 
@@ -596,7 +616,7 @@ gulp : in memory streams, code over configuration,
 
 		Object.setPrototypeOf(a, b); -- adds all the props of b to a
 
-		Object.assign(target, a, b); -- here target is an empty object, paramenters of a and b are populated to target object
+		Object.assign(target, a, b); -- here target is an empty object, parameters of a and b are populated to target object
 			If both a and b have the same property then b`s property overloads the a`s property.
 			for ex: a = { a: 1}; b = { a: 5, b: 6 }; c = { c: 10 };
 				let target = {};

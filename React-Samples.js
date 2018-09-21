@@ -514,7 +514,7 @@ module.exports = routes;
 
 > Context API:
 
-  - 
+  -
 
 # React and Redux: Dan Abramov:
 
@@ -729,3 +729,11 @@ module.exports = routes;
     ReactDOM.render(
       <Blog posts={posts} />,
       document.getElementById('root')
+
+
+- Create a higher order functions:
+
+  const add = (x, y) => x + y;
+  const createAdder = a => b => add(a, b);
+  const add1 = createAdder(2);
+  add1(8); // returns 10

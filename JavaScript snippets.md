@@ -73,11 +73,28 @@ handleSearch = (event) => {
 ```javascript
 render() {
 	let { articles, searchTerm } = this.state;
-	
+
 	if (searchTerm) {
 		articles = pickBy(articles, (value) => {
 			return value.title.match(searchTerm) || value.body.match(searchTerm);
 		});
 	}
+}
+```
+
+* Get Cheapest items first:
+```javascript
+function newItemsCheapestFirst(items) {
+  return items
+    .filter(item => item.isNew) // filters only new items
+    .sort((a, b) => {
+      if(a.price < b.price) {
+        return -1;
+      } else if(a.price > b.price) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
 }
 ```

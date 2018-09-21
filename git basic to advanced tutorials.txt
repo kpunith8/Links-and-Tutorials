@@ -10,7 +10,12 @@ https://www.youtube.com/watch?v=-CkqiIPAzgQ
 
 # Git Configuration:
 
+	git config --global user.name "Punith K"
+	git config --global user.email "PunithK@gmail.com"
+
 	git config --global core.editor "vim"
+
+	git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
 
 	Git-bash by default only supports 260 character file paths. This has been fixed since git-bash 1.9, but it's not turned on by default.
 
@@ -354,7 +359,7 @@ If that commit contains more files then you can add one file and commit individu
 # Tags:
 
 ## Deleting a remote tag:
-
+``
 	$ git tag -d <12345>
 	$ git push origin :refs/tags/<12345>
 
@@ -449,3 +454,8 @@ If that commit contains more files then you can add one file and commit individu
 
 - List all the files changed in a commit:
 	$ git show --pretty="" --name-only <commit-hash>
+
+- Remove the local branches no longer on remote
+
+	$ git remote prune origin
+	$ git fetch -p

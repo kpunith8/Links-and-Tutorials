@@ -6,6 +6,7 @@
 - slidenerd
 - derekbanas
 - KepowOb - Kevin Powell - CSS
+- java brains
 - The Net Ninja - node and monogodb and mix
 
 ## Links:
@@ -17,6 +18,7 @@
 - https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays
 -	mlab.com -> kpunith8 -> Ap@2496 -> Database: gql-sample - root  test123
 - http://osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/
+- https://www.robinwieruch.de/essential-react-libraries-framework/
 
 ## Tutorials:
 
@@ -49,6 +51,7 @@
 * `GraphQL` - `relay`, `apolo`, `graphcool` - serverless GraphQL
 * `reactstrap` - wrapper for Bootstrap 4.0 for react
 * `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
+* `reselect` - 
 
 ### Common libraries:
 

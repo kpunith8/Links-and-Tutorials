@@ -121,6 +121,21 @@ fileObject.fileExists((err, exists) => {
 });
 ```
 
+### Create a node package in local system
+- Project should have `package.json` with the following details
+```javascript
+'name': 'Sample Project',
+ 'description': 'Description of the project',
+'version': '1.0.0',
+'main': 'lib/index.js',
+ 'private': true
+```
+- `npm link .` will create link to the package in local
+- To use it in any project run this command `npm link <package-name>` in the root folder where the package is required.
+
+### Publish npm package to npm registry
+- First add the user in command line `npm adduser`, once user created publish the package using `npm publish`, make sure `private` property is removed in the  `package.json`
+
 # Advanced node: Samer Buna - Plural sight:
 
 ## Architecture:
@@ -129,7 +144,7 @@ fileObject.fileExists((err, exists) => {
 $ node -p 'process.verisons.v8'
 ```
 ```javascript
-$ node --harmony // will load staged feature of the node`
+$ node --harmony // will load staged feature of the node
 ```
 - To select in progress node features
 ```javascript
@@ -217,3 +232,16 @@ Can be executed as either from being required or from the command line using,
 `$ npm print.js 5 Hello`
 
 - Event Loop - En entity that handles external events and converts them to callback invocations.
+
+## Event Emitters:
+- Sample usage
+```javascirpt
+const EventEmitter = require('events');
+ class Logger extends EventEmitter {
+ }
+
+ const logger = new Logger();
+ logger.emit('event'); // Any named event can be emitted
+
+ logger.on('event', listenerFunction);
+```
