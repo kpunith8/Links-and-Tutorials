@@ -245,3 +245,57 @@ const EventEmitter = require('events');
 
  logger.on('event', listenerFunction);
 ```
+
+## Common built-in libraries:
+
+### os module:
+- `> os.` hit tab to auto complete all possible methods available. Usage: for ex: `os.freemem()` to display free memory and `os.type()`
+to disply the type of Operating System.
+
+### fs module: File System
+- Has both synchronous and asynchronous flavors on all methods
+
+```javascript
+const fs = require('fs');
+
+// Asynchronous form
+fs.readFile(__filename, (err, data) => {
+  if (err) throw error;
+
+  // do something with the data
+});
+
+// Synchronous form
+const data = fs.readFileSync(__filename);
+// Exceptions are thrown immediately
+// do something with data
+```
+
+```javascript
+const fs = require('fs');
+const path = require('path');
+
+// Get the directory name
+const dirname = path.join(__dirname, 'files');
+
+// Reads all the files in the folder
+const files = fs.readdirSync(dirname);
+
+files.forEach(file => {
+  const filePath = path.join(dirname, file);
+
+  // Gets the status of the file
+  fs.stat(filePath, (err, stats) => {
+    if (err) throw error;
+
+    fs.truncate(filePath, stats.size/2, err => {
+      if (err) throw err;
+    });
+  });
+});
+```
+- Delete files older than 7 days in a directory
+
+```javascript
+
+```

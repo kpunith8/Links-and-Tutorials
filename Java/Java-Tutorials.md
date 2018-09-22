@@ -211,19 +211,6 @@ public class Demo {
 `eg:` `DocumentBuilder`, `frameworks`
 -	Composition used
 
-# JUnit - 4:
-```java
-public class ConsoleRunner {
-	psvm() {
-		JUnitCore junit = new JUnitCore();
-		junit.addListener(System.out);
-
-		junit.run(<UnitTest.class>);
-	}
-}
-```
-infinitest - for continuos integration
-
 # Java-The-Complete-Reference-9th-Edition: Find the samples in local eclipse workspace:
 
 ## Enum:
@@ -284,13 +271,11 @@ enum Apple {
 	}
 }
 ```
-- Here are `two` restrictions that apply to enumerations.
+- Here are `two` restrictions that apply to enumerations:
 	- An enumeration `cannot inherit another class`
-	- An enum 'cannot be a superclass'. This means that an enum can’t be extended.
+	- An enum `cannot be a superclass`. This means that an enum can’t be extended.
 
-
-- Obtain a value that indicates an enumeration constant’s position in the list of
-			constants using 'ordinal() method'.
+- Obtain a value that indicates an enumeration constant’s position in the list of constants using `ordinal()` method.
 
 ## Type Wrappers: Object representation of primitive data types
 
@@ -582,7 +567,8 @@ class Gen<T extends MyClass & MyInterface> {
 
 - Use `@Context UriInfo` and` @Context HtppHeaders` to get additions info of the query params.
 
-- Use` @BeanParam` to get all param in single class, instead of using,
+- Use `@BeanParam` to get all param in single class, instead of using,
+
 ```java
 @GET
 public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
@@ -591,18 +577,19 @@ public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("star
 }
 ```
 
-	-	Create a class to assign these params as follows,
-	```java
-	class FilterBean
-	{
-		private @QueryParam("year") int year;
-		private @QueryParam("start") int start;
-		private @QueryParam("size") int size;
+-	Create a class to assign these params as follows,
+```java
+class FilterBean
+{
+	private @QueryParam("year") int year;
+	private @QueryParam("start") int start;
+	private @QueryParam("size") int size;
+	// Write getters and setters for each query params
+}
+```
 
-		// Write getters and setters for each query params
-	}
-	```
 - Replace the above call as follows,
+
 ```java
 @GET
 public List<Message> getMessages(@BeanParam FilterBean filterBean)
@@ -612,11 +599,104 @@ public List<Message> getMessages(@BeanParam FilterBean filterBean)
 }
 ```
 
+# Unit Testing Java:
+
 ## JUnit:
+- Throwing an exception
+
 ```java
+// Code throwing IllegalArgumentException with an message
+throw new IllegalArgumentException(String.format("Cannot find corresponding enum entry for %d", flag));
+
+// unit test for the above code
 @Rule
 public ExpectedException thrown = ExpectedException.none();
 
-thrown.expect(IllegalArgumentException.class);
-thrown.expectMessage(HIGHER_BOUND_FLAG_NOT_FOUND_ERROR);
+@Test
+public void testThrowsIllegalStateException_valueNotFound_HigherBound()
+{
+	thrown.expect(IllegalArgumentException.class);
+	thrown.expectMessage("Cannot find corresponding enum entry for 3");
+
+	someClass.getValue(3);
+}
 ```
+
+## Mockito:
+
+- If you are using annotations to mock a class, make sure it is initialized in a method with JUnit4's `@Before` annotation, since
+annotations don't initialize themselves, for ex: In this case it is initialized in a `setUp()`
+
+```java
+@Before
+public void setUp()
+{
+	MockitoAnnotations.initMocks(this);
+}
+```
+
+- It can also be done using '@Rule' annotation on MockitoRule for ex:
+
+```java
+@Rule
+public  MockitoRule mockitoRule = MockitoJUnit.rule();
+@Mock
+private WebService mockWebService;
+```
+
+- Mocks also can be created using mock() static method as follows
+```java
+private WebService mockWebService = mock(WebService.class);
+```
+
+### Verifying interactions with mockito: To verify methods with void return type
+
+```java
+@Test
+public void testLogoutOfAnUser() {
+	User user = new User(mockWebService, USER_ID, PASSWORD);
+	user.logout();
+
+	verify(mockWebService).logout(); // By default verify defaults second parameter to times(1) if not specified
+
+	// If you have a parameter to be passed, pass it as follows,
+	user.login(USER_ID, PASSWORD);
+	verify(mockWebService, times(1)).login(USER_ID, PASSWORD);
+}
+```
+
+- It can also be verified to check the number of times it is called, use, `verify(mockWebService, times(1)).logout();`
+second parameter can be, `atLeast(1), atLeastOnce(), atMost(), never() and only()`
+
+- Parameters passed can be all mock values or `anyInt(), anyString() or any(Response.class)`; these are called matchers.
+
+- If you use matchers for one of the argument then all of the parameters should be matchers, or if you are passing the actual value to one of the parameter use `of(mockValue)` matcher, for ex:
+`verify(mockWebService).login(anyString(), of(PASSWORD));`
+
+- Possible matchers are, `gt(0), lt(100), lte(2020), startsWith('ab'), contains('c3'), matches('n[1-9]'), and(gt(0), lt(1000)), isNotNull(Response.class), not(eq(0))` and so on, check `Mockito.Matchers and Mockito.AdditionalMatchers` class other options
+
+### Stubbing methods:
+
+- When a mock is created for a class, every method in that class returns a default values for the given method
+
+- If you want to return some value, you need to stub the method as follows, for ex:
+
+```java
+when(mockWebService.isOnline()).thenReturn(true);
+// It is also possible to return multiple values
+when(mockWebService.isOnline()).thenReturn(true, false, true); // first time it returns true, second time false and so on
+// Can throw exception
+when(mockWebService.isOffline()).thenThrow(MyException.class);
+
+/** Alternative syntax try avoid using it, since Mockito doesn't infer the type,
+it can be used to override the previous stubbed value
+*/
+doReturn(true).when(mockWebService).isOffline();
+
+// BDD syntax
+given(mockWebService.isOnline()).willReturn(true);
+```
+
+### Capturing arguments:
+
+-
