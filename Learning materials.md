@@ -9,6 +9,12 @@
 - java brains
 - The Net Ninja - node and monogodb and mix
 
+### Java
+- devoxx
+- javaone
+
+Venkat Subramaniam
+
 ## Links:
 
 - https://www.webcodegeeks.com/html5/html5-internationalization-example/
@@ -51,7 +57,7 @@
 * `GraphQL` - `relay`, `apolo`, `graphcool` - serverless GraphQL
 * `reactstrap` - wrapper for Bootstrap 4.0 for react
 * `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
-* `reselect` - 
+* `reselect` -
 
 ### Common libraries:
 

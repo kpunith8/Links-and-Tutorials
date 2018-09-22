@@ -561,9 +561,10 @@ class Gen<T extends MyClass & MyInterface> {
 						return v;
 				}
 			}
-		  ```
+	}
+	```
 
-# Rest Services using JAX-RS: `Koushik` - `Java Brain`
+# Rest Services using JAX-RS: `Koushik` - `Java Brains`
 
 - Use `@Context UriInfo` and` @Context HtppHeaders` to get additions info of the query params.
 
@@ -602,7 +603,7 @@ public List<Message> getMessages(@BeanParam FilterBean filterBean)
 # Unit Testing Java:
 
 ## JUnit:
-- Throwing an exception
+- Throwing an exception with custom message
 
 ```java
 // Code throwing IllegalArgumentException with an message
@@ -624,6 +625,11 @@ public void testThrowsIllegalStateException_valueNotFound_HigherBound()
 
 ## Mockito:
 
+### References:
+
+- https://www.youtube.com/watch?v=DJDBl0vURD4 (Actual video link)
+- Download https://dzone.com/refcardz/mockito
+
 - If you are using annotations to mock a class, make sure it is initialized in a method with JUnit4's `@Before` annotation, since
 annotations don't initialize themselves, for ex: In this case it is initialized in a `setUp()`
 
@@ -640,6 +646,7 @@ public void setUp()
 ```java
 @Rule
 public  MockitoRule mockitoRule = MockitoJUnit.rule();
+
 @Mock
 private WebService mockWebService;
 ```
@@ -653,7 +660,8 @@ private WebService mockWebService = mock(WebService.class);
 
 ```java
 @Test
-public void testLogoutOfAnUser() {
+public void testLogoutOfAnUser()
+{
 	User user = new User(mockWebService, USER_ID, PASSWORD);
 	user.logout();
 
@@ -699,4 +707,77 @@ given(mockWebService.isOnline()).willReturn(true);
 
 ### Capturing arguments:
 
--
+```java
+@Captor
+private ArgumentCaptor<Respose> resposeCaptor;
+
+@Test
+public void testLoginSuccessful_captureArguments()
+{
+	User user = new User(mockWebService, USER_ID, PASSWORD);
+	user.login(mockLoginInterface);
+
+	verify(mockWebService).login(resposeCaptor.capture()); // It captures the login info
+	Response response = resposeCaptor.getValue();
+
+	response.onRequestedCompleted(true); // Invoke the action to be performed on captor
+	verify(mockLoginInterface).onLoginSuccess();
+}
+```
+
+### Custom Matchers:
+
+- Matcher to check list contains
+
+```java
+public class ListContains<T> implements ArgumentMatcher<List>
+{
+	private final T object;
+
+	public ListContains(T object)
+	{
+		this.object = object;
+	}
+
+	@Override
+	public boolean matches(List list)
+	{
+		return list.contains(object);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "List doesn't contain object";
+	}
+}
+```
+
+### Testing final methods and classes:
+
+```java
+public class HandlerWrapper
+{
+	private final Handler handler; // Handler which has final methods
+
+	public HandlerWrapper()
+	{
+		this.handler = new Handler();
+	}
+
+	public boolean post(Runnable r)
+	{
+		return handler.post(r);
+	}
+
+	public boolean sendMessage(Message message)
+	{
+		return handler.sendMessage(message);
+	}
+}
+```
+
+### Limitations:
+
+- Cannot mock static methods, private methods, and `hashCode() and equals()` methods
+ 
