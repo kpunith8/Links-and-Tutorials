@@ -1,12 +1,12 @@
 # Java Design Patterns
 ## Creational:
 
-Different types:
-- Singleton
-- Builder
-- Prototype
-- Factory
-- Abstract factory
+- Different types:
+	- Singleton
+	- Builder
+	- Prototype
+	- Factory
+	- Abstract factory
 
 ### Singleton:
 - only one instance created
@@ -15,7 +15,6 @@ Different types:
 -	Static in nature but not the class, since static classes are not thread safe, private instance and private constructor, no parameter required for construction
 
 #### Simple Singleton:
-
 ```java
 private static SingletonSample instance = new SingletonSample();
 
@@ -26,6 +25,7 @@ public static SingletonSample getInstance() {
 	return instance;
 }
 ```
+
 #### Lazy Loading:
 ```java
 private static SingletonSample instance = null;
@@ -41,6 +41,7 @@ public static SingletonSample getInstance() {
 	return instance;
 }
 ```
+
 #### Thread safe:
 ```java
 private static SingletonSample instance = null;
@@ -63,18 +64,17 @@ public static SingletonSample getInstance() {
 Can also be synchronized at the getInstance() method by making it synchronized
 ```java
 public static synchronized SingletonSample getInstance() {
-
 }
 ```
-this will make sure every time it's thread safe. To make sure there is no race condition we will use the above approach
+This will make sure every time it's thread safe. To make sure there is no race condition we will use the above approach
 
-* Pitfalls:
+- Pitfalls:
 	-	Difficult to write unit tests
 	- Not thread safe, if not carefull
 	-	java.util.Calendar is not a singleton but is a prototype
 
 
-* Comparision with factory:
+- Comparision with factory:
 	-	no interface / interface driven
 	-	Returns the same instance / returns multiple instances (multiple constructors)
 	-	Hard to unit test / testable
@@ -134,21 +134,21 @@ obj.getMeat(); // will return meat
 BuilderDemo object = new BuilderDemo.Builder().meat("meat").condiments("condiments").build();
 ```
 
-### Prototype:
+### Prototype
 -	To get the unique instance of the same object
 -	Avoids costly creation
 -	Avoids subclassing
 -	Typically don't use keyword new
 -	Utilizes interfaces
 `eg:` `clone()` method on `Object`
--	Implements Clone/Clonable interface
+-	Implements `Clone/Clonable` interface
 -	Each instance is unique
 
-* pitfalls:
+- pitfalls:
 	-	Sometimes not clear when to use
 	-	Used with other pattern; when pattern contains other pattern it's called a framework
 
-### Factory:
+### Factory
 -	Doesn't expose instantiation logic
 -	Defers instantiation to subclass
 -	It exposes common interface
@@ -211,66 +211,70 @@ public class Demo {
 `eg:` `DocumentBuilder`, `frameworks`
 -	Composition used
 
-# Java-The-Complete-Reference-9th-Edition: Find the samples in local eclipse workspace:
-
-## Enum:
+# Java-The-Complete-Reference-9th-Edition:
+## Enum
 
 - An enumeration can have constructors, methods, and instance variables. `eg:`
-```java
-enum User {
-	ADMIN, NORMAL, GROUP
-}
-```
+	```java
+	enum User {
+		ADMIN, NORMAL, GROUP
+	}
+	```
 
-- The identifiers ADMIN, NORMAL are called enumeration constants.
+- The identifiers `ADMIN`, `NORMAL` are called enumeration constants.
+
 - Each is implicitly declared as a public, static final member of User.
+
 - These constants are self-typed.
+
 - Once you have defined an enumeration, you can create a variable of that type.
--  Even though enumerations define a class type. Do not instantiate an enum using `new`. Instead, you declare and use an enumeration variable in much the same way as you do one
-of the primitive types.
-`eg:`
-```java
-User admin = User.ADMIN;
-```
-- Two enumeration constants `can be compared for equality` by using the `==` relational operator.
-`eg:`
-```java
-if (admin == User.ADMIN)
-```
+
+-  Even though enumerations define a class type. Do not instantiate an enum using `new`. Instead, you declare and use an enumeration variable in much the same way as you do one of the primitive types. `eg:`
+	```java
+	User admin = User.ADMIN;
+	```
+
+- Two enumeration constants `can be compared for equality` by using the `==` relational operator. `eg:`
+	```java
+	if (admin == User.ADMIN)
+	```
+
 - An enumeration value can also be used to control a `switch` statement. `eg:`
-```java
-switch(User) {
-	case ADMIN: break;
-	case GROUP: break;
-}
-```
-- All enumerations automatically contain two predefined methods: `values()` and `valueOf()`.
-Their general forms are shown here:
-```java
-public static enum-type [] values();
-public static enum-type valueOf(String str);
-```
-```java
-User.valueOf("ADMIN"); // returns ADMIN
-User allUsers[] = User.values(); // returns all the values of User as an array
-```
+	```java
+	switch(User) {
+		case ADMIN: break;
+		case GROUP: break;
+	}
+	```
+
+- All enumerations automatically contain two predefined methods: `values()` and `valueOf()`. Their general forms are shown here:
+	```java
+	public static enum-type [] values();
+	public static enum-type valueOf(String str);
+	```
+	```java
+	User.valueOf("ADMIN"); // returns ADMIN
+	User allUsers[] = User.values(); // returns all the values of User as an array
+	```
+
 -	When you define a constructor for an enum, the constructor is called when each enumeration constant is created.`eg:`
-```java
-enum Apple {
-	Jonathan(10), GoldenDel(9), RedDel(12), Winesap(15),Cortland(8);
+	```java
+	enum Apple {
+		Jonathan(10), GoldenDel(9), RedDel(12), Winesap(15),Cortland(8);
 
-	private int price; // price of each apple
+		private int price; // price of each apple
 
-	// Constructor
-	Apple(int price) {
-		price = price;
+		// Constructor
+		Apple(int price) {
+			price = price;
+		}
+
+		int getPrice() {
+			return price;
+		}
 	}
+	```
 
-	int getPrice() {
-		return price;
-	}
-}
-```
 - Here are `two` restrictions that apply to enumerations:
 	- An enumeration `cannot inherit another class`
 	- An enum `cannot be a superclass`. This means that an enum can’t be extended.
@@ -281,48 +285,53 @@ enum Apple {
 
 - The type wrappers are Double, Float, Long, Integer, Short, Byte, Character, and Boolean.
 - Character can be created using,
-```java
-Character(char ch);
-char charValue() // returns the char contained in it.
-```
+	```java
+	Character(char ch);
+	char charValue() // returns the char contained in it.
+	```
 
 - Boolean can be created using
-```java
-Boolean(boolean boolValue);
-Boolean(String boolString); // TRUE or true as a string
-```
-```java
-boolean booleanValue(); // returns the boolean value containg it.
-```
+	```java
+	Boolean(boolean boolValue);
+	Boolean(String boolString); // TRUE or true as a string
+	```
+	```java
+	boolean booleanValue(); // returns the boolean value containg it.
+	```
+
 - `Byte`, `Short`, `Integer`, `Long`, `Float`, and `Double`. All of the numeric type wrappers inherit the abstract class `Number`.
-```java
-Integer(int num);
-Integer(String str);
-```
-If `str` does not contain a valid numeric value, then a `NumberFormatException` is thrown.
+	```java
+	Integer(int num);
+	Integer(String str); // If `str` does not contain a valid numeric value, then a NumberFormatException is thrown.
+	```
 
 - All of the type wrappers override `toString()`. It returns the human-readable form of the
 value contained within the wrapper.
+
 - The process of encapsulating a value within an object is called `boxing`. `eg:`
-```java
-Integer integer = new Integer(100);
-```
+	```java
+	Integer integer = new Integer(100);
+	```
+
 - The process of extracting a value from a type wrapper is called `unboxing`. `eg:`
-```java
-int ii = i.intValue();
-```
+	```java
+	int ii = i.intValue();
+	```
+
 - JDK-5 introduced `auto-boxing` and `auto-unboxing` to avoid boxing and unboxing manually.
 
 	- `Auto-boxing`, no longer necessary to manually construct an object in order to wrap a primitive type. `eg:`
 	```java
 	Integer iOb = 100; // autobox an int
 	```
+
 	- `Auto-unboxing` is the process by which the value of a
 	boxed object is automatically extracted (unboxed) from a type wrapper when its value is needed. There is no need to call a method such as `intValue()` or` doubleValue()`. `eg:`
 	```java
 	int i = iOb; // auto-unboxing
 	Integer iOb, iOb2;
 	```
+
 	- Autoboxing and auto-unboxing in expressions:
 	```java
 	int i;
@@ -347,23 +356,24 @@ int ii = i.intValue();
 	i = iOb + (iOb / 3);
 	```
 
-## Annotations (Metadata):
+## Annotations (Metadata)
 
 - To add supplemental information to source file, it does not change the actions of an program.
 
 - Annotation is created based on interface `eg:`
-```java
-@interface MyAnnotation {
-	String str();
-	int val();
-}
-```
-```java
-// Annotate a method.
-@MyAnno(str = "Annotation Example", val = 100)
-	public static void myMethod() {
-}
-```
+	```java
+	@interface MyAnnotation {
+		String str();
+		int val();
+	}
+	```
+	```java
+	// Annotate a method.
+	@MyAnno(str = "Annotation Example", val = 100)
+		public static void myMethod() {
+	}
+	```
+
 - An annotation cannot include an `extends` clause. However, all annotation types automatically extend the Annotation interface.
 
 - `classes`, `methods`, `fields`, `parameters`, and `enum` constants can be annotated in `JDK 8`.
@@ -378,7 +388,7 @@ such policies, which are encapsulated within the `java.lang.annotation.Retention
 - An annotation with a retention policy of `RUNTIME` is stored in the `.class` file during compilation and is available through the JVM during run time. Thus, `RUNTIME` retention offers the greatest annotation persistence.
 > NOTE: An annotation on a local variable declaration is not retained in the `.class` file.
 
-- Default is CLASS rentention policy, if nothing specified
+- Default is CLASS retention policy, if nothing specified
 ```java
 @Retention(RetentionPolicy.RUNTIME)
 @interface MyAnno {
@@ -386,6 +396,7 @@ such policies, which are encapsulated within the `java.lang.annotation.Retention
 	int val();
 }
 ```
+
 - `Reflection` is the feature that enables information about a class to be obtained at run time.
 
 - The methods `getAnnotation()` and `getAnnotations()` are defined by the `AnnotatedElement` interface, which is defined in `java.lang.reflect` package. This interface supports reflection for annotations and is implemented by the classes `Method`,
@@ -402,7 +413,6 @@ such policies, which are encapsulated within the `java.lang.annotation.Retention
 	 - And `JDK 8` adds,
 		`getDeclaredAnnotation()`, `getAnnotationsByType()`, and `getDeclaredAnnotationsByType()`. Of these, the last two
 		automatically work with a repeated annotation.
-
 
 - Default values: annotation members can have default values that will be used if no value is specified when the annotation is applied. `eg:`
 ```java
@@ -440,6 +450,7 @@ class Single {
 	}
 }
 ```
+
 - The Built-In Annotations:
 
 - Java defines many built-in annotations. Most are specialized, but nine are general purpose.
@@ -462,7 +473,7 @@ class Single {
 
 > NOTE: JDK 8 adds the annotations `Repeatable` and `Native` to `java.lang.annotation`. Repeatable supports repeatable annotations, Native annotates a field that can be accessed by native code.
 
-## Generics:
+## Generics
 
 - Generics means parameterized types, and are type safe. With generics, all casts are automatic	and implicit.
 
@@ -569,215 +580,31 @@ class Gen<T extends MyClass & MyInterface> {
 - Use `@Context UriInfo` and` @Context HtppHeaders` to get additions info of the query params.
 
 - Use `@BeanParam` to get all param in single class, instead of using,
-
-```java
-@GET
-public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
-@QueryParam("size") int size)
-{
-}
-```
+	```java
+	@GET
+	public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
+	@QueryParam("size") int size)
+	{
+	}
+	```
 
 -	Create a class to assign these params as follows,
-```java
-class FilterBean
-{
-	private @QueryParam("year") int year;
-	private @QueryParam("start") int start;
-	private @QueryParam("size") int size;
-	// Write getters and setters for each query params
-}
-```
+	```java
+	class FilterBean
+	{
+		private @QueryParam("year") int year;
+		private @QueryParam("start") int start;
+		private @QueryParam("size") int size;
+		// Write getters and setters for each query params
+	}
+	```
 
 - Replace the above call as follows,
-
-```java
-@GET
-public List<Message> getMessages(@BeanParam FilterBean filterBean)
-{
-	// access them using
-	filterBean.getYear();
-}
-```
-
-# Unit Testing Java:
-
-## JUnit:
-- Throwing an exception with custom message
-
-```java
-// Code throwing IllegalArgumentException with an message
-throw new IllegalArgumentException(String.format("Cannot find corresponding enum entry for %d", flag));
-
-// unit test for the above code
-@Rule
-public ExpectedException thrown = ExpectedException.none();
-
-@Test
-public void testThrowsIllegalStateException_valueNotFound_HigherBound()
-{
-	thrown.expect(IllegalArgumentException.class);
-	thrown.expectMessage("Cannot find corresponding enum entry for 3");
-
-	someClass.getValue(3);
-}
-```
-
-## Mockito:
-
-### References:
-
-- https://www.youtube.com/watch?v=DJDBl0vURD4 (Actual video link)
-- Download https://dzone.com/refcardz/mockito
-
-- If you are using annotations to mock a class, make sure it is initialized in a method with JUnit4's `@Before` annotation, since
-annotations don't initialize themselves, for ex: In this case it is initialized in a `setUp()`
-
-```java
-@Before
-public void setUp()
-{
-	MockitoAnnotations.initMocks(this);
-}
-```
-
-- It can also be done using '@Rule' annotation on MockitoRule for ex:
-
-```java
-@Rule
-public  MockitoRule mockitoRule = MockitoJUnit.rule();
-
-@Mock
-private WebService mockWebService;
-```
-
-- Mocks also can be created using mock() static method as follows
-```java
-private WebService mockWebService = mock(WebService.class);
-```
-
-### Verifying interactions with mockito: To verify methods with void return type
-
-```java
-@Test
-public void testLogoutOfAnUser()
-{
-	User user = new User(mockWebService, USER_ID, PASSWORD);
-	user.logout();
-
-	verify(mockWebService).logout(); // By default verify defaults second parameter to times(1) if not specified
-
-	// If you have a parameter to be passed, pass it as follows,
-	user.login(USER_ID, PASSWORD);
-	verify(mockWebService, times(1)).login(USER_ID, PASSWORD);
-}
-```
-
-- It can also be verified to check the number of times it is called, use, `verify(mockWebService, times(1)).logout();`
-second parameter can be, `atLeast(1), atLeastOnce(), atMost(), never() and only()`
-
-- Parameters passed can be all mock values or `anyInt(), anyString() or any(Response.class)`; these are called matchers.
-
-- If you use matchers for one of the argument then all of the parameters should be matchers, or if you are passing the actual value to one of the parameter use `of(mockValue)` matcher, for ex:
-`verify(mockWebService).login(anyString(), of(PASSWORD));`
-
-- Possible matchers are, `gt(0), lt(100), lte(2020), startsWith('ab'), contains('c3'), matches('n[1-9]'), and(gt(0), lt(1000)), isNotNull(Response.class), not(eq(0))` and so on, check `Mockito.Matchers and Mockito.AdditionalMatchers` class other options
-
-### Stubbing methods:
-
-- When a mock is created for a class, every method in that class returns a default values for the given method
-
-- If you want to return some value, you need to stub the method as follows, for ex:
-
-```java
-when(mockWebService.isOnline()).thenReturn(true);
-// It is also possible to return multiple values
-when(mockWebService.isOnline()).thenReturn(true, false, true); // first time it returns true, second time false and so on
-// Can throw exception
-when(mockWebService.isOffline()).thenThrow(MyException.class);
-
-/** Alternative syntax try avoid using it, since Mockito doesn't infer the type,
-it can be used to override the previous stubbed value
-*/
-doReturn(true).when(mockWebService).isOffline();
-
-// BDD syntax
-given(mockWebService.isOnline()).willReturn(true);
-```
-
-### Capturing arguments:
-
-```java
-@Captor
-private ArgumentCaptor<Respose> resposeCaptor;
-
-@Test
-public void testLoginSuccessful_captureArguments()
-{
-	User user = new User(mockWebService, USER_ID, PASSWORD);
-	user.login(mockLoginInterface);
-
-	verify(mockWebService).login(resposeCaptor.capture()); // It captures the login info
-	Response response = resposeCaptor.getValue();
-
-	response.onRequestedCompleted(true); // Invoke the action to be performed on captor
-	verify(mockLoginInterface).onLoginSuccess();
-}
-```
-
-### Custom Matchers:
-
-- Matcher to check list contains
-
-```java
-public class ListContains<T> implements ArgumentMatcher<List>
-{
-	private final T object;
-
-	public ListContains(T object)
+	```java
+	@GET
+	public List<Message> getMessages(@BeanParam FilterBean filterBean)
 	{
-		this.object = object;
+		// access them using
+		filterBean.getYear();
 	}
-
-	@Override
-	public boolean matches(List list)
-	{
-		return list.contains(object);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "List doesn't contain object";
-	}
-}
-```
-
-### Testing final methods and classes:
-
-```java
-public class HandlerWrapper
-{
-	private final Handler handler; // Handler which has final methods
-
-	public HandlerWrapper()
-	{
-		this.handler = new Handler();
-	}
-
-	public boolean post(Runnable r)
-	{
-		return handler.post(r);
-	}
-
-	public boolean sendMessage(Message message)
-	{
-		return handler.sendMessage(message);
-	}
-}
-```
-
-### Limitations:
-
-- Cannot mock static methods, private methods, and `hashCode() and equals()` methods
- 
+	```
