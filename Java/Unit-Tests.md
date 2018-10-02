@@ -1,7 +1,7 @@
 # Java Unit Testing
 
 ## JUnit
-- Throwing an exception with custom message
+- Throwing an exception with a custom message
 	```java
 	// Code throwing IllegalArgumentException with an message
 	throw new IllegalArgumentException(String.format("Cannot find corresponding enum entry for %d", flag));

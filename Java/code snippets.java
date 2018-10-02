@@ -30,7 +30,7 @@ public static String readFile(String fileName) throws IOException {
 			br.close();
 		}
 	}
-	
+
 	/*
 		BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
@@ -50,23 +50,23 @@ public static String readFile(String fileName) throws IOException {
 
 		}
 	*/
-	
+
 		/*
 		 * Set<Entry<Integer, Boolean>> mapSet = bulbsWithState.entrySet();
 		 * Iterator<Entry<Integer, Boolean>> mapIterator = mapSet.iterator();
 		 * while (mapIterator.hasNext()) {
-		 * 
+		 *
 		 * Entry<Integer, Boolean> mapEntry = mapIterator.next(); //Integer
 		 * keyValue = mapEntry.getKey(); Boolean value = mapEntry.getValue();
-		 * 
+		 *
 		 * if (value == true) { bulbCount++; } }
 		 */
 		/*
 		 * for (Boolean item : bulbsWithState.values()) {
 		 * if(item.valueOf(true)){ bulbCount++; } }
 		 */
-		 
-		 
+
+
 		 // Sample matrix test
 		 //sample = addElements(key.intValue(), value.intValue());
 		int[][] sample1 = new int[20] [20];
@@ -74,29 +74,29 @@ public static String readFile(String fileName) throws IOException {
 		for (int kk = 0; kk < k; kk++) {
 
 			for (int ll = 0; ll < v; ll++) {
-				
-						sample1[kk][ll] = count++;	
+
+						sample1[kk][ll] = count++;
 			}
 		}
-		
+
 		for (int kk = 0; kk < k; kk++) {
 
 			for (int ll = 0; ll < v; ll++) {
-				
-						System.out.print(sample1[kk][ll] + " ");	
+
+						System.out.print(sample1[kk][ll] + " ");
 			}
 			System.out.println();
 		}
-	
-	// find factor 
+
+	// find factor
 	/*
 		 int factorNumber = 1;
-		  
+
 		 while (factorNumber <= n) { if (n % factorNumber == 0) {
 		 System.out.println(factorNumber); } factorNumber++; }
-		 
-		 
-		 
+
+
+
 		 /*
 	private static String FindBestSelection(String studentPreference, List<Preference<String, String>> hospitalPrefs) {
 		// TODO Auto-generated method stub
@@ -117,15 +117,15 @@ public static String readFile(String fileName) throws IOException {
 
 	}
 	*/
-	
+
 	// Using FormToolKit in RCP View
-	
+
 	/*
 		toolKit = new FormToolkit(parent.getDisplay());
 		form = toolKit.createScrolledForm(parent);
 
 		// Create Grid layout to add data
-		
+
 		GridLayout gLayoyt = new GridLayout();
 		form.getBody().setLayout(gLayoyt);
 		gLayoyt.numColumns = 1;
@@ -134,7 +134,7 @@ public static String readFile(String fileName) throws IOException {
 		gData.horizontalSpan = 5;
 
 		form.setLayoutData(gData);
-		
+
 		Label label = toolKit.createLabel(form.getBody(), "Name");
 		/*
 		Label label = new Label(form.getBody(), SWT.NULL);
@@ -142,26 +142,26 @@ public static String readFile(String fileName) throws IOException {
 		//
 		Text text = new Text(form.getBody(), SWT.BORDER);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		/*
 		Label label1 = new Label(form.getBody(), SWT.NULL);
 		label1.setText("Description");
 		//
-		
+
 		Label label1 = toolKit.createLabel(form.getBody(), "Description");
-		
+
 		Text textDesc = new Text(form.getBody(), SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
-		
+
 		// Specify Height of TextField to 75 pixels
 		gridData.heightHint = 75;
-		
+
 		textDesc.setLayoutData( gridData);//new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		/* Create GridLayout with 2 columns to add Label and
 		 * Read only text
 		 //
-		
+
 		GridLayout gLayoyt1 = new GridLayout();
 		form.getBody().setLayout(gLayoyt1);
 		gLayoyt1.numColumns = 2;
@@ -170,25 +170,25 @@ public static String readFile(String fileName) throws IOException {
 		gData1.horizontalSpan = 1;
 
 		form.setLayoutData(gData);
-		
+
 		Button button = toolKit.createButton(form.getBody(), "Execution Times", SWT.CHECK);
-		
+
 		Text readonlyText = new Text(form.getBody(), SWT.BORDER | SWT.READ_ONLY);
 		readonlyText.setText("1");
 		readonlyText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
         Button okBtn = new Button(form.getBody(), SWT.PUSH);
         okBtn.setSize(new Point(100,100));
         okBtn.setText("OK");
         okBtn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 0, 0));
-        
+
         Button cancBtn = new Button(form.getBody(), SWT.PUSH);
-    
+
         cancBtn.setSize(new Point(100,100));
         cancBtn.setText("Cancel");
         cancBtn.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		*/
-		
+
 		/*
 		text.addModifyListener(new ModifyListener(){
 		      public void modifyText(ModifyEvent event) {
@@ -198,41 +198,41 @@ public static String readFile(String fileName) throws IOException {
 		      }
 		    });
 		*/
-		
+
 		final String textS = text.getText();
 		cancelBtn.addSelectionListener(new SelectionAdapter() {
-			
+
 			public void widgetSelected(SelectionEvent e) {
-				
+
 				System.out.println("X: " + textS);
 			}
 		});
-	
+
 	// Mouse Listener
 	cancelBtn.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseUp(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseDown(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(text.getText() != ""){
 					MessageDialog.openConfirm(top.getShell(), "Test Window ", text.getText());
-					
+
 				}
 			}
-			
+
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		// FormLayout to align the buttons
 		FormLayout fLayout = new FormLayout();
 		bottom1.setLayout(fLayout);
@@ -254,7 +254,7 @@ public static String readFile(String fileName) throws IOException {
 		okBtn.setLayoutData(okData);
 
 		 */
-		
+
 			/*
 		Composite bottom = new Composite(top, SWT.NONE);
 		GridLayout gLayoyt1 = new GridLayout(4, true);
@@ -271,10 +271,7 @@ public static String readFile(String fileName) throws IOException {
 		gData1.grabExcessHorizontalSpace = true;
 		 */
 		// bottom.setLayoutData(gData1);
-		 
-		 
-		 /********************** Sample Screen Given By Mustak Code (Using RCP Plugin)********************/
-		 /*
+
 		Label labelName = new Label(top, SWT.NULL);
 		labelName.setText("Name");
 
@@ -287,39 +284,39 @@ public static String readFile(String fileName) throws IOException {
 		Text textDesc = new Text(top, SWT.MULTI | SWT.BORDER | SWT.WRAP
 				| SWT.V_SCROLL);
 		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
-		
+
 		// Specify Height of TextField to 75 pixels
 		gridData.heightHint = 75;
 		textDesc.setLayoutData(gridData);
 
 		Button buttonCheck = new Button(top, SWT.CHECK);
 		buttonCheck.setText("Execution times");
-		buttonCheck.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));    
+		buttonCheck.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Text readonlyText = new Text(top, SWT.BORDER | SWT.READ_ONLY);
 		readonlyText.setText("1");
-		readonlyText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));  
+		readonlyText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// Composite to add Buttons in a FormLayout
 
 		Composite bottom1 = new Composite(top, SWT.SHELL_TRIM | SWT.CENTER);
 		bottom1.layout(true);
-		
+
 		RowLayout rowLayout = new RowLayout(SWT.HORIZONTAL);
 		rowLayout.marginTop = 10;
         rowLayout.marginBottom = 10;
         rowLayout.marginLeft = 320;
         rowLayout.wrap = true;
         rowLayout.pack = true;
-        
+
         rowLayout.marginRight = 5;
         rowLayout.spacing = 10;
-        
+
         rowLayout.justify = true;
         bottom1.setLayout(rowLayout);
-        
-        
-		
+
+
+
 		final Button addBtn = new Button(bottom1, SWT.PUSH);
 		addBtn.setText("Add");
 		addBtn.setLayoutData(new RowData(80, 30));
@@ -347,61 +344,36 @@ public static String readFile(String fileName) throws IOException {
 			}
 		});
 		*/
-		
-		
+
+
 		// Buttons alignment
-		
+
 		/*
 		Composite dialog1 = new Composite(dialog, SWT.NONE);
 		RowLayout row = new RowLayout();
 		dialog1.setLayout(row);
-	
+
 		Button buttonLogin = new Button(dialog1, SWT.PUSH);
 		buttonLogin.setText("Login");
 		buttonLogin
 				.setLayoutData(new RowData(60, 30));
-		
+
 		Button buttonCancel = new Button(dialog1, SWT.PUSH);
 		buttonCancel.setText("Cancel");
 		buttonCancel
 				.setLayoutData(new RowData(60, 30));
-		
-		
-		/*
-		
-		Composite bottom1 = new Composite(parent, SWT.SHELL_TRIM | SWT.CENTER);
-		FormLayout fLayout = new FormLayout();
-		bottom1.setLayout(fLayout);
 
-		final Button buttonLogin = new Button(bottom1, SWT.PUSH);
-		buttonLogin.setText("Login");
-	
-		Button buttonCancel = new Button(bottom1, SWT.PUSH);
-		buttonCancel.setText("Cancel");
-
-		FormData addData = new FormData(80, 30);
-		addData.right = new FormAttachment(buttonCancel, -5, SWT.LEFT);
-		addData.bottom = new FormAttachment(buttonCancel, 0, SWT.BOTTOM);
-		buttonLogin.setLayoutData(addData);
-	
-		FormData cancelData = new FormData(80, 30);
-		cancelData.right = new FormAttachment(98);
-		cancelData.bottom = new FormAttachment(95);
-		buttonCancel.setLayoutData(cancelData);
-
-		*/
-		
 		// Align button to center in Grid
-		
+
 		Button buttonLogin = new Button(top, SWT.PUSH);
 		buttonLogin.setText("Click here to login"); // $NON-NLS-1$
 		buttonLogin.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
-		
+
 		/***** Hiding and showing a view in RCP *******/
-		
+
 				IWorkbenchPage activePage = PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage();
-					
+
 				try {
 					activePage.showView(AppConstants.LOGIN_VIEW_ID); // $NON-NLS-1$
 				} catch (PartInitException e1) {
@@ -409,32 +381,16 @@ public static String readFile(String fileName) throws IOException {
 				} finally {
 					activePage.hideView(activePage.findView(AppConstants.MAIN_VIEW_ID));	// $NON-NLS-1$
 				}
-				
-				
-// Dialog box in SWT
-if(emptyUserId){
+
+
+  // Dialog box in SWT
+  if(emptyUserId){
 					MessageDialog.openConfirm(dialog, "Error!",
 							"User ID shouldn't be empty!"); // $NON-NLS-1$ $NON-NLS-2$
 				} else if (emptyPassword){
 					MessageDialog.openConfirm(dialog, "Error!",
 							"Password shouldn't be empty!"); // $NON-NLS-1$ $NON-NLS-2$
 				}
-				
-				
-// DB test
-int userPriority = rs.getInt("login_priority"); // $NON-NLS-1$
-
-if (userPriority == 0) {
-	System.out.println("We are in Admin page"); // $NON-NLS-1$
-	return true;
-} else if (userPriority == 1) {
-	System.out.println("We are in Mentor page"); // $NON-NLS-1$
-	return true;
-} else {
-	System.out.println("We are in user page"); // $NON-NLS-1$
-	return true;
-}
-
 
 // text verify listener to not to allow user to type some chars
 
@@ -451,18 +407,18 @@ uText.addVerifyListener(new VerifyListener() {
 	            }
 	        }
 	        });
-				
-				
-				
+
+
+
 /** window Close button listener ***/
 dialog.addListener(SWT.Close, new Listener() {
-		
+
 		@Override
 		public void handleEvent(Event event) {
 			dialog.dispose();
 		}
 	});
-	
+
 
 /*** Button created in LoginPopup ***/
 		/*
@@ -487,14 +443,13 @@ dialog.addListener(SWT.Close, new Listener() {
 
 		new Label(btncomposite, SWT.NONE);
 		new Label(btncomposite, SWT.NONE);
-		*/	
-		
+		*/
+
 		labelUserid = new Label(dialog, SWT.CENTER);
 		labelUserid.setLayoutData(new GridData(SWT.FILL, SWT.RIGHT, true, false));
-		
-	/****** ProcessSearchRequest() to search both epicID and epic title *********/
+
 	/**** mysql column is converted integer to string ****/
-	
+
 	public List<Epic> processSearchRequest(String epicTitle) {
 		List<Epic> epicList = new ArrayList<Epic>();
 		Epic epic = null;
@@ -571,12 +526,10 @@ dialog.addListener(SWT.Close, new Listener() {
 		return epicList;
 	}
 
-	
-	//
 	items[i].setText(0, "EPIC" + String.valueOf(epicList.get(i).getEpicID()));
-	
+
 	//*********************** Creating messageBox with ok and cancel button ****************************//
-	
+
 	MessageBox messageBox = new MessageBox(newComposite
 							.getShell(), SWT.ICON_WARNING | SWT.OK | SWT.CANCEL);
 					messageBox.setText(resourceBundle
@@ -604,15 +557,8 @@ dialog.addListener(SWT.Close, new Listener() {
 					case SWT.CANCEL:
 						break;
 					}
-					
-					
-					
-
- \\grdfilesrvblr03\automated testing\mustak\html result folder
- 
- 
  // To list all the employees
- 
+
  @Override
  public List<Employee> processAddRequest() {
 		List<Employee> empList = new ArrayList<Employee>();
