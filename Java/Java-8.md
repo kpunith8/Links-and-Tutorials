@@ -138,7 +138,9 @@
 
 ## Streams
 - Streams does not hold any data; it pulls the data it processes from a source
+
 - Stream does not modify the data it processes
+
 - Source may be unbounded; not finite and size of the source is not known at built time.
 
 - Stream patterns
@@ -174,4 +176,74 @@
 	// accept() doesn't return anything and cannot be chained
 	builder.accept("one");
 	Stream<String> stream = builder.build();
+	```
+
+### Stream methods
+- `map()` call can change the type of the stream.
+
+- `filter()` call doesn't change the type of the stream.
+
+- `peek(System.out::println)` can be invoked on `map()` to display the items, using `forEach()` on `map()` doesn't return stream.
+
+- `forEach()` is terminal operation and should be called at the end, and it doesn't return any stream.
+
+- `peak()` can be used for logging purposes, don't use it in production, and it is an intermediate operation, calling at the end of stream will not print anything. `eg:`
+ 	```java
+	person.stream()
+		  	.map(p -> p.getAge())
+				.peek(System.out::println)
+				.filter(age -> age > 20)
+				.peek(System.out::println); // It should always be terminal call to process the data of a stream
+	```
+
+- If a call returns Stream then it is an `intermediate call` or if it returns void or something else then it is a `terminal call`.
+
+- `collect(toList())` static method from the `java.util.stream.Collectors` can be used to return a list from processed stream.
+
+> NOTE: if no terminal operation - no data is processed from a stream and no data is returned
+
+### Selecting ranges of data in a stream
+- `skip()` and `filter()`
+	```java
+	person.stream()
+				.skip(2)
+				.limit(3)
+				.filter(age -> age > 20)
+				.forEach(System.out::println);
+	```
+
+### Simple reductions
+- Match reduction: `anyMatch(), allMatch(), and noneMatch(),`
+	```java
+	// allMatch() returns true if all the elements matches the predicate
+	// noneMatch() returns true if no elements matches the predicate
+	people.stream()
+				.anyMatch(p -> p.getAge() > 20); // returns true if any of the element matches the predicate
+	```
+
+- These three matchers may not evaluate the predicate on all the elements, hence they are called 'Short-Circuiting' terminal operations
+
+- Find Reduction: `findFirst() and findAny()`
+	```java
+	// Optional is returned because it may not return result because of empty stream of predicate cannot match
+	// findAny() returns any person matching the predicate
+	Optional<Person> opt = people.stream().findFirst(p -> p.getAge() > 20);
+	```
+
+- Reduce reduction: has 3 types
+	```java
+	// Using the identity, here 0 is the identity element of the max reduction
+	people.stream()
+				.reduce(0, (p1, p2) -> Integer.max(p1.getAge(), p2.getAge()));
+
+	// No identity element is provided, so that the result it wrapped in Optional
+	Optional<Integer> optionalAges = people.stream().reduce((p1, p2) -> Integer.max(p1.getAge(), p2.getAge()));
+
+	// Used in parallel operations
+	people.stream()
+				.reduce(
+					new ArrayList<Integer>(),
+					(list, p) -> { list.add(p.getAge()); return list; },
+					(list1, list2) -> { list1.addAll(list2); return list1; }
+				);
 	```
