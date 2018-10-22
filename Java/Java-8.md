@@ -137,6 +137,25 @@
 | **Array Constructor ** | `int[]::new` | `len -> new int[len]`
 
 ## Streams
+- Stream is a sequence of elements from a source that supports aggregate operations.
+
+	- Sequence of elements: A stream provides an interface to a sequenced set of values of a specific element type.
+	However, streams don’t actually store elements; they are computed on demand.
+
+	- Source: Streams consume from a data-providing source such as collections, arrays, or I/O resources.
+
+	- Aggregate operations: Streams support SQL-like operations and common operations from functional programing languages, such as `filter`, `map`, `reduce`, `find`, `match`, `sorted`, and so on.
+
+- Stream operations have two fundamental characteristics that make them very different from collection operations:
+
+	- Pipelining: Many stream operations return a stream themselves. This allows operations to be chained to form a larger pipeline.
+	This enables certain optimizations, such as `laziness` and `short-circuiting`.
+
+	- Internal iteration: In contrast to collections, which are iterated explicitly (external iteration),
+	stream operations do the iteration behind the scenes for you.
+
+- Stream lets you process data in a declarative way. Furthermore, streams can leverage multi-core architectures without you having to write a single line of multithread code.
+
 - Streams does not hold any data; it pulls the data it processes from a source
 
 - Stream does not modify the data it processes
@@ -247,3 +266,37 @@
 					(list1, list2) -> { list1.addAll(list2); return list1; }
 				);
 	```
+
+- Let’s say we need to find all transactions of type grocery and return a list of transaction IDs sorted in decreasing order of transaction value.
+- In Java SE 7, we’d do that as shown.
+	```java
+	List<Transaction> groceryTransactions = new Arraylist<>();
+	for(Transaction t: transactions){
+	  if(t.getType() == Transaction.GROCERY){
+	    groceryTransactions.add(t);
+	  }
+	}
+	Collections.sort(groceryTransactions, new Comparator(){
+	  public int compare(Transaction t1, Transaction t2){
+	    return t2.getValue().compareTo(t1.getValue());
+	  }
+	});
+	List<Integer> transactionIds = new ArrayList<>();
+	for(Transaction t: groceryTransactions){
+	  transactionsIds.add(t.getId());
+	}
+	```
+
+- In Java SE 8, we’d do it as shown.
+	```java
+	List<Integer> transactionsIds =
+	    transactions.stream()
+	                .filter(t -> t.getType() == Transaction.GROCERY)
+	                .sorted(comparing(Transaction::getValue).reversed())
+	                .map(Transaction::getId)
+	                .collect(toList());
+	```
+
+## References:
+- https://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html
+- https://www.oracle.com/technetwork/articles/java/architect-streams-pt2-2227132.html

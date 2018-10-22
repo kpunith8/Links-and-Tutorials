@@ -49,6 +49,7 @@ Venkat Subramaniam
 * `LoveField` - for Mysql - https://google.github.io/lovefield/
 * `sequelize` - ORM
 * `font-awesome` for icons
+* `doc`z - For documentation site for react
 
 ### React Libraries:
 

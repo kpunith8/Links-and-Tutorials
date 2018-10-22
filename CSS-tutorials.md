@@ -40,11 +40,36 @@ aligned style of the list never moves, set this property to `inside` to show alo
 
 ## CSS Grid Layout:
 
-```css
-.portfolio {
-  display: grid;
-  height: 100%;
-  grid-template-rows: repeat(6, 100px);
-  grid-template-columns: repeat(6, 100px);
-}
-```
+- Example code at: https://codesandbox.io/s/l2yjm5z6l9
+
+- Two dimensional layouts - Rows and Columns
+
+- The height of the row is defined by the content
+
+- `auto-fill` - Won't create tracks out of empty space,  and `auto-fit` - does, can be used with `grid-template-columns: repeat(auto-fill, 100px)`
+
+- `minmax()` - works with `auto-fill` and `auto-fit` `eg:` `grid-template-columns: repeat(auto-fill, minmax(100px, 1fr))`
+
+- Named lines: Naming grid areas creates named lines, useful when using `grid-row` or `grid-column` specifying row/column begin/end
+  `eg:` `grid-column: content-start / content-end` - here `content` is the grid-area name given
+
+- Alignment properties: There are six
+  - `justify-*` - For row axis - Horizontal
+  - `align-*` - For column axis - Vertical
+
+  ```css
+  /* Keeps the grids to center */
+  /* Also can be start, end, space-between, space-around */
+  justify-content: center;
+
+  /* To justify the content inside */
+  /* stretch - by default; start, end, use, justify-self: end; on grid item */
+  justify-items: end;
+
+  /* stretch; by default, center, start, end, space-around, space-between*/
+  align-content: center;
+
+  /* Align items vertically */
+  /* stretch - by default; start, end, use, justify-self: end on grid item, base-line */
+  align-items: center;
+  ```
