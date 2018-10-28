@@ -59,6 +59,7 @@ Venkat Subramaniam
 * `reactstrap` - wrapper for Bootstrap 4.0 for react
 * `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
 * `reselect` -
+* `react-cache` - To cache the data
 
 ### Common libraries:
 

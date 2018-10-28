@@ -115,3 +115,20 @@ flag while installing, it will put the package to 'DevDependencies' section of t
 	user/<username>/AppData/Roaming/npm or npm-cache
 
 		$ npm cache verify
+
+- Check for installed npm packages:
+
+	-	To list all the packages installed and its dependencies
+		$ npm list => -g option to check for global variables
+
+	-	Lists only top  level packages
+		$ npm list --depth = 0
+
+	- List packages of a given package
+		$ npm list react
+
+	- To check the version of a package
+		$ npm view cowsay version
+
+	- To discover new releases of the packages, you run
+		$ npm outdated
