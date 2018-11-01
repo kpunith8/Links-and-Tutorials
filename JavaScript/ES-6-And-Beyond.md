@@ -1,14 +1,3 @@
-
-### Writing arrow functions better way
-```javascript
-const arrowFunc = (data) => {
-	return {
-		type: 'ACTION_1',
-		payload: data,
-	};
-};
-```
-
 ## ES6 Fundamentals: Mark Zamoyta
 
 - Check the browser compatibility list for ES6, http://kangax.github.io/
@@ -507,4 +496,14 @@ let emp = new WeakMap();
     type: 'ACTION_1',
     payload: data,
   });
+```
+
+### Writing arrow functions better way
+```javascript
+const arrowFunc = (data) => {
+	return {
+		type: 'ACTION_1',
+		payload: data,
+	};
+};
 ```

@@ -171,7 +171,7 @@ addClass(), removeClass(), toggleClass()
 ```
 
 ###	Handling Events:
-- Identifying event type, `event.type` - returns a string
+- Identifying event type, `event.type`; returns a string
 
 - Multiple events and handlers can be defined in on() using a map
 	```javascript
@@ -266,12 +266,18 @@ window.onload = function() {
 ## Debugging JS in Chrome Developer tools
 
 - Don't declare global variables
+
 - Protect variables with scope
 	```javascript
-	(function () { // Closure function
+	// Closure function
+	(function () {
 		let now = new Date();
 		funciton doSomething() {
 			// do something
 		}
 	})();
 	```
+
+- `console.table(data, ['name', 'email']);` - To print the JSON data in table form
+
+-	`console.log('%c Error', 'color: white, background: red');` - Apply the style to log

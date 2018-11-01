@@ -1,6 +1,7 @@
-## Youtube Channels:
+## Youtube Channels
 
-###	Web developement:
+###	Web developement
+
 - Traversy Media
 - codedamn
 - slidenerd
@@ -10,10 +11,23 @@
 - The Net Ninja - node and monogodb and mix
 
 ### Java
+
 - devoxx
 - javaone
+- oracle developers
 
-Venkat Subramaniam
+## Personalities
+
+### JS
+
+- Douglas Crockford - JS Best parts
+- Dan Abramov - React
+
+### Java
+
+- Venkat Subramaniam - Java
+- Uncle Robert C Martin - Clean code
+- Victor Rentea - Clean Code
 
 ## Links:
 
