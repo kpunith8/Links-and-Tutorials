@@ -297,6 +297,10 @@
 	                .collect(toList());
 	```
 
+### Optional
+
+- 
+
 ## References:
 - https://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html
 - https://www.oracle.com/technetwork/articles/java/architect-streams-pt2-2227132.html

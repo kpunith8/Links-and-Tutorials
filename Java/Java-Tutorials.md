@@ -10,7 +10,7 @@
 
 ### Singleton:
 - only one instance created
--	Gurantees controlling a resource
+-	Guarantees controlling a resource
 -	Lazily loaded `eg:` `Runtime`, `Logger`, Spring beams, graphic managers
 -	Static in nature but not the class, since static classes are not thread safe, private instance and private constructor, no parameter required for construction
 
@@ -70,11 +70,11 @@ This will make sure every time it's thread safe. To make sure there is no race c
 
 - Pitfalls:
 	-	Difficult to write unit tests
-	- Not thread safe, if not carefull
+	- Not thread safe, if not careful
 	-	java.util.Calendar is not a singleton but is a prototype
 
 
-- Comparision with factory:
+- Comparison with factory:
 	-	no interface / interface driven
 	-	Returns the same instance / returns multiple instances (multiple constructors)
 	-	Hard to unit test / testable

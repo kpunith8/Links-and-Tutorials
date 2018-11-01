@@ -74,10 +74,23 @@ import React, { useState, useEffect } from 'react';
 function Counter() {
   const initialCount = () => Number(window.localstorage.getItem('count')) || 0;  
   const [count, setCount] = useState(initialCount);
+  const [person, setPerson] = useState(null);
 
   useEffect(() => {
     window.localstorage.setItem('count', count);
   }, [count]); // To make sure to run this hook only when state changes
+
+  // Passing empty array as second parameter to useEffect will load the data only the component loads for the
+  // first time, like componentDidMount, specifying the state inside the array updates only when state updates
+  // useEffect() can be async for eg:
+
+  useEffect(async () => {
+    const response = await window.fetch('url');
+    const data = await response.json();
+    const [item] = data.results; // It depends on returned value from API
+
+    setPerson(item); // Display person object in UI
+  }, []);
 
   return (
     <button onClick={() => setCount(count + 1)}>count</button>
