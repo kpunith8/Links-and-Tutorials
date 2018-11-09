@@ -1,3 +1,14 @@
+## CSS Basics:
+### Stylesheet origin
+
+  - user agent styles - browser's default styles; they vary slightly from browser to browser, but generally they do the same
+    things: headings (<h1> through <h6>) and paragraphs (<p>) are given a top and bottom
+    margin, lists (<ol> and <ul>) are given a left padding, and link colors and default
+    font sizes are set.
+
+  - author styles - User defined rules; User agent styles have lower priority, so author styles override them.
+
+
 # CSS Basics: Kevin Powell
 
 ## Styling Text:
@@ -73,3 +84,6 @@ aligned style of the list never moves, set this property to `inside` to show alo
   /* stretch - by default; start, end, use, justify-self: end on grid item, base-line */
   align-items: center;
   ```
+
+  ### References
+  - http://www.autoprefixer.github.io

@@ -297,9 +297,28 @@
 	                .collect(toList());
 	```
 
-### Optional
+### Advanced Streams:
 
-- 
+-	Spliterator: The object on which a Stream is built. Main stream API built on top of Spliterator interface
+
+- ArrayList and HashSet have different spliterators.
+
+- `flatMap()` flattens the stream of streams
+	```java
+	// Where s1, s2, and s3 are Stream<String> type
+	Stream<String> stream = Stream.of(s1, s2, s3).flatMap(Function.identity());
+
+	// Function to spilt lines into words
+	Function<String, Stream<String>> splitIntoWords =
+		line -> Pattern.compile(" ").splitAsStream(line);
+	// Pass this function to flatMap as,
+	Stream<String> wordsStream = Stream.of(s1, s2, s3) // stream of streams of lines
+		.flatMap(Function.identity()) // stream of lines
+		.flatMap(splitIntoWords); // stream of words
+
+	// Collect it to set
+	Set<String> words = wordsStream.collect(Collectors.toSet());
+	```
 
 ## References:
 - https://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html
