@@ -317,7 +317,100 @@ to disply the type of Operating System.
   });
   ```
 
-- Delete files older than 7 days in a directory
-  ```javascript
+- use `util` module to deprecate, format, do many more, check the list of items in node console
 
+### Debugging
+
+- debug an node file using, `node debug file.js` it opens debugger in node REPL, type `help` to get the available options
+  to debug
+
+- use `sb(2)` function to set the break point, it sets break point at line 2.
+
+- type `restart` to restart the debugging, if the debugger was stopped.
+
+- use `cont` to continue the script in debug mode, once it stops at line 2, type `repl` to enter the debug REPL mode
+  to inspect the values, type variable name or object name to print the values at that point `eg`: args
+
+- If the break point is in a loop, use `watch()` expressions to watch on particular values, instead of
+  hitting the break points three times `eg:` `watch('arg')` `watch('total')` to watch 2 values in a loop,
+  type `cont` to see watchers set
+
+- To launch it in chrome dev tools, run the following command, `node --inspect --debug-brk index.js`, it gives an url copy the
+  url and paste it in chrome to debug
+
+
+### Streams
+
+- Collections of data that might not be available all at once and don't have to fit in memory.
+
+- 4 types of Streams
+  - Readable - `fs.createReadStream`
+  - Writable - `fs.createWriteStream`
+  - Duplex - `net.Socket`
+  - Transform - `zlib.createGzip`
+
+- All streams are instance of `EventEmitters`
+
+- streams can also piped using `pipe()` function `eg:` `src.pipe(dest)`, use either pipes or events, don't mix them
+
+- Writable stream example
+  ```javascript
+  // It just echos the text typed in
+  const { Writable } = require('stream');
+
+  const outStream = new Writable({
+    write(chunk, encoding, callback) {
+      console.log(chunk.toString());
+      callback();
+    }
+  });
+
+  // streams can be piped using, process.stdin's pipe()
+  process.stdin.pipe(outStream);
+
+  // It also can be written as
+  // process.stdin.pipe(process.stdout);
+  ```
+
+- Readable stream example
+  ```javascript
+  const { Readable } = require('stream');
+
+  const intStream = new Readable({
+    read(size) {
+      this.push(String.fromCharCode(this.currentCharCode++));
+
+      if (this.currentCharCode > 90) { // char code for z
+        this.push(null);
+      }
+    }
+  });
+
+  intStream.currentCharCode = 65;
+
+  //intStream.push('ABSSKSKSKS');
+  // signals the input stream to end
+  //intStream.push(null);
+
+  intStream.pipe(process.stdout);
+  ```
+
+  - `process.stdout.on('error', process.exit)` - to exit the `stdout` on error
+
+- Duplex needs to implement both `read()` and `write()` functions
+
+- Transform stream example using `zlib.createGzip()`
+  ```javascript
+  const fs = require('fs');
+  const zlib = require('zlib');
+  const file = process.argv[2];
+
+  fs.createReadStream(file)
+    .pipe(zlib.createGzip())
+    .on('data', () => console.log('.')) // To give progress info on data event
+    .pipe(fs.createWriteStream(`${file}.gz`))
+    .on('finish', () => console.log('Done')); // To print done on finish event
+
+  // Pass file-name as second parameter in command line
+  // $ node zip.js file.txt
   ```
