@@ -162,6 +162,8 @@
 
 - Source may be unbounded; not finite and size of the source is not known at built time.
 
+- Once the instance created, the instance `will not modify its source`, therefore allowing the `creation of multiple instances` from a single source.
+
 - Stream patterns
 	```java
 	// empty stream
@@ -195,6 +197,11 @@
 	// accept() doesn't return anything and cannot be chained
 	builder.accept("one");
 	Stream<String> stream = builder.build();
+
+	// Stream of arrays
+	String[] arr = new String[]{"a", "b", "c"};
+	Stream<String> streamOfArrayFull = Arrays.stream(arr);
+	Stream<String> streamOfArrayPart = Arrays.stream(arr, 1, 3);
 	```
 
 ### Stream methods
@@ -318,6 +325,34 @@
 
 	// Collect it to set
 	Set<String> words = wordsStream.collect(Collectors.toSet());
+	```
+
+### Other Java features
+
+- To get number of processors `Runtime.getRuntime().availableProcessors()`
+
+- To make use of `ARM` - `Automatic Resource Management`, JDK 7 introduced `try with resource`
+	class should implement `AutoCloseable` to make sure it can be used as follows
+	```
+	// It doesn't require finally block to be added
+	try(Resource resource = new Resource())
+	{
+		// Logic
+	}
+	```
+
+- `ForkJoinPool` for concurrent execution, part concurrent package
+	```java
+	List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+	Stream<Integer> stream = numbers.parallelStream().map(e -> e + 1);
+
+	// Creates 100 threads
+	ForkJoinPool pool = ForkJoinPool(100);
+
+	// stream runs parallelly because terminal operation is in a pool
+	pool.submit(() -> stream.forEach(e -> {}));
+	pool.shutdown();
+	pool.awaitTermination(10, TimeUnit.SECONDS);
 	```
 
 ## References:

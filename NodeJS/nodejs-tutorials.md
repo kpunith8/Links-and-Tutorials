@@ -1,4 +1,4 @@
-# Node.js - Addision Wesley
+## Node.js - Addision Wesley
 
 ```javascript
 $ node debug server.js // Opens the file in debug mode
@@ -139,7 +139,7 @@ console.log('ares of sqaure', sq.area());
 
 - First add the user in command line `npm adduser`, once user created publish the package using `npm publish`, make sure `private` property is removed in the  `package.json`
 
-## Advanced nodeJS: Samer Buna - Plural sight
+## Advanced nodeJS: Samer Buna
 
 ### Architecture
 
@@ -414,3 +414,12 @@ to disply the type of Operating System.
   // Pass file-name as second parameter in command line
   // $ node zip.js file.txt
   ```
+
+## Testing Strategies: Rob Conery
+
+-  
+
+
+### References
+
+- http://www.stripe.com - for Web and mobile payments
