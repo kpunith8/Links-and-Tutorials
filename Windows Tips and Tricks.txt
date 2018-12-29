@@ -1,9 +1,8 @@
-1. Windows CLI tricks:
-----------------------
+## Windows CLI tricks:
 
 * Change the color of CLI
 
-	$color <code> - to see the available colors type help color
+	$color <code> - to see the available colors type $help color
 
 * Hide the folder completely
 
@@ -37,10 +36,12 @@
 	
 * List the commands used in the session hit F7
 
-2. Batch Files:
----------------
+## Batch Files:
 
-# @ECHO off - will not show the user directory info in the CL
-# PAUSE - Will pause for user input
-# START - starts the program specified, for ex: START https://www.google.command
+- @ECHO off - will not show the user directory info in the CL
+- PAUSE - Will pause for user input
+- START - starts the program specified, for ex: START https://www.google.command
+
+## Powershell tutorials:
+
  

@@ -18,7 +18,7 @@
 		return str.toUpperCase(Locale.US);
 	}
 	```
-
+	
 ## Functional Interfaces
 
 - Built in functional interfaces, there are four categories:
@@ -137,6 +137,7 @@
 | **Array Constructor ** | `int[]::new` | `len -> new int[len]`
 
 ## Streams
+
 - Stream is a sequence of elements from a source that supports aggregate operations.
 
 	- Sequence of elements: A stream provides an interface to a sequenced set of values of a specific element type.
@@ -162,9 +163,8 @@
 
 - Source may be unbounded; not finite and size of the source is not known at built time.
 
-- Once the instance created, the instance `will not modify its source`, therefore allowing the `creation of multiple instances` from a single source.
-
-- Stream patterns
+- Once the instance created, the instance `will not modify its source`, therefore allowing the `creation of multiple instances` from a single
+ source.
 	```java
 	// empty stream
 	Stream.empty();
@@ -176,7 +176,7 @@
 	Stream.of("one", "two", "three");
 
 	// constant stream
-	Stream.generate(() -> "one");
+	Stream.generate(() -> "one").limit(10);
 
 	// growing stream
 	Stream.iterate("+", s -> s + , "+");
@@ -204,6 +204,12 @@
 	Stream<String> streamOfArrayPart = Arrays.stream(arr, 1, 3);
 	```
 
+### Types of Streams
+
+- `IntStream`, `DoubleStream`, and `LongStream` - used to avoid auto boxing and un boxing
+- Stream can be converted to any primitive streams using `mapToInt(ToIntFunction<T>)`, `mapToLong(ToLongFunction<T>)`,
+	and `mapToDouble(ToDoubleFunction<T>)`
+
 ### Stream methods
 - `map()` call can change the type of the stream.
 
@@ -227,6 +233,21 @@
 - `collect(toList())` static method from the `java.util.stream.Collectors` can be used to return a list from processed stream.
 
 > NOTE: if no terminal operation - no data is processed from a stream and no data is returned
+
+## Parallel Streams
+
+- Stateful streams will not be computed efficiently in parallel, should avoid using parallel stream for ex: using `skip(2)` or `limit(5)` on
+	a stream
+
+- Stateless stream - No outside information is needed to compute anything
+
+- Making a list unordered will increase the performance on parallel stream
+
+- Controlling the number of cores used by parallel streams
+	```java
+	// Uses only 2 cores, by default fork/join used by parallel stream uses all available CPU cores in the system
+	System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "2");
+	```
 
 ### Selecting ranges of data in a stream
 - `skip()` and `filter()`
@@ -275,7 +296,7 @@
 	```
 
 - Let’s say we need to find all transactions of type grocery and return a list of transaction IDs sorted in decreasing order of transaction value.
-- In Java SE 7, we’d do that as shown.
+- In Java-7, we’d do that as shown.
 	```java
 	List<Transaction> groceryTransactions = new Arraylist<>();
 	for(Transaction t: transactions){
@@ -289,12 +310,12 @@
 	  }
 	});
 	List<Integer> transactionIds = new ArrayList<>();
-	for(Transaction t: groceryTransactions){
+	for(Transaction t : groceryTransactions){
 	  transactionsIds.add(t.getId());
 	}
 	```
 
-- In Java SE 8, we’d do it as shown.
+- In Java-8, we’d do it as shown.
 	```java
 	List<Integer> transactionsIds =
 	    transactions.stream()
@@ -313,11 +334,17 @@
 - `flatMap()` flattens the stream of streams
 	```java
 	// Where s1, s2, and s3 are Stream<String> type
+	Stream<Stream<String>> streamOfStreams = Stream.of(s1, s2, s3);
+
+	// Flatten the stream of stream using flatMap
 	Stream<String> stream = Stream.of(s1, s2, s3).flatMap(Function.identity());
 
 	// Function to spilt lines into words
-	Function<String, Stream<String>> splitIntoWords =
-		line -> Pattern.compile(" ").splitAsStream(line);
+	Function<String, Stream<String>> splitIntoWords = line -> Pattern.compile(" ").splitAsStream(line);
+
+	// or
+	Function<String, Stream<String>> splitIntoWords = line -> Stream.of(line.split(" "));
+
 	// Pass this function to flatMap as,
 	Stream<String> wordsStream = Stream.of(s1, s2, s3) // stream of streams of lines
 		.flatMap(Function.identity()) // stream of lines
@@ -326,6 +353,53 @@
 	// Collect it to set
 	Set<String> words = wordsStream.collect(Collectors.toSet());
 	```
+
+### State of a stream
+
+- It could be in any one of the state, Ordered, Distinct, Sorted, Sized, Non Null, Immutable, Concurrent, and Sub sized
+
+### Optionals
+
+-	Used as special type of stream which would hold one or zero element
+
+- Optional wraps that may not exist, which can be empty
+	```java
+	// pattern-1
+	Optional<Person> opt = ...;
+	
+	if(opt.isPresent()) {
+		Person p = opt.get();
+	} else {
+		// Handle errors
+	}
+	
+	// pattern-2
+	Person p1 = opt.orElse(Person.getDefault());
+	
+	// pattern-3
+	Person p2 = opt.orElseGet(() -> Person.getDefault());
+	
+	Optional<String> empty = Optional.empty();
+	
+	// throws NPE if null passed
+	Optional<String> nonEmpty = Optional.of(s); 
+	
+	// returns empty if null is passed
+	Optional<String> couldBeEmpty = Optional.ofNullable(s); 
+	```
+
+- example
+	```java 
+	public static Optional<Double> sqrt(Double d) {
+		return d > 0d ? Optional.of(Math.sqrt(d)) : Optional.empty();
+	}
+	
+	doubles.stream().forEach(d -> NewMath.sqrt(d)).ifPresent(result::add);
+	```
+
+### Collectors 
+
+- 
 
 ### Other Java features
 
@@ -341,7 +415,7 @@
 	}
 	```
 
-- `ForkJoinPool` for concurrent execution, part concurrent package
+- `ForkJoinPool` for concurrent execution, part of concurrent package
 	```java
 	List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 	Stream<Integer> stream = numbers.parallelStream().map(e -> e + 1);

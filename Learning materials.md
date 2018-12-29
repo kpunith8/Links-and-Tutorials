@@ -46,6 +46,7 @@
 - https://www.robinwieruch.de/essential-react-libraries-framework/ - React
 - https://daveceddia.com/ - React
 - https://www.baeldung.com - Java
+- https://steemit.com
 
 ## Tutorials:
 
@@ -71,6 +72,8 @@
 * `sequelize` - ORM
 * `font-awesome` for icons
 * `doc`z - For documentation site for react
+* `async` - for asynchrous JS
+* `node-orm2` - node.js ORM library
 
 ### React Libraries:
 
@@ -79,22 +82,31 @@
 * `GraphQL` - `relay`, `apolo`, `graphcool` - serverless GraphQL
 * `reactstrap` - wrapper for Bootstrap 4.0 for react
 * `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
-* `reselect`
+* `reselect` and `recompose`
 * `react-cache` - To cache the data
 * `react-testing-library` - By Kent C Dodds
 
 ### Common libraries:
 
 * `lodash` - Reduces boiler plate for array, map and string and operations.
-* `express` - server container for node.js
+* `express` - server container for node.js (hapi)
 * `ember`
+* `underscore` - JS util functions for common tasks
 
 ## Tools:
 
 -	scratchpad.io
 -	jsonplaceholder -> Fake Online REST API for Testing and Prototyping
 -	https://ckeditor.com/ - WYSIWYG editor
+- codesandbox.io
 
 ### Java Libraries
 
 - Jackson - for JSON
+
+### Concepts look out-for
+
+- Error boundries
+- redux, middlewares, redux-thunk
+- forward-ref 
+- higher order componets

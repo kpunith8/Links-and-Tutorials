@@ -1,12 +1,12 @@
 ## CSS Basics:
 ### Stylesheet origin
 
-  - user agent styles - browser's default styles; they vary slightly from browser to browser, but generally they do the same
-    things: headings (<h1> through <h6>) and paragraphs (<p>) are given a top and bottom
-    margin, lists (<ol> and <ul>) are given a left padding, and link colors and default
-    font sizes are set.
+- user agent styles: browser's default styles; they vary slightly from browser to browser, but generally they do the same
+  things: headings `<h1> through <h6>` and paragraphs `<p>` are given a top and bottom
+  margin, lists `<ol> and <ul>`are given a left padding, and link colors and default
+  font sizes are set.
 
-  - author styles - User defined rules; User agent styles have lower priority, so author styles override them.
+- author styles - User defined rules; User agent styles have lower priority, so author styles override them.
 
 
 # CSS Basics: Kevin Powell
