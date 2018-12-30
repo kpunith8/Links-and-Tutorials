@@ -32,15 +32,15 @@ an alternate path for \data\db by setting the path dbpath in mongod.exe. For the
 	logpath=\mongodb\mongo-sever.log
 	verbose=vvvvv -> one v being least verbose, 5 v's being most verbose
 	```
-	
+
 - run it as,
 	```
 	$ mongod -f c:\sample\mongod.conf
-	
+
 	// Or path can be set in command line as follws,
 	$ mongod.exe --dbpath "d:\set-up\mongodb\data"
 	```
-		
+
 - To start MongoDB, run `mongod.exe`,
 	```
 	$ C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe
@@ -62,7 +62,7 @@ Press the `Win key`, type `cmd.exe`, and press `Ctrl+Shift+Enter` to run the Com
 	mkdir c:\data\db
 	mkdir c:\data\log
 	```
-	
+
 - Create a configuration file.
 	- The file must set `systemLog.path`. Include additional configuration options as appropriate.
 		For example, create a file at `C:\Program Files\MongoDB\Server\3.4\mongod.cfg` that specifies both `systemLog.path` and `storage.dbPath`
@@ -73,11 +73,11 @@ Press the `Win key`, type `cmd.exe`, and press `Ctrl+Shift+Enter` to run the Com
 		storage:
 			dbPath: c:\data\db
 		```
-	
-> Important: Run all of the following commands in Command Prompt with “Administrative Privileges”
+
+> Important: Run all of the following commands in Command Prompt with `Administrative Privileges`
 
 - Install the MongoDB service.
-	
+
 	- Install the MongoDB service by starting `mongod.exe` with the `--install` option and
 		the `--config` option to specify the previously created configuration file.
 		```
@@ -109,8 +109,8 @@ Press the `Win key`, type `cmd.exe`, and press `Ctrl+Shift+Enter` to run the Com
 ### Working with mongodb from command prompt
 - Create and use database
 	```javascript
-	// shows the db currently in use 
-	$db 
+	// shows the db currently in use
+	$db
 
 	// shows the list of databases
 	$show dbs
@@ -130,7 +130,7 @@ Press the `Win key`, type `cmd.exe`, and press `Ctrl+Shift+Enter` to run the Com
 	$use myNewDatabase
 	$db.myCollection.insertOne( { x: 1 } );
 
-	// Remove a record 
+	// Remove a record
 	$db.collectionName.remove("objectID");
 
 	// drop a collection
@@ -161,8 +161,8 @@ Press the `Win key`, type `cmd.exe`, and press `Ctrl+Shift+Enter` to run the Com
 	@REM Arbiter
 	start "a" mongod --dbpath ./db3 --port 50000 --replSet "demo"
 	```
-	
-- or run the each instance separately, 
+
+- or run the each instance separately,
 	```javascript
 	$ start "a" mongod --dbpath ./db3 --port 50000 --replSet "demo"
 	```
@@ -173,35 +173,33 @@ Press the `Win key`, type `cmd.exe`, and press `Ctrl+Shift+Enter` to run the Com
 
 - create `demoConfig` as, mongo shell interprets as javascript interpreter
 	```javascript
-  $ var demoConfig = { _id: "demo",
-										 	members: [
-												{
-													"_id": 0,
-													"host": "localhost: 30000",
-													"priority": 10
-												},
-												{
-													"_id": 1,
-													"host": "localhost: 40000",
-												},
-												{
-													"_id": 2,
-													"host": "localhost: 50000",
-													arbiterOnly: true
-												}
-											]
-										};
+	$ var demoConfig = { _id: "demo",
+		members: [{
+				"_id": 0,
+				"host": "localhost: 30000",
+				"priority": 10
+			},
+			{
+				"_id": 1,
+				"host": "localhost: 40000",
+			},
+			{
+				"_id": 2,
+				"host": "localhost: 50000",
+				arbiterOnly: true
+			}]
+	};
 	```
-	
+
 - Initialise the replica set
 	```javascript
 	$ rs.initiate(demoConfig)
 	```
-	
+
 ### Mongo Shell
 ```javascript
 // To rotate the same log file, `printjson()` method used to print it as json to output
-$ mongo localhost/admin --eval "db.runCommand({logRotate: 1})" 
+$ mongo localhost/admin --eval "db.runCommand({logRotate: 1})"
 ```
 
 - We can also pass `JavaScript` scripts as input to the shell,
@@ -216,11 +214,11 @@ $ mongo localhost/admin --eval "db.runCommand({logRotate: 1})"
 	};
 
 	userCount();
-		
+
   // Run this script as,
 	$ mongo userCount.js
 	```
-		
+
 - Add `dropDatabase` prototype a script so that dropping the db will show a message, save it as, `safer.js`
 	```javascript
 	DB.prototype.dropDatabase = function() {
@@ -228,32 +226,32 @@ $ mongo localhost/admin --eval "db.runCommand({logRotate: 1})"
 	}
 
 	db.dropDatabase = DB.prototype.dropDatabase;
-	
-	// run it as,	
+
+	// run it as,
 	$ mongo safer.js --shell // --shell option helps stay in the shell
 	```
-	
-- set `EDITOR` to edit the content in the command line, 
+
+- set `EDITOR` to edit the content in the command line,
 	```javascript
 	$ set EDITOR="C:\Program Files\editor.exe"
-	
+
 	// then run
 	$ edit myProgram
 	```
 
-- To run the script whenever shell loads, put the script to `.mongorc.js` file which will reside in 
-`users/<user-name>/.mongorc.js`, which will be useful in production. 
+- To run the script whenever shell loads, put the script to `.mongorc.js` file which will reside in
+`users/<user-name>/.mongorc.js`, which will be useful in production.
 Add `safer.js` file content to `mongorc.js` file and it won't allow dropping database in production.
 
 - To not to load the `mongorc.js` file to enforce restrictions, run the following command as follows
 	```javascript
 	// it will be useful during development to not to run mongorc.js file every time shell loads
-	$ mongo --norc 
+	$ mongo --norc
 	```
-		
+
 - In production we can disable the `dropDatabase` and `shutdownServer`, add the following lines to `mongorc.js` file to enforce it,
 	```javascript
-	var _no_ = function() { 
+	var _no_ = function() {
 		print('Not Allowed!');
 	}
 	DB.prototype.dropDatabase = _no_;
@@ -269,7 +267,7 @@ Add `safer.js` file content to `mongorc.js` file and it won't allow dropping dat
 
 - Stored as `BSON`; Binary JSON - Data storage serialization format;
 Overhead of marshalling data to disk and usage of data in the server is efficient
- 
+
 - Rules to store data:
 	- A document must have an `_id` field, size of document is `16MB`.
 
@@ -280,8 +278,8 @@ Overhead of marshalling data to disk and usage of data in the server is efficien
 - If no `_id` specified while inserting data to collection, mongodb inserts `ObjectId()`; which is unique and has the following properties,
 `ObjectId().getTimestamp()`; returns ISODate()
 
-- It allows to use the same `_id` for `inserting multiple documents` but it over writes the data of the `_id` which is 
-already exists with the new data, it updates the fields as well, it happens if `save()` function is used, 
+- It allows to use the same `_id` for `inserting multiple documents` but it over writes the data of the `_id` which is
+already exists with the new data, it updates the fields as well, it happens if `save()` function is used,
 if `insert()` function used, it errors out the `duplicate key error`.
 
 ### update command: It is atomic with in a document - no two users can update:
@@ -290,8 +288,8 @@ $ db.foo.update(query, update, options);
 
 // $inc - increments the value by 1
 $ db.test.update({ _id:1 }, { $inc: { x:1 } });
- 
-// $set - sets new field to the test collection 
+
+// $set - sets new field to the test collection
 $ db.test.update({ _id: 1 }, { $set: { y:10 } });
 
 // unsets the field in the collection passed to $unset
@@ -307,23 +305,23 @@ $push: { things: "one" }
 $addToSet: { things: "one" }
 
 // removes all instance of an item in an array, `three` items in a things will be pulled out of an array
-$pull: { things: 'three'} 
+$pull: { things: 'three'}
 
 // removes the last element in the array, -1 removes the first element in the array
-$pop: {things: 1} 
+$pop: {things: 1}
 ```
 
 - Multi-Update
 	```javascript
 	// Updates things with 4 in all the documents
-	$ db.foo.update({}, { $push: { things: 4 }, { multi: true }); 
+	$ db.foo.update({}, { $push: { things: 4 }, { multi: true });
 
 	// Updates only the array has 2 in it
 	$ db.foo.update({things: 2}, { $push: { things: 42 }, { multi: true });
 	```
 
 ### Finding Documents
-```javascript 
+```javascript
 $ db.foo.find(query, projection);
 
 // returns only id field matching the query, projection can be set to 0 to not to show the field names, and multiple
@@ -334,7 +332,7 @@ $ db.foo.find({_id: 1}, {_id: 1, name: 0});
 $ db.foo.find({_id: {$gt: 5}});
 
 // Negating
-$ db.foo.find({_id: {$not: {$gt: 5}}}); 
+$ db.foo.find({_id: {$not: {$gt: 5}}});
 
 // $nin for not in
 $ db.foo.find({_id: {$in: [1,3] } });
@@ -344,8 +342,8 @@ $ db.foo.find({tags: 'cute'}, {name: 1});
 
 // $all: ['cute', 'ocean'] to get both cute and ocean tags, can use dot notation to access nested fields
 // {"info:canFly": true, "info:type": 'bird'}
-$ db.foo.find({tags: {$in: ['cute', 'ocean']}}); 
-		
+$ db.foo.find({tags: {$in: ['cute', 'ocean']}});
+
 // checking for null on dot notation, will return one with null and one without that property exists in the document.
 // checks for the property canFly exists in the document
 $ db.foo.find({"info:canFly": { $exists: true }});
@@ -357,7 +355,7 @@ $ find();
 $ db.foo.find({}).sort({name: 1});
 
 // can be used to limit the number of documents to be displayed or fetched
-$ limit(3) 
+$ limit(3)
 
 // fetches only one record - it has no cursor
 $ findOne({})
@@ -367,12 +365,12 @@ $ findOne({})
 - Regular indexing (B-Tree), Geo indexing, text indexing, hashed indexed (sharding), TTL - time to leave indexing
 	```javascript
 	$ db.foo.ensureIndex(keys, options);
-	
+
 	// explain() function on cursor will tell whether it has index or not, cursor property tells whether it is indexed or basicCursor
-	
+
 	// 1 means Ascending order alphabetically and -1 for Descending order
-	$ db.animals.ensureIndex({name: 1}); 
-	
+	$ db.animals.ensureIndex({name: 1});
+
 	// ns - name space
 	$ db.system.indexes.find({ns: 'test.animals'}, {key: 1});
 	```
