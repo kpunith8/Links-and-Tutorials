@@ -137,7 +137,7 @@ console.log('ares of sqaure', sq.area());
 
 ### Publish npm package to npm registry
 
-- First add the user in command line `npm adduser`, once user created publish the package using `npm publish`, make sure `private` property is removed in the  `package.json`
+- First add the user in command line `npm adduser`, once the user created publish the package using `npm publish`, make sure `private` property is removed in the  `package.json`
 
 ## Advanced nodeJS: Samer Buna
 
@@ -173,26 +173,40 @@ includes thread pool to handle async operations, provides event loop
 - Tab on empty empty node console brings all possible options available in node
   ```javascript
   // type it to enter the REPL mode - Read Eval Print Loop
-  $ node
-  $ var arr = [];
+  $node
+  $var arr = [];
   undefined
 
   // brings available operations on array
-  $ arr.<tab>
+  $arr.<tab>
 
   // remembers the last evaluated value.
   $_
 
-  // brings the special variables associated with node,
+  // brings the special variables associated with node
   $.<tab>  
   // for ex: .break, .clear, .help, .load, .editor, .save
 
   // checks for bad syntax in the source file,
-  $ node -c sample.js  // -r option used to preload modules
+  $node -c sample.js  // -r option used to preload modules
 
   // parameters are passed after process keyword added
-  $ node -p "process.argv.slice(1)" test 42
+  $node -p "process.argv.slice(1)" test 42
   // it prints ['test', '42'] as strings
+	
+	`Ctrl+L` - to clear the session and clear the command line
+	
+	// Editor to code in command line
+	$.editor 
+	
+	// Get the help 
+	$.help
+	
+	// Save the content typed in REPL session to a file 
+	$.save <file-name.js>
+	
+	// Load the saved file using 
+	$.load <file-name.js>
   ```
 
 - Creating custom REPL
@@ -201,7 +215,7 @@ const repl = require('repl');
 let r = repl.start({
     ignoreUndefined: true,
     replMode: repl.REPL_MODE_STRICT
-});
+	});
 // If you want add lodash to global context, which preloads the lodash
 r.context.lodash = require('lodash');
 ```
@@ -414,11 +428,17 @@ to disply the type of Operating System.
   // Pass file-name as second parameter in command line
   // $ node zip.js file.txt
   ```
+	
+### Using curl
 
-## Testing Strategies: Rob Conery
+- To make a get request
+	`$curl http://localhost:8080`
 
--  
-
+- Upload a file 
+	`$curl -F 'data=@path/file-path/name' http://localhost:8080` or `$curl --upload-file <path-of-the-file> http://localhost:8080`
+	
+- Upload multiple files 
+	`$curl -F 'fileX=@path/file-name' -F 'fileY=@path/filename' http://localhost:8080`
 
 ### References
 
