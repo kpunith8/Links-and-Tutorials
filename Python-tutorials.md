@@ -125,6 +125,19 @@ finally:
 - `datetime.date.today()` to get the today's date
 
 ## Modules and Packages
-- A module  is a file that can be imported under one import ex: `import my_module`
-- A package is a collection of modules in directories  that  give a package hierarchy ex: `from my_package.some_file import some_func`
-- Module can imported using an alias `import my_module as mm`
+-	A module  is a file that can be imported under one import ex: `import my_module`
+- A package is a collection of modules in directories that  give a package hierarchy
+	```python
+	# To load specific functions from a module
+  from some_file import some_func, someother_func
+  ```
+- Module can be imported using an alias, `import my_module as mm`
+- To install publicaly availble modules using, `pip install <module-name>`
+
+### __name__
+- `if __name__ == "__main__"` is designed to help indicate where function calls are coming from when
+	working with multiple script files
+- `__name__` is a built-in variable which evaluates to the name of the current module.
+	However, if a module is being run directly, then `__name__` instead set to the string `"__main__"`
+- It tests whether your script is being run directly or being imported by somewhere else.
+

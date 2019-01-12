@@ -374,3 +374,6 @@ $ findOne({})
 	// ns - name space
 	$ db.system.indexes.find({ns: 'test.animals'}, {key: 1});
 	```
+
+## Aggregation
+- 

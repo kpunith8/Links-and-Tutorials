@@ -74,6 +74,8 @@
 * `doc`z - For documentation site for react
 * `async` - for asynchrous JS
 * `node-orm2` - node.js ORM library
+* `LABjs` - 
+*	`grips` - templating engine
 
 ### React Libraries:
 
