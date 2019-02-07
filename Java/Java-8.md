@@ -21,6 +21,12 @@
 	
 ## Functional Interfaces
 
+- An interface with only one abstract method
+
+- Methods from `Object` do not count
+
+- May be annotated with `@FunctionalInterface`, but optional
+
 - Built in functional interfaces, there are four categories:
 
 	- `Consumer<T>` - consumes an object, and doesn't return anything, has `accept(T t)` method
@@ -399,7 +405,6 @@
 
 ### Collectors 
 
-- 
 
 ### Other Java features
 

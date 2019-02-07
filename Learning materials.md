@@ -112,3 +112,7 @@
 - redux, middlewares, redux-thunk
 - forward-ref 
 - higher order componets
+
+- https://javarevisited.blogspot.com/2017/01/how-to-prepare-for-java-interviews.html
+- https://javarevisited.blogspot.com/2018/07/java-multi-threading-interview-questions-answers-from-investment-banks.html
+- http://www.java67.com/2015/07/how-to-stop-thread-in-java-example.html

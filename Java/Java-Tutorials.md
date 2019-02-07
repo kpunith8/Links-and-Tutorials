@@ -608,3 +608,27 @@ class Gen<T extends MyClass & MyInterface> {
 		filterBean.getYear();
 	}
 	```
+	
+### Threads and Concurrency
+
+- Use `synchronize` keyword to avoid the `race condtion` from two threads accessing the same variable or data, 
+	it creates the lock, so that only one can hold the lock to access the data, once lock released other thread can 
+	access the same variable or data.
+
+- Using `synchronize` keyword on a method declaration uses `implicit lock object` i.e class object in case of 
+	`static method` or `instance lock object` in case of a non-static method.
+
+- A `Thread` is started in Java by calling the `start()` method of `java.lang.Thread`.
+
+- Direct call to the `run()` executed in the same thread which calls the `run()` method. 
+	JVM will not create a new thread until you call the `start()` method.
+	
+- When you call the `Thread.start()` method, then the code inside `run()` method 
+	will be executed on a new thread, which is actually created by the start() method.
+	
+- You can call the `run()` multiple times, JVM will not throw any error, but you cannot call the `start()` method 
+	on same thread instance.
+	
+- One of the key difference between `wait()` and `sleep()` method is that, 
+	`Thread.sleep()` puts the current thread on wait but doesn't release any lock it is holding, 
+	but `wait()` releases the lock it holds before going into blocking state.
