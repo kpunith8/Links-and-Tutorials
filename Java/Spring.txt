@@ -85,3 +85,39 @@
 
   - Java Configuration:
     - add @PropertySource("app.properties") to
+		
+
+# Rest Services using JAX-RS: `Koushik` - `Java Brains`
+
+- Use `@Context UriInfo` and` @Context HtppHeaders` to get additions info of the query params.
+
+- Use `@BeanParam` to get all param in single class, instead of using,
+	```java
+	@GET
+	public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
+	@QueryParam("size") int size)
+	{
+	}
+	```
+
+-	Create a class to assign these params as follows,
+	```java
+	class FilterBean
+	{
+		private @QueryParam("year") int year;
+		private @QueryParam("start") int start;
+		private @QueryParam("size") int size;
+		// Write getters and setters for each query params
+	}
+	```
+
+- Replace the above call as follows,
+	```java
+	@GET
+	public List<Message> getMessages(@BeanParam FilterBean filterBean)
+	{
+		// access them using
+		filterBean.getYear();
+	}
+	```
+

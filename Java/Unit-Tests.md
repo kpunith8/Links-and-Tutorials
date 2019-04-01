@@ -166,7 +166,16 @@ public void testLoginSuccessful_captureArguments()
 		}
 	}
 	```
+	
+### Mocking a class implementing multiple interfaces
 
+- If a class implements multiple interfaces, then withSettings can be used to build a mock class as follows
+	```java
+	MockSettings settings = Mockito.withSettings();
+  EmployeeManager mockEmployeeManager = Mockito.mock(EmployeeManager.class,
+  settings.extraInterfaces(SalaryStructure.class));
+	```
+	
 ### Limitations
 
 - Cannot mock static methods, private methods, and `hashCode() and equals()` methods
