@@ -227,6 +227,27 @@ window.onload = function() {
 ## Regular expressions
 - https://regex101.com/
 
+- `test()` function to test whether the given pattern exists in a given string, pattern should be
+	mentioned with in `/test-pattern/`
+	```javascript
+	const str = "test string";
+	const pattern = /test/;
+	pattern.test(str); // returns true if given string matches the pattern
+	```
+- add flag `i` to ignore the case-sensitiveness in the string to be matched eg: `const pattern=/test/i`
+
+- `match()` function can be used to extract the actual matches, returns an array of matched string only one string is matched
+	```javascript
+	"Hello, World!".match(/Hello/);
+	// Returns ["Hello"]
+	let ourStr = "Regular expressions";
+	let ourRegex = /expressions/;
+	ourStr.match(ourRegex);
+	// Returns ["expressions"]
+	```
+- add flag `g` to pattern to match more than once in a given string eg: `const pattern=/test/g`
+
+
 - `/text/gi` - `g` specifies all matches in the file or object, `i` specifies for case insensitive.
 
 - `/[ti]ext/g` - matches `t` or `i` as first character in the text.

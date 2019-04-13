@@ -98,3 +98,18 @@ function newItemsCheapestFirst(items) {
     });
 }
 ```
+
+* Compute the square of positive integeres (don't consider negative numbers)
+	```javascript
+	const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+
+	const squareList = (arr) => {
+	  "use strict";
+
+	  const squaredIntegers = arr.filter(c => Number.isInteger(c)).filter(a => (Math.sign(a) == 1)).map(b  => b * b);
+
+	  return squaredIntegers;
+	};
+
+	const squaredIntegers = squareList(realNumberArray);
+	```

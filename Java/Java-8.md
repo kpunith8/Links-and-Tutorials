@@ -18,7 +18,7 @@
 		return str.toUpperCase(Locale.US);
 	}
 	```
-	
+
 ## Functional Interfaces
 
 - An interface with only one abstract method
@@ -242,7 +242,7 @@
 
 ## Parallel Streams
 
-- Stateful streams will not be computed efficiently in parallel, should avoid using parallel stream for ex: using `skip(2)` or `limit(5)` on
+- Statefull streams will not be computed efficiently in parallel, should avoid using parallel stream for ex: using `skip(2)` or `limit(5)` on
 	a stream
 
 - Stateless stream - No outside information is needed to compute anything
@@ -263,6 +263,17 @@
 				.limit(3)
 				.filter(age -> age > 20)
 				.forEach(System.out::println);
+	```
+
+- Split into sublists of size N adjacent elements
+	```java
+	int SIZE = names.size(); // names is a List<Name>
+	List<List<String>> splitIntoGroupOfWords(int sizeOfTheGroup)
+	{
+		return IntStream.range(0, (SIZE + sizeOfTheGroup - 1) / sizeOfTheGroup)
+			.mapToObj(i -> names.subList(sizeOfTheGroup * i, Math.min(sizeOfTheGroup*(i + 1))))
+			.collect(toList());
+	}
 	```
 
 ### Simple reductions
@@ -372,38 +383,38 @@
 	```java
 	// pattern-1
 	Optional<Person> opt = ...;
-	
+
 	if(opt.isPresent()) {
 		Person p = opt.get();
 	} else {
 		// Handle errors
 	}
-	
+
 	// pattern-2
 	Person p1 = opt.orElse(Person.getDefault());
-	
+
 	// pattern-3
 	Person p2 = opt.orElseGet(() -> Person.getDefault());
-	
+
 	Optional<String> empty = Optional.empty();
-	
+
 	// throws NPE if null passed
-	Optional<String> nonEmpty = Optional.of(s); 
-	
+	Optional<String> nonEmpty = Optional.of(s);
+
 	// returns empty if null is passed
-	Optional<String> couldBeEmpty = Optional.ofNullable(s); 
+	Optional<String> couldBeEmpty = Optional.ofNullable(s);
 	```
 
 - example
-	```java 
+	```java
 	public static Optional<Double> sqrt(Double d) {
 		return d > 0d ? Optional.of(Math.sqrt(d)) : Optional.empty();
 	}
-	
+
 	doubles.stream().forEach(d -> NewMath.sqrt(d)).ifPresent(result::add);
 	```
 
-### Collectors 
+### Collectors
 
 
 ### Other Java features

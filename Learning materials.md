@@ -74,7 +74,7 @@
 * `doc`z - For documentation site for react
 * `async` - for asynchrous JS
 * `node-orm2` - node.js ORM library
-* `LABjs` - 
+* `LABjs` -
 *	`grips` - templating engine
 
 ### React Libraries:
@@ -110,7 +110,7 @@
 
 - Error boundries
 - redux, middlewares, redux-thunk
-- forward-ref 
+- forward-ref
 - higher order componets
 
 - https://javarevisited.blogspot.com/2017/01/how-to-prepare-for-java-interviews.html
