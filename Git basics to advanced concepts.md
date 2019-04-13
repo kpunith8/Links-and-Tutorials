@@ -1,5 +1,37 @@
 ## Git: Basic to advanced concepts
 
+### Git Configuration
+
+- To set user name and email address
+```
+git config --global user.name "Punith K"
+$ git config --global user.email "PunithK@gmail.com"
+```
+- Set `notepad++` as your default editor, it can be any text editor of your choice, by default git ships, `vim` as default editor.
+```
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+```
+
+- By default git supports 260 character file paths. This has been fixed since git-bash 1.9, but it's not turned on by default.
+```
+git config --global core.longpaths true
+```
+
+- If you're having issues cloning long file paths try the following:
+```
+git clone -c core.longpaths=true <your.url.here>
+```
+
+- Filename too long in git for windows:
+```
+git config --system core.longpaths true
+```
+
+- Set merge conflicts style which shows `ours` and `theirs` in the merge conflict which is easier to resolve merge conflict
+```
+git config --global merge.conflictstyle diff3
+```
+
 ### Adding an existing project
 
 - Initialize a git repository
@@ -41,38 +73,6 @@ git branch
 - Push the created branch to remote
 ```
 git push origin <branch-name>
-```
-
-### Git Configuration
-
-- To set user name and email address
-```
-git config --global user.name "Punith K"
-$ git config --global user.email "PunithK@gmail.com"
-```
-- Set `notepad++` as your default editor, it can be any text editor of your choice, by default git ships, `vim` as default editor.
-```
-git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
-```
-
-- By default git supports 260 character file paths. This has been fixed since git-bash 1.9, but it's not turned on by default.
-```
-git config --global core.longpaths true
-```
-
-- If you're having issues cloning long file paths try the following:
-```
-git clone -c core.longpaths=true <your.url.here>
-```
-
-- Filename too long in git for windows:
-```
-git config --system core.longpaths true
-```
-
-- Set merge conflicts style which shows `ours` and `theirs` in the merge conflict which is easier to resolve merge conflict
-```
-git config --global merge.conflictstyle diff3
 ```
 
 ### To get the last 5 log entries for the specific user
