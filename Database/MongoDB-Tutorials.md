@@ -1,5 +1,22 @@
 ## MongoDB: NoSQL database - document database
 
+## Mongodb - cloud - credentials and cluster link
+- Connect with Java
+  ```
+  mongodb+srv://root:<password>@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true
+  ```
+  ```java
+  MongoClientURI uri = new MongoClientURI(
+      "mongodb+srv://root:<password>@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true");
+
+  MongoClient mongoClient = new MongoClient(uri);
+  MongoDatabase database = mongoClient.getDatabase("test");
+  ```
+- access in windows mongo-shell:
+  ```
+  mongo "mongodb+srv://mongo-cluster-qclzr.mongodb.net/test" --username root
+  ```
+
 ### Links and references:
 - https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
@@ -376,4 +393,4 @@ $ findOne({})
 	```
 
 ## Aggregation
-- 
+-

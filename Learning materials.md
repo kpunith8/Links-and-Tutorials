@@ -105,6 +105,11 @@
 ### Java Libraries
 
 - Jackson - for JSON
+- Vert.X - reactive programming library from eclipse
+- RxJava - Reactive programing library from netflix
+- Kafka, Aka
+- lombok - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
+- Spock - Unit test framework
 
 ### Concepts look out-for
 
