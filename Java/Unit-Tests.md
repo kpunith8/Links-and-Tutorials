@@ -22,6 +22,8 @@
 
 ## Mockito
 
+- Mockito uses proxy based approach to intercept calls, whereas powermock used a custom loader and manipulates the byte code.
+
 - If you are using annotations to mock a class, make sure it is initialized in a method with JUnit4's `@Before` annotation, since
 annotations don't initialize themselves, for ex: In this case it is initialized in a `setUp()`
 	```java
@@ -95,6 +97,7 @@ doReturn(true).when(mockWebService).isOffline();
 given(mockWebService.isOnline()).willReturn(true);
 ```
 
+
 ### Capturing arguments
 
 ```java
@@ -114,6 +117,11 @@ public void testLoginSuccessful_captureArguments()
 	verify(mockLoginInterface).onLoginSuccess();
 }
 ```
+
+### Matchers
+
+-	`Matchers.eq()` - used to match references
+- `Matchers.any()` - used to match specific values, `anyDouble(), anyInt(), any(String.class), anySet(), antSetOf(String.class)`
 
 ### Custom Matchers
 
@@ -166,7 +174,7 @@ public void testLoginSuccessful_captureArguments()
 		}
 	}
 	```
-	
+
 ### Mocking a class implementing multiple interfaces
 
 - If a class implements multiple interfaces, then withSettings can be used to build a mock class as follows
@@ -175,7 +183,7 @@ public void testLoginSuccessful_captureArguments()
   EmployeeManager mockEmployeeManager = Mockito.mock(EmployeeManager.class,
   settings.extraInterfaces(SalaryStructure.class));
 	```
-	
+
 ### Limitations
 
 - Cannot mock static methods, private methods, and `hashCode() and equals()` methods

@@ -1,3 +1,50 @@
+### Must know concepts
+
+- `typeof` operator on different values
+	```javascript
+	typeof 100n = 'bigint';
+	typeof NaN = 'number';
+
+	typeof Object = 'function'
+
+	typeof {} = 'object';
+	typeof [] = 'object';
+	typeof new Object() = 'object';
+	typeof null = 'object';
+	```
+- `in` operator - can be used to check if a `property name` exists in an object
+	```javascript
+	"c" in {"a": 1, "b": 1, "c": 1}; // true
+	1 in {"a": 1, "b": 1, "c": 1}; // false, 1 is not a property
+	```
+
+- When used together with `arrays`, will check if an index exists.
+	```javascript
+	"c" in ["a", "b", "c"]; // false
+	1 in ["a", "b", "c"]; // true
+	```
+> Note, it is ignorant of actual value(in either arrays or objects.)
+
+- It allows to check properties on built-in data types.
+	```javascript
+	"length" in []; // true
+	"length" in {}; // true
+
+	// the length property does not exist natively unless added
+	"length" in {}; // false
+	"length" in {"length": 1} // true
+	```
+- `...spread` operator – expand iterables into one or more arguments.
+- `...rest` parameter – collect all remaining parameters ("the rest of") into an array.
+
+- When `var`, `let`, or `const` specified, `var` is assumed
+	```javascript
+	[a] = [1];
+	window.a // returns 1
+	```
+
+- `let` definitions are not available as a property on window object.
+
 ### JavaScript objects and properties
 - Define a property of an object
 	```javascript
@@ -283,6 +330,11 @@ window.onload = function() {
 
 	`[a-z]{5}$` - matches 5 characters at the end
 
+- Regular expression capture groups:
+- Capturing groups in regex is simply extracting a pattern from `() `.
+	You can capture groups with `/regex/.exec(string)` and with `string.match`.
+	Regular capture group is created by wrapping a pattern in `(pattern)`.
+	But to create groups property on resulting object use: `(?<name>pattern)`
 
 ## Debugging JS in Chrome Developer tools
 

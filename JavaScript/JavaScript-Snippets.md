@@ -43,12 +43,12 @@ onClick={() => this.deleteRow(index)}
 ```javascript
 uniqueArray (arrArg) {
  return arrArg.filter((elem, pos, arr) => {
-	 return arr.indexOf(elem) == pos;
+	 return arr.indexOf(elem) === pos;
 	});
 }
 // ES-5:
 array1 = array1.filter(function(val) {
-	return array2.indexOf(val) == -1;
+	return array2.indexOf(val) === -1;
 });
 // ES6:
 array1 = array1.filter(val => !array2.includes(val));
