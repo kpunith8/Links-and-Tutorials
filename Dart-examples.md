@@ -725,6 +725,183 @@ For example, look at this code, which creates a const map
 
 - `Arguments` to the superclass constructor` do not have access` to `this`. For example, arguments `can call static methods` but `not instance methods`.
 
+#### Initializer list
+
+- Besides invoking a superclass constructor, you can also `initialize instance variables` before the constructor body runs. Separate initializers with commas.
+  ```javascript
+  // Initializer list sets instance variables before
+  // the constructor body runs.
+  Point.fromJson(Map<String, num> json)
+      : x = json['x'],
+        y = json['y'] {
+    print('In Point.fromJson(): ($x, $y)');
+  }
+  ```
+
+#### Constant constructors
+
+- If your class produces objects that never change, you can make these objects `compile-time constants`. To do this, define a `const` constructor and make sure that` all instance variables are final`.
+  ```javascript
+  class ImmutablePoint {
+    static final ImmutablePoint origin =
+        const ImmutablePoint(0, 0);
+
+    final num x, y;
+
+    const ImmutablePoint(this.x, this.y);
+  }
+  ```
+
+- Constant constructors don’t always create constants
+
+#### Factory constructors
+
+- Use the `factory` keyword when implementing a constructor that doesn’t always create a new instance of its class.
+For example, a factory constructor might return an instance from a cache, or it might return an instance of a subtype.
+
+- The following example demonstrates a factory constructor returning objects from a cache:
+  ```javascript
+  class Logger {
+    final String name;
+    bool mute = false;
+
+    // _cache is library-private
+    static final Map<String, Logger> _cache =
+        <String, Logger>{};
+
+    factory Logger(String name) {
+      if (_cache.containsKey(name)) {
+        return _cache[name];
+      } else {
+        final logger = Logger._internal(name);
+        _cache[name] = logger;
+        return logger;
+      }
+    }
+
+    Logger._internal(this.name);
+
+    void log(String msg) {
+      if (!mute) print(msg);
+    }
+  }
+  ```
+
+- Factory constructors have `no access` to `this`.
+
+- Invoke a `factory constructor` just like you would any other constructor
+  ```javascript
+  var logger = Logger('UI');
+  logger.log('Button clicked');
+  ```
+
+### Methods
+
+- Methods are `functions` that provide behavior for an object.
+
+#### Instance methods
+
+- Instance methods on objects can `access instance variables` and `this`.
+  ```javascript
+  import 'dart:math';
+
+  class Point {
+    num x, y;
+
+    Point(this.x, this.y);
+
+    num distanceTo(Point other) {
+      var dx = x - other.x;
+      var dy = y - other.y;
+      return sqrt(dx * dx + dy * dy);
+    }
+  }
+  ```
+
+#### Getters and setters
+
+- Getters and setters are special methods that provide read and write access to an object’s properties.
+implement getters and setters, using the `get` and `set` keywords
+  ```javascript
+  class Rectangle {
+    num left, top, width, height;
+
+    Rectangle(this.left, this.top, this.width, this.height);
+
+    // Define two calculated properties: right and bottom.
+    num get right => left + width;
+    set right(num value) => left = value - width;
+    num get bottom => top + height;
+    set bottom(num value) => top = value - height;
+  }
+  ```
+
+#### Abstract methods
+
+- `Instance, getter, and setter methods` can be `abstract`, defining an interface but leaving its implementation up to other classes.
+Abstract methods can only exist in abstract classes.
+
+- To make a method abstract, use a `semicolon (;)` instead of a method body:
+  ```javascript
+  abstract class Doer {
+    // Define instance variables and methods...
+    void doSomething(); // Define an abstract method.
+  }
+
+  class EffectiveDoer extends Doer {
+    void doSomething() {
+      // Provide an implementation, so the method is not abstract here...
+    }
+  }
+  ```
+
+#### Abstract classes
+
+- Use the `abstract` modifier to define an abstract class — a class that `can’t be instantiated`.
+Abstract classes are useful for `defining interfaces`, often with some implementation. If you want your abstract class to appear to be instantiable, `define a factory constructor`.
+
+- Abstract classes often have `abstract methods`.
+
+#### Implicit interfaces
+
+- Every class `implicitly defines` an `interface` containing all the `instance members of the class` and of any interfaces it implements.
+If you want to create a class A that supports class B’s API without inheriting B’s implementation, class A should implement the B interface.
+
+- A class `implements one or more interfaces` by declaring them in an implements clause and then providing the APIs required by the interfaces.
+  ```javascript
+  // A person. The implicit interface contains greet().
+  class Person {
+    // In the interface, but visible only in this library.
+    final _name;
+
+    // Not in the interface, since this is a constructor.
+    Person(this._name);
+
+    // In the interface.
+    String greet(String who) => 'Hello, $who. I am $_name.';
+  }
+
+  // An implementation of the Person interface.
+  class Impostor implements Person {
+    get _name => '';
+
+    String greet(String who) => 'Hi $who. Do you know who I am?';
+  }
+
+  String greetBob(Person person) => person.greet('Bob');
+
+  void main() {
+    print(greetBob(Person('Kathy')));
+    print(greetBob(Impostor()));
+  }
+  ```
+
+- Class implementing `multiple interfaces`
+  ```javascript
+  class Point implements Comparable, Location {
+  }
+  ```
+
 ### Async
 
 - Avoid callback hell and make your code much more readable by using `async` and `await`.
