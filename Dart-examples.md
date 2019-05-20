@@ -492,6 +492,239 @@ You can, of course, define your own exceptions.
   }
   ```
 
+- Catching, or capturing, an exception stops the exception from propagating
+  ```javascript
+  try {
+    breedMoreLlamas();
+  } on OutOfLlamasException {
+    buyMoreLlamas();
+  }
+  ```
+
+- To handle code that can `throw more than one type` of exception, you can specify `multiple catch` clauses. The first catch clause that matches the thrown object’s type handles the exception. If the catch clause does not specify a type, that clause can handle any type of thrown object:
+  ```javascript
+  try {
+    breedMoreLlamas();
+  } on OutOfLlamasException {
+    // A specific exception
+    buyMoreLlamas();
+  } on Exception catch (e) {
+    // Anything else that is an exception
+    print('Unknown exception: $e');
+  } catch (e) {
+    // No specified type, handles all
+    print('Something really unknown: $e');
+  }
+  ```
+
+- Use `catch()` when your exception handler needs the exception object. You can specify `one or two parameters` to `catch()`.
+  ```javascript
+  try {
+    // ···
+  } on Exception catch (e) {
+    print('Exception details:\n $e');
+  } catch (e, s) {
+    print('Exception details:\n $e');
+    print('Stack trace:\n $s');
+  }
+  ```
+
+- To partially handle an exception, while allowing it to propagate, use the `rethrow` keyword.
+  ```javascript
+  void misbehave() {
+    try {
+      dynamic foo = true;
+      print(foo++); // Runtime error
+    } catch (e) {
+      print('misbehave() partially handled ${e.runtimeType}.');
+      rethrow; // Allow callers to see the exception.
+    }
+  }
+
+  void main() {
+    try {
+      misbehave();
+    } catch (e) {
+      print('main() finished handling ${e.runtimeType}.');
+    }
+  }
+  ```
+
+- To ensure that some code runs whether or not an exception is thrown, use a `finally` clause. If no catch clause matches the exception, the exception is propagated after the finally clause runs
+  ```javascript
+  try {
+    breedMoreLlamas();
+  } finally {
+    // Always clean up, even if an exception is thrown.
+    cleanLlamaStalls();
+  }
+  ```
+
+- The `finally` clause runs after any matching catch clauses
+  ```javascript
+  try {
+    breedMoreLlamas();
+  } catch (e) {
+    print('Error: $e'); // Handle the exception first.
+  } finally {
+    cleanLlamaStalls(); // Then clean up.
+  }
+  ```
+
+### Classes
+
+- Dart is an object-oriented language with classes and` mixin-based inheritance`. Every object is an instance of a class,
+and all classes `descend from Object`. Mixin-based inheritance means that although
+every class (except for Object) has `exactly one superclass`, a class body can be reused in multiple class hierarchies.
+
+
+#### Using class members
+
+- Objects have members consisting of `functions` and `data` (methods and instance variables, respectively).
+When you call a method, you invoke it on an object: the method has access to that object’s functions and data.
+
+- Use a `dot (.)` to refer to an instance variable or method:
+  ```javascript
+  var p = Point(2, 2); // Where Point is a class
+  // Set the value of the instance variable y.
+  p.y = 3;
+
+  // Invoke distanceTo() on p.
+  num distance = p.distanceTo(Point(4, 4));
+  ```
+
+- Use `?.` instead of . to avoid an `exception when the leftmost operand is null`
+  ```
+  // If p is non-null, set its y value to 4.
+  p?.y = 4;
+  ```
+
+#### Using constructors
+
+- You can create an object using a constructor. Constructor names can be either `ClassName` or `ClassName.identifier`.
+`new` keyword is optional in `Dart 2`.  
+  ```javascript
+  var p1 = Point(2, 2);
+  var p2 = Point.fromJson({'x': 1, 'y': 2});
+  ```
+
+- Some classes provide `constant constructors`. To create a compile-time constant using a `constant` constructor, put the `const` keyword before the constructor name
+  ```javascript
+  var p = const ImmutablePoint(2, 2);
+  ```
+
+- Constructing `two identical compile-time constants` results in a `single, canonical instance`
+  ```javascript
+  var a = const ImmutablePoint(1, 1);
+  var b = const ImmutablePoint(1, 1);
+  ```
+
+- Within a constant context, you can `omit the const` before a constructor or literal.
+For example, look at this code, which creates a const map
+  ```javascript
+  // Lots of const keywords here.
+  const pointAndLine = const {
+    'point': const [const ImmutablePoint(0, 0)],
+    'line': const [const ImmutablePoint(1, 10), const ImmutablePoint(-2, 11)],
+  };
+
+  // You can omit all but the first use of the const keyword
+  // Only one const, which establishes the constant context.
+  const pointAndLine = {
+    'point': [ImmutablePoint(0, 0)],
+    'line': [ImmutablePoint(1, 10), ImmutablePoint(-2, 11)],
+  };
+  ```
+
+- If a constant constructor is outside of a constant context and is `invoked without const`, it creates a `non-constant object`
+  ```javascript
+  var a = const ImmutablePoint(1, 1); // Creates a constant
+  var b = ImmutablePoint(1, 1); // Does NOT create a constant
+  ```
+#### Getting an object’s type
+
+- To get an object’s type at runtime, you can use Object’s `runtimeType` property, which returns a Type object.
+  ```javascript
+  print('The type of a is ${a.runtimeType}');
+  ```
+
+#### Instance variables
+
+- Here’s how you declare instance variables:
+  ```javascript
+  class Point {
+    num x; // Declare instance variable x, initially null.
+    num y; // Declare y, initially null.
+    num z = 0; // Declare z, initially 0.
+  }
+  ```
+- All uninitialized instance variables have the value `null`.
+
+- All `instance variables` generate an `implicit getter method`.` Non-final instance variables` also generate an `implicit setter` method.
+  ```javascript
+  void main() {
+    var point = Point();
+    point.x = 4; // Use the setter method for x.
+    print(point.x); // Use the getter method for x.
+    print(point.y); // Values default to null.
+  }
+  ```
+
+- Initializing an instance variable where it is declared (instead of in a constructor or method), the value is set when the instance is created, which is `before the constructor` and its initializer list execute.
+
+#### Constructors
+
+- Declare a constructor by creating a function with the `same name as its class`. The most common form of constructor, the generative constructor, creates a new instance of a class
+  ```javascript
+  class Point {
+    num x, y;
+
+    Point(num x, num y) {
+      // this keyword refers to the current instance.
+      this.x = x;
+      this.y = y;
+    }
+
+    // Syntactic sugar for setting x and y
+    // before the constructor body runs.
+    Point(this.x, this.y);
+  }
+  ```
+
+#### Default constructors
+
+- If you don’t declare a constructor, a `default constructor` is provided for you. The default constructor `has no arguments` and invokes the no-argument constructor in the superclass. Constructors aren’t inherited
+
+- `Subclasses don’t inherit` constructors from their `superclass`. A subclass that declares no constructors has only the default (no argument, no name) constructor.
+
+#### Named constructors
+
+- Use a named constructor to implement `multiple constructors` for a class or to provide extra clarity
+  ```javascript
+  Point.origin() {
+    x = 0;
+    y = 0;
+  }
+  ```
+
+- `superclass’s named constructor` is `not inherited` by a `subclass`. If you want a subclass to be created with a named constructor defined in the superclass, you must implement that constructor in the subclass.
+
+#### Invoking a non-default superclass constructor
+
+- By default, a constructor in a subclass calls the `superclass’s unnamed, no-argument constructor`. The superclass’s constructor is called at the beginning of the constructor body. If an initializer list is also being used, it executes before the superclass is called. In summary, the order of execution is as follows:
+  - initializer list
+  - superclass’s no-arg constructor
+  - main class’s no-arg constructor
+
+- If the superclass doesn’t have an unnamed, no-argument constructor, then you must manually call one of the constructors in the superclass. Specify the superclass constructor after `a colon (:)`, just before the constructor body (if any).
+  ```javascript
+  class Employee extends Person {
+    Employee() : super.fromJson(getDefaultData());
+  }
+  ```
+
+- `Arguments` to the superclass constructor` do not have access` to `this`. For example, arguments `can call static methods` but `not instance methods`.
+
 ### Async
 
 - Avoid callback hell and make your code much more readable by using `async` and `await`.
