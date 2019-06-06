@@ -300,8 +300,22 @@
   $ CREATE USER 'test'@'localhost' IDENTIFIED BY 'root';
   ```
 
-### Common Commands
+# Error using docker in command line
 
+- error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on Windows, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.
+
+- Run the following command in powershell admin mode
+ ```
+ $ cd "C:\Program Files\Docker\Docker" ./DockerCli.exe -SwitchDaemon
+ ```
+
+- Error: Command failed: docker swarm init, Error response from daemon: could not find the system's IP address - specify one with --advertise-addr
+- ERROR: connect ECONNREFUSED 127.0.0.1:4444
+```
+$docker swarm init --advertise--addr 127.0.0.1:4444
+```
+
+### Common Commands
   ```
   docker build -t friendlyhello .  # Create image using this directory's Dockerfile
   docker run -p 4000:80 friendlyhello  # Run "friendlyhello" mapping port 4000 to 80
@@ -319,7 +333,6 @@
   docker tag <image> username/repository:tag  # Tag <image> for upload to registry
   docker push username/repository:tag            # Upload tagged image to registry
   docker run username/repository:tag                   # Run image from a registry
-
   docker stack ls                                            # List stacks or apps
   docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
   docker service ls                 # List running services associated with an app

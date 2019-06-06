@@ -902,6 +902,224 @@ If you want to create a class A that supports class B’s API without inheriting
   }
   ```
 
+#### Extending a class
+
+- Use `extends` to create a subclass, and `super` to refer to the superclass
+  ```javascript
+  class Television {
+    void turnOn() {
+      _illuminateDisplay();
+      _activateIrSensor();
+    }
+  }
+
+  class SmartTelevision extends Television {
+    void turnOn() {
+      super.turnOn();
+      _bootNetworkInterface();
+      _initializeMemory();
+      _upgradeApps();
+    }
+  }
+  ```
+
+#### Overriding members
+
+- Subclasses can override `instance methods, getters, and setters`. You can use the `@override` annotation to indicate that you are intentionally overriding a member.
+  ```javascript
+  class SmartTelevision extends Television {
+    @override
+    void turnOn() {
+    }
+  }
+  ```
+
+#### Overridable operators
+
+- You can override the `operators` shown in the following table.
+  ```javascript
+  <,	+, 	|, 	[],  >, 	/, 	^, 	[]=,  <=, 	~/, 	&, 	~, >=, 	*, 	<<, 	==,  –,  	%, 	>>
+  ```
+
+- `!=` is not an overridable operator.
+
+- Here’s an example of a class that overrides the `+ and -` operators:
+  ```javascript
+  class Vector {
+    final int x, y;
+
+    Vector(this.x, this.y);
+
+    Vector operator +(Vector v) => Vector(x + v.x, y + v.y);
+    Vector operator -(Vector v) => Vector(x - v.x, y - v.y);
+  }
+
+  void main() {
+    final v = Vector(2, 3);
+    final w = Vector(2, 2);
+
+    assert(v + w == Vector(4, 5));
+    assert(v - w == Vector(0, 1));
+  }
+  ```
+
+#### noSuchMethod()
+
+- To detect or react whenever code attempts to use a `non-existent method` or `instance variable`, you can override `noSuchMethod()`
+  ```javascript
+  class A {
+    // Unless you override noSuchMethod, using a
+    // non-existent member results in a NoSuchMethodError.
+    @override
+    void noSuchMethod(Invocation invocation) {
+      print('You tried to use a non-existent member: ' +
+          '${invocation.memberName}');
+    }
+  }
+  ```
+
+- You can’t invoke an `unimplemented method` unless one of the following is true
+  - The receiver has the `static type dynamic`.
+  - The receiver has a static type that defines the `unimplemented method` (abstract is OK),
+  and the dynamic type of the receiver has an implementation of `noSuchMethod()` that’s different from the one in class Object.
+
+#### Enumerated types
+
+- Enumerated types, often called `enumerations` or enums, are a special kind of class used to represent a `fixed number of constant values`.
+
+- Declare an enumerated type using the `enum` keyword
+  ```javascript
+  enum Color { red, green, blue }
+  ```
+
+- Each value in an enum has an `index getter`, which returns the zero-based position of the value in the enum declaration
+`Color.red.index` returns 0 and `Color.greeen.index` returns 1 and so on.
+
+- To get a `list of all of the values` in the enum, use the enum’s `values` constant.
+  ```javascript
+  List<Color> colors = Color.values;
+  assert(colors[2] == Color.blue);
+  ```
+
+- Enumerated types have the following limits
+  - You can’t `subclass`, mix in, or `implement` an enum.
+  - You can’t explicitly `instantiate` an enum.
+
+### Adding features to a class: mixins
+
+- Mixins are a way of `reusing a class’s code` in multiple class hierarchies.
+
+- To use a mixin, use the `with` keyword followed by one or more mixin names.
+
+- To implement a mixin, create a class that `extends Object` and declares `no constructors`. Unless you want your mixin to be usable as a regular class, use the `mixin` keyword instead of class.
+  ```javascript
+  mixin Musical {
+    bool canPlayPiano = false;
+    bool canCompose = false;
+    bool canConduct = false;
+
+    void entertainMe() {
+      if (canPlayPiano) {
+        print('Playing piano');
+      } else if (canConduct) {
+        print('Waving hands');
+      } else {
+        print('Humming to self');
+      }
+    }
+  }
+  ```
+
+- To specify that only certain types can use the mixin — for example, so your mixin can invoke a method that it doesn’t define — use on to specify the required superclass:
+  ```javascript
+  mixin MusicalPerformer on Musician {
+  }
+  ```
+
+#### Class variables and methods
+
+- Use the `static` keyword to implement class-wide variables and methods.
+  ```javascript
+  class Queue {
+    static const initialCapacity = 16;
+  }
+
+  void main() {
+    assert(Queue.initialCapacity == 16);
+  }
+  ```
+
+- Static variables `aren’t initialized until they’re used`.
+
+#### Static methods
+
+- Static methods (class methods) `do not operate on an instance`, and thus do not have access to `this`.
+
+
+### Libraries and visibility
+
+- The `import` and `library` directives can help you create a modular and shareable code base.
+
+- Libraries not only provide APIs, but are a `unit of privacy`: identifiers that start with an `_` are visible only inside the library.
+
+- Every Dart app is a library.
+  ```javascript
+  // For built-in libraries, the URI has the special dart: scheme
+  import 'dart:html';
+  //  For other libraries, you can use a file system path or the package: scheme.
+  import 'package:test/test.dart';
+
+  // Using prefix
+  import 'package:lib1/lib1.dart';
+  import 'package:lib2/lib2.dart' as lib2;
+
+  // Uses Element from lib1.
+  Element element1 = Element();
+
+  // Uses Element from lib2.
+  lib2.Element element2 = lib2.Element();
+
+  // Import only foo.
+  import 'package:lib1/lib1.dart' show foo;
+
+  // Import all names EXCEPT foo.
+  import 'package:lib2/lib2.dart' hide foo;
+  ```
+
+#### Lazily loading a library
+
+- Deferred loading (also called lazy loading) allows an application to `load a library on demand`, if and when it’s needed.
+
+- Here are some cases when you might use deferred loading:
+  - To reduce an app’s initial startup time.
+  - To perform A/B testing—trying out alternative implementations of an algorithm, for example.
+  - To load rarely used functionality, such as optional screens and dialogs.
+
+- To lazily load a library, you must first import it using `deferred as`.
+  ```javascript
+  import 'package:greetings/hello.dart' deferred as hello;
+  ```
+
+- When you need the library, invoke loadLibrary() using the library’s identifier.
+  ```javascript
+  Future greet() async {
+    await hello.loadLibrary();
+    hello.printGreeting();
+  }
+  ```
+
+- In the preceding cthe `await` keyword pauses execution until the library is loaded.
+
+- You can invoke `loadLibrary()` multiple times on a library without problems. The library is loaded only once.
+
+- Keep in mind the following when you use deferred loading
+    - A deferred library’s constants aren’t constants in the importing file. Remember, these constants don’t exist until the deferred library is loaded.
+    - You can’t use types from a deferred library in the importing file. Instead, consider moving interface types to a library imported by both the deferred library and the importing file.
+    - Dart implicitly inserts loadLibrary() into the namespace that you define using `deferred as namespace`.
+    - The loadLibrary() function returns a Future.
+
+
+
 ### Async
 
 - Avoid callback hell and make your code much more readable by using `async` and `await`.

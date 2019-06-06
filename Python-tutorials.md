@@ -45,9 +45,11 @@ use `a+` option to `append and read`
             print(a)
             a, b = b, a+b
     ```
+
 - Can be invoked as follows `fib(10)`
 
 ## Conditional loops
+
 - if, elif, and else loops
     ```python
     if condition:
@@ -72,7 +74,7 @@ use `a+` option to `append and read`
         print(d[k]) # to print value of the key in the dictionary
     ```
 
-- Python operators
+### Python operators
   - `range(0, 11, 2)` from 0 to 10 numbers are generated, third param is step, here 2 means it skips 2 items.
   - `list(enumerate('abc'))` creates a tuple with indexes starting from 0 for each char in the string, works on any iterable object.
   - `zip(list1, list2)` combines the list1 and list2 to create a tuple. Params to the `zip()` can be the same list, it zips till the shortest list among the lists passed, other elements in the bigger list are skipped.
@@ -131,6 +133,7 @@ finally:
 	# To load specific functions from a module
   from some_file import some_func, someother_func
   ```
+
 - Module can be imported using an alias, `import my_module as mm`
 - To install publicaly availble modules using, `pip install <module-name>`
 
@@ -138,6 +141,14 @@ finally:
 - `if __name__ == "__main__"` is designed to help indicate where function calls are coming from when
 	working with multiple script files
 - `__name__` is a built-in variable which evaluates to the name of the current module.
-	However, if a module is being run directly, then `__name__` instead set to the string `"__main__"`
+	However, if a module is being run directly, then __name__ instead set to the string `"__main__"`
 - It tests whether your script is being run directly or being imported by somewhere else.
 
+
+## Machine Learning - scikit learn
+
+-
+
+### Links
+- https://docs.python.org/3/library/functions.html
+- https://pythonprogramming.net/
