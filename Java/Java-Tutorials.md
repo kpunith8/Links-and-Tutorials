@@ -575,7 +575,7 @@ class Gen<T extends MyClass & MyInterface> {
 			}
 	}
 	```
-	
+
 ## Java Basics - https://docs.oracle.com/javase/tutorial/java/javaOO/
 
 ### Local Classes
@@ -585,7 +585,7 @@ class Gen<T extends MyClass & MyInterface> {
 - A local class has access to the members of its enclosing class.
 
 - Starting in `Java-8`, a local class can `access local variables` and `parameters of the enclosing block`
-	that are `final` or effectively final. 
+	that are `final` or effectively final.
 
 - `Local classes` are similar to `inner classes` because they `cannot define or declare any static members`.
 	Local classes are `non-static` because they have access to instance members of the enclosing block
@@ -619,12 +619,12 @@ class Gen<T extends MyClass & MyInterface> {
         EnglishGoodbye.sayGoodbye();
    }
 	```
-	
-- A local class can have `static members` provided that they are `constant variables`. A constant variable 
-	is a variable of `primitive type` or type `String` that is declared `final` and initialized with a 
-	compile-time constant expression. A compile-time constant expression is typically a string or 
+
+- A local class can have `static members` provided that they are `constant variables`. A constant variable
+	is a variable of `primitive type` or type `String` that is declared `final` and initialized with a
+	compile-time constant expression. A compile-time constant expression is typically a string or
 	an arithmetic expression that can be evaluated at compile time.
-	```java 
+	```java
 	// This code compiles
 	public void sayGoodbyeInEnglish() {
         class EnglishGoodbye {
@@ -640,36 +640,36 @@ class Gen<T extends MyClass & MyInterface> {
 
 ### Annonymous Classes
 
-- 
+-
 
-	
+
 ### Threads and Concurrency
 
-- Use `synchronize` keyword to avoid the `race-condtion` from two threads accessing the same variable or data, 
-	it creates the lock, so that only one can hold the lock to access the data, once lock released other thread can 
+- Use `synchronize` keyword to avoid the `race-condtion` from two threads accessing the same variable or data,
+	it creates the lock, so that only one can hold the lock to access the data, once lock released other thread can
 	access the same variable or data.
 
-- Using `synchronize` keyword on a method declaration uses `implicit lock object` i.e class object in case of 
+- Using `synchronize` keyword on a method declaration uses `implicit lock object` i.e class object in case of
 	`static method` or `instance lock object` in case of a non-static method.
 
 - Locks are `reentrant` when a thread holds a lock, it can enter a block synchronized on the lock it is holding.
 
 - A `Thread` is started in Java by calling the `start()` method of `java.lang.Thread`.
 
-- Direct call to the `run()` executed in the same thread which calls the `run()` method. 
+- Direct call to the `run()` executed in the same thread which calls the `run()` method.
 	JVM will not create a new thread until you call the `start()` method.
-	
-- When you call the `Thread.start()` method, then the code inside `run()` method 
+
+- When you call the `Thread.start()` method, then the code inside `run()` method
 	will be executed on a new thread, which is actually created by the start() method.
-	
-- You can call the `run()` multiple times, JVM will not throw any error, but you cannot call the `start()` method 
+
+- You can call the `run()` multiple times, JVM will not throw any error, but you cannot call the `start()` method
 	on same thread instance.
-	
-- One of the key difference between `wait()` and `sleep()` method is that, 
-	`Thread.sleep()` puts the current thread on wait but doesn't release any lock it is holding, 
+
+- One of the key difference between `wait()` and `sleep()` method is that,
+	`Thread.sleep()` puts the current thread on wait but doesn't release any lock it is holding,
 	but `wait()` releases the lock it holds before going into blocking state.
-	
-- A thread can be stopped using `interrupt()` method on a thread, The code of task should call `isInterrupted()` 
+
+- A thread can be stopped using `interrupt()` method on a thread, The code of task should call `isInterrupted()`
 	to termicate itself.
 	```java
 	Runnable task = () -> {
@@ -677,18 +677,18 @@ class Gen<T extends MyClass & MyInterface> {
 			...continue the task
 		}
 	}
-	
+
 	Thread thread = new Thread(task);
 	task.interrupt();
 	```
-	
+
 #### Producer/Consumer Pattern
 
 - A producer produces values in buffer, a consumer consumes the values from the buffer.
 
 - The buffer can be full or empty.
 
-- Both producer and consumers runs in thier own Thread.
+- Both producer and consumers runs in their own Thread.
 
 - `wait()` and `notify()` methods are used to solve this problem
 
@@ -704,7 +704,7 @@ class Gen<T extends MyClass & MyInterface> {
 
 - A `happens-before` link exists between `all synchronized` or `volatile` `write` operations and `all synchronized`
 	or `volatile` `read` operations that follw.
-	
+
 - `Synchonization` guarantees the `exclusive execution` of a block of code.
 
 - `Visibiity` guarantees the `consistency of the variables`.
@@ -712,7 +712,7 @@ class Gen<T extends MyClass & MyInterface> {
 - All shared varibles should be accessed in a synchronized or in a volatile way.
 
 - `False Sharing` happens because of the way CPU caches work, the cache is organized in lines of data,
-	Each line can hold 8 longs (64 bytes), when a visible variable is modified in L1 cache, all the 
+	Each line can hold 8 longs (64 bytes), when a visible variable is modified in L1 cache, all the
 	line is marked as `dirty` for the other caches. A read on a dirty line triggers a refresh on the data line.
 
-- 
+-

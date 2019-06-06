@@ -97,7 +97,6 @@ doReturn(true).when(mockWebService).isOffline();
 given(mockWebService.isOnline()).willReturn(true);
 ```
 
-
 ### Capturing arguments
 
 ```java
@@ -187,6 +186,8 @@ public void testLoginSuccessful_captureArguments()
 ### Limitations
 
 - Cannot mock static methods, private methods, and `hashCode() and equals()` methods
+
+### 
 
 ### References
 
