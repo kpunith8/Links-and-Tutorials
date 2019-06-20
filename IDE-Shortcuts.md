@@ -12,9 +12,9 @@
 - `Shift+Alt+F` - To format the document in the context
 
 
-## Eclipse shortcuts 
+## Eclipse shortcuts
 
 - `Alt+Up/down` - To move the selected code up and down.
--	`Alt+Shift+Up/Down` - To select the enclosing selection from up or down. 
+-	`Alt+Shift+Up/Down` - To select the enclosing selection from up or down.
 - `Alt+Shift+A` - for block selection and editing multiple lines
-- Hold `Shift` while hovering the variable/declaration to see its intial declaration.
+- Hold `Shift` while hovering the variable/declaration to see its initial declaration.

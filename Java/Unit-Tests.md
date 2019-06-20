@@ -3,7 +3,7 @@
 ## JUnit
 - Throwing an exception with a custom message
 	```java
-	// Code throwing IllegalArgumentException with an message
+	// Actual Code throwing IllegalArgumentException with an message
 	throw new IllegalArgumentException(String.format("Cannot find corresponding enum entry for %d", flag));
 
 	// unit test for the above code
@@ -11,7 +11,7 @@
 	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
-	public void testThrowsIllegalStateException_valueNotFound_HigherBound()
+	public void testThrowsIllegalStateException_valueNotFound()
 	{
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Cannot find corresponding enum entry for 3");
@@ -187,7 +187,12 @@ public void testLoginSuccessful_captureArguments()
 
 - Cannot mock static methods, private methods, and `hashCode() and equals()` methods
 
-### 
+### Keywords
+
+- Golden master technique
+- Fluent builder
+- Object Mother
+- Rules of simple design - Kent Beck rules
 
 ### References
 
