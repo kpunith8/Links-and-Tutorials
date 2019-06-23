@@ -18,3 +18,4 @@
 -	`Alt+Shift+Up/Down` - To select the enclosing selection from up or down.
 - `Alt+Shift+A` - for block selection and editing multiple lines
 - Hold `Shift` while hovering the variable/declaration to see its initial declaration.
+- `Ctrl+Shift+Y` for Lowercase, `Ctrl+Shift+X` for Uppercase.
