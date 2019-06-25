@@ -37,12 +37,17 @@ $ sdkmanager --update
 
 - Create an emulator using command line with `avdmanager`
 ```
-$ avdmanager create avd -n my-emulator -k "system-images;android-25;google_apis;x86"
+$ avdmanager create avd -n my-emulator -k "system-images;android-28;google_apis;x86"
 ```
 
 - List the emulators and start an emulator
 ```
 $ avdmanager list
+```
+
+- Delete an emulator
+```
+$ avdmanager delete avd -n my-emulator
 ```
 
 - Go to `emulator` directory under `C:\android\emulator` and start the emulator by running,
@@ -61,3 +66,8 @@ $ emulator -avd my-emulator
 - Once the app created, run the app in debug mode by pressing `F5` - it takes few minutes to build the app.
 
 - Make the changes while updating, app hot reloads instantly
+
+- To test the app in release mode, run
+```
+$ flutter run --profile
+```
