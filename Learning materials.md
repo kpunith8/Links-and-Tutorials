@@ -35,6 +35,7 @@
 
 ## Links:
 
+- https://expo.io - React-Native
 - https://www.webcodegeeks.com/html5/html5-internationalization-example/
 - https://scrimba.com/g/gflexbox
 - https://www.egghead.io - Tutorials
@@ -46,6 +47,7 @@
 - https://daveceddia.com/ - React
 - https://www.baeldung.com - Java
 - https://steemit.com
+- https://itnext.io/ - blog
 
 ## Tutorials:
 
@@ -186,3 +188,15 @@
 - http://www.vogella.com/tutorials/EclipseTycho/article.html
 - https://github.com/junit-team/junit4/wiki/Matchers-and-assertthat
 - http://static.javadoc.io/org.mockito/mockito-core/2.8.9/org/mockito/Mockito.html#30
+
+### JS Interview topics for ReactJS
+- Server side rendering, refs
+- React router dom, reach router
+- Error boundaries
+- Pure component
+- HOC
+- JS Scope
+- DS
+
+## Other Links
+- https://www.ambitionbox.com/salaries/take-home-salary-calculator

@@ -354,3 +354,5 @@ window.onload = function() {
 - `console.table(data, ['name', 'email']);` - To print the JSON data in table form
 
 -	`console.log('%c Error', 'color: white, background: red');` - Apply the style to log
+
+- The `Console` method `dir()` displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.

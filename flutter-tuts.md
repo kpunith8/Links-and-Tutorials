@@ -55,6 +55,15 @@ $ avdmanager delete avd -n my-emulator
 $ emulator -avd my-emulator
 ```
 
+- Fix the issues in emulator (If emulator hangs for a long time)
+```
+// working solution
+$ emulator @avd_name -no-snapshot-load
+
+// Not tried, not sure whether it works or not
+$ emulator -avd my_avd -prop persist.sys.language=en -prop persist.sys.country=GB
+```
+
 - Download `flutter-sdk` and set the `path` - Refer official documentation
 
 - Install `flutter plugin` to `Visual Studio Code` to create flutter projects
@@ -71,3 +80,11 @@ $ emulator -avd my-emulator
 ```
 $ flutter run --profile
 ```
+
+## Samples
+
+- Set `debugPaintSizeEnabled`  to `true` so that you can see the `visual layout`. For more information, see Visual debugging(https://flutter.dev/docs/testing/debugging#visual-debugging), a section in Debugging Flutter apps(https://flutter.dev/docs/testing/debugging).
+
+- Declare static assets in `pubspec.yml` file, ex, https://github.com/flutter/website/blob/master/examples/layout/row_column/pubspec.yaml
+
+-
