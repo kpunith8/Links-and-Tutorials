@@ -1,4 +1,4 @@
-## React basics 
+## React basics
 - Mounting process has 4 lifecycle methods, invoked in the following order:
 	- `constructor()` - Initial state declartion and binding of callback functions can be registed here, if you are using ES6
 		arrow functions, then no need to bind callbacks in `constructor`
@@ -6,18 +6,18 @@
 		have access to the component instance.
 	- `render()`
 	- `componentDidMount()` - Asynchrous data fetch can be done here
-	
+
 - Update lifecycle of a component when the state or the props change, there are 5 lifecycle
 methods, in the following order:
-	- `getDerivedStateFromProps()`	
+	- `getDerivedStateFromProps()`
 	- `shouldComponentUpdate(nextProps, nextState)`
 	- `render()`
 	- `getSnapshotBeforeUpdate(prevProps, prevState)`
 	- `componentDidUpdate(prevProps, prevState, snapshot)`
-	
+
 - Unmounting lifecycle. It has only one lifecycle method
 	- `componentWillUnmount()`
-	
+
 - `componentDidCatch(error, info)` used  to catch errors in components.
 
 ## React Hooks - 1.17.0-alpha.0

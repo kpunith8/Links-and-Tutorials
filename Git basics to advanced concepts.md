@@ -544,24 +544,28 @@ git for-each-ref --format="%(align:30,left)%(color:yellow)%(authorname)%(end) %(
 - If someone squashed the commits in their branch and you are still working on top that branch with old commits without being squashed,
 later if they squash all the commits, make sure you follow this to get the clean history to local copy then you can move your code on top it
 by cherry-picking your code.
-```
-- delete the branch locally, make sure you are not in target branch to be deleted
-git branch -D <branch-name>
 
-- fetch all the changes from remote
+- Delete the branch locally, make sure you are not in target branch to be deleted
+```
+git branch -D <branch-name>
+```
+
+- Fetch all the changes from remote
+```
 git fetch -p
 git remote prune origin
-
-- then switch to branch and cherry-pick your code on top it
 ```
+
+- Switch to the branch and `cherry-pick` your code on top it.
 
 ### gitbash on windows doesn't show chars once git log prints or Ctrl+C pressed (Cursor blinks)
 
 - Press `q` in the terminal to quit the log window, or type `reset` to reset the session
 
 ### resolve conflicts in feature branch and rebase with master with a single command
-
- - `git add . && git rebase --continue`
+```
+git add . && git rebase --continue
+```
 
 ### Add changes, squash and rebase with master with a single command
 
