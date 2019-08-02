@@ -355,4 +355,6 @@ window.onload = function() {
 
 -	`console.log('%c Error', 'color: white, background: red');` - Apply the style to log
 
+- `console.dir(names, {colors: true, depth:null});` - shows the array of objects in colors
+
 - The `Console` method `dir()` displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.

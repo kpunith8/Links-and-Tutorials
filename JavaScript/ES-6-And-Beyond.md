@@ -507,3 +507,19 @@ const arrowFunc = (data) => {
 	};
 };
 ```
+
+## ES-2019 - TC-39
+- Optional catch binding
+```javascript
+try {
+	// some statements
+} catch { // no need to pass catch(error)
+	throw new Error('some error');
+}
+```
+
+- Stable `sort()` maintains the chronological order while sorting.
+
+- `flatMap()` to flat the nested arrays, `flatMap(arr, 2)`; // 2 here tells depth
+
+- `Object.fromEntries()` to create a object from a iterator

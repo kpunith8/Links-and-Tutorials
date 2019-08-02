@@ -35,19 +35,21 @@
 
 ## Links:
 
-- https://expo.io - React-Native
+- https://www.expo.io - React-Native
 - https://www.webcodegeeks.com/html5/html5-internationalization-example/
-- https://scrimba.com/g/gflexbox
+- https://www.scrimba.com/g/gflexbox
 - https://www.egghead.io - Tutorials
--	https://scotch.io/@codebeast
+-	https://www.scotch.io/@codebeast
 -	http://www.material-ui.com/#/
 - https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays
-- http://osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/
+- http://www.osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/
 - https://www.robinwieruch.de/essential-react-libraries-framework/ - React
-- https://daveceddia.com/ - React
+- https://www.daveceddia.com/ - React
 - https://www.baeldung.com - Java
-- https://steemit.com
-- https://itnext.io/ - blog
+- https://www.steemit.com
+- https://www.itnext.io/ - blog
+- https://www.javascriptstuff.com/
+-
 
 ## Tutorials:
 
@@ -88,6 +90,11 @@
 * `reselect` and `recompose`
 * `react-cache` - To cache the data
 * `react-testing-library` - By Kent C Dodds
+* `nwb` - React starter kit, like `create-react-app`
+* `react-docgen` - generate react components metadata
+* `chokidar` - watch files
+* `highlight.js` - syntax highlighted code examples
+* `npm-run-all` - run parallel tasks
 
 ### Common libraries:
 
@@ -200,3 +207,8 @@
 
 ## Other Links
 - https://www.ambitionbox.com/salaries/take-home-salary-calculator
+
+
+## Hire right - Apk@1988
+Thank you for your information!
+Your request ID: HA-073119-EF5EN

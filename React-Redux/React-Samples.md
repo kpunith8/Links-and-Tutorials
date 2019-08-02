@@ -1,21 +1,20 @@
-# Links:
+## Links:
 
-  fullstackreact.com
-  https://gist.github.com/samerbuna
-  edgecoders.com
-  jscomplete.com/repl
+- http://fullstackreact.com
+- https://gist.github.com/samerbuna
+- http://edgecoders.com  
 
-  https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
+- https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
 
-  https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
+- https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
 
-  https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
+- https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
 
-  // shouldComponentUpdate(nextProps, nextState) usage
-  https://egghead.io/lessons/react-component-lifecycle-updating
+- `shouldComponentUpdate(nextProps, nextState)` usage
+- https://egghead.io/lessons/react-component-lifecycle-updating
 
-  http://lucybain.com/blog/2017/react-js-when-to-rerender/
-
+- http://lucybain.com/blog/2017/react-js-when-to-rerender/
+```
   componentWillReceiveProps(nextProps) {
     console.log('Recieves the next props' + JSON.stringify(nextProps));
     this.updateOrderDisplays(nextProps);
@@ -24,10 +23,11 @@
   updateOrderDisplays(nextProps) {
     this.setState({ orderDisplays: nextProps.orderDisplays });
   }
-
-// Sample-1: Samer Buna - Plural sight course - ES6 way
-// library used: font awesome, underscore, bootstrap
-// Grid system and deleting an item in the list using React
+```
+## Samer Buna - Plural sight course
+- libraries used: font awesome, underscore, bootstrap
+- Grid system and deleting an item in the list using React
+```javascript
   const Stars = (props) => {
   	return(
     	<div className="col-5">
@@ -208,9 +208,10 @@
   }
 
   ReactDOM.render(<App />, mountNode);
+```
 
-# CSS for sample-1
-
+### CSS for sample-1
+```css
   .mountNode {
     color: #333;
   }
@@ -282,10 +283,10 @@
   height: 100px;
   background-color: cyan;
   }
+```
 
--------------
-React Routes:
--------------
+### React Routes:
+```javascript
 "use strict";
 
 var React = require('react');
@@ -311,11 +312,10 @@ var routes = (
 );
 
 module.exports = routes;
+```
 
-> react-router-dom v4 sample:
-
-  > App component:
-
+### react-router-dom v4 sample:
+```javascript
     import ReactRouter from 'react-router-dom';
     import Router from ReactRouter.BrowserRouter;
     import Switch from ReactRouter.Switch;
@@ -339,9 +339,8 @@ module.exports = routes;
         );
       }
     }
-
-  > Nav component:
-
+```
+```javascript
     import React from 'react';
     import ReactRouter from 'react-router-dom';
     import NavLink from ReactRouter.NavLink;
@@ -369,14 +368,15 @@ module.exports = routes;
     };
 
     export default Nav;
+```
 
 # React Forms: Cory House
 
-  > use mixins to refer other components,
+- use mixins to refer other components,
 
-  > use statics to make transitions to one page to another, and ask save the user data before transition to another page, using
+- use statics to make transitions to one page to another, and ask save the user data before transition to another page, using
   dirty state.
-
+```javascript
   	mixins: [
   		Router.Navigation
   	],
@@ -390,74 +390,81 @@ module.exports = routes;
   	},
 
   	this.transitionTo('authors'); // will take to the name of the page mentioned in Router
+```
 
-# Flux:
+### Flux:
 
-  > Not a framework, name for the pattern for unidirectional dataflows
-  > State update happens from centralized dispatcher to applications data store
-  > Deals with actions and data changes
-  > Action -> Dispatcher -> Store -> React View -> Action (unidirectional)
+- Not a framework, name for the pattern for unidirectional dataflows
+- State update happens from centralized dispatcher to applications data store
+- Deals with actions and data changes
+- Action -> Dispatcher -> Store -> React View -> Action (unidirectional)
 
-  	> Action - Action performed - Has payload and data - makes ajax calls - uses web API
-  	> Dispatcher - Centralized list of callbacks - Notifies everyone who cares - only one dispatcher for an app -
-  		Distributes actions to the stores
-  	> Store - Holds the app state, logic, data retrieval - contains models - an app can have one or more stores -
-  		registers callbacks with dispatcher - uses Nodes EventEmitter
-  	> View - Holds the data in state - sends data to children as props
+- Action - Action performed - Has payload and data - makes ajax calls - uses web API
+- Dispatcher - Centralized list of callbacks - Notifies everyone who cares - only one dispatcher for an app -
+-	Distributes actions to the stores
+- Store - Holds the app state, logic, data retrieval - contains models - an app can have one or more stores -
+registers callbacks with dispatcher - uses Nodes EventEmitter
+- View - Holds the data in state - sends data to children as props
 
-  API:
-  	> register(function callback)
-  	> unregister(string id)
-  	> waitFor(array<string> ids) - update this store first
-  	> dispatch(object payload)
-  	> isDispatching()
+#### API:
+- register(function callback)
+- unregister(string id)
+- waitFor(array<string> ids) - update this store first
+- dispatch(object payload)
+- isDispatching()
 
-# filter array:
-
+#### filter array:
+```javascript
   function searchMovies(query) {
   	return map.filter((movie) => {
   		return movie.title.includes(query);
   	});
   }
+```
 
-# Validating props of an array:
-
+#### Validating props of an array:
+```javascript
 		order: PropTypes.arrayOf(PropTypes.shape({
 		    identifier: PropTypes.number.isRequired,
 		    displayValue: PropTypes.string.isRequired,
 		    required: PropTypes.bool.isRequired
 		  })),
+```
 
-# Updating the state based on the condition in setState()
+#### Updating the state based on the condition in setState()
 
+```javascript
 	this.setState(prevState => {(
 		if(prevState.usedNumbers.length === 9) {
 			return { doneStatus: 'Done!' };
 		}
 	)});
+```
 
-	-- prevState contains all the state of the components it holds,
+- prevState contains all the state of the components it holds,
 
-	-- prevState passed to an function can be destructured to process
+- prevState passed to an function can be destructured to process
 
-	ex: decideTheGame = ({param1, param2}) => {...};
+```javascript
+	decideTheGame = ({param1, param2}) => {...};
 
 		this.setState(prevState => {(
 			if(this.decideTheGame(prevState)) {
 				return { doneStatus: 'Done!' };
 			}
 		)});
+```
 
-	> Update the state 'twice', calling setState in a callback is not allowed, setState accepts callback function, once state updated
-
+- Update the state 'twice', calling setState in a callback is not allowed, setState accepts callback function, once state updated
+```javascript
 		this.setState(prevState => {(
 
 		)}, this.updateAnotherState);
+```
 
 
-
-	> possibleCombination by Samer Buna - https://gist.github.com/samerbuna/aa1f011a6e42d6deba46
-
+- possibleCombination by Samer Buna - https://gist.github.com/samerbuna/aa1f011a6e42d6deba46
+```javascript
 		var possibleCombinationSum = function(arr, n) {
 		  if (arr.indexOf(n) >= 0) { return true; }
 		  if (arr[0] > n) { return false; }
@@ -477,44 +484,7 @@ module.exports = routes;
 		  }
 		  return false;
 	};
-
-
-# Advanced React.js => samerbuna:
-
-  - To add dependencies in yarn use, $ yarn add <package-name>
-  - use nodemon npm package for file changes in windows
-  - add "nodemon lib/server.js" under scripts in package.json and run it using, $yarn dev
-  - Use babel to transfile, add babel to package.json as follows,
-    "babel": {
-      "presets": ["react", "env", "stage-2"]
-    }
-
-  - install following packages to make it work,
-      $ yarn add babel-cli babel-preset-react babel-preset-env babel-preset-stage-2
-
-      Update dev script to transfile on file changes, "nodemon --exec babel-node lib/server.js"
-
-  - Use webpack to specify the bundle
-
-  - Find the time taken to process the webpack, use
-      $ time yarn webpack
-
-> Snapshot tests:
-  - Add serializer in the top of the test file to make the snapshot look better
-
-    expect.addSnapshotSerializer({
-  	   test: (val) => val.title && val.age,
-  	   print: (val) => `${val.title} ${val.age}`
-     });
-
-  - Use 'enzyme-to-json/serializer as serializer' instead of seriazing manualy
-
-    	import enzymeSerializer from 'enzyme-to-json/serializer as serializer';
-    	for ex: expect.addSnapshotSerializer(enzymeSerializer);
-
-> Context API:
-
-  -
+```
 
 # React and Redux: Dan Abramov:
 
@@ -539,7 +509,7 @@ module.exports = routes;
   );
 
 
-# React-Ajax call using jQuery:
+## React-Ajax call using jQuery:
 
   var data = {};
     data.name = 'Punith';
@@ -562,7 +532,7 @@ module.exports = routes;
     });
 
   - Class can change the state of a class not the props of the class.
-
+```javascript
     // Example ran in jscomplete - communicating with other componets and usage of props
 
     class Button extends React.Component {
@@ -609,35 +579,37 @@ module.exports = routes;
       }
     }
 
-    ReactDOM.render(<App />, mountNode);
+ReactDOM.render(<App />, mountNode);
+```
 
-  # Other React stuf:
+## Other Project
 
-    go to -> https://api.github.com/ grab the user_url and put in browser and specify the username and get the avatar
-    url
+- go to -> https://api.github.com/ grab the user_url and put in browser and specify the username and get the avatar url
 
-    css style can be used with style={{display: 'inline-block', marginLeft:10}}
+- css style can be used with style={{display: 'inline-block', marginLeft:10}}
 
-    To get the data from a input field:
+- To get the data from a input field:
+```javascript
+// one way of getting the data from the input and can be accessed using `this.userInput.value`
+ref = {(input) => this.userInput = input}
+```
 
-    ref = {(input) => this.userInput = input} -> one way of getting the data from the input and can be accessed using
-     'this.userInput.value'
-
-
-    // Second example working with data - Add Github users using github api
-
-    const Card = (props) => {
-    	return(
-      	<div style={{margin: '1em'}}>
-        	<img width="75" src={props.avatar_url} />
-          <div style={{display: 'inline-block', marginLeft: 10}}>
-          	<div style={{fontSize: '1.25em', fontWeight: 'bold'}}>{props.name}</div>
-            <div>{props.company}</div>
-          </div>
+- Working with data - Add Github users using github api
+```javascript
+const Card = (props) => {
+  return(
+  	<div style={{margin: '1em'}}>
+    	 <img width="75" src={props.avatar_url} />
+        <div style={{display: 'inline-block', marginLeft: 10}}>
+        	<div style={{fontSize: '1.25em', fontWeight: 'bold'}}>{props.name}</div>
+          <div>{props.company}</div>
         </div>
-      );
-    };
+      </div>
+  );
+};
+```
 
+```javascript
     class Form extends React.Component {
     	state = { userName: ''};
 
@@ -663,8 +635,10 @@ module.exports = routes;
         );
       }
     }
+```
 
-    class App extends React.Component {
+```javascript
+class App extends React.Component {
       state = {
       	cards: []
       };
@@ -684,56 +658,97 @@ module.exports = routes;
         );
       }
     }
+```
+```javascript
+const CardList = (props) => {
+	return(
+  	<div>
+    	{props.cards.map(card => <Card key={card.id} {...card} />)}
+    </div>
+  );
+};
 
-    const CardList = (props) => {
-    	return(
-      	<div>
-        	{props.cards.map(card => <Card key={card.id} {...card} />)} { /* ... spread operator */ }
-        </div>
-      );
-    };
-
-    ReactDOM.render(<App />, mountNode);
-
-    // React official site - example for key and constructing UI
-
-    function Blog(props) {
-      const sidebar = (
-        <ul>
-          {props.posts.map((post) =>
-            <li key={post.id}>
-              {post.title}
-            </li>
-          )}
-        </ul>
-      );
-      const content = props.posts.map((post) =>
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
-        </div>
-      );
-      return (
-        <div>
-          {sidebar}
-          <hr />
-          {content}
-        </div>
+ReactDOM.render(<App />, mountNode);
+```
+```
+function Blog(props) {
+    const sidebar = (
+      <ul>
+        {props.posts.map((post) =>
+          <li key={post.id}>
+            {post.title}
+          </li>
+        )}
+      </ul>
+);
+const content = props.posts.map((post) =>
+    <div key={post.id}>
+      <h3>{post.title}</h3>
+        <p>{post.content}</p>
+      </div>
+    );
+    return (
+      <div>
+        {sidebar}
+        <hr />
+        {content}
+      </div>
       );
     }
 
-    const posts = [
-      {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
-      {id: 2, title: 'Installation', content: 'You can install React from npm.'}
-    ];
-    ReactDOM.render(
-      <Blog posts={posts} />,
-      document.getElementById('root')
+const posts = [
+  {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+  {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+];
 
+ReactDOM.render(<Blog posts={posts} />, document.getElementById('root');
+```
 
-- Create a higher order functions:
+### Reusable components
 
-  const add = (x, y) => x + y;
-  const createAdder = a => b => add(a, b);
-  const add1 = createAdder(2);
-  add1(8); // returns 10
+#### Eject create-react-app
+
+- `ModuleScopePlugin()` comment this in plugins in `webpack.config.js` and `contentBase: paths.appPublic`,
+to import content from outside `/src` folder
+
+- `Webpack alias` - to remove the path identifiers when importing the components ex: `import Example from `../../components/Example`
+  to `module/Example`, set the alias in
+```javascript
+alias:
+  { 'name': path.resolve(__dirnname, '../src/components')
+}
+```
+
+#### Component Design
+
+- Avoid week elements - within `<p>` you cannot put `<h1>` inside, instead consider, put `{children}` within  `<div>`
+```html
+<p>
+  <h1>..</h1>
+<p>
+
+<!-- instead use -->
+<div>
+  {children}
+</div>
+```
+
+- Use `Proptypes` - generates runtime warnings to check the types of component.
+```javascript
+Component.propTypes = {
+  message: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number
+  }),
+  onSelect: PropTypes.function,
+};
+
+// Default props for the component
+Component.defaultProps = {
+  message: "World!",
+  onSelect: () => {},
+};
+```
+
+- Don't hard code HTML Ids - 
