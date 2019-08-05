@@ -207,8 +207,3 @@
 
 ## Other Links
 - https://www.ambitionbox.com/salaries/take-home-salary-calculator
-
-
-## Hire right - Apk@1988
-Thank you for your information!
-Your request ID: HA-073119-EF5EN

@@ -721,19 +721,18 @@ alias:
 
 #### Component Design
 
-- Avoid week elements - within `<p>` you cannot put `<h1>` inside, instead consider, put `{children}` within  `<div>`
+- `Avoid week elements` - within `<p>` you cannot put `<h1>` inside, instead consider, put `{children}` within  `<div>`
 ```html
 <p>
   <h1>..</h1>
 <p>
-
 <!-- instead use -->
 <div>
   {children}
 </div>
 ```
 
-- Use `Proptypes` - generates runtime warnings to check the types of component.
+- Use `Proptypes` and `defaultProps`- generates runtime warnings to check the types of component.
 ```javascript
 Component.propTypes = {
   message: PropTypes.string.isRequired,
@@ -743,7 +742,6 @@ Component.propTypes = {
   }),
   onSelect: PropTypes.function,
 };
-
 // Default props for the component
 Component.defaultProps = {
   message: "World!",
@@ -751,4 +749,24 @@ Component.defaultProps = {
 };
 ```
 
-- Don't hard code HTML Ids - 
+- `Don't hard code HTML IDs` - may conflict with other markup, pass them as props to the component
+
+- `Consider accessibility` - use `tabIndex` attribute to navigate using tab, use `semantic HTML`;
+instead of using `<span>` and `<div>` for actual button element `<button>`.
+Add `label` attribute to input field for screen readers,  use keyboard navigation.
+
+- `Consider config objects for props` - API can evolve easily without adding new props as and when new fields needs to be added.
+```javascript
+<UserDetail name="Punith" title="Developer" />
+// instead use
+<UserDetail user={{name: "Punith", title: "Developer"}} />
+```
+
+- Pass props via spread operator <UserDetail {...this.props} />
+
+- Use spread with de-structuring
+```javascript
+const UserDetail = ({name, ...props}) => {
+  return <div {...props}>{name}</div>
+}
+```
