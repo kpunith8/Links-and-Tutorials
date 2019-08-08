@@ -49,7 +49,7 @@
 - https://www.steemit.com
 - https://www.itnext.io/ - blog
 - https://www.javascriptstuff.com/
--
+- https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
 
 ## Tutorials:
 
@@ -207,3 +207,8 @@
 
 ## Other Links
 - https://www.ambitionbox.com/salaries/take-home-salary-calculator
+
+
+## Mongo Data URI
+old: mongodb+srv://root:root@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true
+new: mongodb+srv://root:root@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true&w=majority
