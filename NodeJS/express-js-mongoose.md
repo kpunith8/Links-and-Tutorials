@@ -343,3 +343,34 @@ const storySchema = Schema({
 const Story = mongoose.model('Story', storySchema);
 const Person = mongoose.model('Person', personSchema);
 ```
+
+-  The `ref` option is what tells Mongoose which model to use during population.
+All `_ids` we store here must be `document _ids` from the `Story` model.
+
+> Note: `ObjectId`, `Number`, `String`, and `Buffer` are valid for use as `refs`.
+However, you should use `ObjectId` unless you are an advanced user and have a good reason for doing so.
+
+#### Saving refs
+
+- Saving refs to other documents works the same way you normally save properties, just assign the `_id` value
+
+```javascript
+const author = new Person({
+  _id: new mongoose.Types.ObjectId(),
+  name: 'Ian Fleming',
+  age: 50
+});
+
+author.save(function (err) {
+  if (err) return handleError(err);
+
+  const story1 = new Story({
+    title: 'Casino Royale',
+    author: author._id    // assign the _id from the person
+  });
+
+  story1.save(function (err) {
+    if (err) return handleError(err);
+  });
+});
+```
