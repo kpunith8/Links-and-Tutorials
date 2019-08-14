@@ -45,7 +45,24 @@
 
 - `let` definitions are not available as a property on window object.
 
+- All the `var` declarations are moved up the scope, called `Hoisting`. In case of function
+they are hoisted up to function declaration
+
+- `let` declarations are scoped to the `nearest block` and are `not hoisted`.
+
 ### JavaScript objects and properties
+
+- Constructor function
+	```javascript
+	function Patient(name, address, case) {
+		this.name = name;
+		this.address = address;
+		this.case = case;
+	}
+
+	const patient = new Patient('Patient-1', 'Bengaluru', 'Fever');
+	```
+	
 - Define a property of an object
 	```javascript
 	var cat = {
@@ -93,7 +110,7 @@
 	display(cat); // returns undefined, it has no prototype, it has __proto__ property, accessed using object.__proto__
 	```
 
-- A Function prototype: is the object `instance` that will become the prototype for all objects created using this function as a constructor.
+- A Function prototype: is an object `instance` that will become the prototype for all objects created using this function as a constructor.
 - An Object's prototype: is the object instance from which the object is inherited.
 	```javascript
 	function Cat(name, color) {

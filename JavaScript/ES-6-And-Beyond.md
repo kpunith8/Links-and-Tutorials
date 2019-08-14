@@ -37,14 +37,19 @@
 	```
 
 ### Spread and Rest Operator (...)
-- ... used as rest symbol before the argument
+
+- Spread operator is used in `function definition`.
+
+- Rest operator is usd in `function invocation`.
+
+- `...` used as rest symbol before the argument
 	```javascript
   let sample = function(price, ...categories) {
   };
   // can be invoked as
   sample(1, 'software', 'hardware');
 	```
-- ... also used as spread operator, it accepts the array and splits into list of parameters
+- `...` also used as spread operator, it accepts the array and splits into list of parameters
 
 - ..."45678" - will be spread into 4,5,6,7
 
@@ -154,7 +159,24 @@ console.log(`Number is: ${"INV-" + number}`);
 
 ### New types and Object Extensions
 
-#### Symbols
+- `Object initializer shorthand` - if the name of the key and value have the same name,
+omit the key names in the object initializer. It can be done anywhere
+	```javascript
+	function buildUser(fName, lName) {
+		let fullName = `fName lName`;
+
+		return {
+			fName,
+			lName,
+			fullName,
+			isActive() { // method initializer shorthand, instead of isActive: function() {return true;}
+				return true;
+			}
+		}; // instead of {fName: fName, lName: lName, fullName: fullName}
+	}
+	```
+
+### Symbols
 - It is unique identifier, and not visible while inspecting an elements, and used for debugging purposes.
 can be constructed using,
   ```JavaScript
@@ -175,6 +197,7 @@ can be constructed using,
   // returns symbols in a article object as follows, [Symbol(article)]
   Object.getOwnPropertySymbols(article);
   ```
+
 #### Well-known symbols
 ```javascript
 Symbol.toStringTag; // is a well-known symbol
@@ -184,12 +207,12 @@ let blog = new Blog();
 console.log(blog.toString());
 ```
 
-#### Object Extensions
+### Object Extensions
 
 - `Object.setPrototypeOf(a, b);` - adds all the props of b to a
 
 - `Object.assign(target, a, b);` - here `target` is an `empty object`, parameters of a and b are populated to target object
-If both a and b have the same property then b`s property overloads the a`s property. for eg,
+If both a and b have the same property then `b's property overrides the a's` property. for eg,
   ```javascript
   a = { a: 1}; b = { a: 5, b: 6 }; c = { c: 10 };
   let target = {};
@@ -218,7 +241,7 @@ If both a and b have the same property then b`s property overloads the a`s prope
 
 ### String extensions
 
-- Add unicode strings within a string as, `\u{1f3c4}` - astral plane values (1f3c4 returns surfer emoji)
+- Add `unicode` strings within a string as, `\u{1f3c4}` - astral plane values (1f3c4 returns surfer emoji)
 
 - `String.fromCodePoint(0x1f3c4);` - Gives surfer emoji
 
@@ -243,9 +266,35 @@ If both a and b have the same property then b`s property overloads the a`s prope
 #### Iterators
 ```javascript
 let ids = [9000, 9001, 9002];
-let id = ids[Symbol.iterator](); -- ids[Symbol.iterator] returns function
-it.next(); -- returns {done: false, value: 9000}
+let id = ids[Symbol.iterator](); // ids[Symbol.iterator] returns function
+it.next(); //returns {done: false, value: 9000}
 ```
+
+- Creating custom iterator for an Object
+	```javascript
+	const post = {
+		title: 'Title one',
+		replies: 19
+	}
+
+	post[Symbol.iterator] = function() {
+		let properties = Object.keys(this);
+		let count = 0;
+		let isDone = false;
+
+		let next = () => {
+			if(count >= properties.length) {
+				isDone = true;
+			}
+
+			return {done: isDone, value: this[properties[count++]]};
+		}
+
+		return {next};
+	}
+	```
+
+- Now we can use `for..of` loop to access the value of a each property
 
 #### Generators - yields
 ```javascript
@@ -295,7 +344,35 @@ it.next();
   it.next();
   ```
 
+- Refactor iterator for object using generator functions
+	```javascript
+	const post = {
+		title: 'Title one',
+		replies: 19
+	}
+
+	post[Symbol.iterator] = function *() {
+		let properties = Object.keys(this);
+
+		for(let property of properties) {
+			yield(this[property]);
+		}
+	}
+	```
+
 #### Promises
+
+- Creating a new `promise` automatically sets it to the `pending` state, then
+it can do one of the 2 things, `fulfilled` or `rejected`.
+
+- `.then(callbackFunction)` can be chained on promise, return value of `first .then()`
+can be input to the `second .then()`
+	```javascript
+	promise
+		.then(results => results.filter(result => result.city === 'Bengaluru'))
+		.then(filteredCities => render());
+	```
+
 - It is an object waiting for an async action to complete
   ```javascript
   function doAsync() {
@@ -308,6 +385,7 @@ it.next();
     return p;
   }
   ```
+
 - use, `then` function on promise to `reject` and `resolve` the promise,
 	```javascript
   doAsync().then(function(value) {
@@ -318,7 +396,7 @@ it.next();
   });
   ```
 
-- Then function can be chained, we can also call `catch` function on promise
+- `then` function can be chained, we can also call `catch` function on promise
 	```javascript
   doAsync.catch(function(reason) {
     console.log(reason);
@@ -371,6 +449,17 @@ array.copyWithin(copyToIndex, copyFromIndex);
  ```
 
 #### Map and WeekMap
+
+- `key/value` pair, `key` can be any value
+
+- Its a iterable, and can be used with `for..of`, returns `[key, value]`.
+
+- `WeekMap` can have only objects as its keys not any other primitive types.
+
+- `WeekMap` are not iterable
+
+- Individual entries in the weekmap can be `garbage collected` though they exists.
+
 ```javascript
 let emp = { name: 'Jake' };
 let emp1 = { name: 'Janet'};
@@ -399,7 +488,7 @@ let employees = new Map(arr);
 .has(obj);
 
 //  returns all the values in the map
-[...employess.values()]; ->
+[...employess.values()];
 
 // it is not possible to call .length property on weakmap because object references are garbage collected.
 let emp = new WeakMap();
