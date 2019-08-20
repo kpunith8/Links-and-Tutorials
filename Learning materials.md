@@ -46,10 +46,13 @@
 - https://www.robinwieruch.de/essential-react-libraries-framework/ - React
 - https://www.daveceddia.com/ - React
 - https://www.baeldung.com - Java
-- https://www.steemit.com
+- https://www.steemit.com - Blog
 - https://www.itnext.io/ - blog
 - https://www.javascriptstuff.com/
 - https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
+- [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
+- [Generators-explorjs](https://exploringjs.com/es6/ch_generators.html#ch_generators)
+- [Javascript.info](https://javascript.info/)
 
 ## Tutorials:
 

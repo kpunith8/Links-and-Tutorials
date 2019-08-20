@@ -1,4 +1,4 @@
-## Node.js - Addision Wesley
+## Node.js - Basics
 
 ```javascript
 $ node debug server.js // Opens the file in debug mode
@@ -33,38 +33,13 @@ console.log('Remove 2 items from the array,', arr.splice(1, 2)); // starting fro
 
 // unshift() adds items at the begining and shift() removes from the begining
 // pop() - pops from the end of an array and push() - pushes items at the end
-
-// Prototypal inheritance
-function Shape() {
-  this.x = 0;
-  this.y = 0;
-
-  this.move = function(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
-
-function Square() {
-}
-
-Square.prototype = new Shape();
-Square.prototype.__proto__ = Shape.prototype;
-Square.prototype.width = 0;
-
-Square.prototype.area = function() {
-  return this.width * this.width;
-}
-
-let square = new Square();
-sq.move(15, 15);
-sq.width = 15;
-console.log('ares of sqaure', sq.area());
 ```
 
 - Node.js globals
   - global object
   - process object  
+
+- 
 
 - Synchronous and async programming
 
@@ -193,19 +168,19 @@ includes thread pool to handle async operations, provides event loop
   // parameters are passed after process keyword added
   $node -p "process.argv.slice(1)" test 42
   // it prints ['test', '42'] as strings
-	
+
 	`Ctrl+L` - to clear the session and clear the command line
-	
+
 	// Editor to code in command line
-	$.editor 
-	
-	// Get the help 
+	$.editor
+
+	// Get the help
 	$.help
-	
-	// Save the content typed in REPL session to a file 
+
+	// Save the content typed in REPL session to a file
 	$.save <file-name.js>
-	
-	// Load the saved file using 
+
+	// Load the saved file using
 	$.load <file-name.js>
   ```
 
@@ -428,16 +403,16 @@ to disply the type of Operating System.
   // Pass file-name as second parameter in command line
   // $ node zip.js file.txt
   ```
-	
+
 ### Using curl
 
 - To make a get request
 	`$curl http://localhost:8080`
 
-- Upload a file 
+- Upload a file
 	`$curl -F 'data=@path/file-path/name' http://localhost:8080` or `$curl --upload-file <path-of-the-file> http://localhost:8080`
-	
-- Upload multiple files 
+
+- Upload multiple files
 	`$curl -F 'fileX=@path/file-name' -F 'fileY=@path/filename' http://localhost:8080`
 
 ### References
