@@ -119,7 +119,7 @@ console.log(`Number is: ${"INV-" + number}`);
   }
 	```
 
-### Destructuring - arrays and objects
+### De-structuring - arrays and objects
 
 - Array destructuring
 	```javascript
@@ -197,6 +197,30 @@ can be constructed using,
   // returns symbols in a article object as follows, [Symbol(article)]
   Object.getOwnPropertySymbols(article);
   ```
+
+- Object properties that are symbols are known as `keyed properties`.
+
+- You cannot use a `dot operator` because dot operators only work on string properties, so you should use a brackets operator.
+
+- Symbols are `invisible` to loops and other methods, `for-in` loop ignores the symbol properties and
+`Object.keys()` and `Object.getOwnPropertyNames()` are ignoring property names that are Symbols.
+
+
+```javascript
+let myCar = {name: 'BMW'};
+let type = Symbol('Store a car type');
+myCar[type] = 'Race';
+
+let honk = Symbol('store honk function');
+myCar[honk] = () => 'honk';
+
+// Usage
+myCar.type; // error
+myCar[type]; // works as expected
+
+myCar.honk(); // error
+myCar[honk](); // works as expected
+```
 
 #### Well-known symbols
 ```javascript
@@ -296,7 +320,10 @@ it.next(); //returns {done: false, value: 9000}
 
 - Now we can use `for..of` loop to access the value of a each property
 
-#### Generators - yields
+#### Generators
+
+- Generators are functions that can be paused and resumed.
+
 ```javascript
 // It does not exist in the function stack, we need iterators to call generators multiple times, * says its a generator
 function *process() {
@@ -307,6 +334,7 @@ function *process() {
 let it = process();
 it.next();
 ```
+
 -  `next()` kicks off the `generator` and then can be passed a value to next as parameter and generator yields,
 `let result = yield;`
 
@@ -344,7 +372,7 @@ it.next();
   it.next();
   ```
 
-- Refactor iterator for object using generator functions
+- Refactoring `Symbol.iterator` for object using generator functions
 	```javascript
 	const post = {
 		title: 'Title one',
@@ -380,6 +408,54 @@ it.next();
 	}
 	```
 
+#####  Ways of `iterating` over a generator
+
+- As generator objects are iterable, ES6 language constructs that support iterables can be applied to them.
+The following three ones are especially important.
+
+- You can only use yield within a generator function.
+
+- The `for-of` loop:
+	```javascript
+	for (const x of genFunc()) {
+	    console.log(x);
+	}
+	```
+
+- The `spread operator`, which turns iterated sequences into elements of an array.
+	```javascript
+	const arr = [...genFunc()]; // ['a', 'b']
+	````
+
+- destructuring:
+	```javascript
+	const [x, y] = genFunc();
+	```
+
+- Call generator function `recursively` inside another generator function `yield*` used
+	```javascript
+	function* gen1() {
+		yield '1';
+		yield '2';
+	}
+
+	function* gen2() {
+		yield '3';
+		yield* gen1(); // just calling gen1() returns object but doesn't yield from that.
+		yield '4';
+	}
+	```
+
+- The operand of `yield*` does not have to be a generator object, it can be any iterable
+	```javascript
+		function* gen3() {
+			yield 'sequence';
+			yield* ['of', 'yielded'];
+		 	yield 'values';
+		}
+	```
+
+
 #### Promises
 
 - Creating a new `promise` automatically sets it to the `pending` state, then
@@ -393,7 +469,7 @@ can be input to the `second .then()`
 		.then(filteredCities => render());
 	```
 
-- It is an object waiting for an async action to complete
+- It is an object waiting for an `async` action to complete
   ```javascript
   function doAsync() {
     let p = new Promise(function(resolve, reject) {
@@ -450,7 +526,7 @@ array.findIndex(function(value, index, array) {
 array.copyWithin(copyToIndex, copyFromIndex);
 
 // returns [0, item1], [1, item2] ...
-...array.entries(); -
+...array.entries();
 
 //  returns index value of an array 0 1 2 ...
 ...array.keys();
@@ -580,7 +656,7 @@ let emp = new WeakMap();
   Reflect.isExtensible(target);
   ```
 
-#### The Proxiy API
+#### The Proxy API
 
 - Its an object wraps an another object
 - used for security in the application, used for profiling

@@ -34,6 +34,7 @@
 	"length" in {}; // false
 	"length" in {"length": 1} // true
 	```
+
 - `...spread` operator – expand iterables into one or more arguments.
 - `...rest` parameter – collect all remaining parameters ("the rest of") into an array.
 
@@ -62,7 +63,7 @@ they are hoisted up to function declaration
 
 	const patient = new Patient('Patient-1', 'Bengaluru', 'Fever');
 	```
-	
+
 - Define a property of an object
 	```javascript
 	var cat = {

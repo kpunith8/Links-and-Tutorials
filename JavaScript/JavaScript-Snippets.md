@@ -99,7 +99,7 @@ function newItemsCheapestFirst(items) {
 }
 ```
 
-* Compute the square of positive integeres (don't consider negative numbers)
+* Compute the square of positive integers (don't consider negative numbers)
 	```javascript
 	const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
 
@@ -113,3 +113,13 @@ function newItemsCheapestFirst(items) {
 
 	const squaredIntegers = squareList(realNumberArray);
 	```
+
+- Custom string repeat method like `String.prototype.repeat(n)`
+
+```javascript
+String.prototype.customRepeat = function(num) {
+	return Array(num).fill(this).join(""); // any thing can be joined
+}
+// usage
+"abc".customRepeat(2); // returns, abcabc
+```
