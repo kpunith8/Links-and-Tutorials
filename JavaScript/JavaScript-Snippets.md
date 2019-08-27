@@ -54,6 +54,11 @@ array1 = array1.filter(function(val) {
 array1 = array1.filter(val => !array2.includes(val));
 ```
 
+* Remove the item already present in an array
+```javascript
+arr.filter(item => item !== itemToRemove);
+```
+
 * Sorting array based on Parameters:
 ```javascript
 array.sort((last, first) => last.displayValue > first.displayValue);
