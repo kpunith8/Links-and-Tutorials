@@ -161,3 +161,15 @@ const Tilt = React.lazy(() => import('./tilt')); // Dynamic import, imports the 
   <Tilt />
 </Suspense>
 ```
+
+### useReducer hook to manage more than one state in a functional component
+
+```javascript
+import { useReducer } from 'react';
+
+// instead of using useState() hook for each state, consider, useReducer
+const [state, setState] = useReducer(
+	(state, newState) => ({...state, ...newState}),
+	{isLoaded: false, fetching: false, data: null, error: null}
+);
+```

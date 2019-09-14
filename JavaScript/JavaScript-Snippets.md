@@ -128,3 +128,8 @@ String.prototype.customRepeat = function(num) {
 // usage
 "abc".customRepeat(2); // returns, abcabc
 ```
+
+* Generates random colours any time it's called
+	```javascript
+	const randomColour = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+	```

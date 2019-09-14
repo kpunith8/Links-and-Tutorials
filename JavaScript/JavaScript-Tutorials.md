@@ -354,6 +354,128 @@ window.onload = function() {
 	Regular capture group is created by wrapping a pattern in `(pattern)`.
 	But to create groups property on resulting object use: `(?<name>pattern)`
 
+## Design Patterns
+
+### Ice Factory
+
+- Issues creating objects using classes
+- Objects created using the `new` keyword are mutable
+	```javascript
+	// Method can be re-assigned to something when object is created using new
+	const db = []
+	const cart = new ShoppingCart({db});
+	// addProduct is a function inside a ShoppingCart
+	cart.addProduct = () => 'nope!'
+
+	// No Error on the line above!
+	cart.addProduct({
+	  name: 'foo',
+	  price: 9.99
+	}) // output: "nope!", instead of adding the product it returns "nope!"
+	```
+
+- Objects created using the `new` keyword `inherit` the `prototype` of the class that was used to create them.
+	So, changes to a class prototype affect all objects created from that class.
+	even if a change is made after the object was created!
+	```javascript
+	const cart = new ShoppingCart({db: []})
+	const other = new ShoppingCart({db: []})
+
+	ShoppingCart.prototype.addProduct = () => ‘nope!’
+	// No Error on the line above!
+
+	cart.addProduct({
+  	name: 'foo',
+  	price: 9.99
+	}) // output: "nope!"
+
+	other.addProduct({
+	  name: 'bar',
+	  price: 8.88
+	}) // output: "nope!"
+	```
+
+- An `Ice Factory` is just a function that creates and returns a `frozen object`.
+	With an Ice Factory our shopping cart example looks like this:
+	```javascript
+	function makeShoppingCart({db}) {
+	  return Object.freeze({
+	    addProduct,
+	    empty,
+	    getProducts,
+	    removeProduct,
+	    // other methods
+	  })
+
+		// It can also have private members that can not be exposed outside this object
+		const secret = 'shhh';
+
+		function addProduct (product) {
+	    db.push(product)
+	  }
+
+	  function empty () {
+	    db = []
+	  }
+
+	  function getProducts () {
+    	return Object.freeze([...db])
+    }
+
+	  function removeProduct (id) {
+	    // remove a product
+	  }
+	}
+	```
+
+- `Object.freeze()` is `shallow`, so if the object we return contains an array or
+	another object we must make sure to Object.freeze() them as well
+
+#### Inheriting features
+
+- Along with our `ShoppingCart`, we probably have a `Catalog` object and an `Order` object.
+	And all of these probably expose some version of `addProduct` and `removeProduct` methods.
+
+- Use Composition over class inheritance
+
+- So, here’s our product list
+	```javascript
+	function makeProductList({productDb}) {
+	  return Object.freeze({
+	    addProduct,
+	    empty,
+	    getProducts,
+	    removeProduct
+	  )}
+	}
+	```
+
+- And here’s our shopping cart:
+	```javascript
+	function makeShoppingCart(productList) {
+	  return Object.freeze({
+	    items: productList,
+	    someCartSpecificMethod,
+		)}
+
+		function someCartSpecificMethod () {
+	  }
+	}
+	```
+
+- And now we can just inject our `ProductList` into our `ShoppingCart`, like this:
+	```javascript
+	const productDb = []
+	const productList = makeProductList({ productDb })
+
+	const cart = makeShoppingCart(productList)
+	```
+
+- And use the ProductList via the `items` property. Like:
+	```javascript
+	cart.items.addProduct()
+	```
+
 ## Debugging JS in Chrome Developer tools
 
 - Don't declare global variables
