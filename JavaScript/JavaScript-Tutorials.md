@@ -359,6 +359,7 @@ window.onload = function() {
 ### Ice Factory
 
 - Issues creating objects using classes
+
 - Objects created using the `new` keyword are mutable
 	```javascript
 	// Method can be re-assigned to something when object is created using new
@@ -451,7 +452,7 @@ window.onload = function() {
 	```
 
 - And here’s our shopping cart:
-	```javascript
+	```
 	function makeShoppingCart(productList) {
 	  return Object.freeze({
 	    items: productList,
@@ -476,7 +477,27 @@ window.onload = function() {
 	cart.items.addProduct()
 	```
 
-## Debugging JS in Chrome Developer tools
+## Mixins
+
+- Mixin is a way properties are added to objects without using inheritance.
+- Mixins provide an alternate way of composing your application.
+- Mixins are a form of object composition, where component features get mixed
+	into a composite object so that properties of each mixin become properties of the composite object.
+	```javascript
+	const myDetails = {}
+
+	const firstName = { firstname: "Punith" }
+	const lastName = { surname: "K" }
+	const occupation = { occupation: "Software Engineer" }
+	const nationality = { nationality: "India" }
+
+	// Assigning myDetails object the properties
+	Object.assign(myDetails, firstName, lastName, occupation, nationality);
+	```
+
+- `Object.assign` composes only dynamic objects, and `copies` the properties, not the whole object
+
+## Debugging in Chrome Developer tools
 
 - Don't declare global variables
 
@@ -498,3 +519,8 @@ window.onload = function() {
 - `console.dir(names, {colors: true, depth:null});` - shows the array of objects in colors
 
 - The `Console` method `dir()` displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
+
+
+## Advanced JS Concepts - Udemy
+
+- 

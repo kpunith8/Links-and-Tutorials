@@ -572,6 +572,67 @@ git add . && git rebase --continue
 - Make sure you have rebased with master and resolved all the conflicts before making changes
   `git add . && git commit -m "Changes" && git rebase -i master`
 
+## Add multiple ssh-keys to Mac
+
+- Refer, https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+- Generate SSH-key
+```
+$ ssh-keygen -t rsa -b 4096 -C "your-email"
+// asks for the filename and path give the name as, id_rsa_personal,
+// which will add 2 files in the current directory, id_rsa_personal and id_rsa_personal.pub
+
+and asks for passphrase
+```
+
+- Adding your SSH key to the ssh-agent
+
+Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked
+for existing SSH keys and generated a new SSH key. When adding your SSH key to the agent,
+use the default macOS ssh-add command, and not an application installed by macports, homebrew, or some other external source.
+
+- Start the ssh-agent in the background.
+```
+$ eval "$(ssh-agent -s)"
+> Agent pid 59566
+```
+
+> If you're using macOS Sierra 10.12.2 or later, you will need to modify your
+~/.ssh/config file to automatically load keys into the ssh-agent and store  passphrases in your keychain.
+
+- Modify the ssh config file ( ~/.ssh/config)
+```
+# Personal GitHub account
+Host github.com
+ HostName github.com
+ User git
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
+```
+
+- Add your `SSH private key` to the ssh-agent and store your passphrase in the keychain.
+If you created your key with a different name, or if you are adding an existing key that has
+a different name, replace id_rsa in the command with the name of your private key file.
+```
+$ ssh-add -K ~/.ssh/id_rsa_personal
+```
+
+- Change the permission of your `id_rsa_personal` key as,
+```
+$ chmod 400 ~/id_rsa_personal
+```
+
+- If you have already cloned using https remove the origin and reset the origin as follows,
+```
+$ git remote rm origin master
+
+$ git remote add origin git@github.com:kpunith8/<repo-name>.git
+```
+
+- Clone the projects with ssh option to push the changes
+
+
 ### References
 
 -	https://www.youtube.com/watch?v=oFYyTZwMyAg
