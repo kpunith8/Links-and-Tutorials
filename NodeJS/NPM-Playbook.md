@@ -102,6 +102,8 @@ $ npm install -g npm@latest-3 // installs the latest npm version 3, in this case
 - Signup in npmjs.org, Add the user in command line using,
 ```
 $ npm adduser // Prompts for username, password, and e-mail address
+
+$ npm login // if you are already an user
 ```
 
 - Create a git repo and set the project to reference to it, run `npm publish` to publish it

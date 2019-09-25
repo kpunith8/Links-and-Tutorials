@@ -36,6 +36,7 @@ Settings -> set, javascript.validate.enable": false
 - `Option+click` - select and edit multiple lines in source
 - `Option+Up/Down Arrow` - Move the selected lines up/down
 - `Shift+Option+Up/Down Arrow` - Copy the line up/down
+- `cmd+Shift+F` - To find method or module usage with in the project.
 
 ### Install fonts in Mac
 

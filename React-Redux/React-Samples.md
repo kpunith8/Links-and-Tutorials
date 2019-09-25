@@ -770,3 +770,122 @@ const UserDetail = ({name, ...props}) => {
   return <div {...props}>{name}</div>
 }
 ```
+
+
+## redux-saga
+
+```javascript
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+
+function* helloSaga() {
+  console.log('Hello Sagas!')
+}
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+  reducer,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(helloSaga);
+
+const action = type => store.dispatch({type});
+```
+
+- Asynchronous call
+```javascript
+import { put, takeEvery, call } from 'redux-saga/effects';
+
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+// Our worker Saga: will perform the async increment task
+export function* incrementAsync() {
+  yield delay(1000); // use call to test it easily, // yield call(delay, 1000)
+  yield put({ type: 'INCREMENT' });
+}
+
+// Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+export function* watchIncrementAsync() {
+  yield takeEvery('INCREMENT_ASYNC', incrementAsync); // action to be dispatched
+}
+```
+
+```javascript
+import { call, put } from 'redux-saga/effects'
+
+export function* fetchData(action) {
+   try {
+      const data = yield call(Api.fetchUser, action.payload.url)
+      yield put({type: "FETCH_SUCCEEDED", data})
+   } catch (error) {
+      yield put({type: "FETCH_FAILED", error})
+   }
+}
+
+// To launch the above task on each FETCH_REQUESTED action:
+
+import { takeEvery } from 'redux-saga/effects'
+
+function* watchFetchData() {
+  yield takeEvery('FETCH_REQUESTED', fetchData)
+}
+```
+
+- `takeEvery` allows `multiple` fetchData instances to be started `concurrently`.
+
+- `takeLatest` allows `only one` fetchData task to run at any moment, if a previous task
+  is still running when another fetchData task is started, the previous task will be automatically `cancelled`.
+
+- If you have multiple Sagas watching for different actions, you can create `multiple watchers` with those built-in helpers.
+  ```javascript
+  // FETCH_USERS
+  function* fetchUsers(action) { ... }
+
+  // CREATE_USER
+  function* createUser(action) { ... }
+
+  // use them in parallel
+  export default function* rootSaga() {
+    yield takeEvery('FETCH_USERS', fetchUsers);
+    yield takeEvery('CREATE_USER', createUser);
+  }
+  ```
+
+- `fork` effect that allows us to start multiple sagas in the `background`.
+
+- `put` dispatches the action to the store.
+
+- `take`, which makes it possible to build complex control flow by allowing total control of the action observation process.
+  eg: `A basic logger` using `takeEvery` - Saga that `watches all actions` dispatched to the store and logs them to the console.
+
+- `take` will `suspend` the generator until a matching action is dispatched.
+
+- Using `takeEvery('*')` (with the wildcard * pattern), we can catch all dispatched actions regardless of their types.
+  ```javascript
+  import { select, takeEvery } from 'redux-saga/effects';
+
+  function* watchAndLog() {
+    yield takeEvery('*', function* logger(action) {
+      const state = yield select();
+
+      console.log('action', action);
+      console.log('state after', state);
+    })
+  }
+  ```
+
+- Using `take` effect
+  ```javascript
+  import { select, take } from 'redux-saga/effects';
+
+  function* watchAndLog() {
+    while (true) {
+      const action = yield take('*');
+      const state = yield select();
+
+      console.log('action', action);
+      console.log('state after', state);
+    }
+  }
+  ```

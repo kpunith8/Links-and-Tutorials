@@ -133,3 +133,14 @@ String.prototype.customRepeat = function(num) {
 	```javascript
 	const randomColour = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 	```
+
+* Remove array duplicates
+```javascript
+const arr = [1, 2, 3, 4, 1, 2, 6];
+
+const uniqueArray = [...new Set(array)];
+
+// indexOf() returns the first index at which a given element can be found in the array.
+// 1 is found at 0 and current index of second 1 in the array is 4 which doesn't match and filtered out
+const uniqueArray = arr.filter((item, index) => arr.indexOf(item) === index);
+```
