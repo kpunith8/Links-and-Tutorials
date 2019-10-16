@@ -44,12 +44,15 @@
 	window.a // returns 1
 	```
 
-- `let` definitions are not available as a property on window object.
+- `let` definitions are not available as a property on `window` object.
 
 - All the `var` declarations are moved up the scope, called `Hoisting`. In case of function
 they are hoisted up to function declaration
 
 - `let` declarations are scoped to the `nearest block` and are `not hoisted`.
+
+- Only `function declarations` will be visible to `window/this/global object` not the `function
+	expressions` or `arrow` functions.
 
 ### JavaScript objects and properties
 
@@ -88,6 +91,10 @@ they are hoisted up to function declaration
 	cat.fullName = 'Muffin Top';
 	display(cat.fullName);
 	display(cat.name.first);
+
+	function display(data) {
+		console.log(data);
+	}
 	```
 
 ### Prototypes
@@ -119,7 +126,7 @@ they are hoisted up to function declaration
 		this.color = color;
 	}
 
-	Cat.prototype.age = 3; // will add age prototype to cat function (Can also be created as, Cat.prototype = {age: 5};)
+	Cat.prototype.age = 4; // will add age prototype to cat function (Can also be created as, Cat.prototype = {age: 5};)
 
 	var fluffy = new Cat('Fluffy', 'White');
 	var muffin = new Cat('Muffin', 'Brown');
@@ -137,7 +144,7 @@ Function Animal(voice) {
 	this.voice = voice || 'grunt';
 }
 
-// Making all the animals make sound
+// Making all the animals to make sound
 Animal.prototype.speak = function() {
 	display(this.voice);
 }
@@ -521,6 +528,13 @@ window.onload = function() {
 - The `Console` method `dir()` displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
 
 
-## Advanced JS Concepts - Udemy
+## ES lint erros
 
-- 
+- Disable ESLint error in-line
+```
+// eslint-disable-next-line no-use-before-define
+
+or
+
+/* eslint-disable no-unused-vars */
+```

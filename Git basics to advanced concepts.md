@@ -623,15 +623,31 @@ $ ssh-add -K ~/.ssh/id_rsa_personal
 $ chmod 400 ~/id_rsa_personal
 ```
 
-- If you have already cloned using https remove the origin and reset the origin as follows,
+- If you have already cloned using `https` remove the `origin` and reset the origin as follows,
 ```
-$ git remote rm origin master
+$ git remote rm origin
 
 $ git remote add origin git@github.com:kpunith8/<repo-name>.git
 ```
 
 - Clone the projects with ssh option to push the changes
 
+## git auto completion for bash shell in macOS
+
+- Install `bash-completion`
+```
+$ brew install bash-completion
+```
+
+- Add this to your `~/.bash_profile`
+```
+$ echo "[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion" >> ~/.bash_profile
+```
+
+- Restart your bash session
+```
+$ source ~/.bash_profile
+```
 
 ### References
 

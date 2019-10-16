@@ -1,5 +1,7 @@
 ## Youtube Channels
 
+- [Automation-Raghav-Pal](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
+
 ###	Web developement
 
 - Traversy Media
@@ -51,7 +53,7 @@
 - https://www.javascriptstuff.com/
 - https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
 - [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
-- [Generators-explorjs](https://exploringjs.com/es6/ch_generators.html#ch_generators)
+- [ES6-indepth-explorjs](https://exploringjs.com/es6/ch_generators.html#ch_generators)
 - [Javascript.info](https://javascript.info/)
 
 ## Tutorials:
@@ -82,6 +84,8 @@
 * `node-orm2` - node.js ORM library
 * `LABjs` -
 *	`grips` - templating engine
+* `DukTape`, `JerryScript` - IoT JS Engines
+* `SpiderNode` - `Node.js` variant for `SpiderMonkey` from Mozilla
 
 ### React Libraries:
 

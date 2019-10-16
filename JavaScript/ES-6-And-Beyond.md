@@ -455,6 +455,33 @@ The following three ones are especially important.
 		}
 	```
 
+### Returning promises from Generators
+
+```javascript
+function spawn(generator) {
+	return new Promise((resolve, reject) => {
+		var onResult = lastPromiseResult => {
+			var {value, done} = generator.next(lastPromiseResult);
+			if(!done) {
+				value.then(onResult, reject);
+			} else resolve (value);
+		};
+
+		onResult();
+	});
+}
+
+// Here, getStockSymbol and getSymbolPrice are promises
+function* getStockPrice(name) {
+	const stockSymbol = yield getStockSymbol(name);
+	const price = yield getSymbolPrice(stockSymbol);
+
+	return price
+}
+
+spawn(getStockPrice('google'))
+	.then(price => console.log('Price:', price), err => console.error(error));
+```
 
 #### Promises
 
