@@ -133,3 +133,18 @@ $ npm cache verify
 $ npm prune // to clean the packages, '--production' flag will remove the all dev dependencies
 $ npm repo <package-name> // Take you to repository location of that package
 ```
+
+## npm link - Making our module available locally
+
+- Create the link the depenedency to be added to main project
+```
+$ npm link // on the root folder of util/project
+// Note down the path once done, that can be used to link in main-project
+```
+
+- Link it to main project
+```
+$ npm link <project-name> // sometimes needs to pass the whole path /users/../node_modules/<util-name>
+```
+
+- Make the changes to util and build it locally, the main-project gets the update immediately without installing

@@ -93,7 +93,7 @@
   ```
   $ docker build --tag=hello-html .
   ```
-  
+
 - Run the app, mapping your machine’s port `4000` to the container’s published port 80 using `-p`
   ```
   $ docker run -p 4000:80 hello-html
@@ -227,6 +227,7 @@
   ```
   $ docker logs mysqldb
   ```
+
 - Create the spring boot app Clone the project: https://github.com/TechPrimers/docker-mysql-spring-boot-example
 
 - `application.properties` file should have the following details, Update the files or project appropriately
@@ -301,9 +302,79 @@
   $ CREATE USER 'test'@'localhost' IDENTIFIED BY 'root';
   ```
 
-# Error using docker in command line
+### Passing params to the docker image
 
-- error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on Windows, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.
+- Sleep ubuntu for 5 seconds
+  ```
+  $ docker run ubuntu sleep 5
+  ```
+
+- Specify the value dynamically, create an image with `ENTRYPOINT` - at startup
+  ```
+  FROM ubuntu
+
+  ENTRYPOINT ["sleep"]
+  ```
+
+  - usage: `$ docker run ubuntu-sleeper 10`
+
+- Specify default value to sleep if nothing is passed from command line
+  ```
+  FROM ubuntu
+
+  ENTRYPOINT ["sleep"]
+
+  CMD ["5"]
+  ```
+
+  - usage: `$ docker run ubuntu-sleeper`, sleeps for 5 seconds
+
+- Specify the entry point from command line
+  ```
+  // Here sleep2.0 is a custom sleep utility
+  $ docker run --entrypoint sleep2.0 ubuntu-sleeper 10
+  ```
+
+### Networking
+
+- Docker has built-in `DNS server` running on port `127.0.0.11` which maps each container with their names
+  with the ip address as a table, by using which you can access the containers.
+
+### Storage
+
+- Persists the data in a volume, docker has `storage drivers` to manage the layers
+  some of the storage drivers are, `AUFS, ZFS, BTRFS, Device Mapper, Overlay, Overlay2`
+  ```
+  // Create a volume
+  $ docker volume create data_volume // stores it in /var/lib/docker/volumes/data_volume
+
+  // Mount the image on volumes to persist the data, called volume mounting
+  $ docker run -v data_volume:/var/lib/mysql mysql
+
+  // it can also be bind to the local folders(location on docker host) as well, called bind mounting
+  //
+  $ docker run -v /data/mysql:/var/lib/mysql mysql
+
+  // can also be writtin using --mount option as follows
+  $ docker run /
+  --mount type=bind,source=/data/mysql,target=/var/lib/mysql mysql
+  ```
+
+## Docker compose
+
+- Using the `docker-compose.yml` - config file
+
+- Link multiple containers, `--link`, without `docker-compose.yml`, needs to link
+  containers explicitly.
+  ```
+  $ docker run -d --name=redis redis
+
+  $ docker run -d --name=vote -p 5000:80 --link redis:redis voting-app
+  ```
+
+## Error using docker in command line
+
+- error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on `Windows`, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.
 
 - Run the following command in `powershell` admin mode
  ```
@@ -369,4 +440,15 @@
   $ docker rmi <image-name> # to remove the image, delete all dependent containers to remove an image
 
   $ docker pull <image-name> # To pull the docker image from the hub.docker.com
+
+  # maps mysql containers database to local systems /opt/data-dir so that we
+  # won't loose the data when an container/image is removed
+  $ docker run -v /opt/data-dir:/var/lib/mysql mysql
+
+  # Inspect container details, returns the details in JSON format
+  $ docker inspect <container-name
+
+  # Get the history of the image, details like size, created date etc, after an image was built using
+  # Dockerfile
+  $ docker history <image-name>
   ```
