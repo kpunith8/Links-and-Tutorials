@@ -140,6 +140,7 @@ $ npm repo <package-name> // Take you to repository location of that package
 ```
 $ npm link // on the root folder of util/project
 // Note down the path once done, that can be used to link in main-project
+// /usr/local/lib/node_modules/@gnosis/ui -> /Users/punith.k/gerrit-projects/gnosis-ui
 ```
 
 - Link it to main project
@@ -147,4 +148,20 @@ $ npm link // on the root folder of util/project
 $ npm link <project-name> // sometimes needs to pass the whole path /users/../node_modules/<util-name>
 ```
 
-- Make the changes to util and build it locally, the main-project gets the update immediately without installing
+#### Back to Normal from link
+
+- When you don’t want to use the local version of `some-dep` anymore,
+	delete the `symlink`. But careful, `npm unlink` is an alias for `npm uninstall`,
+	it does not mirror the behavior of npm link.
+	```
+	$ cd ~/projects/my-app
+
+	$ npm uninstall --no-save some-dep && npm install 	
+	```
+
+- You can clean up the global link, though its presence won’t interfere with my-app.
+	```
+	$ cd ~/projects/some-dep
+
+	$ npm uninstall  # Delete global symlink
+	```

@@ -372,6 +372,55 @@
   $ docker run -d --name=vote -p 5000:80 --link redis:redis voting-app
   ```
 
+- `link` adds an entry to `/etc/hosts` file of an `voting-app` container with
+  host name `redis` with its internal IP address
+
+- linking may not be good way use it.
+
+## Deploy to private registry
+
+- By default docker registry runs on port 5000, use docker registry API to run
+  custom private registry on port 5000
+```
+$ docker run -d -p 5000:5000 --name registry registry:2
+```
+
+- First `tag` the image with private url in it
+```
+$ docker image tag my-image localhost:5000/my-image
+```
+
+- Push the image to local private registry
+```
+$ docker push localhost:5000/my-image
+```
+
+- Pull the image from local registry once pushed
+```
+$ docker pull localhost:5000/my-image
+```
+
+- Or can be pulled from domain or the ip address as well
+```
+$ docker pull 192.168.0.1:5000/my-image
+```
+
+## Docker engine
+
+- Contains `docker daemon`, `REST API`, and `docker CLI`
+
+- Access the remote docker engine using
+```
+$ docker -H=192.168.0.1:2375 run nginx
+```
+
+- Docker can be instructed to use limited resources for a container, by default
+  a docker container can use all the resources possible, use `cgroups` to manage
+  and control resources to each container using `--cpus` option before running a container
+```
+$ docker run --cpus=.5 ubuntu
+```
+
 ## Error using docker in command line
 
 - error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on `Windows`, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.

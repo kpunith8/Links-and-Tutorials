@@ -479,7 +479,19 @@ $REMOTE - File in the current branch
 $MERGED - The output file with resolved changes from $LOCAL and $REMOTE
 ```
 
-### Git Tips and Tricks:
+### Create a branch from a detached mode
+
+- Create a branch from detached mode, to commit and push the changes
+```
+$ git switch -c <branch-name>
+```
+
+- Undo the operation
+```
+$ git switch -
+```
+
+### Git Tips and Tricks
 
 - Refer: https://github.com/git-tips/tips
 
@@ -525,9 +537,9 @@ git commit -a --amend -C HEAD
 git branch -vv
 ```
 
-- List all the files changed in a commit:
+- List all the files changed in a commit, and the count
 ```
-git show --pretty="" --name-only <commit-hash>
+git show --pretty="" --name-only <commit-hash> | wc -l
 ```
 
 - Remove the local branches no longer on remote
@@ -556,23 +568,19 @@ git fetch -p
 git remote prune origin
 ```
 
-- Switch to the branch and `cherry-pick` your code on top it.
+- Get the `total number of files` changed in the `latest commit`
+```
+git show --stat <HEAD/commit-hash> --format=oneline | wc -l
+
+git log --oneline --name-status <HEAD/commit-hash> -1 | wc -l
+```
 
 ### gitbash on windows doesn't show chars once git log prints or Ctrl+C pressed (Cursor blinks)
 
 - Press `q` in the terminal to quit the log window, or type `reset` to reset the session
 
-### resolve conflicts in feature branch and rebase with master with a single command
-```
-git add . && git rebase --continue
-```
 
-### Add changes, squash and rebase with master with a single command
-
-- Make sure you have rebased with master and resolved all the conflicts before making changes
-  `git add . && git commit -m "Changes" && git rebase -i master`
-
-## Add multiple ssh-keys to Mac
+## Add multiple ssh-keys in Mac
 
 - Refer, https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
