@@ -86,6 +86,10 @@
 *	`grips` - templating engine
 * `DukTape`, `JerryScript` - IoT JS Engines
 * `SpiderNode` - `Node.js` variant for `SpiderMonkey` from Mozilla
+* `OpenAPI Initiative` - Swager kind API documentation
+* `OpenAPI-Parser`
+* `restful-react`
+* `react-use` - custom react hooks
 
 ### React Libraries:
 

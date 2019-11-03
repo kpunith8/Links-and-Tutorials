@@ -889,3 +889,24 @@ function* watchFetchData() {
     }
   }
   ```
+
+- Find the scroll position to fix the header
+- https://www.w3schools.com/howto/howto_js_sticky_header.asp
+```javascript
+import {useEffect} from 'react';
+import {useWindowScroll} from 'react-use';
+
+let {y} = useWindowScroll();
+useEffect(() => {
+  let pageHeader = global.document.querySelector(".page-header");
+  let pageHeaderOffsetTop = pageHeader.offsetTop;
+  let pageYOffset = global.window.pageYOffset;
+
+  if(pageYOffset > pageHeaderOffsetTop)
+  {
+    pageHeader.classList.add("sticky");
+  }
+
+  return () => pageHeader.classList.remove("sticky");
+}, [y]);
+```

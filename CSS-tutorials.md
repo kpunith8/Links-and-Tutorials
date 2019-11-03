@@ -45,13 +45,34 @@ aligned style of the list never moves, set this property to `inside` to show alo
 
 - set `margin-left and margin-right` properties to `auto` or `margin: 0 auto` and set the `width: 70%`, so that it keeps the same size and auto adjusts with the screen size, adding `max-width: 1000px` will stop resizing after it reaches 1000px.
 
-## Links
+### Select checked checkbox with custom label
 
-- https://www.cssfontstack.com/
+- Immediate label after a checkbox with a class name `custom-checkbox`
+```css
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: grey;
+}
+```
+
+## Tricks
+
+- Show the border of each element in a page to see how they are organized
+```css
+/* Select all elements and set the border */
+* {
+  border: 1px solid yellow;
+}
+```
+
+- it makes border moves the UI by pixel size, instead use `outline` property to inspect
+
+
+## Links
+- [css font stack](https://www.cssfontstack.com/)
 
 ## CSS Grid Layout:
 
-- Example code at: https://codesandbox.io/s/l2yjm5z6l9
+- Example code at: [Code sandbox](https://codesandbox.io/s/l2yjm5z6l9)
 
 - Two dimensional layouts - Rows and Columns
 
@@ -84,6 +105,11 @@ aligned style of the list never moves, set this property to `inside` to show alo
   /* stretch - by default; start, end, use, justify-self: end on grid item, base-line */
   align-items: center;
   ```
+## SVG
 
-  ### References
-  - http://www.autoprefixer.github.io
+-
+
+
+### References
+
+- http://www.autoprefixer.github.io

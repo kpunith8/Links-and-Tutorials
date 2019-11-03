@@ -418,19 +418,58 @@ $ docker -H=192.168.0.1:2375 run nginx
   a docker container can use all the resources possible, use `cgroups` to manage
   and control resources to each container using `--cpus` option before running a container
 ```
+# Assign .5 cpu to the ubuntu
 $ docker run --cpus=.5 ubuntu
+
+# Assign memory
+$ docker run --memory=100m ubuntu
 ```
+
+## Container Orchestration
+
+- To deploy the code in production to maintain stability and keep the docker containers
+  running always with the help of scripts
+```
+$ docker service create --replicas=100 nodejs
+```
+
+- `Docker Swarm`, `Kubernetes` - can be used to orchestrate the docker
+```
+# Initialize the swarm manager
+$ docker swarm init --advertise-addr 192.168.1.12
+
+# to add workers to the swarm manager
+$ docker swarn join --token <token>
+```
+
+### Docker service
+
+- It can be used to orchestrate - it is a one or more instances of a single
+  application that runs across the swarms of a cluster.
+
+- Create the `3 replicas` of running `web-service` in a swarm
+```
+# It should be run on docker swarm manager node
+$ docker service create --replicas=3 my-web-server
+```
+
 
 ## Error using docker in command line
 
-- error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on `Windows`, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.
+- error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info:
+  open //./pipe/docker_engine: The system cannot find the file specified.
+  In the default daemon configuration on `Windows`, the docker client must
+  be run elevated to connect. This error may also indicate that the docker daemon
+  is not running.
 
 - Run the following command in `powershell` admin mode
  ```
  $ cd "C:\Program Files\Docker\Docker" ./DockerCli.exe -SwitchDaemon
  ```
 
-- Error: Command failed: docker swarm init, Error response from daemon: could not find the system's IP address - specify one with --advertise-addr
+- Error: Command failed: docker swarm init, Error response from daemon:
+  could not find the system's IP address - specify one with `--advertise-addr`
+
 - ERROR: connect ECONNREFUSED 127.0.0.1:4444
   ```
   $docker swarm init --advertise--addr 127.0.0.1:4444

@@ -55,7 +55,7 @@ $ npm uninstall <package-name> --save (or)
 $ npm rm/un/r <package-name> // add '-g' flag to uninstall the global package
 ```
 
-#### Updating the packages
+#### Updating the packages - all in one go
 
 - To discover new releases of the packages, you run
 ```

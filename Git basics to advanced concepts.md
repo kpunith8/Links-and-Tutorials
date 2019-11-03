@@ -575,6 +575,11 @@ git show --stat <HEAD/commit-hash> --format=oneline | wc -l
 git log --oneline --name-status <HEAD/commit-hash> -1 | wc -l
 ```
 
+#### If pre-commit hooks are corrupted and not allowing to proceed 
+```
+git commit -n or --no-verify
+```
+
 ### gitbash on windows doesn't show chars once git log prints or Ctrl+C pressed (Cursor blinks)
 
 - Press `q` in the terminal to quit the log window, or type `reset` to reset the session
