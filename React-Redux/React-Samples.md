@@ -14,6 +14,7 @@
 - https://egghead.io/lessons/react-component-lifecycle-updating
 
 - http://lucybain.com/blog/2017/react-js-when-to-rerender/
+
 ```
   componentWillReceiveProps(nextProps) {
     console.log('Recieves the next props' + JSON.stringify(nextProps));
@@ -24,6 +25,7 @@
     this.setState({ orderDisplays: nextProps.orderDisplays });
   }
 ```
+
 ## Samer Buna - Plural sight course
 - libraries used: font awesome, underscore, bootstrap
 - Grid system and deleting an item in the list using React
@@ -913,4 +915,4 @@ useEffect(() => {
 
 ## refs
 
-- 
+-

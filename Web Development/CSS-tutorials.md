@@ -8,8 +8,7 @@
 
 - author styles - User defined rules; User agent styles have lower priority, so author styles override them.
 
-
-# CSS Basics: Kevin Powell
+# CSS Basics
 
 ## Styling Text:
 
@@ -66,9 +65,59 @@ aligned style of the list never moves, set this property to `inside` to show alo
 
 - it makes border moves the UI by pixel size, instead use `outline` property to inspect
 
+## Examples
 
-## Links
-- [css font stack](https://www.cssfontstack.com/)
+#### Make a navbar stick to the top of the screen
+
+```html
+<!DOCTYPE html>
+<html>
+<style>
+  #navbar {
+    display: flex;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  #navbar a {
+    color: #f2f2f2;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 27px;
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0; /* must set to top */
+    width: 100%
+  }
+</style>
+
+<body onscroll="scroll()">
+  <div id="navbar">
+    <a class="active" href="javascript:void(0)">Home</a>
+    <a href="javascript:void(0)">News</a>
+    <a href="javascript:void(0)">Contact</a>
+  </div>
+  <div>
+    Some content
+  <div>
+
+  <script>
+  let navbar = document.getElementById("navbar");
+  let sticky = navbar.offsetTop;
+
+  function scroll() {
+    if(window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky")
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  }
+  </script>
+</body>
+</html>
+```
 
 ## CSS Grid Layout:
 
@@ -86,23 +135,28 @@ aligned style of the list never moves, set this property to `inside` to show alo
   `eg:` `grid-column: content-start / content-end` - here `content` is the grid-area name given
 
 - Alignment properties: There are six
+
   - `justify-*` - For row axis - Horizontal
   - `align-*` - For column axis - Vertical
-  
+
   ```css
-  /* Keeps the grids to center */
-  /* Also can be start, end, space-between, space-around */
-  justify-content: center;
-  /* To justify the content inside */
-  /* stretch - by default; start, end, use, justify-self: end; on grid item */
-  justify-items: end;
-  /* stretch; by default, center, start, end, space-around, space-between*/
-  align-content: center;
-  /* Align items vertically */
-  /* stretch - by default; start, end, use, justify-self: end on grid item, base-line */
-  align-items: center;
+  .flex-box {
+    /* Keeps the grids to center */
+    /* Also can be start, end, space-between, space-around */
+    justify-content: center;
+    /* To justify the content inside */
+    /* stretch - by default; start, end, use, justify-self: end; on grid item */
+    justify-items: end;
+    /* stretch; by default, center, start, end, space-around, space-between*/
+    align-content: center;
+    /* Align items vertically */
+    /* stretch - by default; start, end, use, justify-self: end on grid item, base-line */
+    align-items: center;
+  }
   ```
 
 ### References
 
+- Kevin Powell - youtube channel
 - http://www.autoprefixer.github.io
+- [css font stack](https://www.cssfontstack.com/)
