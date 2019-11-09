@@ -145,7 +145,7 @@ $ npm link // on the root folder of util/project
 
 - Link it to main project
 ```
-$ npm link <project-name> // sometimes needs to pass the whole path /users/../node_modules/<util-name>
+$ npm link <project-name> // sometimes needs to pass the whole path /Users/../<util-name>
 ```
 
 #### Back to Normal from link

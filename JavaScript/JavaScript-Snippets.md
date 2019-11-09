@@ -1,8 +1,8 @@
 ## Tips and tricks:
 
-* add `debugger` text in the source code, so that chrome developer takes to that point when debugging. Remove them, once done debugging
+* add `debugger` text in the source code, so that chrome developer tools takes to that point when that point is hit.
 
-## lint errors and fixes Fixes:
+## Lint errors and fixes:
 
 * no-undef lint error fix: can be added global section of webpack.config
 https://github.com/chaijs/type-detect/issues/98
@@ -64,7 +64,7 @@ arr.filter(item => item !== itemToRemove);
 array.sort((last, first) => last.displayValue > first.displayValue);
 ```
 
-* Debouncing the search to happen after certain amount time use lodash.debounce
+* Debouncing the search to happen after certain amount time use `lodash.debounce()`
 ```javascript
 doSearch = debounce(() => {}, 300);
 handleSearch = (event) => {
@@ -129,7 +129,7 @@ String.prototype.customRepeat = function(num) {
 "abc".customRepeat(2); // returns, abcabc
 ```
 
-* Generates random colours any time it's called
+* Generates random colours
 	```javascript
 	const randomColour = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 	```
@@ -143,4 +143,10 @@ const uniqueArray = [...new Set(array)];
 // indexOf() returns the first index at which a given element can be found in the array.
 // 1 is found at 0 and current index of second 1 in the array is 4 which doesn't match and filtered out
 const uniqueArray = arr.filter((item, index) => arr.indexOf(item) === index);
+```
+
+- Create array with Array.from
+```javascript
+// Creates 4 items with index value, [0, 1, 2, 3]
+const items = Array.from({length: 4}, (_, i) => i + 1)
 ```

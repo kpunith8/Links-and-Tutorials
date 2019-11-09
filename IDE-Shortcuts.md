@@ -46,3 +46,17 @@ Settings -> set, javascript.validate.enable": false
 $ brew tap caskroom/fonts
 $ brew cask install font-fira-code
 ```
+
+
+## Mac terminal
+
+- `Cmd+K` - To clear the command line
+- 
+
+
+## Mac Shortcuts
+
+- `cmd+Ctrl+Q` - Lock
+- `cmd+Shift+F` - Toggle full screen
+- `cmd+C` - Copy
+- `cmd+Option+V` - Cut/Paste

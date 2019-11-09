@@ -88,27 +88,20 @@ aligned style of the list never moves, set this property to `inside` to show alo
 - Alignment properties: There are six
   - `justify-*` - For row axis - Horizontal
   - `align-*` - For column axis - Vertical
-
+  
   ```css
   /* Keeps the grids to center */
   /* Also can be start, end, space-between, space-around */
   justify-content: center;
-
   /* To justify the content inside */
   /* stretch - by default; start, end, use, justify-self: end; on grid item */
   justify-items: end;
-
   /* stretch; by default, center, start, end, space-around, space-between*/
   align-content: center;
-
   /* Align items vertically */
   /* stretch - by default; start, end, use, justify-self: end on grid item, base-line */
   align-items: center;
   ```
-## SVG
-
--
-
 
 ### References
 

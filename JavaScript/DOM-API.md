@@ -1,5 +1,3 @@
-## DOM API
-
 ### DOM Element
 
 #### classList
@@ -29,57 +27,65 @@ document.getElementById("myDIV").classList.item(0);
 #### Make a navbar stick to the top of the screen
 
 ```html
+<!DOCTYPE html>
+<html>
 <style>
-#navbar {
-  display: flex;
-  overflow: hidden;
-  background-color: #333;
-}
+  #navbar {
+    display: flex;
+    overflow: hidden;
+    background-color: #333;
+  }
 
-#navbar a {
-  color: #f2f2f2;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 27px;
-}
+  #navbar a {
+    color: #f2f2f2;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 27px;
+  }
 
-.sticky {
-  position: fixed;
-  top: 0; /* must set to top */
-  width: 100%
-}
+  .sticky {
+    position: fixed;
+    top: 0; /* must set to top */
+    width: 100%
+  }
 </style>
 
-<body onscroll="myFunction()">
-<div id="navbar">
-  <a class="active" href="javascript:void(0)">Home</a>
-  <a href="javascript:void(0)">News</a>
-  <a href="javascript:void(0)">Contact</a>
-</div>
-<div>
-Some content
-<div>
+<body onscroll="scroll()">
+  <div id="navbar">
+    <a class="active" href="javascript:void(0)">Home</a>
+    <a href="javascript:void(0)">News</a>
+    <a href="javascript:void(0)">Contact</a>
+  </div>
+  <div>
+    Some content
+  <div>
 
-<script>
-var navbar = document.getElementById("navbar");
-var sticky = navbar.offsetTop;
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
+  <script>
+  let navbar = document.getElementById("navbar");
+  let sticky = navbar.offsetTop;
+
+  function scroll() {
+    if(window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky")
     } else {
-    navbar.classList.remove("sticky");
-}
-</script>
+      navbar.classList.remove("sticky");
+    }
+  }
+  </script>
+</body>
+</html>
 ```
 
 #### className
 
-- The className property sets or returns the class name of an element.
+- The `className` property sets or returns the class name of an element.
 
 - To apply multiple classes, separate them with spaces, like "test demo"
 
 ```javascript
 document.getElementById("myDIV").className = "mystyle other-style";
+// or
+document.getElementById("myDIV").classList.add('sample-class')
 
 // return the class name
 const divClass = document.getElementById("myDIV").className;
@@ -252,14 +258,27 @@ navigator.javaEnabled(); // specifies whether the browser has Java enabled.
 ```
 
 ### screen  
+  ```javascript
+  screen.availHeight; // returns the hieght of the user's screen, in pixels, minus interface features like the Windows Taskbar.
 
-```javascript
-screen.availHeight; // returns the hieght of the user's screen, in pixels, minus interface features like the Windows Taskbar.
+  screen.availWidth; // returns the width of the user's screen, in pixels, minus interface features like the Windows Taskbar.
 
-screen.availWidth; // returns the width of the user's screen, in pixels, minus interface features like the Windows Taskbar.
+  screen.height;
+  screen.width;
+  screen.pixelDepth;
+  screen.colorDepth;
+  ```
 
-screen.height;
-screen.width;
-screen.pixelDepth;
-screen.colorDepth;
-```
+### Events
+
+### Coordinates of an Event
+
+- The `event.screenX` and `event.screenY `properties show the `number of pixels` from
+  the left and top of the screen respectively `where the event took place`.
+
+- The `event.clientX` and `event.clientY` properties show the `number of pixels` from
+  the left and top of the `client that is being used` (usually the browser window).
+
+- The `event.pageX` and `event.pageY` properties `show the coordinates` (in pixels)
+  where the event took place from the left and top of the document respectively.
+  This property takes account of whether the page has been scrolled.
