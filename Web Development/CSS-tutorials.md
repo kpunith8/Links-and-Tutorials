@@ -155,6 +155,27 @@ aligned style of the list never moves, set this property to `inside` to show alo
   }
   ```
 
+### Animating a square
+
+```css
+#square {
+  margin: 100px;
+  width: 100px;
+  height: 100px;
+  background: #cc0;
+  animation: spin1 4s linear infinite;
+}
+
+@keyframes spin1 {
+  from {
+    transform:rotate(360deg);
+  }
+  to {
+    transform:rotate(0deg);
+    }
+  }
+```
+
 ### References
 
 - Kevin Powell - youtube channel

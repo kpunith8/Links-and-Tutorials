@@ -446,7 +446,8 @@ window.onload = function() {
 
 - Use Composition over class inheritance
 
-- So, here’s our product list
+- Product list
+
 	```javascript
 	function makeProductList({productDb}) {
 	  return Object.freeze({
@@ -458,16 +459,14 @@ window.onload = function() {
 	}
 	```
 
-- And here’s our shopping cart:
-	```
+- Shopping cart
+	```javascript
 	function makeShoppingCart(productList) {
 	  return Object.freeze({
 	    items: productList,
 	    someCartSpecificMethod,
 		)}
-
-		function someCartSpecificMethod () {
-	  }
+		function someCartSpecificMethod () {}
 	}
 	```
 
@@ -479,8 +478,8 @@ window.onload = function() {
 	const cart = makeShoppingCart(productList)
 	```
 
-- And use the ProductList via the `items` property. Like:
-	```javascript
+- And use the ProductList via the `items` property, as follows
+	```
 	cart.items.addProduct()
 	```
 

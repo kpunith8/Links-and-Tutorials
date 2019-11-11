@@ -1,4 +1,4 @@
-### DOM Element
+### DOM
 
 #### classList
 
@@ -317,3 +317,118 @@ window.location.replace()
 ### window.history
 
 - Used to access information about any previously visited pages in the current browser session.
+
+```javascript
+// goes forward 1 page, pass -1 to go backwards
+history.go(1)
+
+// Same as go with values mentioned
+history.forward()
+window.history.back()
+```
+
+### Controlling Windows
+
+- `window.open()` - A new window can be opened using the
+
+```javascript
+let popup = window.open('https://sitepoint.com','SitePoint',
+  'width=400, height=400, resizable=yes');
+
+// to close the window
+popup.close()
+
+// This takes two parameters that are the X and Y coordinates of the screen that
+// the window is to be moved to top-left corner ➥of the screen
+window.move(0, 0)
+
+// Resize a window using the
+window.resizeTo(600, 400)
+```
+
+### window.screen
+
+- contains information about the screen that the browser is displayed on.
+
+```javascript
+// Visible screen height and width
+screen.height
+screen.width
+
+// height and width of the screen, excluding any operating system menus
+screen.availWidth
+screen.availHeight
+
+// the color bit depth of the user’s mon- itor
+screen.colorDepth
+```
+
+### Document object
+
+- Each `window` object contains `document` object
+
+```javascript
+// writes to the document
+document.write("Hello")
+```
+
+### document.cookie
+
+- Cookies are small files that are saved locally on a user’s computer
+
+- A restriction of cookies is that they `can only be read` by a web page from the same domain that set them.
+
+- Cookies are also limited to storing up to `4KB` of data, although `20 cookies` are allowed per domain
+
+- Cookies can be used for personalising a user’s `browsing experience`, storing user preferences,
+  keeping track of user choices (such as a shopping cart), `authentication` and `tracking users`.]
+
+```javascript
+// Creating a cookie
+document.cookie = "name=Superman"
+
+// multiple cookies can be added with different key, if the same
+// key added, it replaces with the latest
+document.cookie = "age: 100"
+
+// Can be accessed using
+document.cookie
+
+// use the split() to break the string into an array containing each name/value pair
+let cookies = document.cookie.split("; ");
+for (let i = 0, max = cookies.length; i < max; i++){
+  var crumbs = cookies[i].split("=");
+  console.log("The value of " + crumbs[0] + " is " + crumbs[1]);
+}
+
+// cookies can be set a expiry date, they will be deleted automatically once it expires
+let expiryDate = new Date();
+let tomorrow = expiryDate.getTime() + 1000 * 60 * 60 * 24;
+expiryDate.setTime(tomorrow);
+document.cookie = "name=Batman; expires=" + expiryDate.toUTCString();
+
+// An alternative is to set the max-age
+// 1 Day = 86400 seconds
+document.cookie = "name=Batman; max-age=86400"
+
+// By default, cookies can only be read by pages inside the same directory
+// and domain as the file was set. This is for security reasons so that access to the cookie is limited.
+// The path can be changed so that any page in the root directory can read the cookie.
+// It’s done by adding "; path=/" to the end of the cookie when it is set
+document.cookie = "name=Batman; path=/"
+
+// It’s also possible to set the domain by adding "; domain=domainName" to the end of the cookie:
+document.cookie = "name=Batman; domain=sitepoint.com";
+
+// Adding "; secure" to the end of the cookie will ensure that it’s
+// only transmitted over a secure HTTPS network
+document.cookie = "name=Batman; secure"
+
+// To remove a cookie, simply set it to expires to a time in the past
+document.cookie = "name=Batman; expires=Thu, 01 Jan 1970 00:00:01 GMT"
+```
+
+
+## Testing and Debugging
+
+- 

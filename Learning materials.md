@@ -13,6 +13,7 @@
 - The Net Ninja - node and monogodb and mix
 - LevelUpTuts
 - Tyler Mc Ginnis
+- Ben Awad - hooks and react
 
 ### Java
 

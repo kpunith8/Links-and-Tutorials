@@ -913,6 +913,9 @@ useEffect(() => {
 }, [y]);
 ```
 
-## refs
+## Code sandbox - network error accessing fetch
 
--
+- Prepend the link with the following, allows only 50 requests/30mins
+```
+fetch( `https://cors-anywhere.herokuapp.com/<url>`).then(...)
+```

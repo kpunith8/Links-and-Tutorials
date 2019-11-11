@@ -47,11 +47,10 @@ $ brew tap caskroom/fonts
 $ brew cask install font-fira-code
 ```
 
-
 ## Mac terminal
 
 - `Cmd+K` - To clear the command line
-- 
+-
 
 
 ## Mac Shortcuts
