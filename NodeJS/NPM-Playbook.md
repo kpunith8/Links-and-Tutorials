@@ -99,6 +99,9 @@ $ npm install -g npm@latest-3 // installs the latest npm version 3, in this case
 ```
 
 ### Publish npm packages
+
+- Commit and push your changes to git repo before Publishing
+
 - Signup in npmjs.org, Add the user in command line using,
 ```
 $ npm adduser // Prompts for username, password, and e-mail address
@@ -139,13 +142,11 @@ $ npm repo <package-name> // Take you to repository location of that package
 - Create the link the depenedency to be added to main project
 ```
 $ npm link // on the root folder of util/project
-// Note down the path once done, that can be used to link in main-project
-// /usr/local/lib/node_modules/@gnosis/ui -> /Users/punith.k/gerrit-projects/gnosis-ui
 ```
 
 - Link it to main project
 ```
-$ npm link <project-name> // sometimes needs to pass the whole path /Users/../<util-name>
+$ npm link <package-name> // as mentioned in the package.json
 ```
 
 #### Back to Normal from link
@@ -165,3 +166,16 @@ $ npm link <project-name> // sometimes needs to pass the whole path /Users/../<u
 
 	$ npm uninstall  # Delete global symlink
 	```
+
+## Check the bundle size with webpack
+
+```
+$ NODE_ENV=production webpack --config ./webpack.config.prod.js --profile --json > stats.json
+```
+
+- Need to install `webpack-cli` and `webpack-bundle-analyzer` globally
+	then you run
+
+```
+$ webpack-bundle-analyzer stats.json`
+```

@@ -150,3 +150,18 @@ const uniqueArray = arr.filter((item, index) => arr.indexOf(item) === index);
 // Creates 4 items with index value, [0, 1, 2, 3]
 const items = Array.from({length: 4}, (_, i) => i + 1)
 ```
+
+### Storing and retrieving object from local storage
+
+```javascript
+const todos = [{
+	id: 1,
+	item: 'item-1',
+	completed: false
+}]
+localStorage.setItem('todos', JSON.stringify(todos))
+let localTodos = JSON.parse(localStorage.getItem('todos'))
+
+// Remove localStorage
+localStorage.removeItem('todos')
+```

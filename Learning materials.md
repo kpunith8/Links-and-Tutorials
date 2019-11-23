@@ -6,7 +6,6 @@
 
 - Traversy Media
 - codedamn
-- slidenerd
 - derekbanas
 - KepowOb - Kevin Powell - CSS
 - java brains
@@ -14,9 +13,15 @@
 - LevelUpTuts
 - Tyler Mc Ginnis
 - Ben Awad - hooks and react
+- web development simplified
+- Programming with mosh
+- The coding train - fun added
+- Fun fun function - fun added
+- Colt Steele
 
 ### Java
 
+- slidenerd - Android
 - Devoxx
 - Javaone
 - Oracle developers
@@ -36,26 +41,6 @@
 - Uncle Robert C Martin - Clean code
 - Victor Rentea - Clean Code
 
-## Links:
-
-- https://www.expo.io - React-Native
-- https://www.webcodegeeks.com/html5/html5-internationalization-example/
-- https://www.scrimba.com/g/gflexbox
-- https://www.egghead.io - Tutorials
--	https://www.scotch.io/@codebeast
--	http://www.material-ui.com/#/
-- https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays
-- http://www.osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/
-- https://www.robinwieruch.de/essential-react-libraries-framework/ - React
-- https://www.daveceddia.com/ - React
-- https://www.baeldung.com - Java
-- https://www.steemit.com - Blog
-- https://www.itnext.io/ - blog
-- https://www.javascriptstuff.com/
-- https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
-- [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
-- [ES6-indepth-explorjs](https://exploringjs.com/es6/ch_generators.html#ch_generators)
-- [Javascript.info](https://javascript.info/)
 
 ## Tutorials:
 
@@ -63,6 +48,8 @@
 - Advanced SQL
 - Advanced mongo
 - Flexbox, grid
+- JWT - JSON web tokens
+- Spinnaker
 
 ## Libraries:
 
@@ -107,6 +94,7 @@
 * `chokidar` - watch files
 * `highlight.js` - syntax highlighted code examples
 * `npm-run-all` - run parallel tasks
+* `immer` - Convert mutable state to immutable in react
 
 ### Common libraries:
 
@@ -121,6 +109,8 @@
 -	jsonplaceholder -> Fake Online REST API for Testing and Prototyping
 -	https://ckeditor.com/ - WYSIWYG editor
 - codesandbox.io
+- JFrog - artifactory
+- Spinnaker
 
 ### Java Libraries
 
@@ -143,6 +133,27 @@
 - Test driven development - Kent Beck
 - Growing object-oriented software guided by tests - Steve Freeman, Nat Pryce
 - Extreme programming explained - Kent Beck
+
+## Links:
+
+- https://www.expo.io - React-Native
+- https://www.webcodegeeks.com/html5/html5-internationalization-example/ - Blog
+- https://www.scrimba.com/g/gflexbox
+- https://www.egghead.io - Tutorials
+-	https://www.scotch.io/@codebeast - Blog
+-	http://www.material-ui.com/#/ - CSS
+- https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays - Blog
+- http://www.osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/ - Blog
+- https://www.robinwieruch.de/essential-react-libraries-framework/ - React
+- https://www.daveceddia.com/ - React
+- https://www.baeldung.com - Java
+- https://www.steemit.com - Blog
+- https://www.itnext.io/ - blog
+- https://www.javascriptstuff.com/ - Blog
+- https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
+- [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
+- [ES6-indepth-explorjs](https://exploringjs.com/es6/ch_generators.html#ch_generators)
+- [Javascript.info](https://javascript.info/)
 
 # References
 
@@ -196,11 +207,6 @@
 - https://www.safaribooksonline.com/library/view/swt-a-developers/0596008384/ch06s13.html
 - https://wiki.eclipse.org/Eclipse_Corner
 - http://bytes.com/topic/java/answers/716212-how-connect-mysql-eclipse-rcp-application
-
-### RCP Snippets
-
-- http://www.vogella.com/tutorials/EclipseInternationalization/article.html
-- http://help.eclipse.org/juno/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fswt%2Fwidgets%2FTable.html
 
 ### Testing
 - https://resheim.net/2014/12/unit-testing-eclipse-rcp-applications.html

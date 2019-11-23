@@ -176,8 +176,35 @@ aligned style of the list never moves, set this property to `inside` to show alo
   }
 ```
 
+
+## conditional rendering in emotion styled components
+
+```javascript
+const Tab = styled(Basic)`
+${({isVisible, primary}) => isVisible && `
+  font-size: 10px;
+  text-transform: uppercase;
+`};
+
+const Tab = styled.button`
+  width: 100%;
+  outline: 0;
+  border: 0;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  line-height: 0.2;
+
+  ${({ active }) => active && `
+    background: blue;
+  `}
+  <Tab active {...props} />
+`;
+```
+
 ### References
 
 - Kevin Powell - youtube channel
 - http://www.autoprefixer.github.io
-- [css font stack](https://www.cssfontstack.com/)
+- [CSS font stack](https://www.cssfontstack.com/)
+- [CSS at Chrome developers summit](https://css-at-cds.netlify.com/)

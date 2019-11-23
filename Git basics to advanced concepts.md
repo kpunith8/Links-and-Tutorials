@@ -570,12 +570,11 @@ git remote prune origin
 
 - Get the `total number of files` changed in the `latest commit`
 ```
-git show --stat <HEAD/commit-hash> --format=oneline | wc -l
 
 git log --oneline --name-status <HEAD/commit-hash> -1 | wc -l
 ```
 
-#### If pre-commit hooks are corrupted and not allowing to proceed 
+#### If pre-commit hooks are corrupted and not allowing to proceed
 ```
 git commit -n or --no-verify
 ```
