@@ -77,8 +77,42 @@
 }
 ```
 
+### focus and hover
+
+- 
+
 ## CSS - Variables
 
+- property with `--` before the property `--themeColor`
+  ```css
+  /* To apply these variables to the whole page
+     Declare them under :root selector */
+  :root {
+    --themeColor: #3e84da;
+    --layout: 1fr 1fr;
+  }
+
+  .banner {
+    background: var(--themeColor) /* Using the --themeColor custom css property */
+  }
+  ```
+
+- To override the css variable within `@media` need to declare within `:root` selector
+  ```css
+  @media screen and (max-width: 760px) {
+    :root {
+      --layout: 1fr;
+    }
+  }
+  ```
+
+- Access the css variables in JavaScript
+  ```javascript
+  let root = document.querySelector(':root');
+
+  // assume that the <span style="background: red;" />
+  root.style.setProperty('--themeColor', e.target.style.background);
+  ```
 
 ### Chrome dev summit - 2019 (Next generation web styling)
 
@@ -90,7 +124,50 @@
 - `@media(prefers-color-scheme: no-preference/light/dark) {}` - adopt your UI,
   can be found in dev-tools under `Rendering section`
 
--
+- Logical properties - to adjust language specific styles, `rtl`, `ltr`
+
+  - Use `block-size` instead of `height` and use `inline-size` instead of `width`
+
+  - Use `margin-inline-start` instead of `margin-left`
+
+  - Use `border-block-start`, `margin-block-start` instead of `border-top` and
+    `margin-top` respectively
+
+- `position: sticky; top: 0` to make it stick
+
+- `backdrop-filter` - to add filter to text on top of the image
+
+- `:is()`
+  ```css
+  button:is(.focus, :focus) { /* instead of, button.focus, button:focus */
+  }
+
+  article > :is(h1, h2, h3, h4) { /* instead of article > h1, article > h2 */
+  }
+  ```
+
+- `gap` for `flex-box`
+
+- `CSS custom properties`
+  ```
+  CSS.registerProperty({
+    name: `--colorPrimary`,
+    syntax: color,
+    inherits: true,
+    initialValue: deeppink
+  })
+
+  /* Can be replaced with */
+  @property --colorPrimary {
+    syntax: color; /* other props */
+  }
+  ```
+
+- Get the computed style directly, on an element
+  ```
+  const h1 = document.querySelector('h1')
+  h1.computedStyleMap().get('font-size')
+  ```
 
 ## Tricks
 
@@ -222,7 +299,7 @@
 
 ## conditional rendering in emotion styled components
 
-```javascript
+```
 const Tab = styled(Basic)`
 ${({isVisible, primary}) => isVisible && `
   font-size: 10px;
@@ -243,6 +320,15 @@ const Tab = styled.button`
   `}
   <Tab active {...props} />
 `;
+```
+
+## Debugging
+
+- Get the computed style of an element - in dev tools
+
+```
+const h1 = document.querySelector('h1')
+window.getComputedStyle(h1).getPropertyValue('font-size')
 ```
 
 ### References

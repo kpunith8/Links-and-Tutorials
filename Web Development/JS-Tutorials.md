@@ -54,6 +54,8 @@ they are hoisted up to function declaration
 - Only `function declarations` will be visible to `window/this/global object` not the `function
 	expressions` or `arrow` functions.
 
+-
+
 ### JavaScript objects and properties
 
 - Constructor function
@@ -455,7 +457,7 @@ window.onload = function() {
 	    empty,
 	    getProducts,
 	    removeProduct
-	  )}
+	  })
 	}
 	```
 
@@ -465,7 +467,7 @@ window.onload = function() {
 	  return Object.freeze({
 	    items: productList,
 	    someCartSpecificMethod,
-		)}
+		})
 		function someCartSpecificMethod () {}
 	}
 	```
@@ -479,7 +481,7 @@ window.onload = function() {
 	```
 
 - And use the ProductList via the `items` property, as follows
-	```
+	```javascript
 	cart.items.addProduct()
 	```
 
@@ -527,9 +529,10 @@ window.onload = function() {
 - The `Console` method `dir()` displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
 
 
-## ES lint erros
+## ESLint erros
 
 - Disable ESLint error in-line
+
 ```
 // eslint-disable-next-line no-use-before-define
 
@@ -537,3 +540,7 @@ or
 
 /* eslint-disable no-unused-vars */
 ```
+
+## References
+
+- [JS Equality Table](https://dorey.github.io/JavaScript-Equality-Table/)
