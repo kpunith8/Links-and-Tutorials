@@ -78,6 +78,8 @@
 * `OpenAPI-Parser`
 * `restful-react`
 * `react-use` - custom react hooks
+* `cron` - To run cron job for specified amount of time refer: `crontab.guru`
+* `node-fetch` - fetch API for node
 
 ### React Libraries:
 
@@ -225,6 +227,34 @@
 
 ## Other Links
 - https://www.ambitionbox.com/salaries/take-home-salary-calculator
+
+## blogs
+
+- CSS Tricks
+- Smashing Magazine
+- CoDrops
+- SitePoint
+- David Walsh
+- DailyJS
+- Echo JS
+- Front-End Front
+- JavaScript Weekly
+- Dev.to
+- Best of JS
+
+## Podcasts
+
+- Shop Talk Show
+- The Changelog
+- Syntax
+- JS Party
+- JavaScript Jabber
+- Full Stack Radio
+- Front End Happy Hour
+- JAMstack Radio
+- The Web Platform Podcast
+- Modern Web
+- CodePen Radio
 
 
 ## Mongo Data URI

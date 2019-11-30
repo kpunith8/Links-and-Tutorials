@@ -165,3 +165,35 @@ let localTodos = JSON.parse(localStorage.getItem('todos'))
 // Remove localStorage
 localStorage.removeItem('todos')
 ```
+
+### Fetch the data from rest end point until all the pages reached
+
+- If an API end point gives all the jobs then no need of this
+
+- [Github Jobs API](https://jobs.github.com/positions.json)
+
+```javascript
+// one of the way to do
+var fetch = require('node-fetch');
+
+const baseURL = 'https://jobs.github.com/positions.json'
+
+async function fetchGithubJobs() {
+	let resultCount = 1;
+	let page = 0;
+  let allJobs = [];
+
+  // fetch all pages
+  while(resultCount > 0) {
+		const res = await fetch(`${baseURL}?page=${page}`);
+    const jobs = await res.json();
+    allJobs.push(...jobs); // use concat to not to mutate the array
+    resultCount = jobs.length;
+    page++;
+  }
+
+	console.log('Total Jobs', allJobs.length)
+}
+
+fetchGithubJobs();
+```

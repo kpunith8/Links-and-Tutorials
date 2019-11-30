@@ -583,6 +583,7 @@ git commit -n or --no-verify
 
 - Press `q` in the terminal to quit the log window, or type `reset` to reset the session
 
+# macOS Related
 
 ## Add multiple ssh-keys in Mac
 
