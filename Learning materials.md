@@ -80,6 +80,7 @@
 * `react-use` - custom react hooks
 * `cron` - To run cron job for specified amount of time refer: `crontab.guru`
 * `node-fetch` - fetch API for node
+* `redis` - node client for redis
 
 ### React Libraries:
 

@@ -24,5 +24,5 @@ $ brew cask install font-fira-code
 ### List the running services
 
 ```
-$ brew services list 
+$ brew services list
 ```
