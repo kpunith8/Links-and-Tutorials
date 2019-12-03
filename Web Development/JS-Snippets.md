@@ -189,13 +189,13 @@ const baseURL = 'https://jobs.github.com/positions.json'
 async function fetchGithubJobs() {
 	let resultCount = 1;
 	let page = 0;
-  let allJobs = [];
+	let allJobs = [];
 
   // fetch all pages
   while(resultCount > 0) {
 		const res = await fetch(`${baseURL}?page=${page}`);
     const jobs = await res.json();
-    allJobs.push(...jobs); // use concat to not to mutate the array
+    allJobs = [...allJobs, ...jobs]; // use push if you want to mutate the array
     resultCount = jobs.length;
     page++;
   }
