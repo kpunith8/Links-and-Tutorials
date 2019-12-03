@@ -592,28 +592,27 @@ git commit -n or --no-verify
 - Generate SSH-key
 ```
 $ ssh-keygen -t rsa -b 4096 -C "your-email"
-// asks for the filename and path give the name as, id_rsa_personal,
+// asks for the filename and path; specify the name as, id_rsa_personal,
 // which will add 2 files in the current directory, id_rsa_personal and id_rsa_personal.pub
 
-and asks for passphrase
+and asks for passphrase, enter some passphrase or leave it empty if you want
 ```
 
-- Adding your SSH key to the ssh-agent
+- Add your SSH key to the `ssh-agent`, before adding a new SSH key to the `ssh-agent`
+  to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
+  When adding your SSH key to the agent, use the default macOS `ssh-add` command,
+  and not an application installed by `macports`, `homebrew`, or some other external source.
 
-Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked
-for existing SSH keys and generated a new SSH key. When adding your SSH key to the agent,
-use the default macOS ssh-add command, and not an application installed by macports, homebrew, or some other external source.
-
-- Start the ssh-agent in the background.
+- Start the `ssh-agent` in the background.
 ```
 $ eval "$(ssh-agent -s)"
 > Agent pid 59566
 ```
 
 > If you're using macOS Sierra 10.12.2 or later, you will need to modify your
-~/.ssh/config file to automatically load keys into the ssh-agent and store  passphrases in your keychain.
+~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.
 
-- Modify the ssh config file ( ~/.ssh/config)
+- Modify the ssh config file (~/.ssh/config), open in `vi` editor
 ```
 # Personal GitHub account
 Host github.com
@@ -621,22 +620,22 @@ Host github.com
  User git
  AddKeysToAgent yes
  UseKeychain yes
- IdentityFile ~/.ssh/id_rsa
+ IdentityFile ~/.ssh/id_rsa_personal
 ```
 
-- Add your `SSH private key` to the ssh-agent and store your passphrase in the keychain.
-If you created your key with a different name, or if you are adding an existing key that has
-a different name, replace id_rsa in the command with the name of your private key file.
+- Add your `SSH private key` to the `ssh-agent` and store your passphrase in the keychain.
+If you have created your key with a different name, or if you are adding an existing key that has
+a different name, replace `id_rsa` in the command with the name of your private key file.
 ```
 $ ssh-add -K ~/.ssh/id_rsa_personal
 ```
 
-- Change the permission of your `id_rsa_personal` key as,
+- Change the permission of your `id_rsa_personal` key
 ```
 $ chmod 400 ~/id_rsa_personal
 ```
 
-- If you have already cloned using `https` remove the `origin` and reset the origin as follows,
+- If you have already cloned using `https` remove the `origin` and reset the origin to `ssh` as follows,
 ```
 $ git remote rm origin
 
@@ -664,12 +663,14 @@ $ source ~/.bash_profile
 
 ### References
 
--	https://www.youtube.com/watch?v=oFYyTZwMyAg
+- [Display branch name in command line in macOS](https://gist.github.com/joseluisq/1e96c54fa4e1e5647940)
 
-- https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/merge-conflicts
+-	[PR, Branching, Merging](https://www.youtube.com/watch?v=oFYyTZwMyAg)
 
-- https://git-scm.com/book/en/v1/Git-Tools-Stashin_
+- [Merge Conflicts](https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/merge-conflicts)
 
-- http://jebaird.com/2013/07/08/setting-up-kdiff3-as-the-default-merge-tool-for-git-on-windows.html
+- [Git Stash](https://git-scm.com/book/en/v1/Git-Tools-Stashin_)
 
-- https://www.youtube.com/watch?v=-CkqiIPAzgQ
+- [Kdiff3-merge-tool](http://jebaird.com/2013/07/08/setting-up-kdiff3-as-the-default-merge-tool-for-git-on-windows.html)
+
+- [KDiff3 for merging](https://www.youtube.com/watch?v=-CkqiIPAzgQ)

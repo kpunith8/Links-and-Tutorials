@@ -11,19 +11,22 @@ unexpected block statement surrounding arrow body
 
 ## Code Snippets
 
-* Filter an array based on type
+### Filter an array based on type
+
 ```javascript
 const requiredOrders = orders.filter(order => order.required);
 ```
 
-* Converting array to JSON Data
+### Converting array to JSON Data
+
 ```javascript
-function convertToJson(items) {
+function convertToJSON(items) {
 	return JSON.parse(JSON.stringify(items));
 }
 ```
 
-* Get the data from event object
+### Get the data from event object
+
 ```javascript
 saveUserData(event) {
 	var field = event.target.name;
@@ -34,12 +37,14 @@ saveUserData(event) {
 }
 ```
 
-* Passing Parameters to function from render:
+### Passing Parameters to function from render
+
 ```javascript
 onClick={() => this.deleteRow(index)}
 ```
 
-* Unique Array: Pass concatenated array as input
+### Unique Array: Pass concatenated array as input
+
 ```javascript
 uniqueArray (arrArg) {
  return arrArg.filter((elem, pos, arr) => {
@@ -54,17 +59,20 @@ array1 = array1.filter(function(val) {
 array1 = array1.filter(val => !array2.includes(val));
 ```
 
-* Remove the item already present in an array
+### Remove the item already present in an array
+
 ```javascript
 arr.filter(item => item !== itemToRemove);
 ```
 
-* Sorting array based on Parameters:
+### Sorting array based on Parameters
+
 ```javascript
 array.sort((last, first) => last.displayValue > first.displayValue);
 ```
 
-* Debouncing the search to happen after certain amount time use `lodash.debounce()`
+### Debouncing the search to happen after certain amount time use `lodash.debounce()`
+
 ```javascript
 doSearch = debounce(() => {}, 300);
 handleSearch = (event) => {
@@ -74,7 +82,8 @@ handleSearch = (event) => {
 }
 ```
 
-* Perform search on object using lodash.pickby
+### Perform search on object using `lodash.pickby`
+
 ```javascript
 render() {
 	let { articles, searchTerm } = this.state;
@@ -87,7 +96,8 @@ render() {
 }
 ```
 
-* Get Cheapest items first:
+### Get Cheapest items first
+
 ```javascript
 function newItemsCheapestFirst(items) {
   return items
@@ -104,22 +114,17 @@ function newItemsCheapestFirst(items) {
 }
 ```
 
-* Compute the square of positive integers (don't consider negative numbers)
-	```javascript
-	const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+### Compute the square of positive integers (don't consider negative numbers)
 
-	const squareList = (arr) => {
-	  "use strict";
+```javascript
+const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
 
-	  const squaredIntegers = arr.filter(c => Number.isInteger(c)).filter(a => (Math.sign(a) == 1)).map(b  => b * b);
+const squareList = arr => {
+	return arr.filter(c => Number.isInteger(c)).filter(a => (Math.sign(a) == 1)).map(b  => b * b);
+};
+```
 
-	  return squaredIntegers;
-	};
-
-	const squaredIntegers = squareList(realNumberArray);
-	```
-
-- Custom string repeat method like `String.prototype.repeat(n)`
+### Custom string repeat method like `String.prototype.repeat(n)`
 
 ```javascript
 String.prototype.customRepeat = function(num) {
@@ -129,12 +134,14 @@ String.prototype.customRepeat = function(num) {
 "abc".customRepeat(2); // returns, abcabc
 ```
 
-* Generates random colours
-	```javascript
-	const randomColour = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16);
-	```
+### Generates random colours
 
-* Remove array duplicates
+```javascript
+const randomColour = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+```
+
+### Remove array duplicates
+
 ```javascript
 const arr = [1, 2, 3, 4, 1, 2, 6];
 
@@ -145,7 +152,8 @@ const uniqueArray = [...new Set(array)];
 const uniqueArray = arr.filter((item, index) => arr.indexOf(item) === index);
 ```
 
-- Create array with Array.from
+- Create array with `Array.from()`
+
 ```javascript
 // Creates 4 items with index value, [0, 1, 2, 3]
 const items = Array.from({length: 4}, (_, i) => i + 1)
@@ -166,7 +174,7 @@ let localTodos = JSON.parse(localStorage.getItem('todos'))
 localStorage.removeItem('todos')
 ```
 
-### Fetch the data from rest end point until all the pages reached
+### Fetch the data from REST end point until all the pages reached
 
 - If an API end point gives all the jobs then no need of this
 
@@ -196,4 +204,16 @@ async function fetchGithubJobs() {
 }
 
 fetchGithubJobs();
+```
+
+### Assign CSS styles to an element
+
+```javascript
+let element = document.createElement("div");
+let style = { position: "absolute", left: 0, top: 0 };
+
+Object.entries(style).map(entry => {
+	let [property, value] = entry;
+  element.style[property] = value;
+});
 ```

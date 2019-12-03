@@ -62,12 +62,12 @@
 * `SASS` - Syntactically Awesome Style Sheets
 * `CSS` Modules
 * `Toaster` library to notify
-* `nock` - mocking http calls
+* `nock` - mocking http calls for nodejs
 * `axios` - To fetch data and post data from rest services
-* `LoveField` - for Mysql - https://google.github.io/lovefield/
+* `LoveField` - for Mysql ORM - https://google.github.io/lovefield/
 * `sequelize` - ORM
 * `font-awesome` for icons
-* `doc`z - For documentation site for react
+* `docz` - For documentation site for react
 * `async` - for asynchrous JS
 * `node-orm2` - node.js ORM library
 * `LABjs` -

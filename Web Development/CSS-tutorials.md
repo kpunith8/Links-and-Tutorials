@@ -77,9 +77,17 @@
 }
 ```
 
-### focus and hover
+### display property
 
-- 
+- `div` by default has `display: block` which takes up the whole line.
+
+- `span` by default has `display: inline` which takes minimal space possible.
+  multiple spans can sit in a same line. They `cannot` have `width` and `height` properties
+  to set the height and width. To set these properties set the `display: inline-block`
+
+- `img` tag buy default has `display: inline-block`
+
+- `display: none` property makes a `div` or any elements disappear from the dom.
 
 ## CSS - Variables
 
