@@ -528,6 +528,11 @@ window.onload = function() {
 
 - The `Console` method `dir()` displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
 
+### Copy the objects from console to clipboard
+
+- Right click on the object and select `Store as global variable`
+- it copies to `temp1` variable, use `copy(temp1)` method to copy to `clipboard`
+
 
 ## ESLint erros
 

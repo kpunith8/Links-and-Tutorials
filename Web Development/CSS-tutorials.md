@@ -305,7 +305,9 @@
 ```
 
 
-## conditional rendering in emotion styled components
+## Emotion-UI - React styling
+
+### conditional rendering in emotion styled components
 
 ```
 const Tab = styled(Basic)`
@@ -328,6 +330,17 @@ const Tab = styled.button`
   `}
   <Tab active {...props} />
 `;
+```
+
+### Pass props to styled component - object style
+
+```
+const Card = styled('a')({
+  border: '1px solid blue',
+
+  },
+  props => ({borderTop: props.isConnected ? '5px solid red' : null})
+)
 ```
 
 ## Debugging
