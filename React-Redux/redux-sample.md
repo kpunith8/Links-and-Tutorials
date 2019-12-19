@@ -1,6 +1,6 @@
 - Store data to local storage using HTML-5's localStorage API
 
-```javascirpt
+```javascript
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state');
@@ -26,7 +26,7 @@ export const saveState = state => {
 
 - Pass the stored state to the redux-store as follows
 
-```javascirpt
+```javascript
 import { loadState, saveState } from 'localStorage';
 
 const persistedState = loadState();

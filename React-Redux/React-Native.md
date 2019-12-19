@@ -59,56 +59,52 @@ $ npm run android
 - To update the navigation icon:
 
 ```javascript
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="person" style={{ color: tintColor }} />  // Icon from native-base
-    )
-  }
+static navigationOptions = {
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="person" style={{ color: tintColor }} />  // Icon from native-base
+  )
+}
 ```
 
 # Using native-base
 
 ```javascript
-  <Container>
-    <Header>
-      <Left>
-        <Icon name='' style={{paddingLeft: 10}}> </Icon>
-      </Left>
-      <Body>
-        <Text> Sample </Text>
-      </Body>
-      <Right>
-        <EntypoIcon name='' style={{paddingRight: 10}} </EntypoIcon>
-      </Right>
-    </Header>
-    <Content>
-      // Multiple views can be added
-      <View style={{flexDirection: 'row'}}>
-        <View style={{flex: 1}}>
-          <Image source={require(./assets/sample.jpg)} style={{width: 75, height: 75, borderRadius: 37.5}}/>
-        </View>
-        <View style={{flex: 3}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-            <View style={{alignItems: 'center'}}>
-              <Text>10</Text>
-              <Text>posts</Text>
-            </View>
-            <View style={{alignItems: 'center'}}>
-              <Text>100</Text>
-              <Text>followers</Text>
-            </View>
-            <View style={{alignItems: 'center'}}>
-              <Text>200</Text>
-              <Text>Following</Text>
-            </View>
+<Container>
+  <Header>
+    <Left>
+      <Icon name='' style={{paddingLeft: 10}}> </Icon>
+    </Left>
+    <Body>
+      <Text> Sample </Text>
+    </Body>
+    <Right>
+      <EntypoIcon name='' style={{paddingRight: 10}} </EntypoIcon>
+    </Right>
+  </Header>
+  <Content>
+    // Multiple views can be added
+    <View style={{flexDirection: 'row'}}>
+      <View style={{flex: 1}}>
+        <Image source={require(./assets/sample.jpg)} style={{width: 75, height: 75, borderRadius: 37.5}}/>
+      </View>
+      <View style={{flex: 3}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+          <View style={{alignItems: 'center'}}>
+            <Text>10</Text>
+            <Text>posts</Text>
+          </View>
+          <View style={{alignItems: 'center'}}>
+            <Text>100</Text>
+            <Text>followers</Text>
+          </View>
+          <View style={{alignItems: 'center'}}>
+            <Text>200</Text>
+            <Text>Following</Text>
           </View>
         </View>
       </View>
-      </View>
-    </Content>
-  <Container>
+    </View>
+    </View>
+  </Content>
+<Container>
 ```
-
-## react-native for web
-
--

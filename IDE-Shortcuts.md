@@ -54,3 +54,5 @@ Settings -> set, javascript.validate.enable": false
 - `Option + Up/Down Arrow` - Move the selected lines up/down
 
 - `Shift + Option + Up/Down Arrow` - Copy the line up/down
+
+- `Shift + Tab` - untab the tabs

@@ -1,7 +1,9 @@
 ## Links:
 
 - http://fullstackreact.com
+
 - https://gist.github.com/samerbuna
+
 - http://edgecoders.com  
 
 - https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
@@ -15,275 +17,294 @@
 
 - http://lucybain.com/blog/2017/react-js-when-to-rerender/
 
-```
-  componentWillReceiveProps(nextProps) {
-    console.log('Recieves the next props' + JSON.stringify(nextProps));
-    this.updateOrderDisplays(nextProps);
-  }
+- When component recieves props, update the state so that UI re-renders
+```javascript
+componentWillReceiveProps(nextProps) {
+  console.log('Recieves the next props' + JSON.stringify(nextProps));
+  this.updateOrderDisplays(nextProps);
+}
 
-  updateOrderDisplays(nextProps) {
-    this.setState({ orderDisplays: nextProps.orderDisplays });
-  }
+updateOrderDisplays(nextProps) {
+  this.setState({ orderDisplays: nextProps.orderDisplays });
+}
 ```
 
 ## Samer Buna - Plural sight course
-- libraries used: font awesome, underscore, bootstrap
+
+- Libraries used: `font awesome`, `underscore`, `bootstrap`
+
 - Grid system and deleting an item in the list using React
+
 ```javascript
-  const Stars = (props) => {
-  	return(
-    	<div className="col-5">
-    	  {_.range(props.numberOfStars).map(i =>
-        	<i key={i} className="fa fa-star"></i>
+const Stars = (props) => {
+	return(
+  	<div className="col-5">
+  	  {_.range(props.numberOfStars).map(i =>
+      	<i key={i} className="fa fa-star"></i>
+      )}
+  	</div>
+  );
+}
+```
+
+```javascript
+const Button = (props) => {
+	return(1
+  	<div className="col-2">
+    	<button>=</button>
+    </div>
+  );
+}
+```
+
+```Javascript
+const Answer = (props) => {
+	return(
+  	<div className="col-5">
+			{props.selectedNumbers.map((number, i) =>
+        	<span className="used" key={i} onClick={() => props.unselectNumber(number)}>
+          	{number}
+          </span>
         )}
-    	</div>
-    );
-  }
+    </div>
+  );
+}
+```
 
-  const Button = (props) => {
-  	return(1
-    	<div className="col-2">
-      	<button>=</button>
-      </div>
-    );
-  }
-
-  const Answer = (props) => {
-  	return(
-    	<div className="col-5">
-  			{props.selectedNumbers.map((number, i) =>
-          	<span className="used" key={i} onClick={() => props.unselectNumber(number)}>
-            	{number}
-            </span>
-          )}
-      </div>
-    );
-  }
-
-  const Numbers = (props) => {
-  	const numberClassName = (number) => {
-    	if(props.selectedNumbers.indexOf(number) >= 0) {
-      	return 'selected';
-      }
+```javascript
+const Numbers = (props) => {
+	const numberClassName = (number) => {
+  	if(props.selectedNumbers.indexOf(number) >= 0) {
+    	return 'selected';
     }
-
-  	return(
-    	<div className="card text-center">
-      	<div>
-          {Numbers.list.map((number, i) =>
-          	<span key={i} className={numberClassName(number)} id="number"
-            	onClick={() => props.selectNumber(number)}>
-            {number}
-            </span>
-          )}
-        </div>
-      </div>
-      );
   }
 
-  const NewList = (props) => {
-  	return(
-    	<div className="list">
-      	<ul>{props.data}</ul>
+	return (
+  	<div className="card text-center">
+    	<div>
+        {Numbers.list.map((number, i) =>
+        	<span key={i} className={numberClassName(number)} id="number"
+          	onClick={() => props.selectNumber(number)}>
+          {number}
+          </span>
+        )}
       </div>
+    </div>
     );
-  }
+}
+```
 
-  const List = (props) => {
-  	this.state = { newList: [] };
+```javascript
+const NewList = (props) => {
+	return(
+  	<div className="list">
+    	<ul>{props.data}</ul>
+    </div>
+  );
+}
+```
 
-  	deleteItem = (item) => {
-    	props.delete(item);
-    };
+```javascript
+const List = (props) => {
+	this.state = { newList: [] };
 
-    addItem = (item)  => {
+	deleteItem = (item) => {
+  	props.delete(item);
+  };
 
-      	this.setState(prevState => ({
-      	newList: prevState.newList.concat(item)
-      }));
-    };
+  addItem = (item)  => {
+    	this.setState(prevState => ({
+    	   newList: prevState.newList.concat(item)
+    }));
+  };
 
-    const listItems = props.data.map((number, key) =>
-      <li onClick={addItem.bind(this, number)}>{number}<span className="fa fa-window-close"
-  			onClick={deleteItem.bind(this, number)}> </span></li>
-      );
+  const listItems = props.data.map((number, key) =>
+    <li onClick={addItem.bind(this, number)}>{number}<span className="fa fa-window-close"
+			onClick={deleteItem.bind(this, number)}> </span></li>);
 
   const newItems = this.state.newList.map((number, key) =>
-      <li >{number}</li>
-      );
+    <li >{number}</li>);
 
-  	return(
-    	<div className="list">
-      	<ul>{listItems}</ul>
-        <ul>{newItems}</ul>
-        </div>
-    );
-  }
+	return(
+  	<div className="list">
+    	<ul>{listItems}</ul>
+      <ul>{newItems}</ul>
+      </div>
+  );
+}
+```
 
-  // Will be used to store global variables
-  Numbers.list = _.range(1, 10);
+- Will be used to store global variables
+```javascript
+Numbers.list = _.range(1, 10);
+```
 
-  class Game extends React.Component {
-  	constructor() {
-    	super();
-    	this.state = {
+```javascript
+class Game extends React.Component {
+	constructor(props) {
+  	super(props);
+
+  	this.state = {
     	selectedNumbers: [],
       numberOfStars: 1 + Math.floor(Math.random() * 9),
       data: [1,2,3,4,5]
-    	};
-    	this.delete = this.delete.bind(this);
-    }
+  	};
 
-    delete = (item) => {
-    	this.setState(prevState => ({
-      	data: prevState.data.filter(number => number !=item)
-      }));
-    }
+  	this.delete = this.delete.bind(this);
+  }
 
-    selectNumber = (clickedNumber) => {
-    	if(this.state.selectedNumbers.indexOf(clickedNumber) >=0) { return; }
+  delete = (item) => {
+  	this.setState(prevState => ({
+    	data: prevState.data.filter(number => number !=item)
+    }));
+  }
 
-      this.setState(prevState => ({
-      	selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
-      }));
-    };
+  selectNumber = (clickedNumber) => {
+  	if(this.state.selectedNumbers.indexOf(clickedNumber) >=0) { return; }
 
-    unselectNumber = (clickedNumber) => {
-    	this.setState(prevState => ({
-      	selectedNumbers: prevState.selectedNumbers
-        													.filter(number => number !== clickedNumber)
-      }));
-    };
+    this.setState(prevState => ({
+    	selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
+    }));
+  };
 
-  	render() {
-    	return(
-      	<div className="container">
-        	<h3>Play Nine</h3>
-          <hr />
+  unselectNumber = (clickedNumber) => {
+  	this.setState(prevState => ({
+    	selectedNumbers: prevState.selectedNumbers
+      													.filter(number => number !== clickedNumber)
+    }));
+  };
+
+	render() {
+  	return(
+    	<div className="container">
+      	<h3>Play Nine</h3>
+        <hr />
+        <div className="row">
+        	<Stars numberOfStars={this.state.numberOfStars}/>
+        	<Button />
+        	<Answer selectedNumbers={this.state.selectedNumbers}
+          	unselectNumber={this.unselectNumber} />
+        </div>
+        <br />
+        <Numbers selectedNumbers={this.state.selectedNumbers}
+        	selectNumber={this.selectNumber} />
+        <List delete={this.delete} data={this.state.data} />
+        <div className="container">
           <div className="row">
-          	<Stars numberOfStars={this.state.numberOfStars}/>
-          	<Button />
-          	<Answer selectedNumbers={this.state.selectedNumbers}
-            	unselectNumber={this.unselectNumber} />
-          </div>
-          <br />
-          <Numbers selectedNumbers={this.state.selectedNumbers}
-          	selectNumber={this.selectNumber} />
-          <List delete={this.delete} data={this.state.data} />
-          <div className="container">
-            <div className="row">
-              <div className="col-6 left">
-                <div className="row">
-                  <div className="col orders">
-                    orders
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col search">
-                    search
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col result">
-                    result
-                  </div>
+            <div className="col-6 left">
+              <div className="row">
+                <div className="col orders">
+                  orders
                 </div>
               </div>
-              <div className="col-6 right">
-              col-6
+              <div className="row">
+                <div className="col search">
+                  search
+                </div>
+              </div>
+              <div className="row">
+                <div className="col result">
+                  result
+                </div>
               </div>
             </div>
+            <div className="col-6 right">
+            col-6
+            </div>
           </div>
-      </div>
-      );
-    }
-  }
-
-  class App extends React.Component {
-  	render() {
-    	return(
-      	<div>
-        	<Game />
         </div>
-      );
-    }
+    </div>
+    );
   }
-
-  ReactDOM.render(<App />, mountNode);
+}
 ```
 
-### CSS for sample-1
+```javascript
+class App extends React.Component {
+	render() {
+  	return(
+    	<div>
+      	<Game />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, mountNode);
+```
+
+### CSS for Above code
 ```css
   .mountNode {
     color: #333;
   }
 
   .fa-star {
-  margin: 0.5em;
-  font-size: 24px;
+    margin: 0.5em;
+    font-size: 24px;
   }
 
   .fa-window-close {
-  margin: 5px;
-  float: right;
+    margin: 5px;
+    float: right;
   }
 
   li {
-  background: #cce5ff;
-  margin: 1px;
-  padding: 10px;
+    background: #cce5ff;
+    margin: 1px;
+    padding: 10px;
   }
 
 
   #number {
-  display: inline-block;
-  margin: 0.5em;
-  text-align: center;
-  background-color: #ccc;
-  width: 24px;
-  border-radius: 50%;
-  cursor: pointer;
+    display: inline-block;
+    margin: 0.5em;
+    text-align: center;
+    background-color: #ccc;
+    width: 24px;
+    border-radius: 50%;
+    cursor: pointer;
   }
 
   .selected {
-  background-color: #eee;
-  color: #ddd;
-  cursor: not-allowed;
+    background-color: #eee;
+    color: #ddd;
+    cursor: not-allowed;
   }
 
   .used {
-  background-color: #aaddaa;
-  color: #99bb99;
-  cursor: not-allowed;
+    background-color: #aaddaa;
+    color: #99bb99;
+    cursor: not-allowed;
   }
 
   ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
   .left {
-  height: 200px;
-  background-color:#88f66d;
+    height: 200px;
+    background-color:#88f66d;
   }
   .right {
-  height: 200px;
-  background-color: #f06488;
+    height: 200px;
+    background-color: #f06488;
   }
 
   .orders {
-  height: 80px;
-  background-color: gray;
+    height: 80px;
+    background-color: gray;
   }
 
   .search {
-  height: 20px;
-  background-color: blue;
+    height: 20px;
+    background-color: blue;
   }
 
   .result {
-  height: 100px;
-  background-color: cyan;
+    height: 100px;
+    background-color: cyan;
   }
 ```
 
@@ -317,269 +338,254 @@ module.exports = routes;
 ```
 
 ### react-router-dom v4 sample:
-```javascript
-    import ReactRouter from 'react-router-dom';
-    import Router from ReactRouter.BrowserRouter;
-    import Switch from ReactRouter.Switch;
 
-    App extends React.Component {
-      render() {
-        return(
-          <Router>
-            <div className="container">
-              <Nav /> -- Component to show the content
-              <Switch> // Switch to hande the special request coming to route other than specified one
-                <Route exact path='/' component={Home} />
-                <Route path='/battle' component={Battle} />
-                <Route path='/popular' component={Popular} />
-                <Route render = {function() {
-                    return (<p>Page Not Found</p>);
-                  }}/>
-              </Switch>
-            </div>
-          </Router>
-        );
-      }
-    }
+```javascript
+import ReactRouter from 'react-router-dom';
+import Router from ReactRouter.BrowserRouter;
+import Switch from ReactRouter.Switch;
+
+App extends React.Component {
+  render() {
+    return(
+      <Router>
+        <div className="container">
+          <Nav /> -- Component to show the content
+          <Switch> // Switch to hande the special request coming to route other than specified one
+            <Route exact path='/' component={Home} />
+            <Route path='/battle' component={Battle} />
+            <Route path='/popular' component={Popular} />
+            <Route render = {function() {
+                return (<p>Page Not Found</p>);
+              }}/>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
+}
 ```
+
 ```javascript
-    import React from 'react';
-    import ReactRouter from 'react-router-dom';
-    import NavLink from ReactRouter.NavLink;
+import React from 'react';
+import ReactRouter from 'react-router-dom';
+import NavLink from ReactRouter.NavLink;
 
-    const Nav = () => {
-      return(
-        <ul className='nav'>
-          <li>
-            <NavLink exact activeClassName='active' to='/' >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName='active' to='/battle' >
-              Battle
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName='active' to='/popular' >
-              popular
-            </NavLink>
-          </li>
-        </ul>
-      );
-    };
+const Nav = () => {
+  return(
+    <ul className='nav'>
+      <li>
+        <NavLink exact activeClassName='active' to='/' >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName='active' to='/battle' >
+          Battle
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName='active' to='/popular' >
+          popular
+        </NavLink>
+      </li>
+    </ul>
+  );
+};
 
-    export default Nav;
+export default Nav;
 ```
 
 # React Forms: Cory House
 
-- use mixins to refer other components,
+- use `mixins` to refer to other components.
 
 - use statics to make transitions to one page to another, and ask save the user data before transition to another page, using
   dirty state.
+
 ```javascript
-  	mixins: [
-  		Router.Navigation
-  	],
+mixins: [
+	Router.Navigation
+],
 
-  	statics: {
-  		willTransitionFrom: function(transition, component) {
-  			if (component.state.dirty && !confirm('Leave without saving?')) {
-  				transition.abort();
-  			}
-  		}
-  	},
+statics: {
+	willTransitionFrom: function(transition, component) {
+		if (component.state.dirty && !confirm('Leave without saving?')) {
+			transition.abort();
+		}
+	}
+},
 
-  	this.transitionTo('authors'); // will take to the name of the page mentioned in Router
+this.transitionTo('authors'); // will take to the name of the page mentioned in Router
 ```
-
-### Flux:
-
-- Not a framework, name for the pattern for unidirectional dataflows
-- State update happens from centralized dispatcher to applications data store
-- Deals with actions and data changes
-- Action -> Dispatcher -> Store -> React View -> Action (unidirectional)
-
-- Action - Action performed - Has payload and data - makes ajax calls - uses web API
-- Dispatcher - Centralized list of callbacks - Notifies everyone who cares - only one dispatcher for an app -
--	Distributes actions to the stores
-- Store - Holds the app state, logic, data retrieval - contains models - an app can have one or more stores -
-registers callbacks with dispatcher - uses Nodes EventEmitter
-- View - Holds the data in state - sends data to children as props
-
-#### API:
-- register(function callback)
-- unregister(string id)
-- waitFor(array<string> ids) - update this store first
-- dispatch(object payload)
-- isDispatching()
 
 #### filter array:
 ```javascript
-  function searchMovies(query) {
-  	return map.filter((movie) => {
-  		return movie.title.includes(query);
-  	});
-  }
+function searchMovies(query) {
+	return map.filter((movie) => {
+		return movie.title.includes(query);
+	});
+}
 ```
 
 #### Validating props of an array:
 ```javascript
-		order: PropTypes.arrayOf(PropTypes.shape({
-		    identifier: PropTypes.number.isRequired,
-		    displayValue: PropTypes.string.isRequired,
-		    required: PropTypes.bool.isRequired
-		  })),
+order: PropTypes.arrayOf(PropTypes.shape({
+  identifier: PropTypes.number.isRequired,
+  displayValue: PropTypes.string.isRequired,
+  required: PropTypes.bool.isRequired
+}))
 ```
 
 #### Updating the state based on the condition in setState()
 
 ```javascript
-	this.setState(prevState => {(
-		if(prevState.usedNumbers.length === 9) {
-			return { doneStatus: 'Done!' };
-		}
-	)});
+this.setState(prevState => {(
+	if(prevState.usedNumbers.length === 9) {
+		return { doneStatus: 'Done!' };
+	}
+)});
 ```
 
-- prevState contains all the state of the components it holds,
+- `prevState` contains all the state of the components it holds,
 
-- prevState passed to an function can be destructured to process
+- `prevState` passed to an function can be destructured to process
 
 ```javascript
-	decideTheGame = ({param1, param2}) => {...};
+decideTheGame = ({param1, param2}) => {...};
 
-		this.setState(prevState => {(
-			if(this.decideTheGame(prevState)) {
-				return { doneStatus: 'Done!' };
-			}
-		)});
+this.setState(prevState => {(
+	if(this.decideTheGame(prevState)) {
+		return { doneStatus: 'Done!' };
+	}
+)});
 ```
 
-- Update the state 'twice', calling setState in a callback is not allowed, setState accepts callback function, once state updated
+- Update the state `twice`, calling setState in a callback is not allowed, `setState` accepts callback function
+
 ```javascript
-		this.setState(prevState => {(
-
-		)}, this.updateAnotherState);
+this.setState(prevState => {(
+  )}, this.updateAnotherState);
 ```
-
 
 - possibleCombination by Samer Buna - https://gist.github.com/samerbuna/aa1f011a6e42d6deba46
 ```javascript
-		var possibleCombinationSum = function(arr, n) {
-		  if (arr.indexOf(n) >= 0) { return true; }
-		  if (arr[0] > n) { return false; }
-		  if (arr[arr.length - 1] > n) {
-		    arr.pop();
-		    return possibleCombinationSum(arr, n);
-		  }
-		  var listSize = arr.length;
-			var combinationsCount = (1 << listSize);
+var possibleCombinationSum = function(arr, n) {
+  if (arr.indexOf(n) >= 0) { return true; }
+  if (arr[0] > n) { return false; }
+  if (arr[arr.length - 1] > n) {
+    arr.pop();
+    return possibleCombinationSum(arr, n);
+  }
+  var listSize = arr.length;
+	var combinationsCount = (1 << listSize);
 
-		  for (var i = 1; i < combinationsCount ; i++ ) {
-		    var combinationSum = 0;
-		    for (var j=0 ; j < listSize ; j++) {
-		      if (i & (1 << j)) { combinationSum += arr[j]; }
-		    }
-		    if (n === combinationSum) { return true; }
-		  }
-		  return false;
-	};
+  for (var i = 1; i < combinationsCount ; i++ ) {
+    var combinationSum = 0;
+    for (var j=0 ; j < listSize ; j++) {
+      if (i & (1 << j)) { combinationSum += arr[j]; }
+    }
+    if (n === combinationSum) { return true; }
+  }
+  return false;
+};
 ```
 
-# React and Redux: Dan Abramov:
+# React and Redux: Dan Abramov
 
-  https://egghead.io/lessons/javascript-redux-simplifying-the-arrow-functions
-  use node-uuid v4
+- https://egghead.io/lessons/javascript-redux-simplifying-the-arrow-functions
 
-  // Instead of return in the body cover the return in ()
-  export const addToDo = (text) => ({
-    type: 'SET_FILTER',
-    text,
-  });
+- use `node-uuid` to generate unique id
 
-  create store can take persisted state as second parameter, - done in entry point
+```javascript
+// Instead of return in the body cover the return in ()
+export const addToDo = (text) => ({
+  type: 'SET_FILTER',
+  text,
+});
+```
 
-  todoApp is imported from
-  const store = createStore(todoApp, persistedState);
-  render(
-    <Provider store = {store}>
-        <Router routes = {routes} history={browserHistory} />
-    </Provider>,
-    document.getElementById('app')
-  );
+- `createStore()` can take persisted state as second parameter.
 
+```javascript
+const store = createStore(todoApp, persistedState);
+render(
+  <Provider store = {store}>
+      <Router routes = {routes} history={browserHistory} />
+  </Provider>,
+  document.getElementById('app')
+);
+```
 
 ## React-Ajax call using jQuery:
 
-  var data = {};
-    data.name = 'Punith';
-    data.id = 1;
-    data.age = 38;
-    data.sex = 'male';
-
-    jquery.ajax({
-      url: 'http://localhost:3000/users',
-      type: 'POST',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      success: function (data) {
-          console.log('Update successfull');
-          console.log(JSON.stringify(data));
-      }.bind(this),
-        error: function (xhr, status, err) {
-        console.log(err);
-      }
-    });
-
-  - Class can change the state of a class not the props of the class.
 ```javascript
-    // Example ran in jscomplete - communicating with other componets and usage of props
+var data = {};
+data.name = 'Punith';
+data.id = 1;
+data.age = 38;
+data.sex = 'male';
 
-    class Button extends React.Component {
-      state = {counter: 0};
+jquery.ajax({
+  url: 'http://localhost:3000/users',
+  type: 'POST',
+  data: JSON.stringify(data),
+  contentType: 'application/json',
+  success: function (data) {
+      console.log('Update successfull');
+      console.log(JSON.stringify(data));
+  }.bind(this),
+    error: function (xhr, status, err) {
+    console.log(err);
+  }
+})
+```
 
-      handleClick = () => {
-      	this.props.onClickFunction(this.props.incrementValue);
-      };
+- Class can change the state of a class not the props of the class.
 
-      render() {
-      	return(
-        	<button onClick={this.handleClick}>
-          	+{this.props.incrementValue}
-          </button>
-        );
-      }
-    }
+```javascript
+class Button extends React.Component {
+  state = {counter: 0};
 
-    const Result = (props) => {
-      	return(
-        	<div>{props.counter}</div>
-        );
-      };
+  handleClick = () => {
+    this.props.onClickFunction(this.props.incrementValue);
+  };
 
-    class App extends React.Component {
-      state = {counter: 0};
+  render() {
+    return(
+    	<button onClick={this.handleClick}>
+      	+{this.props.incrementValue}
+      </button>
+    );
+  }
+}
 
-      incrementCounter = (incrementValue) => {
-      	this.setState((prevState) => ({
-          counter: prevState.counter + incrementValue
-        }));
-      }
+const Result = (props) => {
+  return(
+  	<div>{props.counter}</div>
+  );
+};
 
-      render() {
-        	return(
-            <div>
-              <Button incrementValue={1} onClickFunction={this.incrementCounter}/>
-              <Button incrementValue={5} onClickFunction={this.incrementCounter}/>
-              <Button incrementValue={7} onClickFunction={this.incrementCounter}/>
-              <Button incrementValue={100} onClickFunction={this.incrementCounter}/>
-              <Result counter={this.state.counter}/>
-            </div>
-          );
-      }
-    }
+class App extends React.Component {
+  state = {counter: 0};
+
+  incrementCounter = (incrementValue) => {
+    this.setState((prevState) => ({
+      counter: prevState.counter + incrementValue
+    }));
+  }
+
+  render() {
+  	return(
+      <div>
+        <Button incrementValue={1} onClickFunction={this.incrementCounter}/>
+        <Button incrementValue={5} onClickFunction={this.incrementCounter}/>
+        <Button incrementValue={7} onClickFunction={this.incrementCounter}/>
+        <Button incrementValue={100} onClickFunction={this.incrementCounter}/>
+        <Result counter={this.state.counter}/>
+      </div>
+    );
+  }
+}
 
 ReactDOM.render(<App />, mountNode);
 ```
@@ -612,55 +618,56 @@ const Card = (props) => {
 ```
 
 ```javascript
-    class Form extends React.Component {
-    	state = { userName: ''};
+class Form extends React.Component {
+	state = { userName: ''};
 
-    	handleSubmit = (event) => {
-      	event.preventDefault();
-        axios.get(`https://api.github.com/users/${this.state.userName}`)
-        .then(resp => {
-        	this.props.onSubmit(resp.data);
-          this.setState({userName: ''});
-        });
-      };
+	handleSubmit = (event) => {
+  	event.preventDefault();
+    axios.get(`https://api.github.com/users/${this.state.userName}`)
+    .then(resp => {
+    	this.props.onSubmit(resp.data);
+      this.setState({userName: ''});
+    });
+  };
 
-    	render() {
-      	return(
-          <form onSubmit={this.handleSubmit}>
-          	<input type="text"
-          	value={this.state.userName}
-            onChange={(event) => this.setState({ userName: event.target.value })}
-            placeholder="Github username" required/>
+	render() {
+  	return(
+      <form onSubmit={this.handleSubmit}>
+      	<input type="text"
+      	value={this.state.userName}
+        onChange={(event) => this.setState({ userName: event.target.value })}
+        placeholder="Github username" required/>
 
-          	<button type="submit">Add User</button>
-          </form>
-        );
-      }
-    }
+      	<button type="submit">Add User</button>
+      </form>
+    );
+  }
+}
 ```
 
 ```javascript
 class App extends React.Component {
-      state = {
-      	cards: []
-      };
+  state = {
+  	cards: []
+  };
 
-      addNewCard = (cardInfo) => {
-      	this.setState((prevState) => ({
-        	cards: prevState.cards.concat(cardInfo)
-        }));
-      };
+  addNewCard = (cardInfo) => {
+  	this.setState((prevState) => ({
+    	cards: prevState.cards.concat(cardInfo)
+    }));
+  };
 
-      render() {
-      	return(
-        	<div>
-        		<Form onSubmit={this.addNewCard}/>
-          	<CardList cards={this.state.cards} />
-          </div>
-        );
-      }
-    }
+  render() {
+  	return(
+    	<div>
+    		<Form onSubmit={this.addNewCard}/>
+      	<CardList cards={this.state.cards} />
+      </div>
+    );
+  }
+}
 ```
+
 ```javascript
 const CardList = (props) => {
 	return(
@@ -671,39 +678,6 @@ const CardList = (props) => {
 };
 
 ReactDOM.render(<App />, mountNode);
-```
-```
-function Blog(props) {
-    const sidebar = (
-      <ul>
-        {props.posts.map((post) =>
-          <li key={post.id}>
-            {post.title}
-          </li>
-        )}
-      </ul>
-);
-const content = props.posts.map((post) =>
-    <div key={post.id}>
-      <h3>{post.title}</h3>
-        <p>{post.content}</p>
-      </div>
-    );
-    return (
-      <div>
-        {sidebar}
-        <hr />
-        {content}
-      </div>
-      );
-    }
-
-const posts = [
-  {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
-  {id: 2, title: 'Installation', content: 'You can install React from npm.'}
-];
-
-ReactDOM.render(<Blog posts={posts} />, document.getElementById('root');
 ```
 
 ### Reusable components
@@ -892,8 +866,9 @@ function* watchFetchData() {
   }
   ```
 
-- Find the scroll position to fix the header
+### Find the scroll position to fix the header
 - https://www.w3schools.com/howto/howto_js_sticky_header.asp
+
 ```javascript
 import {useEffect} from 'react';
 import {useWindowScroll} from 'react-use';
@@ -918,4 +893,25 @@ useEffect(() => {
 - Prepend the link with the following, allows only 50 requests/30mins
 ```
 fetch( `https://cors-anywhere.herokuapp.com/<url>`).then(...)
+```
+
+## Add css styles with hooks (passed as array)
+
+```javascript
+const [cardStyle, setCardStyle] = useState({})
+
+useEffect(() => {
+  const borderColor = isSuccess(dep1)
+    ? isConnected
+      ? colors.primary
+      : colors.red300
+    : isError(dep2)
+    ? colors.red300
+    : colors.gray100
+
+  setCardStyle({borderTop: `3px solid ${borderColor}`})
+}, [dep1, dep2])
+
+// Passing array of styles to css
+<Details css={[{maxWidth: '30%'}, cardStyle]} />
 ```
