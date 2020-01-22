@@ -416,6 +416,16 @@ git push --set-upstream origin <new_branch>
 
 ### Tags:
 
+#### Create a tag
+```
+$ git tag -a 1.4 -m "my version 1.4"
+```
+
+### Publish a tag
+```
+$ git push origin 1.4
+```
+
 #### Deleting a remote tag
 ```
 git tag -d <12345>

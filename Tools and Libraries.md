@@ -18,6 +18,7 @@
 - The coding train - fun added
 - Fun fun function - fun added
 - Colt Steele
+- florin pop
 
 ### Java
 
@@ -30,7 +31,7 @@
 
 ### JS
 
-- Douglas Crockford - JS Best Parts author
+- Douglas Crockford - JS Best Parts, author
 - Dan Abramov - React
 - Kent C Dodds - React
 - Dave Ceddia - React
@@ -41,17 +42,17 @@
 - Uncle Robert C Martin - Clean code
 - Victor Rentea - Clean Code
 
-
 ## Tutorials:
 
 - SCSS tutorials
-- Advanced SQL
 - Advanced mongo
 - Flexbox, grid
 - JWT - JSON web tokens
 - Spinnaker
 
 ## Libraries:
+
+### JS
 
 * `webpack` - bundler
 * `gulp` - task runner like npm
@@ -81,8 +82,10 @@
 * `cron` - To run cron job for specified amount of time refer: `crontab.guru`
 * `node-fetch` - fetch API for node
 * `redis` - node client for redis
+* `stripe` - payment and ui components
+* `vega` - Data visualization API
 
-### React Libraries:
+### React:
 
 * `styled-components` - to create styled components for react
 * `react-spring` - React animation
@@ -99,7 +102,7 @@
 * `npm-run-all` - run parallel tasks
 * `immer` - Convert mutable state to immutable in react
 
-### Common libraries:
+### Common:
 
 * `lodash` - Reduces boiler plate for array, map and string and operations.
 * `express` - server container for node.js (hapi)
@@ -108,28 +111,24 @@
 
 ## Tools:
 
--	scratchpad.io
--	jsonplaceholder -> Fake Online REST API for Testing and Prototyping
--	https://ckeditor.com/ - WYSIWYG editor
-- codesandbox.io
-- JFrog - artifactory
-- Spinnaker
+-	`jsonplaceholder` -> Fake Online REST API for Testing and Prototyping
+- `JFrog` - artifactory
+- `Spinnaker`
 
-### Java Libraries
+### Java
 
-- Jackson - for JSON
-- Vert.X - reactive programming library from eclipse
-- RxJava - Reactive programing library from netflix
-- Kafka, Aka
-- lombok - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
-- Spock - Unit test framework
+- `Jackson` - for JSON
+- `Vert.X` - reactive programming library from eclipse
+- `RxJava` - Reactive programing library from netflix
+- `Kafka`, `Aka`
+- `lombok` - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
+- `Spock` - Unit test framework
 
-### Concepts look out-for
+### Python
 
-- Error boundaries
-- redux, middleware's, redux-thunk
-- forward-ref
-- higher order components
+- `jupyter` - interactive notebook
+- `altair` - https://altair-viz.github.io/ - data visualization with vega and vega lite
+- `nteract` - interactive code notebook like `jupyter`
 
 ### Books
 
@@ -139,6 +138,9 @@
 
 ## Links:
 
+-	https://scratchpad.io - html, css editor
+- https://ckeditor.com/ - WYSIWYG editor
+- https://codesandbox.io - online code playground
 - https://www.expo.io - React-Native
 - https://www.webcodegeeks.com/html5/html5-internationalization-example/ - Blog
 - https://www.scrimba.com/g/gflexbox
@@ -164,6 +166,7 @@
 - https://javarevisited.blogspot.com/2018/07/java-multi-threading-interview-questions-answers-from-investment-banks.html
 - http://www.java67.com/2015/07/how-to-stop-thread-in-java-example.html
 - https://manojsatishkumar.github.io/
+- [Anti-patterns](https://sahandsaba.com/nine-anti-patterns-every-programmer-should-be-aware-of-with-examples.html)
 
 ### Mokito Video
 
@@ -220,11 +223,13 @@
 ### JS Interview topics for ReactJS
 - Server side rendering, refs
 - React router dom, reach router
-- Error boundaries
 - Pure component
 - HOC
 - JS Scope
 - DS
+- Error boundaries
+- redux, middleware's, redux-thunk
+- forward-ref
 
 ## Other Links
 - https://www.ambitionbox.com/salaries/take-home-salary-calculator

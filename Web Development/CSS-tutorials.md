@@ -243,6 +243,88 @@
 </html>
 ```
 
+### Scroll aware navbar - Hide on scrollDown and show on scrollUp
+
+```html
+<body>
+  <nav id="navbar">
+    <ul>
+      <li><a>Link1</a></li>
+      <li><a>Link2</a></li>
+      <li><a>Link3</a></li>
+      <li><a>Link4</a></li>
+    </ul>
+  </nav>
+  <p class="some-content">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+    in culpa qui officia deserunt mollit anim id est laborum.
+
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+    in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+</body>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px; /* top: -80px on scroll */
+  padding: 0 100px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  color: blue;
+  padding: 0 20px;
+  font-weight: bold;
+}
+</style>
+
+<script type="text/javascript">
+  let lastScrollTop = 0;
+  let navbar = document.querySelector('.navbar');
+
+  window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset ||
+      document.documentElement.scrollTop
+
+      if(scrollTop > lastScrollTop) {
+        navbar.style.top = "-80px";
+      } else {
+        navbar.style.top = 0;
+      }
+
+      lastScrollTop = scrollTop;
+  })
+</script>
+```
+
 ## CSS Grid Layout:
 
 - Example code at: [Code sandbox](https://codesandbox.io/s/l2yjm5z6l9)
@@ -304,6 +386,35 @@
   }
 ```
 
+## Align content to center of the page using flex box
+
+```html
+<html>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box div {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+
+  <body>
+    <div class="box">
+      <div>Content to align center</div>
+    </div>
+  </body>
+</html>
+```
 
 ## Emotion-UI - React styling
 
@@ -334,7 +445,7 @@ const Tab = styled.button`
 
 ### Pass props to styled component - object style
 
-```
+```js
 const Card = styled('a')({
   border: '1px solid blue',
 
@@ -347,7 +458,7 @@ const Card = styled('a')({
 
 - Get the computed style of an element - in dev tools
 
-```
+```js
 const h1 = document.querySelector('h1')
 window.getComputedStyle(h1).getPropertyValue('font-size')
 ```

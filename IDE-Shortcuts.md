@@ -55,4 +55,12 @@ Settings -> set, javascript.validate.enable": false
 
 - `Shift + Option + Up/Down Arrow` - Copy the line up/down
 
-- `Shift + Tab` - untab the tabs
+- `Shift + Tab` - un-tab the tabs
+
+- `Cmd + D` - Select entries starting from the word under the cursor
+
+- `Cmd + K + M` - Tell editor to treat document in the selected format
+
+- `Cmd + Shift + .` - Fast Navigation within the file
+
+- `Cmd + Shift + \` - Goto matching bracket
