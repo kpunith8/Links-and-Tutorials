@@ -1,6 +1,4 @@
-# Links-and-Tutorials
-Contains files and links to some of the programming tutorials
+## Links-and-Tutorials
 
-Programming languages covered:
-
-JavaScript, 
+- Contains tutorials, links, libraries and code examples for  `Java`, `JavaScript`
+  `Web development topics`, `python`, `NodeJS`, `flutter`, `Dart` and lot more
