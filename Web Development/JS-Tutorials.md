@@ -488,8 +488,11 @@ window.onload = function() {
 ## Mixins
 
 - Mixin is a way properties are added to objects without using inheritance.
+
 - Mixins provide an alternate way of composing your application.
+
 - Mixins are a form of object composition, where component features get mixed
+
 	into a composite object so that properties of each mixin become properties of the composite object.
 	```javascript
 	const myDetails = {}

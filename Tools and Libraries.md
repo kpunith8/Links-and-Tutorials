@@ -88,26 +88,30 @@
 ### React:
 
 * `styled-components` - to create styled components for react
+* `emotion` - Styled components, CSS in JS
 * `react-spring` - React animation
 * `GraphQL` - `relay`, `apolo`, `graphcool` - serverless GraphQL
 * `reactstrap` - wrapper for Bootstrap 4.0 for react
 * `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
 * `reselect` and `recompose`
 * `react-cache` - To cache the data
-* `react-testing-library` - By Kent C Dodds
+* `react-testing-library` - testing library - By Kent C Dodds
 * `nwb` - React starter kit, like `create-react-app`
 * `react-docgen` - generate react components metadata
 * `chokidar` - watch files
 * `highlight.js` - syntax highlighted code examples
 * `npm-run-all` - run parallel tasks
 * `immer` - Convert mutable state to immutable in react
+* `nextJS` - React library for SPA
+* `Gatsby` - React library for SPA
+* `react-loading-skeleton` - skeleton loading for data or images
 
 ### Common:
 
 * `lodash` - Reduces boiler plate for array, map and string and operations.
 * `express` - server container for node.js (hapi)
-* `ember`
 * `underscore` - JS util functions for common tasks
+* `contentful` - CMS - content management system
 
 ## Tools:
 
@@ -119,8 +123,8 @@
 
 - `Jackson` - for JSON
 - `Vert.X` - reactive programming library from eclipse
-- `RxJava` - Reactive programing library from netflix
-- `Kafka`, `Aka`
+- `RxJava` - Reactive programming library from Netflix
+- `Kafka`, `Aka` - Reactive frameworks
 - `lombok` - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
 - `Spock` - Unit test framework
 
@@ -129,6 +133,7 @@
 - `jupyter` - interactive notebook
 - `altair` - https://altair-viz.github.io/ - data visualization with vega and vega lite
 - `nteract` - interactive code notebook like `jupyter`
+-  https://altair-viz.github.io/getting_started/starting.html
 
 ### Books
 
@@ -138,6 +143,10 @@
 
 ## Links:
 
+- https://jobs.github.com/positions.json - github jobs API
+- https://picsum.photos/ - Stock Images
+- https://miragejs.com/ - Fake server API
+- https://www.contentful.com/developers/ - CMS
 -	https://scratchpad.io - html, css editor
 - https://ckeditor.com/ - WYSIWYG editor
 - https://codesandbox.io - online code playground

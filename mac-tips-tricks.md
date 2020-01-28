@@ -18,7 +18,7 @@ $ brew cask install font-fira-code
 
 - `Cmd + Shift + F` - Toggle full screen
 
-- `Cmd + Option + V` - Cut/Paste
+- `Cmd + C` - Copy and `Cmd + Option + V` - Cut/Paste
 
 - `Ctrl + Cmd + Space` - Emoji Icons
 

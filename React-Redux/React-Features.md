@@ -1,18 +1,27 @@
-## React basics
+## React basics - Lagacy
 - Mounting process has 4 lifecycle methods, invoked in the following order:
-	- `constructor()` - Initial state declartion and binding of callback functions can be registed here, if you are using ES6
+
+	- `constructor()` - Initial state declaration and binding of callback functions
+		can be registered here, if you are using ES6
 		arrow functions, then no need to bind callbacks in `constructor`
+
 	- `static getDerivedStateFromProps(props, state)` - It is important to know that this is a static method and it doesn’t
 		have access to the component instance.
+
 	- `render()`
-	- `componentDidMount()` - Asynchrous data fetch can be done here
+
+	- `componentDidMount()` - Asynchronous data fetch can be done here
 
 - Update lifecycle of a component when the state or the props change, there are 5 lifecycle
-methods, in the following order:
+	methods, in the following order:
 	- `getDerivedStateFromProps()`
+
 	- `shouldComponentUpdate(nextProps, nextState)`
+
 	- `render()`
+
 	- `getSnapshotBeforeUpdate(prevProps, prevState)`
+
 	- `componentDidUpdate(prevProps, prevState, snapshot)`
 
 - Unmounting lifecycle. It has only one lifecycle method
@@ -20,10 +29,12 @@ methods, in the following order:
 
 - `componentDidCatch(error, info)` used  to catch errors in components.
 
-## React Hooks - 1.17.0-alpha.0
+## React Hooks - 16.8
+
 - Allows state management and life cycle management in functional components
-- No need to write class
-- use `react: "next"` to get the latest alpha to use this feature
+
+- No need to write class, works only with functional components
+
 
 ### `useState` hook
 
@@ -88,6 +99,7 @@ export default Counter;
 ```
 
 ### Store values to local storage with `useEffect` hook
+
 - use `useEffect` hook acts like `CDM` and `CDU` life cycle methods, it runs every time state changes
 
 ```javascript
