@@ -1,6 +1,6 @@
 ## Building a JavaScript Environment: Cory House
 
-- ember - fully opionated library
+- ember - fully opinionated library
 
 ### Editor Selection
 
