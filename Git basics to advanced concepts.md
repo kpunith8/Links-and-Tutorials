@@ -153,6 +153,11 @@ git config --global alias.st status
 git config --global alias.unstage 'reset HEAD --'
 ```
 
+- Put multiple commands in double quotes, edit `.gitconfig` add this under `[alias]` section as follows
+```
+sort-branch = !"git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'"
+```
+
 ### Passing parameters to git alias
 ```
 git config --global alias.ra ra="!f() {\
@@ -592,6 +597,11 @@ git commit -n or --no-verify
 ### gitbash on windows doesn't show chars once git log prints or Ctrl+C pressed (Cursor blinks)
 
 - Press `q` in the terminal to quit the log window, or type `reset` to reset the session
+
+### Sort the branches by last updated date
+```
+git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'
+```
 
 # macOS Related
 

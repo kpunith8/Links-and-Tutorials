@@ -15,8 +15,8 @@
 - Ben Awad - hooks and react
 - web development simplified
 - Programming with mosh
-- The coding train - fun added
-- Fun fun function - fun added
+- The coding train
+- Fun fun function
 - Colt Steele
 - florin pop
 
@@ -115,9 +115,26 @@
 
 ## Tools:
 
--	`jsonplaceholder` -> Fake Online REST API for Testing and Prototyping
 - `JFrog` - artifactory
 - `Spinnaker`
+
+## REST end points
+
+-  Star wars APIs
+```javascript
+{
+	"films": "https://swapi.co/api/films/",
+	"people": "https://swapi.co/api/people/",
+	"planets": "https://swapi.co/api/planets/",
+	"species": "https://swapi.co/api/species/",
+	"starships": "https://swapi.co/api/starships/",
+	"vehicles": "https://swapi.co/api/vehicles/"
+}
+```
+
+- `jsonplaceholder`
+
+- `heroku.endpoint with CORS`
 
 ### Java
 
@@ -166,7 +183,7 @@
 - https://www.javascriptstuff.com/ - Blog
 - https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
 - [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
-- [ES6-indepth-explorjs](https://exploringjs.com/es6/ch_generators.html#ch_generators)
+- [ES6-indepth-explorjs](https://exploringjs.com/)
 - [Javascript.info](https://javascript.info/)
 
 # References
