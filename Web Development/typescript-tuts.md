@@ -13,10 +13,11 @@
 
 - `tsc` - TypeScript compiler
 
+
 ### Issues
 
 - `Cannot redeclare block-scoped variable` (VS Code) - writing individual files
 
   - Fix: add `export {};` in the beginning of the file
 
-- 
+-
