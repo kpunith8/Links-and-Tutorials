@@ -1,4 +1,6 @@
-## AWS - Amazon Web Services -  Provider of cloud services
+## AWS - Amazon Web Services - Cloud services provider
+
+- Similar offerings, `Google Cloud`, `Microsoft Azure`, and many more
 
 - [Service Health Dashboard](https://status.aws.amazon.com/)
 
@@ -367,28 +369,108 @@
   - Mostly used for extreme performance and should not be the default load balancer to choose
   - Directly see the client IP
 
-- `Load Balancing -> Load Balancers` -> Select `Application Load Balancer` -> `Create`
-  - `Configure Load Balancer` -> `Name: web-app-alb, Scheme: internet-facing, IP address type: IPv4`,
-    `Listeners: Load Balance protocol: HTTP, port: 80`, `Availability Zones: select all available`
+- `Creating a Load Balancer`
 
-  - `Configure Security Groups` -> Create a new security group -> Fill `name` and `description` ->
-    `Type: Custom TCP, Protocol: TCP, Port: 80, Source: Custom, 0.0.0.0/0, ::/0`
+  - `Load Balancing -> Load Balancers` -> Select `Application Load Balancer` -> `Create`
+    - `Configure Load Balancer` -> `Name: web-app-alb, Scheme: internet-facing, IP address type: IPv4`,
+      `Listeners: Load Balance protocol: HTTP, port: 80`, `Availability Zones: select all available`
 
-  - `Configure Routing` -> Create new target group -> Name it -> `Target Group: Protocol: HTTP, Port: 80, Target Type: instance`
-    `Health Check: Protocol: HTTP, Path: /`
+    - `Configure Security Groups` -> Create a new security group -> Fill `name` and `description` ->
+      `Type: Custom TCP, Protocol: TCP, Port: 80, Source: Custom, 0.0.0.0/0, ::/0`
 
-  - `Register Target` -> Select the targeted instance from the list
+    - `Configure Routing` -> Create new `Target Group` -> Name it -> `Target Group: Protocol: HTTP, Port: 80, Target Type: instance`
+      `Health Check: Protocol: HTTP, Path: /`
 
-  - `Review` -> `Create`
+    - `Register Target` -> Select the targeted instance from the list
 
-  -  Once load balancer is provisioned, grab link from `DNS Name` from `Description` and access the link
+    - `Review` -> `Create`
 
-- We can only allow the http request on Port 80 for our app security group to use, Load balancer
-  `Security Groups` -> Select the Security group attached to the instance and edit the inbound rules
-  `HTTP -> Source: Custom to use Load balancers Security Group` -> `type sg-` to auto complete, instead of `0.0.0.0/0`
-  It allows inbound connections only from Load balancer
-  If you try to access the public IP to access the apache server, it never loads, it always loads only from
-  `DNS Name` link under Load Balancer
+    -  Once load balancer is provisioned, grab link from `DNS Name` from `Description` and access the link
+
+  - We can only allow the http requests on Port 80 for our app security group to use Load balancer's SG.
+    - Go to `Security Groups` -> Select the Security group attached to the instance and `edit` the inbound rules
+    - `HTTP -> Source: Custom, <use Load balancer's Security Group>` -> `type sg-` to auto complete, instead of `0.0.0.0/0`
+    - It allows inbound connections only from a Load balancer
+    - If you try to access the `public IP` to access the apache server, it never loads, it always loads only from
+      `DNS Name` link under Load Balancer
 
 
-#### ASG - Auto Scaling Group
+#### ASG - Auto Scaling Group (Free)
+
+- Adopts to the load on websites and applications
+
+- Creates and get rid of servers
+
+- Scale out (Add EC2 instances) to match the increased load
+
+- Scale in (Remove EC2 instances) to match the decreased load
+
+- Ensures we have a minimum and a maximum number of machines running
+
+- Automatically register new instances to load balancer
+
+- ASGs have the following `attributes`
+  - A `launch configuration` and it consists of,
+    - AMI + Instance Type
+    - EC2 User Data
+    - EBS Volumes
+    - Security Groups
+    - SSH Key Pair
+
+  - Set Min/Max size/Initial Capacity
+  - Define network + subnet information
+  - Load balancer information
+  - Define scaling policies
+
+- `Auto Scaling Alarms`
+  - Possible to scale ASG based on `CloudWatch Alarms`
+  - An alarm monitors a metric (such as Average CPU)
+  - Metrics are computed for the overall ASG instances
+  - Based on the alarm create scale-out/scale-in policies
+
+- `Auto Scaling new rules`
+  - It is now possible to define a better auto scaling rules that are directly managed by EC2
+    - Target average CPU usage
+    - Number of requests on the ELB per instance
+    - Average network in/out
+
+- `Auto Scaling custom metric`
+  - Based on custom metric eg: number of connected users
+  - Send custom metric from application on EC2 to CloudWatch (PutMetric API)
+  - Create CloudWatch alarm to react to low/high values
+  - Use the CloudWatch alarm as the scaling policy for ASG
+
+- `ASG Summary`
+  - Scaling policies can be on CPU, Network and can be even on custom metrics or based on schedule
+  - ASGs use launch configurations and update an ASG by providing a new launch configuration
+  - IAM roles attached to to an ASG will get assigned to EC2 instances
+  - `ASGs are free`, pay for the underlying resources being launched
+  - Having instances under ASG will always restart if any of the instances terminated, extra safety
+  - ASG can terminate instances marked as unhealthy by an LB(and hence replace them)
+
+- `Create an ASG`
+  - `Auto Scaling` -> Create Auto Scaling Group -> select -> Has 2 steps
+    - `Create or Select a launch template` -> `Create launch configuration`
+    - Select an `AMI` - Choose `Instance Type` - `Configure Details` (`Advanced` details - fill the `User Data`)
+      Select `Storage`, `Security Group` (same as the one you are targeting) and create and launch the configuration
+      with `existing key pair`
+
+   - `Create Auto Scaling Group`
+    - `Configure Auto Scaling Group details` -> `Group name: First-ASG, Group Size: Start with '1' instances, Network: default VPC,
+       Subnet: select all available subnets`
+       `Advanced details: Load balancing, check, Receive traffic from one or more balancers`
+       `Target Group: Select the one created for Load Balancer`
+       `Health check type: check, ELB`
+
+    - `Configure scaling policies` -> select, Use scaling policies to adjust the capacity of this group
+      - Scale between '1' and '3' instances. These will be ....
+      - `Scale Group Size` -`Name: Scale-size-group, Metric type: Average CPU utilization, Target value: 60,
+        Instance need: '60' seconds to warm up after scaling`
+
+    - `Configure Notification` -> leave as it is -> `Tags` -> `Review` and `Create`
+
+- Go to `Load Balancing -> Target Groups -> Targets` to see the all registered targets under the targeted group  
+
+### EBS Volumes
+
+- 
