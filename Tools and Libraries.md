@@ -113,6 +113,15 @@
 * `underscore` - JS util functions for common tasks
 * `contentful` - CMS - content management system
 
+## Testing
+
+- `cypress` - e2e tests
+- `miragejs` - mocking http calls
+- `nock` - mocking http calls
+- `testcafe` - integration testing
+- [playwright](https://github.com/microsoft/playwright) - by Microsoft
+- `puppeteer` - by google
+
 ## Tools:
 
 - `JFrog` - artifactory
@@ -160,6 +169,7 @@
 
 ## Links:
 
+- http://bigocheatsheet.com - big O cheat sheet for data structures and algorithms
 - https://jobs.github.com/positions.json - github jobs API
 - https://picsum.photos/ - Stock Images
 - https://miragejs.com/ - Fake server API
@@ -292,3 +302,18 @@
 ## Mongo Data URI
 old: mongodb+srv://root:root@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true
 new: mongodb+srv://root:root@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true&w=majority
+
+## AWS IAM user link
+
+- https://kpunith88.signin.aws.amazon.com/console
+
+- user: kpunith88
+- IAM user name: punith
+- Pass: SIPI@1
+
+## Main Console
+
+- https://console.aws.amazon.com
+
+- username: kpunith9@gmail.com
+- pass: 1Pass

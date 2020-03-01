@@ -96,4 +96,206 @@
 
 ### Elastic Bean Stack - Deploy, monitor and scale the app
 
-- 
+-
+
+## AWS Certified Developer Associate - Udemy Course
+
+### Links
+
+- [Slides and code](https://courses.datacumulus.com/certified-developer-k92)
+
+
+- Create a budget under  `My Billing Dashboard -> Budgets` -> Create Budgets -> Cost Budget to notify when
+  budget crosses the limit specified so that you don't over spend
+
+### IAM - Identity and Access Management
+
+- Root account should never be used, create users with proper permissions
+
+- IAM policies are written in JSON
+
+- 1 IAM user per Person
+
+- 1 IAM role per application
+
+- Never write IAM creds in code
+
+- Never use root IAM creds
+
+### Create an IAM user
+
+- Open `IAM service` and add user - first enable MFA - multi factor authentication with `google authenticator`
+  need to download the app from play store and scan for QR code to set it up
+
+- Create an user with auto generated password - assign permissions with `Attach existing policies directly -> Administration Access`
+  checked
+
+- Review the user and create and download the `credentials.csv` never share this anyone
+
+- Add the user to group after creating a group with admin privileges
+
+- Go to `Users` -> select the created user and `detach the AdminAccess` since they are inherited from
+  admin group created
+
+- Customise the user and login with new link provided in the `Dashboard`
+
+- Use IAM user name provided with downloaded password to login and `change the password` per the password policy
+  Ready to go
+
+
+## EC2
+
+- Rent Virtual machine (EC2)
+
+- Storing data on virtual drives (EBS)
+
+- Distributing load across machines (ELB
+
+- Scaling the services using auto-scaling group (ASG)
+
+### Create and launch an EC2 instance
+
+- `Choose AMI` - `Amazon Machine Image`, Select free tier eligible `Amazon Linux 2 AMI`
+
+- `Choose Instance Type` - `t2.micro` type - free tier eligible
+
+- Leave the `Configure Instance`, `Add Storage`, and `Add Tags` - as is
+
+- `Configure Security Group` - create a new security group by renaming the name and description
+  leave other options untouched,
+
+- `Review and Launch` - create a new key pair to access the EC2 instance with `SSH` and download the file and keep it
+  `.pem` extension file with the name provided in the popup
+
+- Once the instance launched, go to `EC2 Dashboard` and see the `instances` running
+  - Right click on the running instance and select `instance state` to control the state of the instance
+    `stop`, `reboot`, or `terminate`
+
+- When you `stop and start` the instance it will change the public IP which will result in `Connection refused` error
+  when connecting with `SSH`
+
+- Creating a new instance can make use of existing key/pair and the security group
+
+#### Connect to the running instance with SSH in mac/linux
+
+- SSH - Secure Shell - allows to control remote machine securely using the command line
+
+- Copy the IPv4 Public IP from `running instance's Description tab`  
+
+- - Make sure `.pem` file has least privileges so that no one can access it, by default it has `0644`
+  ```
+  $ chmod 0400 <file-name.pem>
+  ```
+
+- Use command line with download `.pem` file to access with `ec2-user@public-ip`
+  ```
+  $ ssh -i <file-name.pem> ec2-user@<public-ip>
+  ```
+
+- Once login successful, opens the instance, check the user `whoami` command
+
+#### Connect to running instance in windows with putty
+
+- Download and install the putty
+
+- Open `PuttyGen` to convert the `.pem` to `.ppk` which will be understood by `Putty`
+
+- File -> Load the private key -> Save the private key with/without passphrase
+
+- Open the `Putty` and connect to `EC2-instance`
+  - Host Name (or IP address): `ec2-user@<public-ip>`
+  - Port: `22` - always defaults to 22
+  - Load the `.ppk` file to the connection -> `Category (tree) -> Connection -> SSH -> Auth -> Browse`
+    and select the saved `.ppk file`
+  - Save the connection for future use
+  - Click on `Open` button to connect
+
+#### Connect with EC2 Instance Connect
+
+- Click on `Connect` button next to the instance and select `EC2 Instance Connect` option
+  and provide the user name and click connect, which opens the web based UI
+
+### Security Groups
+
+- They control how network traffic is allowed into or out of your EC2 machine
+
+- `Network & Security -> Security Groups` - To control the inbound and outbound connection to the instance
+  - Under `Inbound` tab edit and remove the rule added to port-22, then try to connect - which doesn't work
+  - Create one with `Type: SSH, Protocol: TCP, Port range: 22, Source: Custom 0.0.0.0/0`
+
+#### Create an Elastic IP
+
+- If you need an `fixed IP`, it requires `Elastic IP` - public IPv4 IP, you own until you delete it
+  can be attached to one instance at a time. Only 5 IPs, can be increased. Try avoid using `Elastic IP`
+
+- `Network & Security -> Elastic Ips` -> Click on `Allocate new address` -> `Allocate`
+  - Right click on created Elastic IP -> `Associate address` -> select the instance  -> `Associate`
+
+- Associated Elastic IP will be assigned as public IPv4 address and won't be lost on stop and restarting an instance.
+
+
+### Install Apache on EC2
+
+- Login into ec2 instance run the following commands
+  ```
+  $ sudo su // to give the super user permissions
+
+  $ yum update -y // to update the all the packages in the machine
+  ```
+
+- Install the `httpd`
+  ```
+  $ yum install -y httpd.x86_64
+  ```
+
+- Start the httpd service
+  ```
+  $ systemctl start httpd.service // use Amazon Linux 2 to get systemctl command
+  ```
+
+- Enable httpd.service on reboot
+  ```
+  $ systemctl enable httpd.service
+  ```
+
+- Access the `localhost:80` get the `html` file with `curl`
+  ```
+  $ curl localhost:80
+  ```
+
+- Access the webpage using the public IP in browser, make sure you have inbound rule added to `port:80`
+  under `Security Group` Add one with `Type: HTTP`
+
+- Edit the webpage under `/var/www/html/index.html`
+  ```
+  $ echo "Hello World from $(hostname -f)" > /var/www/html/index.html
+  ```
+
+### EC2 User Data - To bootstrap
+
+- Bootstrap the EC2 instances using `EC2 User Data` script, then run with root user
+
+- Select the instance `Actions -> Instance Settings -> View/Change the User Data`
+  - Make sure instance is stopped to make the changes
+
+- Example user data to install the updates, install httpd service and update the `index.html` under
+  `/var/www/html/index.html`
+  ```
+  #!/bin/bash
+
+  # Get admin privileges
+  sudo su # By default EC2 runs with admin privileges, no need to copy this line
+
+  # Install httpd (Linux 2 version)
+  yum update -y
+  yum install -y httpd.x86_64
+  systemctl start httpd.service
+  systemctl enable httpd.service
+  echo "Hello World from $(hostname -f)" > /var/www/html/index.html
+  ```
+
+- Restart the instance and access the Public IP to see that apache server running
+
+### EC2 Launch Types
+
+-

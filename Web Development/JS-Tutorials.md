@@ -54,7 +54,6 @@ they are hoisted up to function declaration
 - Only `function declarations` will be visible to `window/this/global object` not the `function
 	expressions` or `arrow` functions.
 
--
 
 ### JavaScript objects and properties
 
