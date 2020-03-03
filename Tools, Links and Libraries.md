@@ -317,3 +317,22 @@ new: mongodb+srv://root:root@mongo-cluster-qclzr.mongodb.net/test?retryWrites=tr
 
 - username: kpunith9@gmail.com
 - pass: 1Pass
+
+# Links
+
+## Jenkins
+
+- https://jenkins.io/doc/book/pipeline/jenkinsfile/#using-multiple-agents
+- https://jenkins.io/blog/2018/07/02/whats-new-declarative-piepline-13x-sequential-stages/
+
+## Stackoverflow questions/answers
+
+## Jenkinsfile
+- https://stackoverflow.com/questions/43321026/can-i-define-multiple-agent-labels-in-a-declarative-jenkins-pipeline
+- https://stackoverflow.com/questions/44870978/how-to-run-multiple-stages-on-the-same-node-with-declarative-jenkins-pipeline
+- https://issues.jenkins-ci.org/browse/JENKINS-55561
+
+## Cypress - xvfb issue
+
+- https://github.com/cypress-io/cypress-docker-images/issues/54 - docker compose
+	sh "sudo ps -ef | sudo grep vvfb | sudo grep -v grep | sudo awk '{print \$2}' | sudo xargs kill -9"

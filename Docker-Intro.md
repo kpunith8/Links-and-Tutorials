@@ -66,7 +66,7 @@
   ```
   - It opens the interactive bash shell - enter `hostname` and then `exit`
 
-- Pull and run a Dockerized nginx web server that we name, webserver:
+- Pull and run a Dockerized `nginx` web server that we name, `webserver`:
   ```
   $ docker run --detach --publish 80:80 --name webserver nginx
   ```
