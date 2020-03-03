@@ -40,3 +40,6 @@
   ```javascript
   import '@cypress/code-coverage/support'
   ```
+
+- Running the cypress in docker and in Jenkins refer, `Docker-Intro.md` file's
+  `Installing latest node on docker image` section

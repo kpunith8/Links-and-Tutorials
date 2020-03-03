@@ -569,7 +569,7 @@ $ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress
 
   $ docker swarm leave --force      # Take down a single node swarm from the manager
 
-  $ docker rmi <image-name> # to remove the image, delete all dependent containers to remove an image
+  $ docker rmi -f <image-name> # to remove the image, delete all dependent containers to remove an image
 
   $ docker pull <image-name> # To pull the docker image from the hub.docker.com
 
