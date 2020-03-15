@@ -505,7 +505,7 @@
 - `Instance Store`
   - Some instances do not come with `Root EBS` Volume, instead they come with `Instance Store`
   - They are physically attached to the machine
-  - Pros: Better I/O performance
+  - Pros:  Better I/O performance
   - Cons: Instance store is `lost on termination`,
     `cannot resize volumes`, and `backups must be operated by the user`
 
@@ -559,10 +559,10 @@
 - `RDS Encryption`
   - Encryption with `rest` capability with `AWS KMS-AES-256` encryption
   - `SSL certificates` to encrypt data to RDS in `flight`
-  - To `enforce SSL`:
-    - `PostegreSQL`: `rds.force_ssl=1` in the AWS RDS Console
-    - `MySQL`: within the DB: `GRANT USAGE ON *.* TO 'mysqluser'@'%' REQUIRE SSL`
-  - To `connect using SSL`:
+  - To `enforce SSL`
+    - `PostegreSQL`- `rds.force_ssl=1` in the AWS RDS Console
+    - `MySQL`- within the DB - `GRANT USAGE ON *.* TO 'mysqluser'@'%' REQUIRE SSL`
+  - To `connect using SSL`
     - Provide the SSL trust certificate (Download from the AWS)
     - Provide SSL options while connecting to DB
 
@@ -622,4 +622,43 @@
 
 - Buckets must have globally unique name
 
-- 
+- Defined at the region level
+
+- Naming conventions
+  - `No uppercase`
+  - `No underscore`
+  - `3-63 chars long`
+  - `Not an IP`
+  - Must start with a `lowercase` char or a `ß`
+
+- Object(files) have a key. The key is full length
+  - eg: `<my-bucket>/my_file.txt`
+
+- There is no concept of `directories` in the bucket
+
+- Object values are the content of the body
+  - Max size is `5TB`
+  - If the size is more than 5TB use `multi-part upload`
+  - They can be `metadata` (list of text key/value pairs - system or user metadata)
+  - It also can be `tags` (Unicode key/value pair - upto 10) - useful for security/life cycle
+  - Can have a `version ID` (If versioning is enabled)
+
+- `Create a S3`
+  - Search for `S3` -> `Create a bucket` -> `Name: Give a unique name, Region: Mumbai` and leave the other sections
+    as it is and create one
+  - Once bucket provisioned, upload the files, leave it to default values and upload the file
+
+  - `S3 Versioning` - Enabled at the bucket level, same key overwrite will increment the version: 1,2,3
+    - It is a best practice to version the buckets
+    - Protects against unintended deletes (Allows to restore a version)
+    - Easily rollback to previous version
+
+  - Select the created bucket -> `Properties` tab -> `Versioning` -> Enable the versioning
+
+  - `S3 Encryption for Objects` - There are 4 methods
+    - `SSE-S3` - Encrypts s3 objects using keys handled and managed by AWS
+    - `SSE-KMS` - Leverages AWS Key Management Service to manage encrypt keys
+    - `SSE-C` - Allows to manage your own keys
+    - `Client Side Encryption`
+
+    - `SS3-S3` -

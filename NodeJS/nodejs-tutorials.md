@@ -39,8 +39,6 @@ console.log('Remove 2 items from the array,', arr.splice(1, 2)); // starting fro
   - global object
   - process object  
 
-- 
-
 - Synchronous and async programming
 
   ```javascript

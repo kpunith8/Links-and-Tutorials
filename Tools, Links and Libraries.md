@@ -120,6 +120,12 @@
 * `underscore` - JS util functions for common tasks
 * `contentful` - CMS - content management system
 
+
+## CSS:
+
+- tailwind
+- https://material-ui.com/components/ - react based components
+
 ## Testing
 
 - `cypress` - e2e tests

@@ -490,6 +490,11 @@ RUN echo "source $NVM_DIR/nvm.sh && \
 CMD ["bash"]
 ```
 
+- Build the custom image
+```
+$ docker build -t custom-cy:latest
+```
+
 ### Running cypress from custom built docker image
 
 ```
