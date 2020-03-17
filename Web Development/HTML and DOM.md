@@ -427,8 +427,3 @@ document.cookie = "name=Batman; secure"
 // To remove a cookie, simply set it to expires to a time in the past
 document.cookie = "name=Batman; expires=Thu, 01 Jan 1970 00:00:01 GMT"
 ```
-
-
-## Testing and Debugging
-
-- 

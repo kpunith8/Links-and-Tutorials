@@ -629,7 +629,7 @@
   - `No underscore`
   - `3-63 chars long`
   - `Not an IP`
-  - Must start with a `lowercase` char or a `ß`
+  - Must start with a `lowercase` char or a `number`
 
 - Object(files) have a key. The key is full length
   - eg: `<my-bucket>/my_file.txt`

@@ -1,6 +1,7 @@
 ## MongoDB: NoSQL database - document database
 
 ## Mongodb - cloud - credentials and cluster link
+
 - Connect with Java
   ```
   mongodb+srv://root:<password>@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true
@@ -18,9 +19,11 @@
   ```
 
 ### Links and references:
+
 - https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
 ### Shortcuts: mongo shell
+
 - `Ctrl+K` - to delete the chars to its right
 
 - `Ctrl+L` - clears the screen

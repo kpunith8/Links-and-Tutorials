@@ -374,5 +374,3 @@ author.save(function (err) {
   });
 });
 ```
-
-### 

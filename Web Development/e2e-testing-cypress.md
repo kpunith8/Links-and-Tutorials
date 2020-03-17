@@ -55,7 +55,6 @@
 ## Cypress and Docker
 
 - https://buddy.works/guides/how-dockerize-node-application (Node app docker)
-
 - https://stackoverflow.com/questions/26320901/cannot-install-nodejs-usr-bin-env-node-no-such-file-or-directory
 - https://docs.docker.com/develop/develop-images/multistage-build/ - multi stage build - build with more than one images
 

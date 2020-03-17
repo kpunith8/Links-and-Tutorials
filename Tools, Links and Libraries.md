@@ -8,7 +8,6 @@
 - codedamn
 - derekbanas
 - KepowOb - Kevin Powell - CSS
-- java brains
 - The Net Ninja - node and monogodb and mix
 - LevelUpTuts
 - Tyler Mc Ginnis
@@ -20,23 +19,18 @@
 - Colt Steele
 - florin pop
 
-
-## DB
-
-- `sqlectron` - to manage the databases
-
 ### Java
 
-- slidenerd - Android
-- Devoxx
-- Javaone
-- Oracle developers
+- `slidenerd`
+- `Devoxx`
+- `Javaone`
+- `java brains`
 
 ## Personalities
 
 ### JS
 
-- Douglas Crockford - JS Best Parts, author
+- Douglas Crockford - JS Best Parts; author
 - Dan Abramov - React
 - Kent C Dodds - React
 - Dave Ceddia - React
@@ -47,7 +41,7 @@
 - Uncle Robert C Martin - Clean code
 - Victor Rentea - Clean Code
 
-## Tutorials:
+## Tutorials
 
 - SCSS tutorials
 - Advanced mongo
@@ -55,76 +49,55 @@
 - JWT - JSON web tokens
 - Spinnaker
 
-## Libraries:
+# Libraries:
 
-### JS
+## JS
 
-* `webpack` - bundler
-* `gulp` - task runner like npm
-* `gulp-connect`- runs a local web dev server
-* `gulp-open` - opens a URL in the browser
-* `browserify` (bundles JS), reactify (transforms JSX to JS)
-* `vinyl-source-stream`- Use conventional text streams with gulp
-* `SASS` - Syntactically Awesome Style Sheets
-* `CSS` Modules
-* `Toaster` library to notify
-* `nock` - mocking http calls for nodejs
-* `axios` - To fetch data and post data from rest services
-* `LoveField` - for Mysql ORM - https://google.github.io/lovefield/
-* `sequelize` - ORM
-* `font-awesome` for icons
-* `docz` - For documentation site for react
-* `async` - for asynchrous JS
-* `node-orm2` - node.js ORM library
-* `LABjs` -
-*	`grips` - templating engine
-* `DukTape`, `JerryScript` - IoT JS Engines
-* `SpiderNode` - `Node.js` variant for `SpiderMonkey` from Mozilla
-* `OpenAPI Initiative` - Swager kind API documentation
-* `OpenAPI-Parser`
-* `restful-react`
-* `react-use` - custom react hooks
-* `cron` - To run cron job for specified amount of time refer: `crontab.guru`
-* `node-fetch` - fetch API for node
-* `redis` - node client for redis
-* `stripe` - payment and ui components
-* `vega` - Data visualization API
-
-### React:
-
-* `styled-components` - to create styled components for react
-* `emotion` - Styled components, CSS in JS
-* `react-spring` - React animation
-* `GraphQL` - `relay`, `apolo`, `graphcool` - serverless GraphQL
-* `reactstrap` - wrapper for Bootstrap 4.0 for react
-* `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
-* `reselect` and `recompose`
-* `react-cache` - To cache the data
-* `react-testing-library` - testing library - By Kent C Dodds
-* `nwb` - React starter kit, like `create-react-app`
-* `react-docgen` - generate react components metadata
-* `chokidar` - watch files
-* `highlight.js` - syntax highlighted code examples
-* `npm-run-all` - run parallel tasks
-* `immer` - Convert mutable state to immutable in react
-* `nextJS` - React library for SPA
-* `Gatsby` - React library for SPA
-* `react-loading-skeleton` - skeleton loading for data or images
-* `formik`, `react-final-form`, `react-redux-form` - form library
-* `xstate` - State management for react
-
-### Common:
-
-* `lodash` - Reduces boiler plate for array, map and string and operations.
-* `express` - server container for node.js (hapi)
-* `underscore` - JS util functions for common tasks
-* `contentful` - CMS - content management system
+- `webpack` - bundler
+- `gulp` - task runner like npm
+- `gulp-connect`- runs a local web dev server
+- `gulp-open` - opens a URL in the browser
+- `browserify` (bundles JS), reactify (transforms JSX to JS)
+- `vinyl-source-stream`- Use conventional text streams with gulp
+- `LABjs` - JS job loader
 
 
-## CSS:
+## Backend
 
-- tailwind
+- `nock` - mocking http calls for nodejs
+- `axios` - To fetch data and post data from rest services
+- `LoveField` - for Mysql ORM - https://google.github.io/lovefield/
+- `sequelize` - ORM
+- `async` - for asynchrous JS
+- `node-orm2` - node.js ORM library
+- `SpiderNode` - `Node.js` variant for `SpiderMonkey` from Mozilla
+- `OpenAPI Initiative` - Similar to Swager API documentation
+- `OpenAPI-Parser`
+- `cron` - To run cron job for specified amount of time refer: `crontab.guru`
+- `node-fetch` - fetch API for node
+- `redis` - node client for redis
+- `sqlectron` - to manage the databases
+
+## CSS
+
+- `SASS` - Syntactically Awesome Style Sheets
+- `CSS` - Modules
+- `Toaster` library to notify
+- `font-awesome` for icons
+- `docz` - For documentation site for react
+-	`grips` - templating engine
+- `DukTape`, `JerryScript` - IoT JS Engines
+- `tailwind css`
 - https://material-ui.com/components/ - react based components
+
+## Common
+
+- `stripe` - payment and ui components
+- `vega` - Data visualization API
+- `lodash` - Reduces boiler plate for array, map and string and operations.
+- `express` - server container for node.js (hapi)
+- `underscore` - JS util functions for common tasks
+- `contentful` - CMS - content management system
 
 ## Testing
 
@@ -135,10 +108,36 @@
 - [playwright](https://github.com/microsoft/playwright) - by Microsoft
 - `puppeteer` - by google
 
+## React
+
+- `react-use` - custom react hooks
+- `restful-react`
+- `styled-components` - to create styled components for react
+- `emotion` - Styled components, CSS in JS
+- `react-spring` - React animation
+- `GraphQL` - `relay`, `apolo`, `graphcool` - serverless GraphQL
+- `reactstrap` - wrapper for Bootstrap 4.0 for react
+- `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
+- `reselect` and `recompose`
+- `react-cache` - To cache the data
+- `react-testing-library` - testing library - By Kent C Dodds
+- `nwb` - React starter kit, like `create-react-app`
+- `react-docgen` - generate react components metadata
+- `chokidar` - watch files
+- `highlight.js` - syntax highlighted code examples
+- `npm-run-all` - run parallel tasks
+- `immer` - Convert mutable state to immutable in react
+- `nextJS` - React library for SPA
+- `Gatsby` - React library for SPA
+- `react-loading-skeleton` - skeleton loading for data or images
+- `formik`, `react-final-form`, `react-redux-form` - form library
+- `xstate` - State management for react
+
+
 ## Tools:
 
 - `JFrog` - artifactory
-- `Spinnaker`
+- `Spinnaker` - Automated deployments
 
 ## REST end points
 
@@ -156,7 +155,10 @@
 
 - `jsonplaceholder`
 
-- `heroku.endpoint with CORS`
+- `heroku endpoint with CORS`
+
+- https://jobs.github.com/positions.json - github jobs API
+
 
 ### Java
 
@@ -172,42 +174,43 @@
 - `jupyter` - interactive notebook
 - `altair` - https://altair-viz.github.io/ - data visualization with vega and vega lite
 - `nteract` - interactive code notebook like `jupyter`
--  https://altair-viz.github.io/getting_started/starting.html
+-  https://altairviz.github.io/getting_started/starting.html
 
 ### Books
 
-- Test driven development - Kent Beck
-- Growing object-oriented software guided by tests - Steve Freeman, Nat Pryce
-- Extreme programming explained - Kent Beck
+- `Test driven development` - Kent Beck
+- `Growing object-oriented software guided by tests` - Steve Freeman, Nat Pryce
+- `Extreme programming explained` - Kent Beck
 
 ## Links:
 
+### JS
 - http://bigocheatsheet.com - big O cheat sheet for data structures and algorithms
-- https://jobs.github.com/positions.json - github jobs API
 - https://picsum.photos/ - Stock Images
 - https://miragejs.com/ - Fake server API
 - https://www.contentful.com/developers/ - CMS
--	https://scratchpad.io - html, css editor
+-	https://scratchpad.io - HTML, CSS editor
 - https://ckeditor.com/ - WYSIWYG editor
 - https://codesandbox.io - online code playground
 - https://www.expo.io - React-Native
-- https://www.webcodegeeks.com/html5/html5-internationalization-example/ - Blog
+- https://www.webcodegeeks.com/html5/html5-internationalization-example/ - JS/Web Blog
 - https://www.scrimba.com/g/gflexbox
-- https://www.egghead.io - Tutorials
--	https://www.scotch.io/@codebeast - Blog
+- https://www.egghead.io - JS/Web Tutorials
+-	https://www.scotch.io/@codebeast - JS Blog
 -	http://www.material-ui.com/#/ - CSS
 - https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays - Blog
 - http://www.osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/ - Blog
 - https://www.robinwieruch.de/essential-react-libraries-framework/ - React
 - https://www.daveceddia.com/ - React
-- https://www.baeldung.com - Java
+- https://www.baeldung.com - Java blog
 - https://www.steemit.com - Blog
 - https://www.itnext.io/ - blog
-- https://www.javascriptstuff.com/ - Blog
+- https://www.javascriptstuff.com/ - JS Blog
 - https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
 - [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
-- [ES6-indepth-explorjs](https://exploringjs.com/)
+- [ES6-indepth-explorjs](https://exploringjs.com/) - JS ES6-to-Everything
 - [Javascript.info](https://javascript.info/)
+- [SpackingJS.com](http://speakingjs.com/es5/ch19.html) - Regular expressions
 
 # References
 
@@ -270,6 +273,7 @@
 - http://static.javadoc.io/org.mockito/mockito-core/2.8.9/org/mockito/Mockito.html#30
 
 ### JS Interview topics for ReactJS
+
 - Server side rendering, refs
 - React router dom, reach router
 - Pure component
@@ -283,7 +287,7 @@
 ## Other Links
 - https://www.ambitionbox.com/salaries/take-home-salary-calculator
 
-## blogs
+## Blogs
 
 - CSS Tricks
 - Smashing Magazine
@@ -311,36 +315,15 @@
 - Modern Web
 - CodePen Radio
 
-
-## Mongo Data URI
-old: mongodb+srv://root:root@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true
-new: mongodb+srv://root:root@mongo-cluster-qclzr.mongodb.net/test?retryWrites=true&w=majority
-
-## AWS IAM user link
-
-- https://kpunith88.signin.aws.amazon.com/console
-
-- user: kpunith88
-- IAM user name: punith
-- Pass: SIPI@1
-
-## Main Console
-
-- https://console.aws.amazon.com
-
-- username: kpunith9@gmail.com
-- pass: 1Pass
-
-# Links
-
-## Jenkins
+# Jenkins
 
 - https://jenkins.io/doc/book/pipeline/jenkinsfile/#using-multiple-agents
 - https://jenkins.io/blog/2018/07/02/whats-new-declarative-piepline-13x-sequential-stages/
 
-## Stackoverflow questions/answers
+# Stackoverflow questions/answers
 
 ## Jenkinsfile
+
 - https://stackoverflow.com/questions/43321026/can-i-define-multiple-agent-labels-in-a-declarative-jenkins-pipeline
 - https://stackoverflow.com/questions/44870978/how-to-run-multiple-stages-on-the-same-node-with-declarative-jenkins-pipeline
 - https://issues.jenkins-ci.org/browse/JENKINS-55561

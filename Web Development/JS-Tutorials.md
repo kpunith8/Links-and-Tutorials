@@ -362,6 +362,32 @@ window.onload = function() {
 	Regular capture group is created by wrapping a pattern in `(pattern)`.
 	But to create groups property on resulting object use: `(?<name>pattern)`
 
+## Examples
+
+-  https://www.regextester.com/
+
+- Domain
+	- `^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$`
+
+- IPv4 address
+	- `^(?:(?:25[0-5]{1}.)|(?:2[0-4]{1}[0-9]{1}.)|(?:1{1}[0-9]?[0-9]?.)|(?:[0-9]{1}[0-9]?.)){3}(?:(?:25[0-5]{1})|(?:2[0-4]?[0-9]?)|(?:1{1}[0-9]?[0-9]?)|(?:[0-9]{1}[0-9]?)){1}$`
+
+- IPv6 address
+  - `^((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7}$`
+
+```javascript
+const domainPattern = '^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$'
+const domainRegExp = new RegExp(domainPattern)
+// Usage
+domainRegExp.test('example.com') // true
+domainRegExp.test('http://example.com') // false
+
+// Combining domain, ip address patterns, tests both domain or IP addresses
+const ipAddressAndDomainRegExp = new RegExp(`${domainRegExp.source}|${ipv4AddressRegExp.source}|${ipv6AddressRegExp.source}`)
+domainRegExp.test('123.11.11.22') // true
+domainRegExp.test('256.11.11.22') // false
+```
+
 ## Design Patterns
 
 ### Ice Factory
