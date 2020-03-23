@@ -585,23 +585,26 @@ git remote prune origin
 
 - Get the `total number of files` changed in the `latest commit`
 ```
-
 git log --oneline --name-status <HEAD/commit-hash> -1 | wc -l
 ```
 
 #### If pre-commit hooks are corrupted and not allowing to proceed
-```
-git commit -n or --no-verify
-```
 
-### gitbash on windows doesn't show chars once git log prints or Ctrl+C pressed (Cursor blinks)
+- Stop the verification on git commit with hooks
+  ```
+  git commit -n or --no-verify
+  ```
+
+### gitbash on Windows doesn't show chars once git log prints or Ctrl+C pressed (Cursor blinks)
 
 - Press `q` in the terminal to quit the log window, or type `reset` to reset the session
 
 ### Sort the branches by last updated date
-```
-git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'
-```
+
+- Sort branches by last date
+  ```
+  git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'
+  ```
 
 # macOS Related
 
@@ -612,11 +615,10 @@ git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)
 - Generate SSH-key
 ```
 $ ssh-keygen -t rsa -b 4096 -C "your-email"
-// asks for the filename and path; specify the name as, id_rsa_personal,
-// which will add 2 files in the current directory, id_rsa_personal and id_rsa_personal.pub
-
-and asks for passphrase, enter some passphrase or leave it empty if you want
 ```
+  - Asks for the filename and path; specify the name as, `id_rsa_personal`,
+   which will add 2 files in the current directory, `id_rsa_personal` and `id_rsa_personal.pub` and then, asks for `passphrase`, enter some passphrase or leave it empty if you want
+
 
 - Add your SSH key to the `ssh-agent`, before adding a new SSH key to the `ssh-agent`
   to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
@@ -651,18 +653,18 @@ $ ssh-add -K ~/.ssh/id_rsa_personal
 ```
 
 - Change the permission of your `id_rsa_personal` key
-```
-$ chmod 400 ~/id_rsa_personal
-```
+  ```
+  $ chmod 400 ~/id_rsa_personal
+  ```
 
 - If you have already cloned using `https` remove the `origin` and reset the origin to `ssh` as follows,
-```
-$ git remote rm origin
+  ```
+  $ git remote rm origin
 
-$ git remote add origin git@github.com:kpunith8/<repo-name>.git
-```
+  $ git remote add origin git@github.com:kpunith8/<repo-name>.git
+  ```
 
-- Clone the projects with ssh option to push the changes
+- Clone the projects with `ssh` option to push the changes
 
 ## git auto completion for bash shell in macOS
 

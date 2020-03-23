@@ -10,14 +10,16 @@
 - KepowOb - Kevin Powell - CSS
 - The Net Ninja - node and monogodb and mix
 - LevelUpTuts
-- Tyler Mc Ginnis
+- Tyler McGinnis - React, JS -  https://www.youtube.com/channel/UCbAn7pVK2VIyo-UysfWGdZQ
 - Ben Awad - hooks and react
-- web development simplified
+- Web Dev Simplified - https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw
 - Programming with mosh
 - The coding train
 - Fun fun function
 - Colt Steele
 - florin pop
+- Hasura - GraphQL client - https://www.youtube.com/channel/UCZo1ciR8pZvdD3Wxp9aSNhQ
+- `Codevolution` - React - https://www.youtube.com/channel/UC80PWRj_ZU8Zu0HSMNVwKWw
 
 ### Java
 
@@ -25,6 +27,14 @@
 - `Devoxx`
 - `Javaone`
 - `java brains`
+
+### Python
+
+- `Joseph Delgadillo` - https://www.youtube.com/channel/UCqR4a4lUDbDkAFQnhw4pfXQ
+
+### Mobile Development
+
+- ` Devefy` - `Flutter` - https://www.youtube.com/channel/UCwmFOfFuvRPI112vR5DNnrA
 
 ## Personalities
 
@@ -60,7 +70,6 @@
 - `browserify` (bundles JS), reactify (transforms JSX to JS)
 - `vinyl-source-stream`- Use conventional text streams with gulp
 - `LABjs` - JS job loader
-
 
 ## Backend
 

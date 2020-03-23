@@ -892,7 +892,7 @@ useEffect(() => {
 
 - Prepend the link with the following, allows only 50 requests/30mins
 ```
-fetch( `https://cors-anywhere.herokuapp.com/<url>`).then(...)
+fetch(`https://cors-anywhere.herokuapp.com/<url>`).then(...)
 ```
 
 ## Add css styles with hooks (passed as array)
@@ -915,3 +915,5 @@ useEffect(() => {
 // Passing array of styles to css
 <Details css={[{maxWidth: '30%'}, cardStyle]} />
 ```
+
+##

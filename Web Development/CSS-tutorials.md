@@ -1,13 +1,14 @@
-## CSS Basics:
+## CSS
+
 ### Stylesheet origin
 
-- user agent styles: browser's default styles; they vary slightly from browser to browser,
+- `User agent styles` - browser's default styles; they vary slightly from browser to browser,
   but generally they do the same
   things: headings `<h1> through <h6>` and paragraphs `<p>` are given a top and bottom
   margin, lists `<ol> and <ul>`are given a left padding, and link colors and default
   font sizes are set.
 
-- `author styles` - User defined rules; User agent styles have lower priority,
+- `Author styles` - User defined rules; User agent styles have lower priority,
   so author styles override them.
 
 ## Styling Text:
@@ -71,11 +72,11 @@
 ### Select checked checkbox with custom label
 
 - Immediate label after a checkbox with a class name `custom-checkbox`
-```css
-[type="checkbox"]:checked + label .custom-checkbox {
-  background: grey;
-}
-```
+  ```css
+  [type="checkbox"]:checked + label .custom-checkbox {
+    background: grey;
+  }
+  ```
 
 ### display property
 
@@ -180,12 +181,12 @@
 ## Tricks
 
 - Show the border of each element in a page to see how they are organized
-```css
-/* Select all elements and set the border */
-* {
-  border: 1px solid yellow;
-}
-```
+  ```css
+  /* Select all elements and set the border */
+  * {
+    border: 1px solid yellow;
+  }
+  ```
 
 - it makes border moves the UI by pixel size, instead use `outline` property to inspect
 
@@ -386,6 +387,102 @@ ul li a {
   }
 ```
 
+## ::before and ::after pseudo selectors
+
+- `content` can be specified with `open-quote` or `close-quote` property to
+  display quotes using `:before` and `::after` respectively.
+
+### Tooltip with pseudo elements
+
+```html
+<p> This is a example <a href="#" data-tool-tip="I'm a tooltip">Wiki</a></p>
+```
+
+```css
+a[data-tool-tip] {
+  position: relative;
+}
+
+a[data-tool-tip]::after { /* can be ::before too */
+  /* read the value from data-tool-tip attribute */
+  content: attr(data-tool-tip);
+  position: absolute;
+  background-color: gray;
+  padding: 1em 3em;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8em;
+  bottom: 0;
+  left: 0;
+  white-space: nowrap; /* no wrapping to keep the text as is */
+  transform: scale(0);
+  transition:
+    transform ease-out 200ms, /* 2 transitions added on transform and bottom */
+    bottom ease-out 200ms;
+}
+
+/* :hover should be before ::after or ::before pseudo selectors to work properly */
+a[data-tool-tip]:hover::after {
+  transform: scale(1);
+  bottom: 100%;
+}
+```
+
+
+### Give a number to sections with increment-counter
+
+```html
+<div class="counter">
+  <h1 class="section one">
+    <p>content</p>
+  </h1>
+  <h1 class="section two">
+    <p>content</p>
+  </h1>
+  <h1 class="section three">
+    <p>content</p>
+  </h1>
+</div>
+```
+
+- `counter-reset, counter-increment, counter-decrement` special properties
+  - Give a name to a `div` with `counter-reset: section-counter`, can be used to
+    increment the counter by 1 or any number
+
+- Use `::before` pseudo selector to add the counter to each section for each h1 elements
+  ```css
+  .counters {
+    background: lightgray;
+    text-align: left;
+    padding: 8em 5em;
+    margin-top: 5em;
+
+    counter-reset: header-counter;
+  }
+
+  .section {
+    position: relative;
+  }
+
+  .section::before {
+    counter-increment: header-counter; /* The name of counter specified with counter-reset */
+    content: counter(header-counter); /* can be any text in the content '. ' */
+    position: absolute;
+    top: 0.5em;
+    left: -2.5em;
+    background: white;
+    height: 2em;
+    width: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid gray;
+    box-sizing: border-box;
+    color: gray;
+  }
+  ```
+
 ## Align content to center of the page using flex box
 
 ```html
@@ -445,7 +542,7 @@ const Tab = styled.button`
 
 ### Pass props to styled component - object style
 
-```js
+```javascript
 const Card = styled('a')({
   border: '1px solid blue',
 
@@ -465,7 +562,12 @@ window.getComputedStyle(h1).getPropertyValue('font-size')
 
 ### References
 
-- Kevin Powell - youtube channel
-- http://www.autoprefixer.github.io
+- Kevin Powell - Youtube channel
+- [CSS auto prefixer for cross browser compatibility](http://www.autoprefixer.github.io)
 - [CSS font stack](https://www.cssfontstack.com/)
-- [CSS at Chrome developers summit](https://css-at-cds.netlify.com/)
+- [Chrome developers summit@2019](https://css-at-cds.netlify.com/)
+- [CSS References, cool stuff](https://tympanus.net/codrops/css_reference/)
+
+#### CSS features
+
+- [counter-increment](https://www.w3schools.com/cssref/pr_gen_counter-increment.asp)

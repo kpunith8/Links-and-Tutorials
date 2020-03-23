@@ -64,3 +64,19 @@ Settings -> set, javascript.validate.enable": false
 - `Cmd + Shift + .` - Fast Navigation within the file
 
 - `Cmd + Shift + \` - Goto matching bracket
+
+
+## VS Code plugins
+
+- `quokka.js` - Same line evalution
+- `auto import`
+- `Better haml`
+- `Bracket pair colorizer 2`
+- `Editor config`
+- `Git lens`
+- `JavaScript and TypeScript Nightly`
+- `Jenkinsfile support`
+- `Live Server`
+- `Prettier`
+- `npm`
+- `npm intellisense`
