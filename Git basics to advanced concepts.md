@@ -155,7 +155,11 @@ git config --global alias.unstage 'reset HEAD --'
 
 - Put multiple commands in double quotes, edit `.gitconfig` add this under `[alias]` section as follows
 ```
-sort-branch = !"git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'"
+# One with colors
+sort-branch = !"git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)'|column -ts'|'"
+
+# One without colors
+sort-branch = !"git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(refname:short)|%(committerdate:relative)|%(subject)'|column -ts'|'"
 ```
 
 ### Passing parameters to git alias

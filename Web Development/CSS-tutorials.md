@@ -451,12 +451,15 @@ a[data-tool-tip]:hover::after {
 
 - Use `::before` pseudo selector to add the counter to each section for each h1 elements
   ```css
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   .counters {
     background: lightgray;
     text-align: left;
     padding: 8em 5em;
     margin-top: 5em;
-
     counter-reset: header-counter;
   }
 
@@ -478,10 +481,210 @@ a[data-tool-tip]:hover::after {
     justify-content: center;
     border-radius: 50%;
     border: 2px solid gray;
-    box-sizing: border-box;
     color: gray;
   }
   ```
+
+### Add image overlay and heading style
+
+```html
+<h1 class="intro">Here is a generic heading</h1>
+
+<div class="container">
+  <div class="card">
+    <img src="//unsplash.it/400/400" alt="" class="card__img">
+    <div class="card__text">
+      <h3 class="card__title">Card title</h3>
+      <p class="card__body">And here is some text</p>
+    </div>
+
+    </div>
+  <div class="card">
+    <img src="//unsplash.it/401/401" alt="" class="card__img">
+    <div class="card__text">
+      <h3 class="card__title">Card title</h3>
+      <p class="card__body">And here is some text</p>
+    </div>
+    </div>
+</div>
+
+<p class="source">Hover effect inspired by <a href="https://tympanus.net/Development/HoverEffectIdeas/">this codrops article</a></p>
+```
+
+```css
+@import url('https://fonts.googleapis.com/css?family=Unica+One|Vollkorn');
+
+$ff-ss: 'Unica One';
+$ff-s: 'Vollkorn';
+
+$clr-red: #c31;
+$clr-black: rgba(black, 1);
+$clr-gray: rgba(black, .7);
+
+*, *::before, *::after { box-sizing: border-box }
+
+body {
+  font-size: 1rem;
+  text-align: center;
+  font-family: $ff-s;
+  line-height: 1.4;
+  color: $clr-gray;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: $ff-ss;
+  text-transform: uppercase;
+  line-height: .9;
+  color: #c31;
+}
+
+.intro {
+  position: relative;
+  display: inline-block;
+}
+
+h1::before,
+h1::after {
+  content: '';
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+}
+
+h1::before {
+  background: $clr-red;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -2;
+}
+
+h1::after {
+  height: 101%;
+  background: white;
+  left: -.1em;
+  right: -.1em;
+  z-index: -1;
+}
+
+h2 {
+  margin-top: 1.2em;
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: .25em;
+}
+
+a {
+  color: $clr-red;
+}
+
+.intro {
+  font-size: 4rem;
+}
+
+blockquote {
+  font-size: 2rem;
+  color: $clr-black;
+
+  &::before {
+    content: open-quote;
+  }
+
+  &::after {
+    content: close-quote;
+  }
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  position: relative;
+  margin: 1em;
+  background: $clr-gray;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 1.25em;
+    bottom: 1.25em;
+    left: 1.25em;
+    right: 1.25em;
+    opacity: 1;
+    transition: transform ease-out 250ms;
+  }
+
+  &::before {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    transform: scale(0,1);
+  }
+
+  &::after {
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    transform: scale(1,0);
+  }
+
+  &:hover::before {
+    transform: scale(1.05, 1);
+  }
+
+  &:hover::after {
+    transform: scale(1, 1.05);
+  }
+}
+
+.card__img {
+  max-width: 100%;
+  display: block;
+  transition: opacity ease-out 250ms;
+
+}
+
+.card:hover {
+  .card__img {
+    opacity: .4;
+  }
+}
+
+.card__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  opacity: 0;
+  transition: opacity ease-out 250ms;
+}
+
+.card:hover .card__text {
+  opacity: 1;
+}
+
+.card__title {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 0;
+}
+
+.source {
+  opacity: .8;
+  position: absolute;
+  width: 100%;
+  bottom: 1em;
+}
+```
+
+- https://codepen.io/kevinpowell/pen/ZrMzre?editors=1100
 
 ## Align content to center of the page using flex box
 
