@@ -242,16 +242,16 @@
 - Install the maven project to produce the jar, give a name to the jar, in `pom.xml` under `<build>` tag as follows,
   ```
   <build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<finalName>users-mysql</finalName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <plugins>
+  <plugin>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-maven-plugin</artifactId>
+  <configuration>
+  <finalName>users-mysql</finalName>
+  </configuration>
+  </plugin>
+  </plugins>
+  </build>
   ```
 
 - Create the `Dockerfile` in the root directory of the spring project, as follows
@@ -417,13 +417,14 @@ $ docker -H=192.168.0.1:2375 run nginx
 - Docker can be instructed to use limited resources for a container, by default
   a docker container can use all the resources possible, use `cgroups` to manage
   and control resources to each container using `--cpus` option before running a container
-```
-# Assign .5 cpu to the ubuntu
-$ docker run --cpus=.5 ubuntu
 
-# Assign memory
-$ docker run --memory=100m ubuntu
-```
+  ```
+  // Assign .5 cpu to the ubuntu
+  $ docker run --cpus=.5 ubuntu
+
+  // Assign memory
+  $ docker run --memory=100m ubuntu
+  ```
 
 ## Container Orchestration
 
@@ -434,13 +435,13 @@ $ docker service create --replicas=100 nodejs
 ```
 
 - `Docker Swarm`, `Kubernetes` - can be used to orchestrate the docker
-```
-# Initialize the swarm manager
-$ docker swarm init --advertise-addr 192.168.1.12
+  ```
+  // Initialize the swarm manager
+  $ docker swarm init --advertise-addr 192.168.1.12
 
-# to add workers to the swarm manager
-$ docker swarn join --token <token>
-```
+  // to add workers to the swarm manager
+  $ docker swarn join --token <token>
+  ```
 
 ### Docker service
 
@@ -448,85 +449,79 @@ $ docker swarn join --token <token>
   application that runs across the swarms of a cluster.
 
 - Create the `3 replicas` of running `web-service` in a swarm
-```
-# It should be run on docker swarm manager node
-$ docker service create --replicas=3 my-web-server
-```
+  ```
+  // It should be run on docker swarm manager node
+  $ docker service create --replicas=3 my-web-server
+  ```
 
-## Links
-
-- https://buddy.works/guides/how-dockerize-node-application (Node app docker)
-- https://stackoverflow.com/questions/26320901/cannot-install-nodejs-usr-bin-env-node-no-such-file-or-directory
-- https://docs.docker.com/develop/develop-images/multistage-build/ - multi stage build - build with more than one images
-- https://goinbigdata.com/docker-run-vs-cmd-vs-entrypoint/
-- https://aboullaite.me/docker-hacks/
-
-### Installing latest node on docker image
+## Installing latest node on docker image
 
 - https://gist.github.com/remarkablemark/aacf14c29b3f01d6900d13137b21db3a
-```
-FROM ubuntu:latest
+  ```
+  FROM ubuntu:latest
 
-RUN set -eux \
-    && apt-get update \
-    && apt-get install -y curl \
-    && apt-get -y autoclean \
-    && rm -rf /var/lib/apt/lists/*
+  RUN set -eux \
+      && apt-get update \
+      && apt-get install -y curl \
+      && apt-get -y autoclean \
+      && rm -rf /var/lib/apt/lists/*
 
-ENV NVM_VERSION v0.34.0
-ENV NODE_VERSION v13.7.0
-ENV NVM_DIR /usr/local/nvm
-RUN mkdir $NVM_DIR
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+  ENV NVM_VERSION v0.34.0
+  ENV NODE_VERSION v13.7.0
+  ENV NVM_DIR /usr/local/nvm
+  RUN mkdir $NVM_DIR
+  RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-ENV NODE_PATH $NVM_DIR/$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+  ENV NODE_PATH $NVM_DIR/$NODE_VERSION/lib/node_modules
+  ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 
-RUN echo "source $NVM_DIR/nvm.sh && \
-    nvm install $NODE_VERSION && \
-    nvm alias default $NODE_VERSION && \
-    nvm use default" | bash
+  RUN echo "source $NVM_DIR/nvm.sh && \
+      nvm install $NODE_VERSION && \
+      nvm alias default $NODE_VERSION && \
+      nvm use default" | bash
 
-CMD ["bash"]
-```
+  CMD ["bash"]
+  ```
 
 - Build the custom image
 ```
-$ docker build -t custom-cy:latest
+$ docker build -t node-img:latest
 ```
 
 ### Running cypress from custom built docker image
-
 ```
 // use npm install with Cypress cache volume specified, instead of npm ci if you don't want caching and remove specifying volume for Cypress cache
-$ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress/4.0.2:/root/.cache/Cypress/4.0.2 --workdir /app custom-cy:latest bash -c "npm install && npm run test:cypress"
+$ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress/4.0.2:/root/.cache/Cypress/4.0.2 --workdir /app node-img:latest bash -c "npm install && npm run test:cypress"
 
 // working command
 & docker run --volume `pwd`:/app --workdir /app custom-cy:latest bash -c "npm ci && npm run test:cypress"
 ```
 
-## Error using docker in command line
+## Windows: Error using docker in command line
 
-- error during connect: Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info:
+- Error connecting:
+  ```
+  Get http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.35/info:
   open //./pipe/docker_engine: The system cannot find the file specified.
-  In the default daemon configuration on `Windows`, the docker client must
-  be run elevated to connect. This error may also indicate that the docker daemon
-  is not running.
+  In the default daemon configuration on `Windows`, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.
+  ```
 
-- Run the following command in `powershell` admin mode
+- Run the following command in `powershell` with admin privileges
  ```
  $ cd "C:\Program Files\Docker\Docker" ./DockerCli.exe -SwitchDaemon
  ```
 
-- Error: Command failed: docker swarm init, Error response from daemon:
+- `Error: Command failed: docker swarm init, Error response from daemon:`
   could not find the system's IP address - specify one with `--advertise-addr`
 
-- ERROR: connect ECONNREFUSED 127.0.0.1:4444
+- `ERROR: connect ECONNREFUSED 127.0.0.1:4444`
   ```
   $docker swarm init --advertise--addr 127.0.0.1:4444
   ```
 
 ### Common Commands
+
+- Common commands used
   ```
   $ docker build -t friendlyhello .  # Create image using this directory's Dockerfile
 
@@ -591,3 +586,11 @@ $ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress
   # Dockerfile
   $ docker history <image-name>
   ```
+
+## Links
+
+- https://buddy.works/guides/how-dockerize-node-application (Node app docker)
+- https://stackoverflow.com/questions/26320901/cannot-install-nodejs-usr-bin-env-node-no-such-file-or-directory
+- https://docs.docker.com/develop/develop-images/multistage-build/ - multi stage build - build with more than one images
+- https://goinbigdata.com/docker-run-vs-cmd-vs-entrypoint/
+- https://aboullaite.me/docker-hacks/
