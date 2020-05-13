@@ -2,8 +2,8 @@
 
 ## Installation on Windows 10
 
-- Enable Hyper-V feature in Control Panel -> Programs and Features -> Turn windows features on or off -> Check - Hyper-V
-- If Hyper-V is not running, enable Intel VT/VT-x or AMD-V in BIOS
+- Enable `Hyper-V` feature in `Control Panel -> Programs and Features -> Turn windows features on or off -> Check - Hyper-V`
+- If Hyper-V is not running, enable `Intel VT/VT-x` or `AMD-V in BIOS`
 
 ### Basic commands
 
@@ -202,104 +202,6 @@
   $ docker swarm leave --force
   ```  
 
-### MySQL and Spring-boot app on container
-
-- Pull mysql and openjdk image
-  ```
-  $ docker pull mysql
-  $ docker pull openjdk
-  ```
-
-- Create a network run both mysql database and java app in one network
-  ```
-  $ docker network create user-mysql
-
-  # List the created network
-  $ docker network ls
-  ```
-
-- Run the mysql image in created network
-  ```
-  $ docker container run --name mysqldb --network user-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=bootdb -d mysql
-  ```
-
-- Check the logs that the mysql container in running properly
-  ```
-  $ docker logs mysqldb
-  ```
-
-- Create the spring boot app Clone the project: https://github.com/TechPrimers/docker-mysql-spring-boot-example
-
-- `application.properties` file should have the following details, Update the files or project appropriately
-  ```
-  spring.datasource.url = jdbc:mysql://mysqldb/bootdb
-  spring.datasource.username = root
-  spring.datasource.password = root
-  spring.datasource.platform= mysql
-  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-  ```
-
-- Install the maven project to produce the jar, give a name to the jar, in `pom.xml` under `<build>` tag as follows,
-  ```
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <finalName>users-mysql</finalName>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  ```
-
-- Create the `Dockerfile` in the root directory of the spring project, as follows
-  ```
-  FROM openjdk:8
-  COPY target/users-mysql.jar users-mysql.jar
-  EXPOSE 8086
-  ENTRYPOINT ["java", "-jar", "users-mysql.jar"]
-  ```
-
-- Build the spring-boot image
-  ```
-  $ docker build --tag=user-api .
-  ```
-
-- Run the spring-boot app in the created network
-  ```
-  $ docker container run --network user-mysql --name user-jdbc-container -p 8086:8086 -d user-api
-  ```
-
-- Verify that both mysql and user-api containers running
-  ```
-  $ docker container ls
-  ```
-
-- Check the logs that the spring boot has started without errors
-  ```
-  $ docker logs user-jdbc-container
-  ```
-
-- Open the browser and query for the resource, run `http://localhost:8086/all/create` to insert a dummy row to db, then `http://localhost:8086/all/` to see the inserted result
-
-### Executing commands inside a running container:
-
-- Open a created image in command line, interactive and in terminal (`-it` option)
-
-  ```
-  $ docker exec -it <container-name> bash
-  $ mysql -uroot -ppassword
-  // or
-  $ docker exec -it <container-name> mysql -u<username> -p<password>
- ```
-
-- Create the user and password if needed
-  ```
-  $ CREATE USER 'test'@'localhost' IDENTIFIED BY 'root';
-  ```
-
 ### Passing params to the docker image
 
 - Sleep ubuntu for 5 seconds
@@ -451,49 +353,6 @@ $ docker service create --replicas=100 nodejs
   // It should be run on docker swarm manager node
   $ docker service create --replicas=3 my-web-server
   ```
-
-## Installing latest node on docker image
-
-- https://gist.github.com/remarkablemark/aacf14c29b3f01d6900d13137b21db3a
-  ```
-  FROM ubuntu:latest
-
-  RUN set -eux \
-      && apt-get update \
-      && apt-get install -y curl \
-      && apt-get -y autoclean \
-      && rm -rf /var/lib/apt/lists/*
-
-  ENV NVM_VERSION v0.34.0
-  ENV NODE_VERSION v13.7.0
-  ENV NVM_DIR /usr/local/nvm
-  RUN mkdir $NVM_DIR
-  RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-
-  ENV NODE_PATH $NVM_DIR/$NODE_VERSION/lib/node_modules
-  ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
-
-  RUN echo "source $NVM_DIR/nvm.sh && \
-      nvm install $NODE_VERSION && \
-      nvm alias default $NODE_VERSION && \
-      nvm use default" | bash
-
-  CMD ["bash"]
-  ```
-
-- Build the custom image
-```
-$ docker build -t node-img:latest
-```
-
-### Running cypress from custom built docker image
-```
-// use npm install with Cypress cache volume specified, instead of npm ci if you don't want caching and remove specifying volume for Cypress cache
-$ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress/4.0.2:/root/.cache/Cypress/4.0.2 --workdir /app node-img:latest bash -c "npm install && npm run test:cypress"
-
-// working command
-& docker run --volume `pwd`:/app --workdir /app node-img:latest bash -c "npm ci && npm run test:cypress"
-```
 
 ## Windows: Error using docker in command line
 
