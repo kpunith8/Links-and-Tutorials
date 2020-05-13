@@ -242,16 +242,16 @@
 - Install the maven project to produce the jar, give a name to the jar, in `pom.xml` under `<build>` tag as follows,
   ```
   <build>
-  <plugins>
-  <plugin>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-maven-plugin</artifactId>
-  <configuration>
-  <finalName>users-mysql</finalName>
-  </configuration>
-  </plugin>
-  </plugins>
-  </build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>users-mysql</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
   ```
 
 - Create the `Dockerfile` in the root directory of the spring project, as follows
@@ -494,7 +494,7 @@ $ docker build -t node-img:latest
 $ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress/4.0.2:/root/.cache/Cypress/4.0.2 --workdir /app node-img:latest bash -c "npm install && npm run test:cypress"
 
 // working command
-& docker run --volume `pwd`:/app --workdir /app custom-cy:latest bash -c "npm ci && npm run test:cypress"
+& docker run --volume `pwd`:/app --workdir /app node-img:latest bash -c "npm ci && npm run test:cypress"
 ```
 
 ## Windows: Error using docker in command line
