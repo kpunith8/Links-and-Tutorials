@@ -242,16 +242,16 @@
 - Install the maven project to produce the jar, give a name to the jar, in `pom.xml` under `<build>` tag as follows,
   ```
   <build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<finalName>users-mysql</finalName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <finalName>users-mysql</finalName>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   ```
 
 - Create the `Dockerfile` in the root directory of the spring project, as follows
@@ -282,18 +282,16 @@
   $ docker logs user-jdbc-container
   ```
 
-- Open the browser and query for the resource, run `http://localhost:8086/all/create` to insert a dummy row to db, then
-  `http://localhost:8086/all/` to see the inserted result
+- Open the browser and query for the resource, run `http://localhost:8086/all/create` to insert a dummy row to db, then `http://localhost:8086/all/` to see the inserted result
 
 ### Executing commands inside a running container:
 
 - Open a created image in command line, interactive and in terminal (`-it` option)
+
   ```
   $ docker exec -it <container-name> bash
   $ mysql -uroot -ppassword
-
-  or
-
+  // or
   $ docker exec -it <container-name> mysql -u<username> -p<password>
  ```
 
@@ -316,7 +314,7 @@
   ENTRYPOINT ["sleep"]
   ```
 
-  - usage: `$ docker run ubuntu-sleeper 10`
+- Usage: `$ docker run ubuntu-sleeper 10`
 
 - Specify default value to sleep if nothing is passed from command line
   ```
@@ -327,7 +325,7 @@
   CMD ["5"]
   ```
 
-  - usage: `$ docker run ubuntu-sleeper`, sleeps for 5 seconds
+- Usage: `$ docker run ubuntu-sleeper`, sleeps for 5 seconds
 
 - Specify the entry point from command line
   ```
