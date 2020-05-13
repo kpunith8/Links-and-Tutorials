@@ -2,6 +2,17 @@
 
 - [Automation-Raghav-Pal](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
 
+## TODO
+
+- `Vega` - Dashboard, Visualisation, with python
+- `Tailwind` - CSS Library
+- `Cypress` - Integration tests
+- `reach-router` - router for react
+- `next.js` - React CMS
+- https://vega.github.io
+- https://www.contentful.com/ - Contentfull - CMS
+- http://idl.cs.washington.edu/projects/lyra/ - Lyra
+
 ###	Web developement
 
 - Traversy Media
@@ -194,6 +205,8 @@
 ## Links:
 
 ### JS
+- https://www.robinwieruch.de/ - react, nodejs
+- https://ponyfoo.com/articles - JS blog (in depth)
 - http://bigocheatsheet.com - big O cheat sheet for data structures and algorithms
 - https://picsum.photos/ - Stock Images
 - https://miragejs.com/ - Fake server API
@@ -219,7 +232,7 @@
 - [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
 - [ES6-indepth-explorjs](https://exploringjs.com/) - JS ES6-to-Everything
 - [Javascript.info](https://javascript.info/)
-- [SpackingJS.com](http://speakingjs.com/es5/ch19.html) - Regular expressions
+- [SpeakingJS.com](http://speakingjs.com/es5/ch19.html) - Regular expressions
 
 # References
 

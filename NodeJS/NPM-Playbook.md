@@ -139,14 +139,15 @@ $ npm repo <package-name> // Take you to repository location of that package
 
 ## npm link - Making our module available locally
 
-- Create the link the depenedency to be added to main project
+- Create the link for the dependency to be added to main project.
 ```
+// Build the project before linking
 $ npm link // on the root folder of util/project
 ```
 
 - Link it to main project
 ```
-$ npm link <package-name> // as mentioned in the package.json
+$ npm link <package-name> // as mentioned in the package.json's name
 ```
 
 #### Back to Normal from link
