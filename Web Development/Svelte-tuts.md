@@ -289,4 +289,62 @@ button:hover {
 
 ### Text inputs
 
--
+- Binding to value instead of event handlers.
+
+```javascript
+<script>
+let name = 'world';
+</script>
+
+<input bind:value={name}>
+
+<h1>Hello {name}!</h1>
+```
+
+- In the DOM, everything is a string. That's unhelpful when dealing with numeric inputs
+  `type="number" and type="range"` — it is important to remember to coerce `input.value` before using it.
+  With bind:value, Svelte takes care of coercing
+
+```javascript
+<script>
+let a = 1;
+let b = 2;
+</script>
+
+<label>
+  <input type=number bind:value={a} min=0 max=10>
+  <input type=range bind:value={a} min=0 max=10>
+</label>
+
+<label>
+  <input type=number bind:value={b} min=0 max=10>
+  <input type=range bind:value={b} min=0 max=10>
+</label>
+
+<p>{a} + {b} = {a + b}</p>
+```
+
+- Check boxes
+
+- Checkboxes are used for toggling between states. Instead of binding to `input.value`, bind to `input.checked`
+
+```javascript
+<script>
+let yes = false;
+</script>
+
+<label>
+  <input type=checkbox bind:checked={yes}>
+  Yes! Send me regular email spam
+</label>
+
+{#if yes}
+  <p>Thank you. We will bombard your inbox and sell your personal details.</p>
+{:else}
+  <p>You must opt in to continue. If you're not paying, you're the product.</p>
+{/if}
+
+<button disabled={!yes}>
+  Subscribe
+</button>
+```

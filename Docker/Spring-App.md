@@ -85,7 +85,7 @@
 - Open a created image in command line, interactive and in terminal, `-it` option
   ```
   $ docker exec -it <container-name> mysql -u<username> -p<password>
- ```
+  ```
 
 - Create the user and password if needed
   ```
