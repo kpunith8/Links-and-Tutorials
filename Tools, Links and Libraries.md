@@ -2,6 +2,14 @@
 
 - [Automation-Raghav-Pal](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
 
+
+## AI code completion - kite
+
+- https://kite.com/
+
+
+## Sonic Pi -> sound programming
+
 ## TODO
 
 - `Vega` - Dashboard, Visualisation, with python
@@ -81,6 +89,7 @@
 - `browserify` (bundles JS), reactify (transforms JSX to JS)
 - `vinyl-source-stream`- Use conventional text streams with gulp
 - `LABjs` - JS job loader
+- `npm-run-all` - run parallel tasks
 
 ## Backend
 
@@ -130,12 +139,14 @@
 
 ## React
 
+### CSS, Component, Testing, and more libraries
+
 - `react-use` - custom react hooks
 - `restful-react`
 - `styled-components` - to create styled components for react
 - `emotion` - Styled components, CSS in JS
 - `react-spring` - React animation
-- `GraphQL` - `relay`, `apolo`, `graphcool` - serverless GraphQL
+- `GraphQL` - `relay`, `apolo`, `graphcool` - GraphQL
 - `reactstrap` - wrapper for Bootstrap 4.0 for react
 - `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
 - `reselect` and `recompose`
@@ -145,14 +156,22 @@
 - `react-docgen` - generate react components metadata
 - `chokidar` - watch files
 - `highlight.js` - syntax highlighted code examples
-- `npm-run-all` - run parallel tasks
 - `immer` - Convert mutable state to immutable in react
-- `nextJS` - React library for SPA
-- `Gatsby` - React library for SPA
 - `react-loading-skeleton` - skeleton loading for data or images
 - `formik`, `react-final-form`, `react-redux-form` - form library
-- `xstate` - State management for react
 
+### SPA
+
+- `nextJS` - React library for SPA
+- `Gatsby` - React library for SPA
+
+### State management
+
+- `redux`  
+- `mobX`
+- `xstate`
+- `recoil`
+- https://kea.js.org/
 
 ## Tools:
 

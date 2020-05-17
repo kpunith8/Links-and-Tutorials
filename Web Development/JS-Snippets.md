@@ -96,7 +96,7 @@ render() {
 }
 ```
 
-### Get Cheapest items first
+### Get Cheapest items first - custom sort
 
 ```javascript
 function newItemsCheapestFirst(items) {

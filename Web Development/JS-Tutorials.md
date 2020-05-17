@@ -542,7 +542,7 @@ domainRegExp.test('256.11.11.22') // false
 	// Closure function
 	(function () {
 		let now = new Date();
-		funciton doSomething() {
+		function doSomething() {
 			// do something
 		}
 	})();
@@ -559,8 +559,8 @@ domainRegExp.test('256.11.11.22') // false
 ### Copy the objects from console to clipboard
 
 - Right click on the object and select `Store as global variable`
-- it copies to `temp1` variable, use `copy(temp1)` method to copy to `clipboard`
 
+- it copies to `temp1` variable, use `copy(temp1)` method to copy to `clipboard`
 
 ## ESLint erros
 

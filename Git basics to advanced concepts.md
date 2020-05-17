@@ -1,12 +1,13 @@
-## Git: Basic to advanced concepts
+# Git: Basic to advanced concepts
 
-### Git Configuration
+## Git Configuration
 
-- To set user name and email address
+### Set user name and email address
 ```
 git config --global user.name "Punith K"
 $ git config --global user.email "PunithK@gmail.com"
 ```
+
 - Set `notepad++` as your default editor, it can be any text editor of your choice, by default git ships, `vim` as default editor.
 ```
 git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
@@ -32,9 +33,14 @@ git config --system core.longpaths true
 git config --global merge.conflictstyle diff3
 ```
 
+### Cache the password for an hour
+```
+git config --global credential.helper cache --timeout=3600
+```
+
 ### Adding an existing project
 
-- Initialize a git repository
+- Initialize a empty git repository
 ```
 git init
 ```
@@ -144,7 +150,7 @@ git reset HEAD CONTRIBUTING.md
 git checkout -- CONTRIBUTING.md
 ```
 
-### Git alias: Help type less in the command line
+### Git alias: Type less in the command line
 ```
 git config --global alias.co checkout
 git config --global alias.br branch

@@ -5,7 +5,7 @@
 - `let` and `const` have block scoping
 
 - Invoking the function within a function
-	```javascript
+  ```javascript
   const invoice = {
     number: 123,
     process: function() {
@@ -13,7 +13,7 @@
     }
   };
   invoice.process()(); // returns 123
-	```
+  ```
 
 - It is not allowed to bind new object to the arrow function or call or apply methods on new object
 
@@ -21,11 +21,11 @@
  	```javascript
   var getPrice = ()
     => 100;
-	```
+  ```
 
 ### Default Function Parameters
 - Passing product as undefined sets default value 100
-	```javascript
+  ```javascript
   let sample = function(product = 100, type='software') {
 
   }
@@ -34,7 +34,7 @@
   let getTotal = function(price, tax= price * 0.75) {
     console.log(tax);
   }
-	```
+  ```
 
 ### Spread and Rest Operator (...)
 
@@ -43,12 +43,12 @@
 - Rest operator is usd in `function invocation`.
 
 - `...` used as rest symbol before the argument
-	```javascript
+  ```javascript
   let sample = function(price, ...categories) {
   };
   // can be invoked as
   sample(1, 'software', 'hardware');
-	```
+  ```
 - `...` also used as spread operator, it accepts the array and splits into list of parameters
 
 - ..."45678" - will be spread into 4,5,6,7
@@ -56,22 +56,22 @@
 - It can also be used to create the new object without mutating
 
 - person object added with the addPowers property and returns the new object without mutating person object
-	```javascript
+  ```javascript
   {...person, addPowers: 'superman'};
-	```
+  ```
 
 ### Object Literal Extensions
 ```javascript
 var price = 5.99, quantity = 10;
 
 var productView = {
-	price,
-	quantity,
-	calculateValue() {
-	// Passing function name as string is allowed
-	// for ex: "calculate value" () -> Can be accessed using, productView["calucalate value"]()
-	 return this.price * this.quantity // No longer requires function keyword
-	}
+  price,
+  quantity,
+  calculateValue() {
+  // Passing function name as string is allowed
+  // for ex: "calculate value" () -> Can be accessed using, productView["calucalate value"]()
+   return this.price * this.quantity // No longer requires function keyword
+  }
 };
 ```
 
@@ -79,12 +79,12 @@ var productView = {
 
 ### for of Loops
 - Loops through elements of an array and characters of a string
-	```javascript
+  ```javascript
   for (var item of categories) {
     // categories = [,,]; -> returns 'undefined undefined'; since elements with in array ends with comma in JavaScript
     console.log(item);
   }
-	```
+  ```
 
 ### Octal and Binary Literals
 - `0o10` or `0O10`, for octal numbers  
@@ -103,7 +103,7 @@ console.log(`Number is: ${"INV-" + number}`);
 - Interpolation takes place first before the function calls
 
 - Tagged function literals
-	```javascript
+  ```javascript
   processInvoice `template`; // processInvoice is a function with one parameter
   let invoiceNumber = '1350';
   let amount = '2000';
@@ -117,41 +117,41 @@ console.log(`Number is: ${"INV-" + number}`);
     // returns [1350, 2000]
     console.log(values);
   }
-	```
+  ```
 
 ### De-structuring - arrays and objects
 
 - Array destructuring
-	```javascript
+  ```javascript
   let salary = ['32', '50', '75'];
   // skip the elements by specifying , between elements for ex: [low, , high] second elementt is not assigned to any variable
   let [low, average, high] = salary;
 
   console.log(average); // returns 50
-	```
+  ```
 
 - Objects can be assigned to another name as follows,
-	```javascript
+  ```javascript
   const salary = {high: 25, average: 20};
   {high: newHigh, average: newAvg} = salary;
-	```
+  ```
 
 ### Classes and Modules:
 - Modules, variables and functions can be exported
 
 - importing statements are hoisted to top
-	```javascript
+  ```javascript
   export let moduleId = 99;
 
   // which can be imported as id as follows,
   import { moduleId as id } from 'module.js';
   // If we try to access moduleId throws runtime error: moduleId is undefined
-	```
+  ```
 
 - We can also import default module names as alias using,
-	```javascript
+  ```javascript
   import { default as myProjectName } from 'module.js';
-	```
+  ```
 
 - We can also export `{ projectId as default, projectName };` when imported projectId is imported as default.
 
@@ -161,20 +161,20 @@ console.log(`Number is: ${"INV-" + number}`);
 
 - `Object initializer shorthand` - if the name of the key and value have the same name,
 omit the key names in the object initializer. It can be done anywhere
-	```javascript
-	function buildUser(fName, lName) {
-		let fullName = `fName lName`;
+  ```javascript
+  function buildUser(fName, lName) {
+  let fullName = `fName lName`;
 
-		return {
-			fName,
-			lName,
-			fullName,
-			isActive() { // method initializer shorthand, instead of isActive: function() {return true;}
-				return true;
-			}
-		}; // instead of {fName: fName, lName: lName, fullName: fullName}
-	}
-	```
+  return {
+  fName,
+  lName,
+  fullName,
+  isActive() { // method initializer shorthand, instead of isActive: function() {return true;}
+  return true;
+  }
+  }; // instead of {fName: fName, lName: lName, fullName: fullName}
+  }
+  ```
 
 ### Symbols
 - It is unique identifier, and not visible while inspecting an elements, and used for debugging purposes.
@@ -244,9 +244,9 @@ If both a and b have the same property then `b's property overrides the a's` pro
   Object.assign(target, a, b);
 
   Object.defineProperty(b, 'c', {
-		value: 10,
-		enumerable: false // Properties are enumerable by default
-	});
+  value: 10,
+  enumerable: false // Properties are enumerable by default
+  });
 
   // target has,  { a: 5, b: 6 } because of enumerable set to false
   Object.assign(target, a, b);
@@ -295,28 +295,28 @@ it.next(); //returns {done: false, value: 9000}
 ```
 
 - Creating custom iterator for an Object
-	```javascript
-	const post = {
-		title: 'Title one',
-		replies: 19
-	}
+  ```javascript
+  const post = {
+  title: 'Title one',
+  replies: 19
+  }
 
-	post[Symbol.iterator] = function() {
-		let properties = Object.keys(this);
-		let count = 0;
-		let isDone = false;
+  post[Symbol.iterator] = function() {
+  let properties = Object.keys(this);
+  let count = 0;
+  let isDone = false;
 
-		let next = () => {
-			if(count >= properties.length) {
-				isDone = true;
-			}
+  let next = () => {
+  if(count >= properties.length) {
+  isDone = true;
+  }
 
-			return {done: isDone, value: this[properties[count++]]};
-		}
+  return {done: isDone, value: this[properties[count++]]};
+  }
 
-		return {next};
-	}
-	```
+  return {next};
+  }
+  ```
 
 - Now we can use `for..of` loop to access the value of a each property
 
@@ -327,8 +327,8 @@ it.next(); //returns {done: false, value: 9000}
 ```javascript
 // It does not exist in the function stack, we need iterators to call generators multiple times, * says its a generator
 function *process() {
-	yield 8000;
-	yield 8001;
+  yield 8000;
+  yield 8001;
 }
 
 let it = process();
@@ -350,9 +350,9 @@ it.next();
 - if no try catch specified, `it.throw('foo');` throws exception: foo on iterating through yield. for eg,
   ```javascript
   function *process() {
-		yield 900;
-		yield 901;
-		yield 902;
+  yield 900;
+  yield 901;
+  yield 902;
   }
 
   let it = process();
@@ -373,40 +373,40 @@ it.next();
   ```
 
 - Refactoring `Symbol.iterator` for object using generator functions
-	```javascript
-	const post = {
-		title: 'Title one',
-		replies: 19
-	}
+  ```javascript
+  const post = {
+  title: 'Title one',
+  replies: 19
+  }
 
-	post[Symbol.iterator] = function *() {
-		let properties = Object.keys(this);
+  post[Symbol.iterator] = function *() {
+  let properties = Object.keys(this);
 
-		for(let property of properties) {
-			yield(this[property]);
-		}
-	}
-	```
+  for(let property of properties) {
+  yield(this[property]);
+  }
+  }
+  ```
 
 - The following function returns an iterable over the properties of an object, one [key, value] pair per property:
-	```javascript
-	function* objectEntries(obj) {
-		const propKeys = Reflect.ownKeys(obj);
+  ```javascript
+  function* objectEntries(obj) {
+  const propKeys = Reflect.ownKeys(obj);
 
-	  for (const propKey of propKeys) {
-	  	// `yield` returns a value and then pauses
-	    // the generator. Later, execution continues
-	    // where it was previously paused.
-	    yield [propKey, obj[propKey]];
-	 	}
-	}
+    for (const propKey of propKeys) {
+    	// `yield` returns a value and then pauses
+      // the generator. Later, execution continues
+      // where it was previously paused.
+      yield [propKey, obj[propKey]];
+   	}
+  }
 
-	// objectEntries() is used like this
-	const jane = { first: 'Jane', last: 'Doe' };
-	for (const [key,value] of objectEntries(jane)) {
-		console.log(`${key}: ${value}`);
-	}
-	```
+  // objectEntries() is used like this
+  const jane = { first: 'Jane', last: 'Doe' };
+  for (const [key,value] of objectEntries(jane)) {
+  console.log(`${key}: ${value}`);
+  }
+  ```
 
 #####  Ways of `iterating` over a generator
 
@@ -416,71 +416,71 @@ The following three ones are especially important.
 - You can only use yield within a generator function.
 
 - The `for-of` loop:
-	```javascript
-	for (const x of genFunc()) {
-	    console.log(x);
-	}
-	```
+  ```javascript
+  for (const x of genFunc()) {
+      console.log(x);
+  }
+  ```
 
 - The `spread operator`, which turns iterated sequences into elements of an array.
-	```javascript
-	const arr = [...genFunc()]; // ['a', 'b']
-	````
+  ```javascript
+  const arr = [...genFunc()]; // ['a', 'b']
+  ````
 
 - destructuring:
-	```javascript
-	const [x, y] = genFunc();
-	```
+  ```javascript
+  const [x, y] = genFunc();
+  ```
 
 - Call generator function `recursively` inside another generator function `yield*` used
-	```javascript
-	function* gen1() {
-		yield '1';
-		yield '2';
-	}
+  ```javascript
+  function* gen1() {
+  yield '1';
+  yield '2';
+  }
 
-	function* gen2() {
-		yield '3';
-		yield* gen1(); // just calling gen1() returns object but doesn't yield from that.
-		yield '4';
-	}
-	```
+  function* gen2() {
+  yield '3';
+  yield* gen1(); // just calling gen1() returns object but doesn't yield from that.
+  yield '4';
+  }
+  ```
 
 - The operand of `yield*` does not have to be a generator object, it can be any iterable
-	```javascript
-		function* gen3() {
-			yield 'sequence';
-			yield* ['of', 'yielded'];
-		 	yield 'values';
-		}
-	```
+  ```javascript
+  function* gen3() {
+  yield 'sequence';
+  yield* ['of', 'yielded'];
+   	yield 'values';
+  }
+  ```
 
 ### Returning promises from Generators
 
 ```javascript
 function spawn(generator) {
-	return new Promise((resolve, reject) => {
-		var onResult = lastPromiseResult => {
-			var {value, done} = generator.next(lastPromiseResult);
-			if(!done) {
-				value.then(onResult, reject);
-			} else resolve (value);
-		};
+  return new Promise((resolve, reject) => {
+  var onResult = lastPromiseResult => {
+  var {value, done} = generator.next(lastPromiseResult);
+  if(!done) {
+  value.then(onResult, reject);
+  } else resolve (value);
+  };
 
-		onResult();
-	});
+  onResult();
+  });
 }
 
 // Here, getStockSymbol and getSymbolPrice are promises
 function* getStockPrice(name) {
-	const stockSymbol = yield getStockSymbol(name);
-	const price = yield getSymbolPrice(stockSymbol);
+  const stockSymbol = yield getStockSymbol(name);
+  const price = yield getSymbolPrice(stockSymbol);
 
-	return price
+  return price
 }
 
 spawn(getStockPrice('google'))
-	.then(price => console.log('Price:', price), err => console.error(error));
+  .then(price => console.log('Price:', price), err => console.error(error));
 ```
 
 #### Promises
@@ -490,11 +490,11 @@ it can do one of the 2 things, `fulfilled` or `rejected`.
 
 - `.then(callbackFunction)` can be chained on promise, return value of `first .then()`
 can be input to the `second .then()`
-	```javascript
-	promise
-		.then(results => results.filter(result => result.city === 'Bengaluru'))
-		.then(filteredCities => render());
-	```
+  ```javascript
+  promise
+  .then(results => results.filter(result => result.city === 'Bengaluru'))
+  .then(filteredCities => render());
+  ```
 
 - It is an object waiting for an `async` action to complete
   ```javascript
@@ -510,7 +510,7 @@ can be input to the `second .then()`
   ```
 
 - use, `then` function on promise to `reject` and `resolve` the promise,
-	```javascript
+  ```javascript
   doAsync().then(function(value) {
     console.log('fulfilled...');
   },
@@ -520,7 +520,7 @@ can be input to the `second .then()`
   ```
 
 - `then` function can be chained, we can also call `catch` function on promise
-	```javascript
+  ```javascript
   doAsync.catch(function(reason) {
     console.log(reason);
   });
@@ -648,7 +648,7 @@ let emp = new WeakMap();
 - DSL - Domain Specific Language
 
 - Object Construction and method calls - Reflect is an Object
-	```javascript
+  ```javascript
   Reflect.construct(target, argumentList[, newTarget]);
 
   // arguments should be passed as an array
@@ -710,28 +710,50 @@ let emp = new WeakMap();
   });
 ```
 
-### Writing arrow functions better way
+### Returning an object from an arrow function
 ```javascript
-const arrowFunc = (data) => {
-	return {
-		type: 'ACTION_1',
-		payload: data,
-	};
-};
+const arrowFunc = (data) => ({
+  type: 'ACTION_CLOSE',
+  payload: data
+})
 ```
 
+## ES-7
+
+- `includes()` method on array prototype
+
+- `**` exponential operator
+
+## ES-8
+
+- `padStart(num)` and `padEnd(num)` - adds specified number  of spaces to the string in the beginning and
+  to the end respectively
+
+- `Trailing commas` at the end of array or params, `[1,2,3,4,]`
+
+- `Object.values(obj)` - returns the array of values, and `Object.entries(obj)` -
+  returns an array of `[key, value]` pair
+
+- `async-await`
+
 ## ES-2019 - TC-39
-- Optional catch binding
+
+- `Optional catch binding`
 ```javascript
 try {
-	// some statements
+  // some statements
 } catch { // no need to pass catch(error)
-	throw new Error('some error');
+  throw new Error('some error');
 }
 ```
 
+- `flat()` on array prototype, flattens the array of depth 1, `arr.flat(depth=1)`
+  pass the depth as param to flatten array depth > 2
+
 - Stable `sort()` maintains the chronological order while sorting.
 
-- `flatMap()` to flat the nested arrays, `flatMap(arr, 2)`; // 2 here tells depth
+- `flatMap()` to flat the nested arrays, `flatMap(arr, 2)`, here second param specifies the depth
 
-- `Object.fromEntries()` to create a object from a iterator
+- `Object.fromEntries(iterator)` to create a object from an iterator
+
+- `trimStart()` and `trimEnd()` to trim spaces
