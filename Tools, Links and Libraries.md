@@ -1,6 +1,7 @@
 ## Youtube Channels
 
 - [Automation-Raghav-Pal](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
+- [Programming with mosh](https://www.youtube.com/user/programmingwithmosh/videos)
 
 
 ## AI code completion - kite
