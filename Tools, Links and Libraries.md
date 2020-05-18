@@ -22,6 +22,11 @@
 - https://www.contentful.com/ - Contentfull - CMS
 - http://idl.cs.washington.edu/projects/lyra/ - Lyra
 
+## Devops
+
+- intelliPaat - youtube channel - https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE
+
+
 ###	Web developement
 
 - Traversy Media

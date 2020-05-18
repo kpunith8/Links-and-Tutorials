@@ -42,6 +42,12 @@
   $ docker container ls
   ```
 
+- Remove all the running dockers in AWS machine (ubuntu)
+  At least one docker container should be running before deleting
+  ```
+  sudo docker rm -f $(sudo docker ps -a -q)
+  ```
+
 - Installing the docker gives the client and the daemon
 - Client makes API calls to daemon
 - Daemon implements the Docker Remote API
