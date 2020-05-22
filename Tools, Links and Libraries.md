@@ -4,12 +4,16 @@
 - [Programming with mosh](https://www.youtube.com/user/programmingwithmosh/videos)
 
 
+# Share beautiful code snippets
+
+- https://carbon.now.sh/
+
 ## AI code completion - kite
 
 - https://kite.com/
 
 
-## Sonic Pi -> sound programming
+## Sonic Pi -> Music programming
 
 ## TODO
 
@@ -27,7 +31,7 @@
 - intelliPaat - youtube channel - https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE
 
 
-###	Web developement
+###	Web developement - Youtube channels
 
 - Traversy Media
 - codedamn
@@ -238,7 +242,6 @@
 - https://www.contentful.com/developers/ - CMS
 -	https://scratchpad.io - HTML, CSS editor
 - https://ckeditor.com/ - WYSIWYG editor
-- https://codesandbox.io - online code playground
 - https://www.expo.io - React-Native
 - https://www.webcodegeeks.com/html5/html5-internationalization-example/ - JS/Web Blog
 - https://www.scrimba.com/g/gflexbox
@@ -258,6 +261,12 @@
 - [ES6-indepth-explorjs](https://exploringjs.com/) - JS ES6-to-Everything
 - [Javascript.info](https://javascript.info/)
 - [SpeakingJS.com](http://speakingjs.com/es5/ch19.html) - Regular expressions
+
+### Online playgrounds
+
+- https://runkit.com
+- https://codesandbox.io - online code playground
+- https://codepen.io/ - JS Playground
 
 # References
 

@@ -55,21 +55,7 @@ $ npm uninstall <package-name> --save (or)
 $ npm rm/un/r <package-name> // add '-g' flag to uninstall the global package
 ```
 
-#### Updating the packages - all in one go
 
-- To discover new releases of the packages, you run
-```
-$ npm outdated
-```
-
-- To update to a new major version all the packages, install the `npm-check-updates` package globally
-```
-$ npm install -g npm-check-updates
-// Run this command to update the list
-$ ncu -u
-$ npm update
-$ npm install
-```
 
 #### Installing from git repo and gist
 ```
@@ -179,4 +165,20 @@ $ NODE_ENV=production webpack --config ./webpack.config.prod.js --profile --json
 
 ```
 $ webpack-bundle-analyzer stats.json`
+```
+
+#### Updating the packages - all in one go
+
+- To discover new releases of the packages, you run
+```
+$ npm outdated
+```
+
+- To update to a new major version all the packages, install the `npm-check-updates` package globally
+```
+$ npm install -g npm-check-updates
+// Run this command to update the list
+$ ncu -u
+$ npm update
+$ npm install
 ```
