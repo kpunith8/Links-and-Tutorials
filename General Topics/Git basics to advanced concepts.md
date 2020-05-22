@@ -33,6 +33,11 @@ git config --system core.longpaths true
 git config --global merge.conflictstyle diff3
 ```
 
+- Ignore the file name cases before pushing the changes, when coding in 2 diff OSs
+```
+git config core.ignorecase false
+```
+
 ### Cache the password for an hour
 ```
 git config --global credential.helper cache --timeout=3600

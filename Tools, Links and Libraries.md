@@ -187,6 +187,15 @@
 
 - `JFrog` - artifactory
 - `Spinnaker` - Automated deployments
+- `Favicon Generator` - https://realfavicongenerator.net/
+
+
+## Free hosting
+
+- `vercel.com` - static and dynamic website
+- `netlify.com` - static and dynamic website
+- `heroku.com` - Node.js apps
+
 
 ## REST end points
 
