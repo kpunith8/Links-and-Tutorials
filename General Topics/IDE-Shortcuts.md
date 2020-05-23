@@ -80,3 +80,24 @@ Settings -> set, javascript.validate.enable": false
 - `Prettier`
 - `npm`
 - `npm intellisense`
+- `REST Client` - to make rest calls from VS code
+  - Create `requests.rest` - file in the route folder
+  - Put `###` to send separate request in the same page
+
+  ```
+  GET http://localhost:3000/posts HTTP/1.1
+
+  ###
+
+  POST http://localhost:3000/posts
+  content-type: application/json
+
+  {
+    "name": "Punith",
+    "email": "kpunith8@gmail.com"
+  }
+
+  ###
+
+  GET http://localhost:3000/posts?page=2&pageSize=10
+  ```

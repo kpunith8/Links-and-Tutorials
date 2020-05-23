@@ -5,8 +5,8 @@
 - Create new node app in heroku (App can be created using heroku-cli as well,
 download `heroku-cli`, if you want to use `heroku-git` to store your files)
 
-- Add the `ProcFile` to your git repo in the root folder,
-`ProcFile` should have the following content, name of the file should be case sensitive.
+- Add the `Procfile` to your project root folder, and should be committed to source control
+  `Procfile` should have the following content, name of the file should be `case sensitive`.
 ```
 web: node index.js // It should point to the folder you are deploying could be auth/index.js
 ```
@@ -22,7 +22,6 @@ web: node index.js // It should point to the folder you are deploying could be a
   "image": "heroku/nodejs"
 }
 ```
-
 
 - Refer, https://github.com/heroku/node-js-getting-started for more info
 
@@ -43,11 +42,17 @@ $ heroku create // Assigns the name to the app
 $ git push heroku master // Push it to heroku git
 
 $ heroku open // to open the app
+
+$ heroku apps // to list all the apps hosted under the user name
 ```
 
 - If you want to link your git to heroku, select the app created go to ->
   `Deploy` section and Select `github` option (by default it points to heroku-git)
-  and configure your branch and other automatic deployments
+  and configure your branch and other automatic deployments.
+
+- Once automatic deployments are enabled, no need to push to `heroku master`
+  push to your repo's master branch or designated release branch, it triggers
+  build automatically.
 
 
 ## Renaming heroku app name
@@ -109,4 +114,19 @@ $ heroku config:unset GITHUB_USERNAME
 
 - Download the `CLI` and login and deploy, follow the guidelines in the official documentation
 
-- Make sure to remove `homepage` url from `package.json` if it exists before publishing
+- Make sure to remove `homepage` url from `package.json` if it exists, before publishing.
+
+
+## Using CURL to query the REST services
+
+```
+$ curl -i -X GET http://rest-api.io/items
+
+$ curl -i -X GET http://rest-api.io/items/5069b47aa892630aae059584
+
+$ curl -i -X DELETE http://rest-api.io/items/5069b47aa892630aae059584
+
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New item", "year": "2009"}' http://rest-api.io/items
+
+$ curl -i -X PUT -H 'Content-Type: application/json' -d '{"name": "Updated item", "year": "2010"}' http://rest-api.io/items/5069b47aa892630aae059584
+```

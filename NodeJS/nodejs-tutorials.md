@@ -413,6 +413,13 @@ to disply the type of Operating System.
 - Upload multiple files
 	`$curl -F 'fileX=@path/file-name' -F 'fileY=@path/filename' http://localhost:8080`
 
+
+## Generate random hexa decimal string for secret keys from command line
+```
+$ node
+> require('crypto').randomBytes(64).toString('hex')
+```
+
 ### References
 
 - http://www.stripe.com - for Web and mobile payments
