@@ -60,6 +60,7 @@
 ### Python
 
 - `Joseph Delgadillo` - https://www.youtube.com/channel/UCqR4a4lUDbDkAFQnhw4pfXQ
+- `Keith Galli` - https://www.youtube.com/channel/UCq6XkhO5SZ66N04IcPbqNcw
 
 ### Mobile Development
 

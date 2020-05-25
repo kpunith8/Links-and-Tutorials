@@ -1,4 +1,4 @@
-# Docker - intro
+# Docker
 
 ## Installation on Windows 10
 
@@ -246,22 +246,28 @@
 - Docker has built-in `DNS server` running on port `127.0.0.11` which maps each container with their names
   with the ip address as a table, by using which you can access the containers.
 
-### Storage
+### Storage - Persist data in local volumes
 
 - Persists the data in a volume, docker has `storage drivers` to manage the layers
   some of the storage drivers are, `AUFS, ZFS, BTRFS, Device Mapper, Overlay, Overlay2`
+
+- Create a volume
   ```
-  // Create a volume
   $ docker volume create data_volume // stores it in /var/lib/docker/volumes/data_volume
+  ```
 
-  // Mount the image on volumes to persist the data, called volume mounting
+- Mount the image on volumes to persist the data, called volume mounting
+  ```
   $ docker run -v data_volume:/var/lib/mysql mysql
+  ```
 
-  // it can also be bind to the local folders(location on docker host) as well, called bind mounting
-  //
+- It can also be bind to the local folders(location on docker host) as well, called bind mounting
+  ```
   $ docker run -v /data/mysql:/var/lib/mysql mysql
+  ```
 
-  // can also be writtin using --mount option as follows
+- Can also be writtin using `--mount` option as follows
+  ```
   $ docker run /
   --mount type=bind,source=/data/mysql,target=/var/lib/mysql mysql
   ```
@@ -360,6 +366,52 @@ $ docker service create --replicas=100 nodejs
   $ docker service create --replicas=3 my-web-server
   ```
 
+## Best Practices
+
+### Cleanup as you go
+
+- Chain `RUN` commands together to clean as you go, instead of this,
+  ```
+  FROM ubuntu
+  RUN apt-get update
+  RUN apt-get install -y python
+
+  CMD ['python', 'app.py']
+  ```
+
+- Do this instead
+  ```
+  FROM ubuntu
+  RUN apt-get update && \
+      apt-get install -y python python-pip && \
+      rm -rf /var/lib/apt/lists/*
+
+  CMD ["python", app.py]
+  ```
+
+- `rm -rf /var/lib/apt/lists/*` - Cleans repository indexes once the installation is done.
+
+### Keep images tight and focused
+
+- Install only deps/tools/packages are necessary
+
+- use `multi-stage` builds to separate build time and run time dependencies.
+
+- Eg: Node image with nginx server
+  ```
+  FROM node as build
+  WORKDIR /usr/src/app
+  COPY package.json package-lock*.json .
+  RUN npm install
+  COPY public ./public
+  COPY src ./src
+  RUN npm run build
+
+  FROM ngnix:alpine
+  COPY ngnix.conf /etc/ngnix/ngnix.conf
+  COPY --from=build /usr/src/app/build /usr/share/ngnix/html
+  ```
+
 ## Windows: Error using docker in command line
 
 - Error connecting:
@@ -370,9 +422,9 @@ $ docker service create --replicas=100 nodejs
   ```
 
 - Run the following command in `powershell` with admin privileges
- ```
- $ cd "C:\Program Files\Docker\Docker" ./DockerCli.exe -SwitchDaemon
- ```
+  ```
+  $ cd "C:\Program Files\Docker\Docker" ./DockerCli.exe -SwitchDaemon
+  ```
 
 - `Error: Command failed: docker swarm init, Error response from daemon:`
   could not find the system's IP address - specify one with `--advertise-addr`

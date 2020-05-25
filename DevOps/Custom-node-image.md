@@ -40,3 +40,28 @@ $ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress
 // working command
 & docker run --volume `pwd`:/app --workdir /app node-img:latest bash -c "npm ci && npm run test:cypress"
 ```
+
+
+### Node image with least permissions
+
+```
+FROM node:12-slim
+EXPOSE 3000
+RUN mkdir /app && chown -R node:node /app
+
+WORKDIR /app
+USER node
+
+COPY --chown=node:node package.json package-lock*.json ./
+RUN npm install && npm cache clean --force
+
+COPY --chown=node:node . .
+CMD ['node', 'start']
+```
+
+- Accessing the file system for node image is not allowed
+
+- Give the root permissions, as follows,
+```
+$ docker-compose exec -u root node bash
+```
