@@ -186,6 +186,26 @@
   }
   ```
 
+## Switch Block
+
+- Switch block
+  ```
+  import "runtime"
+
+  switch os := runtime.GOOS; os {
+    case "darwin":
+      fmt.Println("OS X.")
+    case "linux":
+      fmt.Println("Linux.")
+    default:
+      // freebsd, openbsd,
+      // plan9, windows...
+      fmt.Printf("%s.\n", os)
+	   }
+  ```
+
+- Switch without a condition is the same as switch true.
+
 ## Pointers
 
 - A pointer holds the memory address of a value.
@@ -336,7 +356,7 @@
   }
   ```
 
-### Appending to a slice:
+### Appending to a Slice
 
 - It is common to append new elements to a slice, and so Go provides a built-in `append` function
   ```
@@ -359,7 +379,7 @@
 
 - The returned slice will `point to the newly allocated array`.
 
-### Range:
+### Range
 
 - The `range` form of the `for` loop iterates over a slice or map.
 
@@ -374,3 +394,135 @@
     }
   }
   ```
+
+- Skip the `index` or `value` by assigning to `_`
+
+- Only want the `index`, omit the `second` variable.
+  ```
+  pow := make([]int, 10)
+  for i := range pow {
+    pow[i] = 1 << uint(i) // == 2**i
+  }
+  for _, value := range pow {
+    fmt.Printf("%d\n", value)
+  }
+  ```
+
+## Maps
+
+- A map maps keys to values.
+
+- The `zero value` of a map is `nil`. A `nil` map has `no keys`, nor can keys be added.
+
+- The `make` function returns a map of the given type, initialized and ready for use.
+  ```
+  type Vertex struct {
+	Lat, Long float64
+  }
+
+  var m map[string]Vertex
+
+  func main() {
+  	m = make(map[string]Vertex)
+  	m["Bell Labs"] = Vertex{
+  		40.68433, -74.39967,
+  	}
+  	fmt.Println(m["Bell Labs"])
+  }
+  ```
+
+- Map literals are like struct literals, but the keys are required.
+  ```
+  var m = map[string]Vertex{
+    "Bell Labs": Vertex{
+      40.68433, -74.39967,
+    }
+    "Google": Vertex{
+      37.42202, -122.08408,
+    },
+  }
+  ```
+
+- If the `top-level type` is just a `type name`, `omit it from the elements` of the literal.
+  ```
+  var m = map[string]Vertex{
+    "Bell Labs": {40.68433, -74.39967},
+    "Google":    {37.42202, -122.08408},
+  }
+  ```
+
+### Mutating Maps
+
+- Insert or update an element in map m:
+  ```
+  m[key] = elem
+  ```
+
+- Retrieve an element
+  ```
+  elem = m[key]
+  ```
+
+- Delete an element
+  ```
+  delete(m, key)
+  ```
+
+- Test that a `key` is present with a two-value assignment
+  ```
+  elem, ok = m[key]
+  ```
+
+  - If `key` is in `map`, `ok` is true. If not, ok is false.
+  - If `key` is not in the map, then `elem` is the `zero value` for the map's element type.
+
+> Note: If `elem` or `ok` have not yet been declared you could use a short declaration form:
+  `elem, ok := m[key]`
+
+## Function Values
+
+- Functions are values too. They can be passed around just like other values.
+
+- Function values may be used as function arguments and return values.
+  ```
+  func compute(fn func(float64, float64) float64) float64 {
+    return fn(3, 4)
+  }
+
+  hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+
+	fmt.Println(compute(hypot))
+	fmt.Println(compute(math.Pow))
+  ```
+
+## Function closures
+
+- Go functions may be closures. A closure is a function value that references variables from outside its body.
+
+- The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+  ```
+  func adder() func(int) int { // func(int) int, is the return type of the func adder()
+    sum := 0
+    return func(x int) int {
+      sum += x
+      return sum
+	  }
+  }
+
+  func main() {
+    // Executing 2 different adders to verify the closure behavior
+    pos, neg := adder(), adder()
+  	for i := 0; i < 10; i++ {
+  		fmt.Println(
+  			pos(i),
+  			neg(-2*i),
+  		)
+  	}
+  }
+  ```
+
+## Methods
+
+- 
