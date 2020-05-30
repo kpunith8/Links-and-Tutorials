@@ -28,3 +28,18 @@ $ brew cask install font-fira-code
 ```
 $ brew services list
 ```
+
+
+## Using zsh
+
+- Change the default shell to `zsh`, execute this in
+  ```
+  $ chsh -s /bin/zsh
+  ```
+
+- zsh auto suggestions, https://github.com/zsh-users/zsh-autosuggestions
+
+- Remove the computer name in the shell prompt, add this line to `~/.zshrc`
+  ```
+  export DEFAULT_USER="$(whoami)"
+  ```

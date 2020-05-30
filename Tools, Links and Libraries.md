@@ -170,6 +170,7 @@
 - `immer` - Convert mutable state to immutable in react
 - `react-loading-skeleton` - skeleton loading for data or images
 - `formik`, `react-final-form`, `react-redux-form` - form library
+- `storybook` - component documentation
 
 ### SPA
 
@@ -271,6 +272,8 @@
 - [ES6-indepth-explorjs](https://exploringjs.com/) - JS ES6-to-Everything
 - [Javascript.info](https://javascript.info/)
 - [SpeakingJS.com](http://speakingjs.com/es5/ch19.html) - Regular expressions
+- [Effectful js](https://github.com/awto/effectfuljs)
+- [Front end Magazine](https://increment.com/)
 
 ### Online playgrounds
 
