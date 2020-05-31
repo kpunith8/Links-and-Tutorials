@@ -1,5 +1,125 @@
 # Go Lang
 
+## Paths
+
+- Set the `GOPATH` to your project directory, if the project
+  created is not under the `GOPATH`, for eg: if your project is in `Documents`
+  set the path as follows (`Mac`) (For windows consult the docs)
+  ```
+  $ export GOPATH="/Users/<user-name>/Documents/go-samples/"
+  ```
+
+- Check the path of environment variables using,
+  ```
+  $ go env GOPATH
+  ```
+
+- Unset the previously set env variable
+  ```
+  $ go env -u GOPATH/GOBIN
+  ```
+
+- Set the default value of a `GOPATH` or `GOBIN`
+  ```
+  $ go env -w GOBIN=/somewhere/else/bin
+  ```
+
+## Packages - Importing Local Packages
+
+- Create the folder structure as the name of the package, under `GOPATH`
+  ```
+  $ cd src/github.com/kpunith8/gosamples
+  ```
+
+- Create `mod.go` file in the root folder
+  ```
+  $ go mod init github.com/kpunith8/gosamples
+  ```
+  - Stick with lower case letters for package names, `no underscores`, `hyphens` or `camel cases`,
+    here `gosamples` is the folder/package name where all the code exists.
+
+- Create a file `sample.go` inside the `gosamples` folder.
+
+- `install` the project
+  ```
+  $ go install github.com/kpunith8/gosamples
+
+  // or use shorthands if you are in the root directory
+  $  go install .
+  $  go install
+  ```
+  - This command builds the `gosamples` command, producing an executable binary.
+
+  - It then installs that binary as `$HOME/go/bin/gosamples` (Relative Path)
+
+  - The install directory is controlled by the `GOPATH` and `GOBIN`
+
+  - If `GOPATH` is set, binaries are installed to the `bin subdirectory` of the first directory in the GOPATH list.
+    Otherwise, binaries are installed to the `bin subdirectory` of the default `GOPATH`
+
+### Importing packages from your module
+
+- Create a `ds` package and use it from the `sample.go` program
+
+- Create a directory `ds` under `gosamples` and add a file named `ds.go` and add some code,
+  to export some code it should start with a `uppercase letter` for ex: function name should
+  start with a uppercase letter
+
+- File name can be different but it should have the package name as its parent folder, here,
+  `ds` is the package name and file name can be `func-utils.go`
+
+- It should not contain main function
+  ```
+  package ds
+
+  // Adder function closure example
+  func Adder() func(int) int {
+    sum := 0
+    return func(x int) int {
+      sum += x
+      return sum
+    }
+  }
+  ```
+
+- Build the created package to check whether it compiles
+  ```
+  $ cd ds
+  // Build is not required
+  $ go build
+  ```
+  - This won't produce an output file. Instead it saves the compiled package in the local build cache.
+
+- Use it in `sample.go`, import and use it,
+  ```
+  package main
+
+  import (
+    "fmt"
+    "github.com/kpunith8/gosamples/ds"
+  )
+
+  func main() {
+    adder1 := ds.Adder()
+    fmt.Println("Adder:", adder1(10))
+  }
+  ```
+
+- Install the `gosamples` program
+  ```
+  $ go install .
+  ```
+
+- Run the program
+  ```
+  $ gosamples
+
+  // or run the program
+  $ go run samples.go
+  ```
+
+- OR run the
+
 ## Functions
 
 - It should have `main()` function to execute the code
@@ -490,11 +610,11 @@
   }
 
   hypot := func(x, y float64) float64 {
-		return math.Sqrt(x*x + y*y)
-	}
+    return math.Sqrt(x*x + y*y)
+  }
 
-	fmt.Println(compute(hypot))
-	fmt.Println(compute(math.Pow))
+  fmt.Println(compute(hypot))
+  fmt.Println(compute(math.Pow))
   ```
 
 ## Function closures
@@ -508,21 +628,167 @@
     return func(x int) int {
       sum += x
       return sum
-	  }
+    }
   }
 
   func main() {
     // Executing 2 different adders to verify the closure behavior
     pos, neg := adder(), adder()
-  	for i := 0; i < 10; i++ {
-  		fmt.Println(
-  			pos(i),
-  			neg(-2*i),
-  		)
-  	}
+    for i := 0; i < 10; i++ {
+      fmt.Println(
+        pos(i),
+        neg(-2*i),
+      )
+    }
   }
   ```
 
 ## Methods
 
-- 
+- Go `does not have classes`. However, you can define methods on `types`.
+
+- A method is a function with a special `receiver` argument.
+
+- The receiver appears in its own argument list between the func keyword and the method name.
+  ```
+  type Vertex struct {
+    X, Y float64
+  }
+
+  func (v Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+  }
+
+  v := Vertex{3, 4}
+  fmt.Println(v.Abs())
+  ```
+
+- Method is a `function` with a `receiver` argument, same can be written as,
+  ```
+  func Abs(v Vertex) float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+  }
+
+  v := Vertex{3, 4}
+  fmt.Println(Abs(v))
+  ```
+
+- Method can be declared on `non-struct types`, too.
+  ```
+  type MyFloat float64
+
+  func (f MyFloat) Abs() float64 {
+    if f < 0 {
+      return float64(-f)
+    }
+    return float64(f)
+  }
+  ```
+
+- Method can be declared with a `receiver` whose type is defined in the `same package` as the method.
+
+### Pointer receivers
+
+- It is possible to declare methods with `pointer receivers`. This means the receiver type has the literal syntax `*T` for some type T.
+  (Also, T cannot itself be a pointer such as `*int`)
+  ```
+  func (v *Vertex) Scale(f float64) { // try without the pointer to check the behavior of the method
+    v.X = v.X * f
+    v.Y = v.Y * f
+  }
+  ```
+
+- Methods with pointer receivers `can modify the value` to which the receiver points.
+
+## Methods and pointer indirection
+
+- Functions with a pointer argument must take a pointer
+  ```
+  func ScaleFunc(v *Vertex, f float64) {
+    v.X = v.X * f
+    v.Y = v.Y * f
+  }
+
+  ScaleFunc(&v, 5)
+  ```
+
+- While methods with pointer receivers `take either a value` or `a pointer as the receiver` when they are called
+  ```
+  v := Vertex{3,4}
+  v.Scale(5)
+
+  p := &Vertex{4, 3} // or &v
+  p.Scale(10) // OK
+  ```
+
+- Functions that take a `value argument` must take a value of that specific type
+  ```
+  func AbsFunc(v Vertex) float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+  }
+
+  v := Vertex{3,4}
+  fmt.Println(AbsFunc(v))  // OK
+  fmt.Println(AbsFunc(&v)) // Compile error!
+  ```
+
+- While methods with `value receivers` take either a `value` or a `pointer` as the receiver when they are called
+  ```
+  v := Vertex{3,4}
+  fmt.Println(v.Abs()) // OK
+
+  p := &v
+  fmt.Println(p.Abs()) // OK
+  ```
+
+### Choosing a value or pointer receiver
+
+- There are two reasons to use a pointer receiver.
+
+  - The method can `modify the value` that its receiver points to.
+  - `Avoid copying` the value on each method call. This can be more efficient if the receiver is a large struct.
+
+- In general, all methods on a given type should have either value or pointer receivers, but `not a mixture of both`.
+
+
+## Interfaces
+
+- An `interface type` is defined as a `set of method signatures`.
+
+- A value of interface type can hold any value that `implements` those methods.
+
+- Interfaces are implemented `implicitly`
+
+- A type implements an interface by implementing its methods. There is `no explicit declaration` of intent, `no implements` keyword.
+
+- Implicit interfaces decouple the definition of an interface from its implementation,
+  which could then appear in any package without pre arrangement.
+
+### Interface Values
+
+- Under the hood, interface values can be thought of as a `tuple` of a `value` and a `concrete type`
+  (value, type)
+
+- An interface value holds a value of a specific underlying concrete type.
+
+- Calling a method on an interface value executes the method of the same name on its underlying type.
+  ```
+  type I interface {
+    M()
+  }
+
+  type T struct {
+    S string
+  }
+
+  func (t *T) M() {
+    fmt.Println(t.S)
+  }
+
+  var i I
+
+	i = &T{"Hello"}
+	i.M()
+
+  fmt.Printf("(%v, %T)\n", i, i)
+  ```
