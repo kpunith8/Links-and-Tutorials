@@ -1,8 +1,6 @@
 ## Youtube Channels
 
 - [Automation-Raghav-Pal](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
-- [Programming with mosh](https://www.youtube.com/user/programmingwithmosh/videos)
-
 
 # Share beautiful code snippets
 
@@ -28,27 +26,27 @@
 
 ## Devops
 
-- intelliPaat - youtube channel - https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE
+- [intelliPaat](https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE)
 
 
 ###	Web developement - Youtube channels
 
-- Traversy Media
-- codedamn
-- derekbanas
-- KepowOb - Kevin Powell - CSS
-- The Net Ninja - node and monogodb and mix
-- LevelUpTuts
-- Tyler McGinnis - React, JS -  https://www.youtube.com/channel/UCbAn7pVK2VIyo-UysfWGdZQ
-- Ben Awad - hooks and react
-- Web Dev Simplified - https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw
-- Programming with mosh
-- The coding train
-- Fun fun function
-- Colt Steele
-- florin pop
-- Hasura - GraphQL client - https://www.youtube.com/channel/UCZo1ciR8pZvdD3Wxp9aSNhQ
-- `Codevolution` - React - https://www.youtube.com/channel/UC80PWRj_ZU8Zu0HSMNVwKWw
+- `Traversy Media`
+- `codedamn`
+- `derekbanas`
+- `KepowOb` - Kevin Powell - CSS
+- `The Net Ninja` - node and monogodb and mix
+- `LevelUpTuts`
+- `Tyler McGinnis` - React, JS
+- `Ben Awad` - Hooks and react
+- `Web Dev Simplified` - React, NodeJS
+- `Programming with mosh`
+- `The coding train`
+- `Fun fun function`
+- `Colt Steele`
+- `florin pop`
+- `Hasura` - GraphQL client
+- `Codevolution` - React
 
 ### Java
 
@@ -64,22 +62,22 @@
 
 ### Mobile Development
 
-- ` Devefy` - `Flutter` - https://www.youtube.com/channel/UCwmFOfFuvRPI112vR5DNnrA
+- `Devefy` - `Flutter` - https://www.youtube.com/channel/UCwmFOfFuvRPI112vR5DNnrA
 
 ## Personalities
 
 ### JS
 
-- Douglas Crockford - JS Best Parts; author
-- Dan Abramov - React
-- Kent C Dodds - React
-- Dave Ceddia - React
+- `Douglas Crockford` - JS Best Parts
+- `Dan Abramov` - React
+- `Kent C Dodds` - React
+- `Dave Ceddia` - React
 
 ### Java
 
-- Venkat Subramaniam - Java
-- Uncle Robert C Martin - Clean code
-- Victor Rentea - Clean Code
+- `Venkat Subramaniam` - Java
+- `Uncle Robert C Martin` - Clean code
+- `Victor Rentea` - Clean Code
 
 ## Tutorials
 
@@ -138,6 +136,7 @@
 - `express` - server container for node.js (hapi)
 - `underscore` - JS util functions for common tasks
 - `contentful` - CMS - content management system
+- `Grid.js` - Table API
 
 ## Testing
 
@@ -223,17 +222,25 @@
 ### Java
 
 - `Jackson` - for JSON
+
 - `Vert.X` - reactive programming library from eclipse
+
 - `RxJava` - Reactive programming library from Netflix
+
 - `Kafka`, `Aka` - Reactive frameworks
+
 - `lombok` - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
+
 - `Spock` - Unit test framework
 
 ### Python
 
 - `jupyter` - interactive notebook
+
 - `altair` - https://altair-viz.github.io/ - data visualization with vega and vega lite
+
 - `nteract` - interactive code notebook like `jupyter`
+
 -  https://altairviz.github.io/getting_started/starting.html
 
 ### Books
@@ -245,48 +252,128 @@
 ## Links:
 
 ### JS
-- https://www.robinwieruch.de/ - react, nodejs
-- https://ponyfoo.com/articles - JS blog (in depth)
-- http://bigocheatsheet.com - big O cheat sheet for data structures and algorithms
-- https://picsum.photos/ - Stock Images
-- https://miragejs.com/ - Fake server API
-- https://www.contentful.com/developers/ - CMS
--	https://scratchpad.io - HTML, CSS editor
-- https://ckeditor.com/ - WYSIWYG editor
-- https://www.expo.io - React-Native
-- https://www.webcodegeeks.com/html5/html5-internationalization-example/ - JS/Web Blog
-- https://www.scrimba.com/g/gflexbox
-- https://www.egghead.io - JS/Web Tutorials
--	https://www.scotch.io/@codebeast - JS Blog
--	http://www.material-ui.com/#/ - CSS
-- https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays - Blog
-- http://www.osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/ - Blog
-- https://www.robinwieruch.de/essential-react-libraries-framework/ - React
-- https://www.daveceddia.com/ - React
-- https://www.baeldung.com - Java blog
-- https://www.steemit.com - Blog
-- https://www.itnext.io/ - blog
-- https://www.javascriptstuff.com/ - JS Blog
-- https://reactgo.com/nested-resolvers-relationaldata-graphql/ - nested resolvers in Apollo Server
+
+- [JS in depth articles](https://ponyfoo.com/articles)
+
+- https://www.steemit.com
+
+- https://www.itnext.io/
+
+- https://www.javascriptstuff.com/
+
+- https://www.webcodegeeks.com/html5/html5-internationalization-example/
+
+- https://www.egghead.io
+
+-	https://www.scotch.io/@codebeast
+
+- https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays
+
+- http://www.osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/
+
+- [Effectful.js](https://github.com/awto/effectfuljs)
+
 - [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
-- [ES6-indepth-explorjs](https://exploringjs.com/) - JS ES6-to-Everything
+
+- [ES6-indepth-explorjs](https://exploringjs.com/)
+
 - [Javascript.info](https://javascript.info/)
-- [SpeakingJS.com](http://speakingjs.com/es5/ch19.html) - Regular expressions
-- [Effectful js](https://github.com/awto/effectfuljs)
+
+- [SpeakingJS.com](http://speakingjs.com/es5/ch19.html)
+
 - [Front end Magazine](https://increment.com/)
+
+- [40 Free Resources](https://dev.to/jfelx/40-high-quality-free-resources-for-web-development-10o3)
+
+	- [Documentation aggregator](https://devdocs.io/)
+
+	- [Dev hints](https://devhints.io/)
+
+	- [Regex](https://ihateregex.io/)
+
+#### Blogs
+
+- CSS Tricks
+- Smashing Magazine
+- CoDrops
+- SitePoint
+- David Walsh
+- DailyJS
+- Echo JS
+- Front-End Front
+- JavaScript Weekly
+- Dev.to
+- Best of JS
+
+#### Podcasts
+
+- Shop Talk Show
+- The Changelog
+- Syntax
+- JS Party
+- JavaScript Jabber
+- Full Stack Radio
+- Front End Happy Hour
+- JAMstack Radio
+- The Web Platform Podcast
+- Modern Web
+- CodePen Radio
+
+### Common web
+
+- [Big O cheat sheet for data structures and algorithms](http://bigocheatsheet.com)
+
+- [Stock Images](https://picsum.photos/)
+
+- [Fake server API](https://miragejs.com/)
+
+- [CMS](https://www.contentful.com/developers/)
+
+- [Nested resolvers in Apollo Server](https://reactgo.com/nested-resolvers-relationaldata-graphql/)
+
+### React
+
+- https://www.robinwieruch.de/
+
+- https://www.daveceddia.com/
+
+### CSS
+
+- http://www.material-ui.com/#/
+
+- https://www.scrimba.com/g/gflexbox
+
+
+### Mobile development
+
+- https://www.expo.io - React-Native
+
+### Java
+
+- https://www.baeldung.com - Java blog
 
 ### Online playgrounds
 
-- https://runkit.com
+- https://runkit.com - node packages installed
+
 - https://codesandbox.io - online code playground
+
 - https://codepen.io/ - JS Playground
+
+- https://scratchpad.io - HTML, CSS editor
+
+- https://ckeditor.com/ - WYSIWYG editor
 
 # References
 
 - https://javarevisited.blogspot.com/2017/01/how-to-prepare-for-java-interviews.html
+
 - https://javarevisited.blogspot.com/2018/07/java-multi-threading-interview-questions-answers-from-investment-banks.html
+
 - http://www.java67.com/2015/07/how-to-stop-thread-in-java-example.html
+
 - https://manojsatishkumar.github.io/
+
 - [Anti-patterns](https://sahandsaba.com/nine-anti-patterns-every-programmer-should-be-aware-of-with-examples.html)
 
 ### Mokito Video
@@ -341,48 +428,7 @@
 - https://github.com/junit-team/junit4/wiki/Matchers-and-assertthat
 - http://static.javadoc.io/org.mockito/mockito-core/2.8.9/org/mockito/Mockito.html#30
 
-### JS Interview topics for ReactJS
 
-- Server side rendering, refs
-- React router dom, reach router
-- Pure component
-- HOC
-- JS Scope
-- DS
-- Error boundaries
-- redux, middleware's, redux-thunk
-- forward-ref
-
-## Other Links
-- https://www.ambitionbox.com/salaries/take-home-salary-calculator
-
-## Blogs
-
-- CSS Tricks
-- Smashing Magazine
-- CoDrops
-- SitePoint
-- David Walsh
-- DailyJS
-- Echo JS
-- Front-End Front
-- JavaScript Weekly
-- Dev.to
-- Best of JS
-
-## Podcasts
-
-- Shop Talk Show
-- The Changelog
-- Syntax
-- JS Party
-- JavaScript Jabber
-- Full Stack Radio
-- Front End Happy Hour
-- JAMstack Radio
-- The Web Platform Podcast
-- Modern Web
-- CodePen Radio
 
 # Jenkins
 
@@ -396,3 +442,16 @@
 - https://stackoverflow.com/questions/43321026/can-i-define-multiple-agent-labels-in-a-declarative-jenkins-pipeline
 - https://stackoverflow.com/questions/44870978/how-to-run-multiple-stages-on-the-same-node-with-declarative-jenkins-pipeline
 - https://issues.jenkins-ci.org/browse/JENKINS-55561
+
+
+### JS Interview topics for ReactJS
+
+- Server side rendering, refs
+- React router dom, reach router
+- Pure component
+- HOC
+- JS Scope
+- DS
+- Error boundaries
+- redux, middleware's, redux-thunk
+- forward-ref

@@ -571,11 +571,16 @@ array.copyWithin(copyToIndex, copyFromIndex);
  buffer.byteLength;
  ```
 
-#### Map and WeekMap
+#### Map
 
 - `key/value` pair, `key` can be any value
 
-- Its a iterable, and can be used with `for..of`, returns `[key, value]`.
+- `NaN` can also be used as a `key`
+
+- Its an iterable, and can be used with `for..of`, returns `[key, value]`.
+
+
+### Weakmap
 
 - `WeekMap` can have only objects as its keys not any other primitive types.
 

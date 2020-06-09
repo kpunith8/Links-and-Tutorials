@@ -43,6 +43,11 @@ git config core.ignorecase false
 git config --global credential.helper cache --timeout=3600
 ```
 
+### Clean the git repo / untracked files
+```
+git clean -fd
+```
+
 ### Adding an existing project
 
 - Initialize a empty git repository

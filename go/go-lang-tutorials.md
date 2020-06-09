@@ -787,8 +787,209 @@
 
   var i I
 
-	i = &T{"Hello"}
-	i.M()
+  i = &T{"Hello"}
+  i.M()
 
   fmt.Printf("(%v, %T)\n", i, i)
+  ```
+
+### Interface values with nil underlying values
+
+- If the `concrete value` inside the interface itself is `nil`, the method will be called with a nil receiver.
+
+- In some languages this would trigger a `null pointer exception`, but in Go it is common to write methods
+  that gracefully handle being called with a nil receiver.
+
+- Note that an `interface value` that holds a `nil concrete value` is itself non-nil.
+  ```
+  func (t *T) M() {
+    if t == nil {
+      fmt.Println("<nil>")
+      return
+    }
+    fmt.Println(t.S)
+  }
+
+  var i I
+
+  var t *T
+  i = t
+
+  i.M()
+  fmt.Printf("(%v, %T)\n", i, i) // returns (<nil>, *main.T), <nil>
+  ```
+
+### Nil Interface Values
+
+- A `nil interface value` holds neither value nor concrete type.
+
+- Calling a method on a nil interface is a `run-time error` because there is no type inside the
+  interface tuple to indicate which concrete method to call.
+
+### The Empty Interface
+
+- The interface type that specifies `zero methods` is known as the empty interface
+  `interface{}`
+
+- An empty interface may `hold values of any type`. (Every type implements at least zero methods.)
+
+- Empty interfaces are used by code that handles values of `unknown type`
+  ```
+  var i interface{}
+  fmt.Printf("(%v, %T)\n", i, i) // returns (<nil>, <nil>)
+
+  i = 42
+  fmt.Printf("(%v, %T)\n", i, i) // returns (42, int)
+
+  i = "hello"
+  fmt.Printf("(%v, %T)\n", i, i) // returns (hello, string)
+  ```
+
+## Stringers
+
+- One of the most ubiquitous interfaces is `Stringer` defined by the `fmt` package.
+  ```
+  type Stringer interface {
+    String() string
+  }
+  ```
+
+- A Stringer is `a type` that can describe `itself as a string`. The `fmt` package look for this interface to print values.
+
+## Errors
+
+- Go programs express error state with `error` values. The `error type` is a built-in interface
+  ```
+  type error interface {
+    Error() string
+  }
+  ```
+
+- Functions often return an `error value`, and calling code should handle errors by testing whether the error equals `nil`.
+  ```
+  i, err := strconv.Atoi("42")
+  if err != nil {
+    fmt.Printf("couldn't convert number: %v\n", err)
+    return
+  }
+
+  fmt.Println("Converted integer:", i)
+  ```
+
+- A `nil` error denotes `success`; a `non-nil` error denotes `failure`.
+
+## Readers
+
+- The `io` package specifies the `io.Reader` interface, which represents the read end of a stream of data.
+
+- The `io.Reader` interface has a `Read` method:
+  ```
+  func (T) Read(b []byte) (n int, err error)
+  ```
+
+- Read populates the given `byte slice` with data and returns the number of bytes populated and an error value.
+  It returns an `io.EOF` error when the stream ends.
+
+
+## Goroutines
+
+- A `goroutine` is a `lightweight thread` managed by the Go runtime.
+  ```
+  go f(x, y, z)
+  ```
+
+- starts a new goroutine running
+  ```
+  f(x, y, z)
+  ```
+
+- The evaluation of f, x, y, and z happens in the `current goroutine` and the execution of `f` happens in the new goroutine.
+
+- Goroutines `run` in the `same address space`, so access to shared memory must be `synchronized`.
+
+## Channels
+
+- Channels are a `typed conduit` through which you can `send` and `receive` values with the channel operator, `<-`
+  ```
+  ch <- v    // Send v to channel ch.
+  v := <-ch  // Receive from ch, and assign value to v.
+  ```
+
+- The data flows in the direction of the arrow.
+
+- Like maps and slices, channels must be created before use:
+  ```
+  ch := make(chan int)
+  ```
+
+- By default, `sends` and `receives` block until the other side is ready.
+  This allows goroutines to `synchronize` without explicit locks or condition variables.
+
+- The example code sums the numbers in a slice, distributing the work between two goroutines.
+  Once both goroutines have completed their computation, it   calculates the final result.
+  ```
+  func sum(s []int, c chan int) {
+    sum := 0
+    for _, v := range s {
+      sum += v
+    }
+    c <- sum // send sum to c
+  }
+
+  func main() {
+    s := []int{7, 2, 8, -9, 4, 0}
+
+    c := make(chan int)
+    go sum(s[:len(s)/2], c)
+    go sum(s[len(s)/2:], c)
+    x, y := <-c, <-c // receive from c
+
+    fmt.Println(x, y, x+y)
+  }
+  ```
+
+### Buffered Channels
+
+- Channels can be `buffered`. Provide the `buffer length` as the second argument to `make` to initialize a buffered channel:
+  ```
+  ch := make(chan int, 100)
+  ```
+
+- Sends to a buffered channel block only when the `buffer is full`. Receives block when the `buffer is empty`.
+
+## Range and Close
+
+- A `sender` can `close` a channel to indicate that no more values will be sent.
+  Receivers can test whether a channel has been closed by assigning a second parameter to the receive expression: after
+  ```
+  v, ok := <-ch
+  ```
+  - `ok` is `false` if there are `no more values` to receive and the channel is closed.
+
+- The loop `for i := range c` receives values from the channel repeatedly until it is closed.
+
+> Note: Only the `sender should close a channel`, never the receiver. Sending on a closed channel will cause a panic.
+
+> Another note: Channels aren't like files; you don't usually need to close them.
+  Closing is only necessary when the receiver must be told there are no more values coming, such as to terminate a range loop.
+
+## Select
+
+- The `select` statement lets a goroutine `wait on multiple communication operations`.
+
+- A `select` `blocks` until one of its cases can run, then it executes that case.
+  It chooses one at random if multiple are ready.
+
+### Default Selection
+
+- The `default` case in a `select` is run if no other case is ready.
+
+- Use a default case to try a send or receive `without blocking`
+  ```
+  select {
+    case i := <-c:
+    // use i
+    default:
+    // receiving from c would block
+  }
   ```
