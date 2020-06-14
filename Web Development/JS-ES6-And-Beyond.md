@@ -575,10 +575,73 @@ array.copyWithin(copyToIndex, copyFromIndex);
 
 - `key/value` pair, `key` can be any value
 
-- `NaN` can also be used as a `key`
-
 - Its an iterable, and can be used with `for..of`, returns `[key, value]`.
 
+- Maps record the `order` in which elements are `inserted` and honor that order when iterating over keys, values or entries.
+
+- Set up a Map via an iterable over key-value `pairs`
+  ```javascript
+  const map = new Map([
+    [ 1, 'one' ],
+    [ 2, 'two' ],
+    [ 3, 'three' ],
+  ]);
+  ```
+
+- `NaN` can also be used as a `key`
+  ```javascript
+  const map = new Map();
+
+  map.set(NaN, 123)
+  map.get(NaN) // 123
+  ```
+
+-  `-0` and `+0` are considered the same value
+  ```javascript
+  map.set(-0, 123)
+  map.get(+0) // 123
+  ```
+
+- Different objects are always `considered different`.
+  ```javascript
+  new Map().set({}, 1).set({}, 2).size // returns 2
+  ```
+
+#### Iterating over maps
+
+- Iterable for keys and values
+  ```javascript
+  for (const key of map.keys()) {
+  }
+
+  for (const value of map.values()) {
+  }
+  ```
+
+- Iterables for entries
+  ```javascript
+  for (const entry of map.entries()) {
+    console.log(entry[0], entry[1]);
+  }
+
+  // with array destructuring
+  for (const [key, value] of map.entries()) {
+  }
+
+  // can also be written as
+  for (const [key, value] of map) {
+    console.log(key, value);
+  }
+  ```
+
+- The `default way` of iterating over a Map is `entries()`
+  ```javascript
+  map[Symbol.iterator] === map.entries // true
+  ```
+
+#### Convert Maps to arrays
+
+-
 
 ### Weakmap
 

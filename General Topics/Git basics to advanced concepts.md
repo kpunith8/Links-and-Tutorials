@@ -703,6 +703,13 @@ $ echo "[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completio
 $ source ~/.bash_profile
 ```
 
+## github-linguist package to know the percentage of code (different programming languages in a repo)
+
+- Install the package and run this command on any git project in local
+  ```
+  $ github-linguist --breakdown
+  ```
+
 ### References
 
 - [Display branch name in command line in macOS](https://gist.github.com/joseluisq/1e96c54fa4e1e5647940)

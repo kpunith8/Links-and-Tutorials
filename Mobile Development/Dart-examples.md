@@ -1118,8 +1118,6 @@ If you want to create a class A that supports class B’s API without inheriting
     - Dart implicitly inserts loadLibrary() into the namespace that you define using `deferred as namespace`.
     - The loadLibrary() function returns a Future.
 
-
-
 ### Async
 
 - Avoid callback hell and make your code much more readable by using `async` and `await`.

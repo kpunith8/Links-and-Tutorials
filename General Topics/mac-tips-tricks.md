@@ -43,3 +43,11 @@ $ brew services list
   ```
   export DEFAULT_USER="$(whoami)"
   ```
+
+## Symobols
+
+- `Opt + [` for `“`
+
+- `Shift + [` for `”`
+
+- `Opt + ]` for apostrophe 

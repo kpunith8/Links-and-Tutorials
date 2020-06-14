@@ -218,6 +218,8 @@
 
 - https://jobs.github.com/positions.json - github jobs API
 
+- [Weather API](https://api.openweathermap.org/data/2.5/weather)- needs API KEY
+
 
 ### Java
 
