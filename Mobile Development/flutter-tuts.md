@@ -129,7 +129,7 @@ $ flutter run --profile
 
 ## Layouts and Widgets
 
-### Row and Column classes
+### Row and Column
 
 - `Row` and `Column` are classes that contain and lay out widgets. Widgets inside
   of a Row or Column are called `children`, and Row and Column are referred to as parents.
@@ -274,7 +274,7 @@ $ flutter run --profile
     }
     ```
 
-### Flexible widget
+### Flexible
 
 - The Flexible widget wraps a widget, so the widget becomes `resizable`. When the
   `Flexible` widget wraps a widget, the widget becomes the Flexible widget’s child and is considered flexible.
@@ -324,7 +324,7 @@ $ flutter run --profile
   - Change the `flex` prop value to `2` for the Flexible Child, it occupies double the
     space of other Flexible child with prop fit: `FlexFir.tight`
 
-### Expanded widget
+### Expanded
 
 - Similar to `Flexible`, the `Expanded` widget can `wrap a widget` and `force` the widget to `fill extra space`.
   ```javascript
@@ -341,7 +341,7 @@ $ flutter run --profile
   while keeping its size in relation to its parent widget.
   `Expanded` changes the constraints of a child widget, so it `fills any empty space`.
 
-### SizedBox widget
+### SizedBox
 
 - The `SizedBox` widget can be used in one of two ways when creating exact dimensions.
 
@@ -372,7 +372,7 @@ $ flutter run --profile
     );
   ```
 
-### Spacer widget
+### Spacer
 
 - Similar to SizedBox, the Spacer widget also can create `space between widgets`.
   ```javascript
@@ -391,7 +391,7 @@ $ flutter run --profile
 > Use `Spacer` when you want to `create space` using a `flex` property.
   Use `SizedBox` when you want to `create space` using a `specific number of logical pixels`.
 
-### Text widget
+### Text
 
 - The Text widget `displays text` and can be configured for different `fonts`, `sizes`, and `colors`.
   ```javascript
@@ -427,7 +427,7 @@ $ flutter run --profile
   );
   ```
 
-### Icon Widget
+### Icon
 
 - The Icon widget displays a graphical symbol that represents an aspect of the UI.
   ```javascript
@@ -454,12 +454,22 @@ $ flutter run --profile
   );
   ```
 
-### Image widget
+### GridView
+
+- Use `GridView` to lay widgets out as a `two-dimensional list`. GridView
+  provides two pre-fabricated lists, or you can build your own custom grid.
+  When a GridView detects that its contents are too long to fit the render box, it automatically `scrolls`.
+
+- `GridView.count` allows you to specify the `number of columns`.
+
+- `GridView.extent` allows you to specify the `maximum pixel width of a tile`.
+
+### Image
 
 - The Image widget displays an image. You either can reference images using a `URL`,
   or you can include images inside your app package.
   ```javascript
-  return Row(
+  Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Image.network('https://github.com/flutter/website/blob/master/examples/layout/sizing/images/pic1.jpg?raw=true'),
@@ -467,10 +477,267 @@ $ flutter run --profile
   );
   ```
 
+### SafeArea
+
+- To make the text or content visible on mobiles with `notch` and `curved phones`, wrap it with SafeArea,
+  specify the dimensions
+  ```javascript
+  SafeArea(
+    child: ListView(
+      childer: List.generate(
+        100,
+        (i) => Text('This is some text')
+      ),
+    ),
+    bottom: true,
+    top: true, // use left and right
+  );
+  ```
+
+- Can be wrapped by a Scaffold too
+  ```Javascript
+  Scaffold(
+    body: SafeArea(
+      child: ...
+    )
+  );
+  ```
+
+### Wrap
+
+- It lays out the children one at a time, if no space it wraps to `next line`, depends on `Row` or Column
+  ```javascript
+  Wrap(
+    direction: Axis.vertical,
+    alignment: WrapAlignment.end,
+    spacing: 10.0,
+    runSpacing: 20.0,
+    children: [],
+  )
+  ```
+
+### AnimatedContainer
+
+- For implicit animations, `borders`, `shapes`, `pading`, `height`, `width`, and more can be animated
+  ```javascript
+  AnimatedContainer(
+    color: _color,
+    duration: _duration,
+    curve: Curves.bounceIn,
+    child: MyWidget(),
+  )
+  ```
+
+### Opacity and AnimatedOpacity
+
+- To hide the widget, but it is will be in the app
+  ```javascript
+  Opacity(
+    opacity: 0.0,
+    child: MyWidget(),
+  )
+  ```
+
+- Can also be used to blending stack on one another.
+  ```JavaScript
+  Stack(
+    children: [
+      MyWidget(),
+      Opacity(
+        opacity: 0.25,
+        child: AnotherWidget()
+      )
+    ]
+  )
+  ```
+
+### FutureBuilder
+
+- Display one thing while loading, for async data loading
+  ```JavaScript
+  FutureBuilder(
+    future: http.get('http://blah.com/cars'),
+    builder: (context, snapshot) {
+      if(snapshot.connectionState == ConnectionState.done) {
+        if(snapshot.hasError) {
+          return SomethingWentWrong();
+        }
+        return someData(snapshot.data);
+      } else {
+        return CircularProgressIndicator();
+      }
+    }
+  )
+  ```
+
+### FadeTransition
+
+- To fade a child inside out
+  ```JavaScript
+  class _MyFadeInState extends State<MyFadeIn> with
+    SingleTickerProviderStateMixin {
+      AnimationController _controller;
+      Animation _animation;
+
+      @override
+      initState() {
+        _controller = AnimationController(
+          vsync: this,
+          duration: Duration(seconds: 2)
+        );
+        _animation = Tween(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(_controller)
+      }
+
+      @override
+      dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+
+      @override
+      Widget build(BuildContext context) {
+        controller.forward();
+        return FadeTransition(
+          opacity: _animation,
+          child: Text(...)
+        );
+      }
+  }
+  ```
+
+- It is good idea to keep it in a `StatefulWidget`, to track the state
+
+### FloatingActionButton
+
+- Add floating action button with bottom navigation
+  ```JavaScript
+  Scaffold(
+    floatingActionButton: FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () {}
+    ),
+    bottomNavigationBar: BottomAppBar(
+      color: Colors.yellow,
+      child: Container(height: 50.0)
+    ),
+    floatingActionButtonLocation:
+      floatingActionButtonLocation.endDocked, // centerDocked
+  );
+  ```
+
+### PageView
+
+- To add `multiple pages` to the app, load different pages on swipe left or right
+  ```JavaScript
+  _controller = PageController(
+    initialPage: 1
+  )
+
+  PageView(
+    controller: _controller,
+    scrollDirection: Axis.vertical, // to scroll vertically
+    children: [
+      myPage1Widget(),
+      myPage2Widget(),
+      myPage3Widget(),
+    ]
+  );
+  ```
+
+### Table
+
+```JavaScript
+Table(
+  children: [
+    TableRow(
+      children: [
+        WideWidget(),
+        MediumWidget(),
+      ]
+    ),
+    TableRow(
+      children: [
+        NarrowWidget(),
+        MediumWidget(),
+      ]
+    ),
+  ],
+  defaultVerticalAlignment: TableCellVerticalAlignment.bottom, // middle
+  defaultColumnWidth: FlexColumnWidth(1.0), // FractionColumnWidth(0.25), IntrinsicColumnWidth()
+  border: TableBorder.all()
+)
+```
+
+### SliverAppBar - use with CustomScrollView -
+
+- Custom `scroll behavior` to the app bar
+  ```JavaScript
+  CustomScrollView(
+    slivers: <Widget> [
+      SliverAppBar(
+        title: Text('Sliver App Bar'),
+        expandedHeight: 200.0,
+        flexibleSpace: FlexibleSpaceBar(
+          background: _expandedImage,
+        ),
+        floating: true, // to make it reappear when scrolled
+      ),
+      _oneSliver(),
+      _anotherSLiver(),
+    ],
+  )
+  ```
+
+- `SliverList` and `SliverGrid`
+
+### Other Widgets
+
+- `InheritedModel`
+
+- `ClipRRect`, `ClipOval`, `ClipPath` - Clip images
+
+- `Hero`
+
+- `CustomPaint` - Draw custom shapes
+
+- `ToolTip` - Show tooltip, material UI already has this builtin
+
+- `FittedBox` - Fit the child component on parent
+
+- `LayoutBuilder` - Change the layout based on
+
+- `AbsorbPointer` - Control the touch on each widget, blocks the touch event
+
+- `Transform` - Perspective on Flutter
+
+- `BackdropFlutter`
+
+- `Align` - Align items in the stack
+
+- `Positioned`
+
+- `Dismissible` - Swipe left to hide or delete action
+
+- `ValueListenableBuilder` - `InheritedWidget` to access value across the widgets
+
+- `Draggable`
+
+- `AnimatedList`
+
+- `Flexible`
+
+- `MediaQuery` - 
+
 ## State Management
 
--
+- BLoC - Rx and Streams
 
+- ScopedModel
+
+- package:provider
 
 ## Use container to add borders
 

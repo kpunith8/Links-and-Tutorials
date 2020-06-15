@@ -66,6 +66,10 @@
 
 ## Personalities
 
+### Education
+
+- Maryellen Weimer
+
 ### JS
 
 - `Douglas Crockford` - JS Best Parts
