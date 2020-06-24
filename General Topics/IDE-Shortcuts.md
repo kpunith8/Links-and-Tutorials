@@ -61,7 +61,7 @@ Settings -> set, javascript.validate.enable": false
 
 - `Cmd + K + M` - Tell editor to treat document in the selected format
 
-- `Cmd + Shift + .` - Fast Navigation within the file
+- `Cmd + Shift + .` - Fast `Navigation` within the file
 
 - `Cmd + Shift + \` - Goto matching bracket
 

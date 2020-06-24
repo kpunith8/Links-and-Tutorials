@@ -29,6 +29,8 @@
 
 - `componentDidCatch(error, info)` used  to catch errors in components.
 
+- `dangerouslySetInnerHTML` - to set html to JSX
+
 ## React Hooks - 16.8
 
 - Allows state management and life cycle management in functional components

@@ -23,12 +23,18 @@ $ brew cask install font-fira-code
 - `Ctrl + Cmd + Space` - Emoji Icons
 
 
-### List the running services
+### List the running services in brew
 
 ```
 $ brew services list
 ```
 
+- Find the services running under,
+  ```
+  $Library/LaunchAgents
+  ```
+
+- `Kafka` - config reside in, `/usr/local/Cellar/kafka/2.5.0/libexec/config`
 
 ## Using zsh
 
@@ -50,4 +56,25 @@ $ brew services list
 
 - `Shift + [` for `”`
 
-- `Opt + ]` for apostrophe 
+- `Opt + ]` for apostrophe
+
+
+## Find the port running and kill it
+
+```
+$ sudo lsof -i :3000
+
+$ sof -i tcp:3000
+```
+
+- Check the status
+```
+$ ps ax | grep <PID>
+```
+
+- Kill it if it is running
+  ```
+  $ kill -9 <PID>
+  $ kill -15 <PID> // Safe killing
+  $ kill -QUIT <PID> // Completely kill it
+  ```

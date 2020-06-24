@@ -326,9 +326,71 @@ ul li a {
 </script>
 ```
 
+## CSS Flexbox
+
+- Examples cover all the samples, `responsive nav bar` and `image gallery`
+  [CodePen Samples](https://codepen.io/kpunith8/pen/dyGWxrx)
+
+- Flex is a `block element` and takes all the available space
+  ```html
+  <div class="container">
+    <div class="home">Home<div>
+    <div class="about">About<div>
+    <div class="search">Search<div>
+  </div>
+
+  <style>
+  .container {
+    display: flex; /* Default flex axis is row */
+    flex-direction: column; /* Change the main axis */
+    justify-content: space-around; /* Align along the main axis */
+  }
+
+  .logout {
+    margin-left: auto; /* To move the logout to right, remove justify-content prop on container */
+  }
+
+  .home {
+    margin-right: auto; /* Push home to left, add justify-content: flex-end */
+  }
+
+  .container > div {
+    flex: 1; /* All the divs will fill the remaining space and shrink/expand as container changes */
+    /* takes 3 values, flex-grow flex-shrink flex-basis */
+  }
+
+  .container > .search { /* Need to target .container, while querying, because of specificity rules */
+    flex: 2; /* To make search to take up the double the space of other items */
+  }
+  </style>
+  ```
+
+- Main axis is `horizontal`, and cross axis is `vertical` by default, which is controlled by,
+  the property, `flex-direction: column` will change the
+  main axis as `vertical`
+
+- Align the `items` in the main axis, `justify-content`, default is, `flex-start`
+
+- Align the `single item` along the main axis, use `margin-left/right: auto`
+
+- To make responsive flex items, use `flex` property with value `1`, it has 3 values, `flex-grow`, `flex-shrink`, and `flex-basis`
+  all values setting to 1
+  ```css
+  .search {
+    flex: 1; /* No need to add, flex: 1; to container > div, here home and search are fixed and search shrinks/expands */
+  }
+  ```
+
+- `Align Items - Cross axis`: `align-items: stretch`, container should have the height prop, target `specific item`,
+  `align-self: flex-start`
+
+- Wrapping: `flex-wrap: nowrap` - if the available space is less, then items will move to next line, when the items have a explicit `width: 300px`
+
+- Order: Move the items regardless of how items are laid out, `order: 1`
+
 ## CSS Grid Layout:
 
-- Example code at: [Code sandbox](https://codesandbox.io/s/l2yjm5z6l9)
+- Example code at: [Code Sandbox](https://codesandbox.io/s/l2yjm5z6l9)
 
 - Two dimensional layouts - Rows and Columns
 
@@ -495,8 +557,6 @@ a[data-tool-tip]:hover::after {
 ### Animated progress bar
 
 - https://codepen.io/kpunith8/pen/JjYmEre
-
-
 
 ## Align content to center of the page using flex box
 

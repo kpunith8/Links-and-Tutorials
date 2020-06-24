@@ -1,6 +1,6 @@
 ## Heroku deployment
 
-- Sign up with heroku, download the heroku cli and login
+- Sign up with `heroku`, download the heroku cli and login
 
 - Create new node app in heroku (App can be created using heroku-cli as well,
 download `heroku-cli`, if you want to use `heroku-git` to store your files)
@@ -53,7 +53,6 @@ $ heroku apps // to list all the apps hosted under the user name
 - Once automatic deployments are enabled, no need to push to `heroku master`
   push to your repo's master branch or designated release branch, it triggers
   build automatically.
-
 
 ## Renaming heroku app name
 
