@@ -114,3 +114,5 @@
 ## Google's - Trusted Web Activity - for PWA
 
 - Full support for web platform APIs
+
+- BubbleWrap -
