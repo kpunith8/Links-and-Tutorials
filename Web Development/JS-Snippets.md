@@ -217,3 +217,14 @@ Object.entries(style).map(entry => {
   element.style[property] = value;
 });
 ```
+
+
+### Create an empty array of some length and return some object
+
+```js
+[...Array(10)].map((_,i) => ({
+	id: i,
+	title: 'name', // can be chosen from array of data
+	price: '$1.0'
+}))
+```

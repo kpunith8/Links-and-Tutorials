@@ -535,6 +535,9 @@ domainRegExp.test('256.11.11.22') // false
 
 ## Debugging in Chrome Developer tools
 
+- Use `DevTool snippets` - to configure the dev tool, https://bgrins.github.io/devtools-snippets/
+	will be available across the websites
+
 - Don't declare global variables
 
 - Protect variables with scope
@@ -554,7 +557,51 @@ domainRegExp.test('256.11.11.22') // false
 
 - `console.dir(names, {colors: true, depth:null});` - shows the array of objects in colors
 
-- The `Console` method `dir()` displays an interactive list of the properties of the specified JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
+- The `console` method `dir()` displays an interactive list of the properties of the specified JavaScript object.
+	The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
+
+- `console.trace()` - to print the trace
+
+- Use `Event Listener Breakpoints` -> select the `mouse -> click` option which opens the first line
+	where the event listener added
+
+- use `console.log` with `JSON.parse(JSON.stringify(arr))`
+	```js
+	let arr = [1, 2, 3]
+
+	// console.log(arr) // would display the array after the change made, if it was mutated
+	console.log('arr before pushing:', JSON.parse(JSON.stringify(arr)))
+
+	// Push an item to arr
+	arr.push(4)
+
+	// It prints 4 items and the above console prints 3
+	console.log('arr before pushing:', JSON.parse(JSON.stringify(arr)))
+	```
+
+- `console.time('name')` and `console.timeEnd('name')` - to measure the time it takes to execute the code
+
+- `debug(methodName)` - in the console pass the function name to debug and it takes to that function
+	if it exists in the current scope or in the project and `unregister` it by, `undebug(methodName)`
+
+- `monitor(methodName)` - gives the details about the params passed to the function, `unmonitor(methodName)`
+	to not to monitor anymore
+
+- `Cmd + Shift + O` - To search for functions in the current file
+
+- `Cmd + Shift + P` - To search for anything in the dev tools
+
+- Make the changes made in `devtools` reflect in actual files, go to `Source -> File System Tab` -> add the folder
+
+
+### Other debugging methods
+
+- `getEventListeners(elem)` - lists all the listeners added to the element
+
+- `monitorEvents(elem, ['click', 'hover', 'mouseout'])` - To monitor the events performed on the element
+
+- `unmonitorEvents(elem)` - to stop monitor the element events
+
 
 ### Copy the objects from console to clipboard
 

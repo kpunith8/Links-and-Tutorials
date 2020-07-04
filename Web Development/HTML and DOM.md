@@ -81,6 +81,7 @@ document.getElementById("myList1").appendChild(cln);
 #### contentEditable
 
 - The `contentEditable` property sets or returns whether the content of an element is editable or not.
+  can be set on body to make the website like an `editor`
 
 ```javascript
 document.getElementById("myP").contentEditable = "true";

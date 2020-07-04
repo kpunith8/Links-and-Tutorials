@@ -108,3 +108,9 @@
 
 - Once cache created we need to clear to recreate again in `chrome-dev-tools`
   - Check the cache create under, `application -> Cache -> Cache storage`
+
+
+
+## Google's - Trusted Web Activity - for PWA
+
+- Full support for web platform APIs

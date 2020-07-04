@@ -182,3 +182,9 @@ $ ncu -u
 $ npm update
 $ npm install
 ```
+
+## Remove node_modules across
+
+```
+$ find / -name node_modules | xargs rm -rf
+```

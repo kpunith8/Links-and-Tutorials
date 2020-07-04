@@ -588,6 +588,34 @@ a[data-tool-tip]:hover::after {
 </html>
 ```
 
+## Set custom property value using DOM API
+
+```JavaScript
+const root = document.documentElement;
+root.style.setProperty("--header-color", "#23a");
+
+:root {
+  --header-color: #1ad83b;
+}
+
+// Usage
+h1 {
+  color: var(--header-color);
+}
+```
+
+### Set background with overlay to the website
+
+```css
+body {
+  background-image: url();
+  background-color: #303030;
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: top;
+}
+```
+
 ## Emotion-UI - React styling
 
 ### conditional rendering in emotion styled components

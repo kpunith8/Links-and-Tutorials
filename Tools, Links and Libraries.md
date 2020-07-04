@@ -140,7 +140,7 @@
 - `express` - server container for node.js (hapi)
 - `underscore` - JS util functions for common tasks
 - `contentful` - CMS - content management system
-- `Grid.js` - Table API
+- `Grid.js` - HTML Table
 
 ## Testing
 
@@ -175,6 +175,9 @@
 - `formik`, `react-final-form`, `react-redux-form` - form library
 - `storybook` - component documentation
 - `react-ga` - Google analytics support (Refer dev-portfolio)
+
+- `SWR` - `React Hooks for Remote Data Fetching`
+- `react-query`
 
 ## CMS - Content Management System
 
@@ -304,10 +307,20 @@
 
 	- [Regex](https://ihateregex.io/)
 
+- [LogRocket Blog](https://blog.logrocket.com/)
+
+- Codewars
+- Codementor
+- Codeshare
+- Laracasts
+- Topcoder
+- Repl it
+
+
 #### Blogs
 
 - CSS Tricks
-- Smashing Magazine
+- [Smashing Magazine](https://www.smashingmagazine.com/)
 - CoDrops
 - SitePoint
 - David Walsh
@@ -317,6 +330,7 @@
 - JavaScript Weekly
 - Dev.to
 - Best of JS
+- [Alligator](https://alligator.io/js/push-api/)
 
 #### Podcasts
 
