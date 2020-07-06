@@ -1,4 +1,4 @@
-## ES6 Fundamentals: Mark Zamoyta
+## ES6 Fundamentals: Mark Zamoyta - Pluralsight
 
 - Check the browser compatibility list for ES6, http://kangax.github.io/
 
@@ -24,7 +24,8 @@
   ```
 
 ### Default Function Parameters
-- Passing product as undefined sets default value 100
+
+- Passing product as `undefined` sets default value 100
   ```javascript
   let sample = function(product = 100, type='software') {
 
@@ -40,27 +41,29 @@
 
 - Spread operator is used in `function definition`.
 
-- Rest operator is usd in `function invocation`.
+- Rest operator is used in `function invocation`.
 
-- `...` used as rest symbol before the argument
+- `...` used as rest operator before the argument
   ```javascript
   let sample = function(price, ...categories) {
   };
   // can be invoked as
   sample(1, 'software', 'hardware');
   ```
-- `...` also used as spread operator, it accepts the array and splits into list of parameters
 
-- ..."45678" - will be spread into 4,5,6,7
+- `...` also used as `spread` operator, it accepts the array and splits into list of parameters
 
-- It can also be used to create the new object without mutating
+- `..."45678"` - will be spread into `4,5,6,7,8`
 
-- person object added with the addPowers property and returns the new object without mutating person object
+- It can also be used to `create a new object` without mutating
+
+- Person object added with the addPowers property and returns the new object without mutating person object
   ```javascript
   {...person, addPowers: 'superman'};
   ```
 
 ### Object Literal Extensions
+
 ```javascript
 var price = 5.99, quantity = 10;
 
@@ -78,6 +81,7 @@ var productView = {
 - It returns object as follows, { price: 5.99, quantity: 10 } - it doesn't require `:` to be specified to set the value to the object
 
 ### for of Loops
+
 - Loops through elements of an array and characters of a string
   ```javascript
   for (var item of categories) {
@@ -87,10 +91,12 @@ var productView = {
   ```
 
 ### Octal and Binary Literals
+
 - `0o10` or `0O10`, for octal numbers  
 - `0b10` or `0B10`, for binaries
 
 ### Template Literals
+
 ```javascript
 let number = '1350';
 
@@ -100,6 +106,7 @@ console.log(`Number is: ${number}`);
 // returns INV-1350, expressions are allowed within the { }
 console.log(`Number is: ${"INV-" + number}`);
 ```
+
 - Interpolation takes place first before the function calls
 
 - Tagged function literals
@@ -136,7 +143,8 @@ console.log(`Number is: ${"INV-" + number}`);
   {high: newHigh, average: newAvg} = salary;
   ```
 
-### Classes and Modules:
+### Classes and Modules
+
 - Modules, variables and functions can be exported
 
 - importing statements are hoisted to top
@@ -160,25 +168,26 @@ console.log(`Number is: ${"INV-" + number}`);
 ### New types and Object Extensions
 
 - `Object initializer shorthand` - if the name of the key and value have the same name,
-omit the key names in the object initializer. It can be done anywhere
+  omit the key names in the object initializer. It can be done anywhere
   ```javascript
   function buildUser(fName, lName) {
-  let fullName = `fName lName`;
+    let fullName = `fName lName`;
 
-  return {
-  fName,
-  lName,
-  fullName,
-  isActive() { // method initializer shorthand, instead of isActive: function() {return true;}
-  return true;
-  }
-  }; // instead of {fName: fName, lName: lName, fullName: fullName}
+    return {
+      fName,
+      lName,
+      fullName,
+      isActive() { // method initializer shorthand, instead of isActive: function() {return true;}
+        return true;
+      }
+    }; // instead of {fName: fName, lName: lName, fullName: fullName}
   }
   ```
 
 ### Symbols
+
 - It is unique identifier, and not visible while inspecting an elements, and used for debugging purposes.
-can be constructed using,
+  can be constructed using,
   ```JavaScript
   let eventSymbol = Symbol('resize-event');
 
@@ -203,29 +212,29 @@ can be constructed using,
 - You cannot use a `dot operator` because dot operators only work on string properties, so you should use a brackets operator.
 
 - Symbols are `invisible` to loops and other methods, `for-in` loop ignores the symbol properties and
-`Object.keys()` and `Object.getOwnPropertyNames()` are ignoring property names that are Symbols.
+  `Object.keys()` and `Object.getOwnPropertyNames()` are ignoring property names that are Symbols.
+  ```javascript
+  let myCar = {name: 'BMW'};
+  let type = Symbol('Store a car type');
+  myCar[type] = 'Race';
 
+  let honk = Symbol('store honk function');
+  myCar[honk] = () => 'honk';
 
-```javascript
-let myCar = {name: 'BMW'};
-let type = Symbol('Store a car type');
-myCar[type] = 'Race';
+  // Usage
+  myCar.type; // error
+  myCar[type]; // works as expected
 
-let honk = Symbol('store honk function');
-myCar[honk] = () => 'honk';
-
-// Usage
-myCar.type; // error
-myCar[type]; // works as expected
-
-myCar.honk(); // error
-myCar[honk](); // works as expected
-```
+  myCar.honk(); // error
+  myCar[honk](); // works as expected
+  ```
 
 #### Well-known symbols
+
 ```javascript
 Symbol.toStringTag; // is a well-known symbol
 Blog.prototype[Symbol.toStringTag] = 'Blog Class';
+
 let blog = new Blog();
 // returns [object Blog Class] // This is an example of meta-programming
 console.log(blog.toString());
@@ -236,7 +245,7 @@ console.log(blog.toString());
 - `Object.setPrototypeOf(a, b);` - adds all the props of b to a
 
 - `Object.assign(target, a, b);` - here `target` is an `empty object`, parameters of a and b are populated to target object
-If both a and b have the same property then `b's property overrides the a's` property. for eg,
+  If both a and b have the same property then `b's property overrides the a's` property. for eg,
   ```javascript
   a = { a: 1}; b = { a: 5, b: 6 }; c = { c: 10 };
   let target = {};
@@ -244,8 +253,8 @@ If both a and b have the same property then `b's property overrides the a's` pro
   Object.assign(target, a, b);
 
   Object.defineProperty(b, 'c', {
-  value: 10,
-  enumerable: false // Properties are enumerable by default
+    value: 10,
+    enumerable: false // Properties are enumerable by default
   });
 
   // target has,  { a: 5, b: 6 } because of enumerable set to false
@@ -274,66 +283,72 @@ If both a and b have the same property then `b's property overrides the a's` pro
 - `String.repeat(10);` - repeats the string specified number of timers
 
 ### Number Extensions
-- `Number.isInteger(), Number.parseInt(), Number.isSafeInteger()`, and so on..
+
+- `Number.isInteger(), Number.parseInt(), Number.isSafeInteger()`, and so on.
+
 - `Number.EPSILON, Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER` - constants
 
 ### Math Extensions
+
 - `Math.sign(0), Math.cbrt(22)`
 
 ### RegExp Extensions
+
 - `pattern = /900/yg;`
+
 - `pattern.lastIndex` - last index can be set using `y` flag,
+
 - `pattern.flags` - returns the flags set to the pattern; `gimuy` are the different flags passed to the pattern
 
 ### Iterators, Generators, and Promises
 
 #### Iterators
+
 ```javascript
 let ids = [9000, 9001, 9002];
 let id = ids[Symbol.iterator](); // ids[Symbol.iterator] returns function
 it.next(); //returns {done: false, value: 9000}
 ```
 
-- Creating custom iterator for an Object
+- Creating `custom iterator` for an Object
   ```javascript
   const post = {
-  title: 'Title one',
-  replies: 19
+    title: 'Title one',
+    replies: 19
   }
 
   post[Symbol.iterator] = function() {
-  let properties = Object.keys(this);
-  let count = 0;
-  let isDone = false;
+    let properties = Object.keys(this);
+    let count = 0;
+    let isDone = false;
 
-  let next = () => {
-  if(count >= properties.length) {
-  isDone = true;
-  }
+    let next = () => {
+      if(count >= properties.length) {
+        isDone = true;
+      }
 
-  return {done: isDone, value: this[properties[count++]]};
-  }
+      return {done: isDone, value: this[properties[count++]]};
+    }
 
-  return {next};
+    return {next};
   }
   ```
 
 - Now we can use `for..of` loop to access the value of a each property
 
-#### Generators
+### Generators
 
-- Generators are functions that can be paused and resumed.
+- Generators are functions that can be `paused` and `resumed`.
+  ```javascript
+  // It does not exist in the function stack, we need iterators to call generators multiple times, * says its a generator
+  function *process() {
+    yield 8000;
+    yield 8001;
+  }
 
-```javascript
-// It does not exist in the function stack, we need iterators to call generators multiple times, * says its a generator
-function *process() {
-  yield 8000;
-  yield 8001;
-}
-
-let it = process();
-it.next();
-```
+  let it = process();
+  it.next();
+  ```
 
 -  `next()` kicks off the `generator` and then can be passed a value to next as parameter and generator yields,
 `let result = yield;`
@@ -343,16 +358,16 @@ it.next();
 
 - `yield` has low precedence; array can also be yielded, `yield [1,2,3];` - entire array is yielded when iterated,
 
-- To yield the each array items with in a array use, `yield* [1,2,3];` -- it yields 1, 2, 3 as separate yields, `yield*` is known as `iterator delegation`.
+- To yield the each array items with in a array use, `yield* [1,2,3];` -- it yields 1, 2, 3 as separate yields, `yield*` is known as    `iterator delegation`.
 
 - `it.throw('foo');` can be called on generators, it catches the error and terminates the iterator, Generator should have try catch logic
 
 - if no try catch specified, `it.throw('foo');` throws exception: foo on iterating through yield. for eg,
   ```javascript
   function *process() {
-  yield 900;
-  yield 901;
-  yield 902;
+    yield 900;
+    yield 901;
+    yield 902;
   }
 
   let it = process();
@@ -375,50 +390,50 @@ it.next();
 - Refactoring `Symbol.iterator` for object using generator functions
   ```javascript
   const post = {
-  title: 'Title one',
-  replies: 19
+    title: 'Title one',
+    replies: 19
   }
 
   post[Symbol.iterator] = function *() {
-  let properties = Object.keys(this);
+    let properties = Object.keys(this);
 
-  for(let property of properties) {
-  yield(this[property]);
-  }
+    for(let property of properties) {
+      yield(this[property]);
+    }
   }
   ```
 
-- The following function returns an iterable over the properties of an object, one [key, value] pair per property:
+- The following function returns an iterable over the properties of an object, one `[key, value]` pair per property
   ```javascript
   function* objectEntries(obj) {
-  const propKeys = Reflect.ownKeys(obj);
+    const propKeys = Reflect.ownKeys(obj);
 
     for (const propKey of propKeys) {
     	// `yield` returns a value and then pauses
       // the generator. Later, execution continues
       // where it was previously paused.
       yield [propKey, obj[propKey]];
-   	}
+    }
   }
 
   // objectEntries() is used like this
   const jane = { first: 'Jane', last: 'Doe' };
-  for (const [key,value] of objectEntries(jane)) {
-  console.log(`${key}: ${value}`);
+
+  for (const [key, value] of objectEntries(jane)) {
+    console.log(`${key}: ${value}`);
   }
   ```
 
 #####  Ways of `iterating` over a generator
 
 - As generator objects are iterable, ES6 language constructs that support iterables can be applied to them.
-The following three ones are especially important.
 
-- You can only use yield within a generator function.
+- You can only use `yield` `within` a generator function.
 
 - The `for-of` loop:
   ```javascript
   for (const x of genFunc()) {
-      console.log(x);
+    console.log(x);
   }
   ```
 
@@ -435,23 +450,23 @@ The following three ones are especially important.
 - Call generator function `recursively` inside another generator function `yield*` used
   ```javascript
   function* gen1() {
-  yield '1';
-  yield '2';
+    yield '1';
+    yield '2';
   }
 
   function* gen2() {
-  yield '3';
-  yield* gen1(); // just calling gen1() returns object but doesn't yield from that.
-  yield '4';
+    yield '3';
+    yield* gen1(); // just calling gen1() returns object but doesn't yield from that.
+    yield '4';
   }
   ```
 
 - The operand of `yield*` does not have to be a generator object, it can be any iterable
   ```javascript
   function* gen3() {
-  yield 'sequence';
-  yield* ['of', 'yielded'];
-   	yield 'values';
+    yield 'sequence';
+    yield* ['of', 'yielded'];
+    yield 'values';
   }
   ```
 
@@ -460,14 +475,14 @@ The following three ones are especially important.
 ```javascript
 function spawn(generator) {
   return new Promise((resolve, reject) => {
-  var onResult = lastPromiseResult => {
-  var {value, done} = generator.next(lastPromiseResult);
-  if(!done) {
-  value.then(onResult, reject);
-  } else resolve (value);
-  };
+    let onResult = lastPromiseResult => {
+      const {value, done} = generator.next(lastPromiseResult);
+      if(!done) {
+        value.then(onResult, reject);
+      } else resolve (value);
+    };
 
-  onResult();
+    onResult();
   });
 }
 
@@ -483,17 +498,17 @@ spawn(getStockPrice('google'))
   .then(price => console.log('Price:', price), err => console.error(error));
 ```
 
-#### Promises
+### Promises
 
 - Creating a new `promise` automatically sets it to the `pending` state, then
-it can do one of the 2 things, `fulfilled` or `rejected`.
+  it can do one of the 2 things, `fulfilled` or `rejected`.
 
 - `.then(callbackFunction)` can be chained on promise, return value of `first .then()`
-can be input to the `second .then()`
+  can be input to the `second .then()`
   ```javascript
   promise
-  .then(results => results.filter(result => result.city === 'Bengaluru'))
-  .then(filteredCities => render());
+    .then(results => results.filter(result => result.city === 'Bengaluru'))
+    .then(filteredCities => render());
   ```
 
 - It is an object waiting for an `async` action to complete
@@ -514,6 +529,7 @@ can be input to the `second .then()`
   doAsync().then(function(value) {
     console.log('fulfilled...');
   },
+
   function(reason) {
     console.log('rejected...');
   });
@@ -532,9 +548,8 @@ can be input to the `second .then()`
   Promise.race([p1, p2]).then(...);
   ```
 
-### Arrays and Collections
+### Array Extensions
 
-#### Array Extensions
 ```javascript
 // has only one item in ES6, but in ES5 creating array like, Array(1000) - leads to array of size 1000
 Array.of(9000);
@@ -562,7 +577,7 @@ array.copyWithin(copyToIndex, copyFromIndex);
 ...array.values();
 ```
 
-#### Array Buffer and Typed Array
+### Array Buffer and Typed Array
 
 - `ArrayBuffer` is an array of `8 bit` bytes
   ```javascript
@@ -571,7 +586,7 @@ array.copyWithin(copyToIndex, copyFromIndex);
  buffer.byteLength;
  ```
 
-#### Map
+## Map
 
 - `key/value` pair, `key` can be any value
 
@@ -607,7 +622,7 @@ array.copyWithin(copyToIndex, copyFromIndex);
   new Map().set({}, 1).set({}, 2).size // returns 2
   ```
 
-#### Iterating over maps
+### Iterating over maps
 
 - Iterable for keys and values
   ```javascript
@@ -639,53 +654,86 @@ array.copyWithin(copyToIndex, copyFromIndex);
   map[Symbol.iterator] === map.entries // true
   ```
 
-#### Convert Maps to arrays
+- Map can be looped over with `map.forEach((value, key, map) => void)`
+
+### Convert Maps to arrays
+
+- The `spread operator (...)` can turn an iterable into an Array
+  ```js
+  [...map.keys()] // [k, k]
+  [...map] // [[k, v], [k, v]]
+  ```
+
+### Mapping and filtering maps
+
+- Convert the Map into an Array of `[key,value]` pairs.
+
+- Map or filter the Array.
+
+- Convert the result back to a Map.
+  ```js
+  const originalMap = new Map().set(1, 'a').set(2, 'b').set(3, 'c');
+
+  // Mapping originalMap:
+  const mappedMap = new Map(
+    [...originalMap]
+    .map(([k, v]) => [k * 2, '_' + v])
+  );
+  // {2 => '_a', 4 => '_b', 6 => '_c'}
+
+  // Filtering originalMap:
+  const filteredMap = new Map(
+    [...originalMap]
+    .filter(([k, v]) => k < 3)
+  );
+  //{1 => 'a', 2 => 'b'}
+  ```
 
 -
 
-### Weakmap
+## Weakmap
 
 - `WeekMap` can have only objects as its keys not any other primitive types.
 
 - `WeekMap` are not iterable
 
 - Individual entries in the weekmap can be `garbage collected` though they exists.
+  ```javascript
+  let emp = { name: 'Jake' };
+  let emp1 = { name: 'Janet'};
 
-```javascript
-let emp = { name: 'Jake' };
-let emp1 = { name: 'Janet'};
+  let employees = new Map();
+  employees.set(emp, 'ABC');
+  employees.set(emp1, 'CDE');
 
-let employees = new Map();
-employees.set(emp, 'ABC');
-employees.set(emp1, 'CDE');
+  // returns ABC
+  employees.get(emp);
 
-// returns ABC
-employees.get(emp);
+  // .delete(obj) - to delete an entry
+  // .length - to get the length of the map
+  // .clear() - clears the map
+  // .entries() - returns the entries
 
-// .delete(obj) - to delete an entry
-// .length - to get the length of the map
-// .clear() - clears the map
-// .entries() - returns the entries
+  let arr = [
+    [emp, 'ABC'],
+    [emp1, 'CDE']
+  ];
 
-let arr = [
-  [emp, 'ABC'],
-  [emp1, 'CDE']
-];
+  // accepts array of objects as well
+  let employees = new Map(arr);
 
-// accepts array of objects as well
-let employees = new Map(arr);
+  //  returns boolean if obj exists
+  .has(obj);
 
-//  returns boolean if obj exists
-.has(obj);
+  //  returns all the values in the map
+  [...employess.values()];
 
-//  returns all the values in the map
-[...employess.values()];
-
-// it is not possible to call .length property on weakmap because object references are garbage collected.
-let emp = new WeakMap();
-```
+  // it is not possible to call .length property on weakmap because object references are garbage collected.
+  let emp = new WeakMap();
+  ```
 
 #### Set and WeakSet
+
 - Unique values exist in the collection
   ```javascript
   // it accepts array an an argument to create the set
@@ -712,7 +760,8 @@ let emp = new WeakMap();
   let a = Perks.from([5, 10, 15]);
   ```
 
-#### The Reflect API:
+#### Reflection - Meta programming
+
 - DSL - Domain Specific Language
 
 - Object Construction and method calls - Reflect is an Object
@@ -754,6 +803,7 @@ let emp = new WeakMap();
 #### The Proxy API
 
 - Its an object wraps an another object
+
 - used for security in the application, used for profiling
   ```javascript
   var p = new Proxy(employeeObject, {
@@ -776,21 +826,13 @@ let emp = new WeakMap();
     type: 'ACTION_1',
     payload: data,
   });
-```
-
-### Returning an object from an arrow function
-```javascript
-const arrowFunc = (data) => ({
-  type: 'ACTION_CLOSE',
-  payload: data
-})
-```
+  ```
 
 ## ES-7
 
-- `includes()` method on array prototype
+- `includes()` on array prototype
 
-- `**` exponential operator
+- `**` exponential operator, `2 ** 3 === 8`
 
 ## ES-8
 
@@ -807,13 +849,13 @@ const arrowFunc = (data) => ({
 ## ES-2019 - TC-39
 
 - `Optional catch binding`
-```javascript
-try {
-  // some statements
-} catch { // no need to pass catch(error)
-  throw new Error('some error');
-}
-```
+  ```javascript
+  try {
+    // some statements
+  } catch { // no need to pass catch(error)
+    throw new Error('some error');
+  }
+  ```
 
 - `flat()` on array prototype, flattens the array of depth 1, `arr.flat(depth=1)`
   pass the depth as param to flatten array depth > 2

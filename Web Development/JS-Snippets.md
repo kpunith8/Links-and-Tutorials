@@ -120,7 +120,10 @@ function newItemsCheapestFirst(items) {
 const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
 
 const squareList = arr => {
-	return arr.filter(c => Number.isInteger(c)).filter(a => (Math.sign(a) == 1)).map(b  => b * b);
+	return arr
+		.filter(c => Number.isInteger(c))
+		.filter(a => Math.sign(a) == 1)
+		.map(b  => b * b);
 };
 ```
 
@@ -227,4 +230,13 @@ Object.entries(style).map(entry => {
 	title: 'name', // can be chosen from array of data
 	price: '$1.0'
 }))
+```
+
+### Returning an object from an arrow function
+
+```javascript
+const arrowFunc = (data) => ({
+  type: 'ACTION_CLOSE',
+  payload: data
+})
 ```
