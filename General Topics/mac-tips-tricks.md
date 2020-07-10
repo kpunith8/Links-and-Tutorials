@@ -8,6 +8,12 @@ $ brew tap caskroom/fonts
 $ brew cask install font-fira-code
 ```
 
+## Copy the result to clipboard
+
+```
+$ ls -al | pbcopy
+```
+
 ## Mac terminal
 
 - `Cmd + K` - To clear the command line permanently
@@ -50,7 +56,7 @@ $ brew services list
   export DEFAULT_USER="$(whoami)"
   ```
 
-## Symobols
+## Symobols Shortcuts
 
 - `Opt + [` for `“`
 
@@ -77,4 +83,9 @@ $ ps ax | grep <PID>
   $ kill -9 <PID>
   $ kill -15 <PID> // Safe killing
   $ kill -QUIT <PID> // Completely kill it
+  ```
+
+- Get the parent ID of the service created it
+  ```
+  $ ps -o ppid=<new pid>
   ```

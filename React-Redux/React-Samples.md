@@ -916,17 +916,47 @@ useEffect(() => {
 <Details css={[{maxWidth: '30%'}, cardStyle]} />
 ```
 
-## RTL- Testing library
+## Using mdx-deck for creating presentations
 
-- Fire `onChange` event on input field
-```javascript
-fireEvent.click(find('.add-item-link'))
-fireEvent.change(find('input[name="label"]'), {
-  target: {value: 'new lbl'}
-})
-// or
-fireEvent.change(find('input[type="text"][name="package_name"]'), {
-  target: {value: 'com.android'}
-})
-fireEvent.click(find('.save-button'))
-```
+- [mdx-deck](https://github.com/jxnblk/mdx-deck)
+
+- Initialise the project with `deck`
+  ```
+  $ npm init deck my-deck
+  ```
+
+- Install the dependencies to highlight, scroll, zoom the code snippet, `mdx-deck-code-surfer`
+  and `raw-loader` for webpack to lazily require the code snippets
+  ```
+  $ npm install mdx-deck-code-surfer raw-loader -D
+  ```
+
+- Once installed start the dev server
+  ```
+  $ npm start
+  ```
+- Create the folder to store the `snippets`,
+
+- Modify the `deck.mdx` file
+  ```js
+  import {Head} from 'mdx-deck'
+
+  export {default as theme} from './theme'
+
+  import {CodeSurfer} from 'mdx-deck-code-surfer'
+
+  <CodeSurfer
+    //code="console.log('Hello World!')" // Sample code to display
+    code={require('raw-loader!./snippets/1.snippet')}
+    title="Snippet"
+    notes="Initial Notes" // on the footer
+    showNumbers // display line of the code snippet
+    steps={[
+      {lines: [5], notes: "Lines"}, // only line 5 is shown
+      {lines: [4, 5, 6], notes: "Lines"}, // multiple lines
+      {range: [4,6], notes: "Range"}, // same as multiple lines
+      {ranges: [[1,2], [4,6]], notes: "Ranges"}, // multiple blocks of code is shown
+      {tokens: {1: [2,6]}, notes: "Tokens"} // show the 2nd and 6th word in the first line
+    ]}
+  />
+  ```

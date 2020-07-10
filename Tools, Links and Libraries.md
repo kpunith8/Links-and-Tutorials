@@ -156,29 +156,54 @@
 ### CSS, Component, Testing, and more libraries
 
 - `react-use` - custom react hooks
+
 - `restful-react`
+
 - `styled-components` - to create styled components for react
+
 - `emotion` - Styled components, CSS in JS
+
 - `react-spring` - React animation
+
 - `GraphQL` - `relay`, `apolo`, `graphcool` - GraphQL
+
 - `reactstrap` - wrapper for Bootstrap 4.0 for react
+
 - `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
+
 - `reselect` and `recompose`
+
 - `react-cache` - To cache the data
+
 - `react-testing-library` - testing library - By Kent C Dodds
+
 - `nwb` - React starter kit, like `create-react-app`
+
 - `react-docgen` - generate react components metadata
+
 - `chokidar` - watch files
+
 - `highlight.js` - syntax highlighted code examples
+
 - `immer` - Convert mutable state to immutable in react
+
 - `react-loading-skeleton` - skeleton loading for data or images
+
 - `formik`, `react-final-form`, `react-redux-form` - form library
+
 - `storybook` - component documentation
+
 - `react-ga` - Google analytics support (Refer dev-portfolio)
 
 - `SWR` - `React Hooks for Remote Data Fetching`
+
 - `react-query`
 
+- [React Hook Form](https://react-hook-form.com/get-started)
+
+- https://github.com/jxnblk/mdx-deck - `Create Presentation`
+	- `mdx-deck-code-surfer`
+	
 ## CMS - Content Management System
 
 - `strapi`

@@ -55,3 +55,19 @@ export const expandSelect = selectInput => {
   fireEvent.focus(selectInput)
 }
 ```
+
+
+## RTL- Testing library
+
+- Fire `onChange` event on input field
+```javascript
+fireEvent.click(find('.add-item-link'))
+fireEvent.change(find('input[name="label"]'), {
+  target: {value: 'new lbl'}
+})
+// or
+fireEvent.change(find('input[type="text"][name="package_name"]'), {
+  target: {value: 'com.android'}
+})
+fireEvent.click(find('.save-button'))
+```
