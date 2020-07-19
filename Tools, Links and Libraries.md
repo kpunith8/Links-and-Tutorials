@@ -1,8 +1,4 @@
-## Youtube Channels
-
-- [Automation-Raghav-Pal](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
-
-# Share beautiful code snippets
+## Share beautiful code snippets
 
 - https://carbon.now.sh/
 
@@ -10,25 +6,17 @@
 
 - https://kite.com/
 
+## Sonic Pi - Music programming
 
-## Sonic Pi -> Music programming
+## Youtube channels
 
-## TODO
+- [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
 
-- `Vega` - Dashboard, Visualisation, with python
-- `Tailwind` - CSS Library
-- `Cypress` - Integration tests
-- `reach-router` - router for react
-- `next.js` - React CMS
-- https://vega.github.io
-- https://www.contentful.com/ - Contentfull - CMS
-- http://idl.cs.washington.edu/projects/lyra/ - Lyra
-
-## Devops
+### Devops
 
 - [intelliPaat](https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE)
 
-###	Web developement - Youtube channels
+### Web developement
 
 - `Traversy Media`
 - `codedamn`
@@ -62,12 +50,13 @@
 ### Mobile Development
 
 - `Devefy` - `Flutter` - https://www.youtube.com/channel/UCwmFOfFuvRPI112vR5DNnrA
+- `MTech viral` - `Flutter`
 
 ## Personalities
 
 ### Education
 
-- Maryellen Weimer
+- `Maryellen Weimer`
 
 ### JS
 
@@ -82,15 +71,7 @@
 - `Uncle Robert C Martin` - Clean code
 - `Victor Rentea` - Clean Code
 
-## Tutorials
-
-- SCSS tutorials
-- Advanced mongo
-- Flexbox, grid
-- JWT - JSON web tokens
-- Spinnaker
-
-# Libraries:
+# Libraries
 
 ## JS
 
@@ -118,7 +99,7 @@
 - `node-fetch` - fetch API for node
 - `redis` - node client for redis
 - `sqlectron` - to manage the databases
-- `TypoORM`
+- `TypeORM`
 - `PostgreSQL`
 - `TypeGraphQL`
 - `Apollo GraphQL`
@@ -127,14 +108,11 @@
 ## CSS
 
 - `SASS` - Syntactically Awesome Style Sheets
-- `CSS` - Modules
-- `Toaster` library to notify
+- `CSS Modules`
+- `Toaster` - Library to notifications
 - `font-awesome` for icons
-- `docz` - For documentation site for react
 -	`grips` - templating engine
-- `DukTape`, `JerryScript` - IoT JS Engines
-- `tailwind css`
-- https://material-ui.com/components/ - react based components
+- `tailwind css` - Utility first CSS - Offers low level API
 
 ## Common
 
@@ -144,42 +122,37 @@
 - `express` - server container for node.js (hapi)
 - `underscore` - JS util functions for common tasks
 - `contentful` - CMS - content management system
+- `DukTape`, `JerryScript` - IoT JS Engines
 - `Grid.js` - HTML Table
 
 ## Testing
 
-- `cypress` - e2e tests
+- `cypress` - E2E tests
 - `miragejs` - mocking http calls
 - `nock` - mocking http calls
-- `testcafe` - integration testing
+- `testcafe` - Integration testing
 - [playwright](https://github.com/microsoft/playwright) - by Microsoft
 - `puppeteer` - by google
 
-## React
+## REACT
 
-### CSS, Component, Testing, and more libraries
+### Common
+
+- `react-app-rewired` - to modify or add babel and webpack config to `create-react-app` without ejecting
+
+- `docz` - For documentation site for react
 
 - `react-use` - custom react hooks
 
 - `restful-react`
 
-- `styled-components` - to create styled components for react
-
-- `emotion` - Styled components, CSS in JS
-
 - `react-spring` - React animation
 
-- `GraphQL` - `relay`, `apolo`, `graphcool` - GraphQL
-
-- `reactstrap` - wrapper for Bootstrap 4.0 for react
-
-- `Jest`, `Enzyme` and `TestCafe` (night watch) - react testing
+- `GraphQL`, `relay`, `apolo`, `graphcool` - GraphQL
 
 - `reselect` and `recompose`
 
 - `react-cache` - To cache the data
-
-- `react-testing-library` - testing library - By Kent C Dodds
 
 - `nwb` - React starter kit, like `create-react-app`
 
@@ -205,18 +178,42 @@
 
 - [React Hook Form](https://react-hook-form.com/get-started)
 
-- https://github.com/jxnblk/mdx-deck - `Create Presentation`
-	- `mdx-deck-code-surfer`
+- https://github.com/jxnblk/mdx-deck - `Markdown based Presentation`
 
-## CMS - Content Management System
+- `mdx-deck-code-surfer` - Create better code slides
 
-- `strapi`
-- `contentful`
-- `netlifycms`
+### Testing
+
+- `Jest`, `Enzyme` - React testing
+
+- `react-testing-library` - Testing library - By `Kent C Dodds`
+
+### Component Libraries
+
+- `reactstrap` - wrapper for Bootstrap 4.0 for react
+
+- `styled-components` - To create styled components for react
+
+- `emotion` - Styled components, CSS in JS
+
+- [Material UI](https://material-ui.com/components/) - Material UI React components
+
+- `Chakra UI`
+
+- `rebass` - React components, similar to bootstrap
+
+### CMS - Content Management System
+
+- `strapi` - Open source
+
+- `contentful` - Freeium - has very good ecosystem
+
+- `netlifycms` - Using github as backend for data storage and API
 
 ### SPA
 
-- `nextJS` - React library for SPA
+- `NextJS` - React library for SPA
+
 - `Gatsby` - React library for SPA
 
 ### State management
@@ -227,7 +224,8 @@
 - `recoil`
 - https://kea.js.org/
 
-### Tools:
+
+## Tools
 
 - `JFrog` - Artifactory to host the packages (npm, jars etc)
 
@@ -253,16 +251,16 @@
 ## REST end points
 
 -  Star wars APIs
-```javascript
-{
-	"films": "https://swapi.co/api/films/",
-	"people": "https://swapi.co/api/people/",
-	"planets": "https://swapi.co/api/planets/",
-	"species": "https://swapi.co/api/species/",
-	"starships": "https://swapi.co/api/starships/",
-	"vehicles": "https://swapi.co/api/vehicles/"
-}
-```
+	```json
+	{
+		"films": "https://swapi.co/api/films/",
+		"people": "https://swapi.co/api/people/",
+		"planets": "https://swapi.co/api/planets/",
+		"species": "https://swapi.co/api/species/",
+		"starships": "https://swapi.co/api/starships/",
+		"vehicles": "https://swapi.co/api/vehicles/"
+	}
+	```
 
 - `jsonplaceholder`
 
@@ -275,13 +273,13 @@
 
 ### Java
 
-- `Jackson` - for JSON
+- `Jackson` - JSON serializer and deserializer
 
 - `Vert.X` - reactive programming library from eclipse
 
 - `RxJava` - Reactive programming library from Netflix
 
-- `Kafka`, `Aka` - Reactive frameworks
+- `Kafka`, `Aka` - Reactive Frameworks
 
 - `lombok` - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
 
@@ -343,11 +341,11 @@
 
 - [40 Free Resources](https://dev.to/jfelx/40-high-quality-free-resources-for-web-development-10o3)
 
-	- [Documentation aggregator](https://devdocs.io/)
+- [Documentation aggregator](https://devdocs.io/)
 
-	- [Dev hints](https://devhints.io/)
+- [Dev hints](https://devhints.io/)
 
-	- [Regex](https://ihateregex.io/)
+- [Regex](https://ihateregex.io/)
 
 - [LogRocket Blog](https://blog.logrocket.com/)
 
@@ -516,6 +514,24 @@
 
 - https://issues.jenkins-ci.org/browse/JENKINS-55561
 
+## TODO
+
+- `Vega` - Dashboard, Visualisation, with python
+- `Tailwind` - CSS Library
+- `Cypress` - Integration tests
+- `reach-router` - router for react
+- `next.js` - React CMS
+- https://vega.github.io
+- https://www.contentful.com/ - Contentfull - CMS
+- http://idl.cs.washington.edu/projects/lyra/ - Lyra
+
+## Tutorials
+
+- SCSS tutorials
+- Advanced Mongo
+- Flexbox, grid
+- JWT - JSON web tokens
+- Spinnaker
 
 ### JS Interview topics for ReactJS
 
@@ -528,3 +544,5 @@
 - Error boundaries
 - redux, middleware's, redux-thunk
 - forward-ref
+- Hooks
+- Concurrent API
