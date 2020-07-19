@@ -593,7 +593,6 @@ domainRegExp.test('256.11.11.22') // false
 
 - Make the changes made in `devtools` reflect in actual files, go to `Source -> File System Tab` -> add the folder
 
-
 ### Other debugging methods
 
 - `getEventListeners(elem)` - lists all the listeners added to the element
@@ -608,6 +607,14 @@ domainRegExp.test('256.11.11.22') // false
 - Right click on the object and select `Store as global variable`
 
 - it copies to `temp1` variable, use `copy(temp1)` method to copy to `clipboard`
+
+
+### Style the hover elements or context menus
+
+- Open the developer tools and go to console and type this code
+	```
+	setTimeout(() => {debugger}, 3000);
+	```
 
 ## ESLint erros
 

@@ -200,7 +200,7 @@
 
 - Open `PuttyGen` to convert the `.pem` to `.ppk` which will be understood by `Putty`
 
-- File -> Load the private key -> Save the private key with/without passphrase
+- File -> Load the Private key -> Save the private key with/without passphrase
 
 - Open the `Putty` and connect to `EC2-instance`
   - Host Name (or IP address): `ec2-user@<public-ip>`

@@ -28,7 +28,6 @@
 
 - [intelliPaat](https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE)
 
-
 ###	Web developement - Youtube channels
 
 - `Traversy Media`
@@ -119,6 +118,11 @@
 - `node-fetch` - fetch API for node
 - `redis` - node client for redis
 - `sqlectron` - to manage the databases
+- `TypoORM`
+- `PostgreSQL`
+- `TypeGraphQL`
+- `Apollo GraphQL`
+- `Hasura` - GraphQL client with PostgreSQL
 
 ## CSS
 
@@ -203,7 +207,7 @@
 
 - https://github.com/jxnblk/mdx-deck - `Create Presentation`
 	- `mdx-deck-code-surfer`
-	
+
 ## CMS - Content Management System
 
 - `strapi`
@@ -223,19 +227,28 @@
 - `recoil`
 - https://kea.js.org/
 
-## Tools:
+### Tools:
 
-- `JFrog` - artifactory
+- `JFrog` - Artifactory to host the packages (npm, jars etc)
+
 - `Spinnaker` - Automated deployments
-- `Favicon Generator` - https://realfavicongenerator.net/
+
+- [Favicon Generator](https://realfavicongenerator.net/)
+
+- [cloudinary](https://cloudinary.com) - Image compressing - free tier
+
+- [imgix](https://imgix.com) - Image compressing - no free tiers
 
 
 ## Free hosting
 
 - `vercel.com` - static and dynamic website
-- `netlify.com` - static and dynamic website
-- `heroku.com` - Node.js apps
 
+- `netlify.com` - static and dynamic website
+
+- `heroku.com` - Node.js apps, backend API's
+
+- `firebase` - Static website and database and more
 
 ## REST end points
 
@@ -287,12 +300,16 @@
 ### Books
 
 - `Test driven development` - Kent Beck
+
 - `Growing object-oriented software guided by tests` - Steve Freeman, Nat Pryce
+
 - `Extreme programming explained` - Kent Beck
 
 ## Links:
 
 ### JS
+
+- [npm dependency visualiser](http://npm.anvaka.com/#!/)
 
 - [JS in depth articles](https://ponyfoo.com/articles)
 
@@ -335,14 +352,18 @@
 - [LogRocket Blog](https://blog.logrocket.com/)
 
 - Codewars
+
 - Codementor
+
 - Codeshare
+
 - Laracasts
+
 - Topcoder
+
 - Repl it
 
-
-#### Blogs
+### Blogs
 
 - CSS Tricks
 - [Smashing Magazine](https://www.smashingmagazine.com/)
@@ -357,7 +378,7 @@
 - Best of JS
 - [Alligator](https://alligator.io/js/push-api/)
 
-#### Podcasts
+### Podcasts
 
 - Shop Talk Show
 - The Changelog
@@ -480,8 +501,6 @@
 - https://github.com/junit-team/junit4/wiki/Matchers-and-assertthat
 - http://static.javadoc.io/org.mockito/mockito-core/2.8.9/org/mockito/Mockito.html#30
 
-
-
 # Jenkins
 
 - https://jenkins.io/doc/book/pipeline/jenkinsfile/#using-multiple-agents
@@ -492,7 +511,9 @@
 ## Jenkinsfile
 
 - https://stackoverflow.com/questions/43321026/can-i-define-multiple-agent-labels-in-a-declarative-jenkins-pipeline
+
 - https://stackoverflow.com/questions/44870978/how-to-run-multiple-stages-on-the-same-node-with-declarative-jenkins-pipeline
+
 - https://issues.jenkins-ci.org/browse/JENKINS-55561
 
 

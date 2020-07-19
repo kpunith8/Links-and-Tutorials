@@ -396,6 +396,8 @@ ul li a {
 
 - The height of the row is defined by the content
 
+- use fraction units for responsiveness
+
 - `auto-fill` - Won't create tracks out of empty space,  and `auto-fit` - does,
   can be used with `grid-template-columns: repeat(auto-fill, 100px)`
 
@@ -427,6 +429,8 @@ ul li a {
     align-items: center;
   }
   ```
+
+-
 
 ### Animating a square
 
