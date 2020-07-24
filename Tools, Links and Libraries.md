@@ -12,6 +12,8 @@
 
 - [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
 
+- [DS] - https://www.youtube.com/channel/UCD8yeTczadqdARzQUp29PJw
+
 ### Devops
 
 - [intelliPaat](https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE)
@@ -513,6 +515,11 @@
 - https://stackoverflow.com/questions/44870978/how-to-run-multiple-stages-on-the-same-node-with-declarative-jenkins-pipeline
 
 - https://issues.jenkins-ci.org/browse/JENKINS-55561
+
+# Github issues
+
+- https://github.com/facebook/react/issues/13991 - React multiple versions error
+	- https://github.com/facebook/react/issues/13991#issuecomment-435587809
 
 ## TODO
 
