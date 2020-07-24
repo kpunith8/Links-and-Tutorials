@@ -489,4 +489,133 @@
 
 ## Middleware
 
+- Middleware is a `function` which is called `before` the `route handler`. Middleware
+  functions have `access to` the `request` and `response` objects, and the `next()` middleware
+  function in the application’s request-response cycle.
+  The `next()` middleware function is commonly denoted by a variable named next.
+
+- Nest middleware are, by default, `equivalent to express middleware`.
+
+- Implement custom Nest middleware in either a `function`, or in a class with an `@Injectable() decorator`.
+  The class should `implement` the `NestMiddleware` interface, while the function does not have any special requirements
+  ```js
+  import { Injectable, NestMiddleware } from '@nestjs/common';
+  import { Request, Response } from 'express';
+
+  @Injectable()
+  export class LoggerMiddleware implements NestMiddleware {
+    use(req: Request, res: Response, next: Function) {
+      console.log('Request...');
+      next();
+    }
+  }
+  ```
+
+### Dependency Injection
+
+- Nest middleware fully supports Dependency Injection. Just as with `providers` and `controllers`,
+  they are able to inject dependencies that are available within the same module. This is done through the constructor.
+
+
+### Applying Middleware
+
+- There is no place for middleware in the `@Module() decorator`. Instead, we set them up using
+  the `configure()` method of the module class. Modules that include middleware have to implement
+  the NestModule interface.
+  ```js
+  // app.module.ts
+  import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+  import { LoggerMiddleware } from './common/middleware/logger.middleware';
+  import { CatsModule } from './cats/cats.module';
+
+  @Module({
+    imports: [CatsModule],
+  })
+  export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+      consumer
+        .apply(LoggerMiddleware)
+        .forRoutes('cats');
+    }
+  }
+  ```
+
+> The `configure()` method can be made asynchronous using `async/await`
+  (e.g., await completion of an asynchronous operation inside the configure() method body).
+
+### Route Wildcards
+
+- Pattern based routes are supported as well. For instance, the asterisk is used as a wildcard,
+  and will match any combination of characters:
+  ```js
+  forRoutes({ path: 'ab*cd', method: RequestMethod.ALL });
+  ```
+
+### Middleware Consumer
+
+- The `MiddlewareConsumer` is a helper class. It provides several built-in methods to manage middleware.
+  All of them can be simply chained.
+
+- The `forRoutes()` method can take a `single string`, `multiple strings`, a `RouteInfo` object,
+  a `controller` class and even `multiple controller` classes, pass a list of `controllers separated by commas`.
+
+
+### Excluding Routes
+
+- To exclude certain routes from having the middleware applied. We can easily exclude certain routes with the `exclude()` method.
+  This method can take a `single string`, `multiple strings`, or a `RouteInfo` object identifying routes to be excluded.
+  ```js
+  consumer
+    .apply(LoggerMiddleware)
+    .exclude(
+      { path: 'cats', method: RequestMethod.GET },
+      { path: 'cats', method: RequestMethod.POST },
+      'cats/(.*)',
+    )
+    .forRoutes(CatsController);
+  ```
+
+### Functional Middleware
+
+- The `LoggerMiddleware` class we've been using is quite simple. It has
+  `no members`, `no additional methods`, and `no dependencies`
+
+- Functional middleware can be declared as a function
+  ```js
+  // logger.middleware-func.ts
+  import { Request, Response } from 'express';
+
+  export function logger(req: Request, res: Response, next: Function) {
+    console.log(`Request...`);
+    next();
+  }
+  ```
+
+- Can be used the `app.module.ts` as,
+  ```js
+  consumer
+    .apply(logger)
+    .forRoutes(CatsController);
+  ```
+
+> Consider using the simpler functional middleware alternative any time your middleware doesn't need any dependencies.
+
+### Multiple Middleware
+
+- To bind multiple middleware that are `executed sequentially`, simply provide a comma separated list inside the `apply()` method:
+  ```js
+  consumer.apply(cors(), helmet(), logger).forRoutes(CatsController);
+  ```
+
+### Global Middleware
+
+- To bind middleware to every registered route at once, we can use the `use()` method that is supplied by the `INestApplication` instance
+  ```js
+  const app = await NestFactory.create(AppModule);
+  app.use(logger);
+  await app.listen(3000);
+  ```
+
+## Exception Filters
+
 - 

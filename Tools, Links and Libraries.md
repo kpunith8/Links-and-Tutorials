@@ -519,7 +519,8 @@
 # Github issues
 
 - https://github.com/facebook/react/issues/13991 - React multiple versions error
-	- https://github.com/facebook/react/issues/13991#issuecomment-435587809
+
+- https://github.com/facebook/react/issues/13991#issuecomment-435587809
 
 ## TODO
 
