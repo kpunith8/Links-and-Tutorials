@@ -999,3 +999,44 @@ useEffect(() => {
     return config
   }
   ```
+
+### Import svg as a react-component in CRA-2.0
+
+- Instead of specifying the svg as src to `<img>` tag, use `ReactComponent` wrapped component
+  for an svg
+  ```js
+  import {ReactComponent as ReactLogo} './logo.svg';
+
+  export default props => (
+    <ReactLogo className="main-logo" />
+  )
+  ```
+
+- Using the classname it can be styled or animated,
+  ```css
+  .main-logo path {
+    stroke: placegoldenrod;
+    stroke-width: 10px;
+    fill: none;
+    stroke-dasharray: 35px 15px;
+    animation: orbit 1s infinite linear;
+  }
+
+  @@keyframes orbit {
+    to {
+      stroke-dashoffset: 50px;
+    }
+  }
+  ```
+
+### Install and initialise eslint
+
+- Install the plugins
+  ```
+  $ npm i -D eslint{,-plugin-react, -plugin-react-hooks}
+  ```
+
+- Create a config file for `eslint`
+  ```
+  $ npx eslint --init # Select the appropriate options and it creates the .eslintrc.js file
+  ```

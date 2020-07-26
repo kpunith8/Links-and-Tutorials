@@ -89,3 +89,12 @@ $ ps ax | grep <PID>
   ```
   $ ps -o ppid=<new pid>
   ```
+
+## Convert markdown files to pdf with, pandoc and have pdflatex
+
+- Install `pandoc` and `pdflatex` before running the command
+  ```
+  $ pandoc -f markdown -t pdf -o converted-markdown.pdf sample-markdown.md --pdf-engine=/Library/TeX/textbin/pdflatex
+  ```
+
+  - here, flags `-f` means `from`, `-t` means `to`, `-o` filename of the pdf output file and the engine name

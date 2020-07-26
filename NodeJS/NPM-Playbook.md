@@ -308,3 +308,30 @@ $ npx kpunith8/repo#branch-name
 	```
 	$ npx <url-to-gist>
 	```
+
+
+## Error Installing npm modules in macOS Catalina
+
+```
+gyp: No Xcode or CLT version detected!
+gyp ERR! configure error
+```
+
+- Get the location of the installed command-line tools by running the command below:
+	```
+	$ xcode-select --print-path
+	```
+
+	- It prints, `/Library/Developer/CommandLineTools`
+
+- Delete all the files in the directory
+	```
+	$ sudo rm -r -f /Library/Developer/CommandLineTools
+	```
+
+- Install the command lines tool again
+	```
+	$ xcode-select --install
+	```
+
+	- Accept the security warning and install it
