@@ -26,7 +26,9 @@
 
 - Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
 
-- `I'm not a great programmer; I'm just a good programmer with great habits.` - `Kent Beck`
+- `I'm not a great programmer; I'm just a good programmer with great habits.` - Kent Beck
+
+- `For each desired change, make the change easy, then make the easy change` — Kent Beck
 
 ## First Step
 
