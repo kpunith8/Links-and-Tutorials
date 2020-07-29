@@ -773,7 +773,7 @@
 
 - Install the CLI based on your OS
 
-### Configuration on Local computer
+### Configuration on Local Computer
 
 - Create an `IAM user`
 
@@ -785,9 +785,9 @@
   $ aws configure
   ```
 
-  - Enter `Access Key ID` and `Secret Access Key` when prompted
+- Enter `Access Key ID` and `Secret Access Key` when prompted
 
-  - Specify `default region name` and default output format as is
+- Specify `default region name` and default output format as is
 
 ### CLI on EC2
 
@@ -821,7 +821,151 @@
   ```
   > Without the access the IAM Role it wont let access s3 from AWS CLI
 
-- Try creating an bucket, it fails because of readonly policy of the `IAM Role` attached to the EC2 instance
+- Try creating a bucket, it fails because of s3 readonly policy of the `IAM Role` attached to the EC2 instance
   ```
   $ aws s3 mb s3://another-bucket
   ```
+
+- Use `IAM Policy Simulator` to check whether service has policies for a specific users or a group
+
+- Use `--dry-run` option to simulate dry run before actually running them
+  ```
+  $ aws ec2 run-instances --dry-run --image-id <get-it-from-running-instance> --instance-type t2.micro
+  ```
+
+### STS - Decode Erros
+
+- The error message running the `CLI commands` can be decoded using the `STS` command line
+  ```
+  $ aws sts decode-authorization-messge --encoded-message <cryptic-msg>
+  ```
+
+- deconde-authorization-message can be granted to decode the error message in `CLI` through an
+  `IAM Policy` by creating a `Custom Policy` and attaching the custom policy to a IAM Role
+  ```
+  1) Edit Policy,
+  2) Service: STS
+  3) Access Level: Write: DecodeAuthorizationMessage
+  ```
+
+- Then run the command again
+  ```
+  $ aws sts decode-authorization-messge --encoded-message <cryptic-msg>
+
+  $ echo <msg> # Copy to VS code editor and format to see the error message properly
+  ```
+
+### EC2 Instance Metadata
+
+- The URL to access the metadata is, `http://169.254.169.254/latest/metadata`
+
+- Above URL works only `within` the `EC2 instance`
+
+- Allows to retrieve the `IAM Role Name` from metadata but not the `IAM Policy`
+
+- Run this inside an EC2 instance
+  ```
+  $ curl http://169.254.169.254/latest/metadata
+
+  # To access IAM Role credentials created by AWS CLI to access the AWS services
+  # It is temporary and comes with a expiration
+  $ curl http://169.254.169.254/latest/metadata/iam/security-credentials/<Role-Name>
+  ```
+
+### AWS CLI Profiles
+
+- In macOS the `config` and `credentials` files stored under `~/.aws` file
+
+- Access multiple AWS accounts, create a profile as follows
+  ```
+  $ aws configure --profile personal-aws
+  ```
+
+- Enter `Access Key ID` and `Secret Access Key` when prompted
+
+- Specify `default region name` and default output format as is
+
+- While running specific commands on CLI provide `--profile` option as follows,
+  ```
+  $ aws s3 ls --profile personal-aws
+  ```
+
+### MFA with CLI
+
+- Must create a temporary session, must run `STS GetSessionToken` API, to get the temporary token
+
+- Go to `IAM Console`, Select the user go to,
+  ```
+  1) Select an IAM user
+  2) Security Credentials: Assigned MFA device: Manage: Virtual MFA Device
+  3) Install the google authenticator and Scan the QR code and register it
+  4) Grab the 'arn:aws:iam::...' to use it in command line
+  ```
+
+- Run the following in command
+  ```
+  $ aws sts get-session-token --serial-number <arn-from-the-console> --token-code <code-from-authenticator>
+  ```
+
+- It returns temporary session creds, store it somewhere so that we can add to profile and access it.
+  ```
+  $ aws configure --profile mfa # Provide the details copied from the above command
+  ```
+
+- And add the session token to `~/.aws/credentials` file as follows,
+  ```
+  aws_session_token=.....
+  ```
+
+## AWS SDK
+
+- Perform actions on AWS directly from your applications code
+
+- Official SDKs are, `Java, NodeJS, Pyton, .Net, Ruby, C++, etc.`
+
+- Use the SDK when coding against AWS services such as `DynamoDB`
+
+## AWS Limits (Quotas)
+
+### API Rate Limits
+
+- `DescribeInstances` API for EC2 has a limit of `100 calls/sec`
+
+- `GetObject` on S3 has a limit `5500 GET/sec`
+
+- For intermittent errors: Implement `Exponential Backoff` - Retry mechanism included in SDK API calls
+
+- For consistent errors: Request an `API throttling limit increase`
+
+### Service Quotas
+
+- Running on-demand standard instances: `1152 vCPU`
+
+- Request for service quote increase by using the `Service Quotas API`
+
+## CLI Credential Provider Chain
+
+- CLI will look for credentials in this order
+
+1. `Commandline Options`: `--region`, `--output`, and `--profile`
+
+2. `Environment Variables`: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN`
+
+3. `CLI Credentials file`: `~/.aws/credentials`
+
+4. `CLI configuration file`: `~/.aws/config`
+
+5. `Container credentials`: For ECS tasks
+
+6. `Instance Profile Credentials`: For EC2 Instance Profiles
+
+## Signing AWS API Requests
+
+- While making call to AWS HTTP API, request must be signed so that the AWS
+  can indetify the user, using AWS credentials.
+
+> Some requests to AWS don't need signing
+
+- Using `SDK` or `CLI` will automatically sign all the HTTP requests.
+
+- Otherwise, need to be signed using, `Signature v4(SigV4)`
