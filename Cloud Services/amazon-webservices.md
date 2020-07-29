@@ -25,19 +25,19 @@
 
 - Never write IAM creds in code
 
-- Never use root IAM creds
+- Never use root IAM credentials
 
 ### Create an IAM user
 
-- Open `IAM service` and add user - first enable MFA - multi factor authentication with `google authenticator`
+- Open `IAM service` and add user - `Enable MFA` - multi factor authentication with `google authenticator`
   need to download the app from play store and scan for QR code to set it up
 
 - Create an user with auto generated password - assign permissions with `Attach existing policies directly -> Administration Access`
   checked
 
-- Review the user and create and download the `credentials.csv` never share this anyone
+- Review the user and create and download the `credentials.csv` never share this with anyone
 
-- Add the user to group after creating a group with admin privileges
+- Add the user to `group` after creating a group with admin privileges
 
 - Go to `Users` -> select the created user and `detach the AdminAccess` since they are inherited from
   admin group created
@@ -48,7 +48,7 @@
   Ready to go
 
 
-## EC2
+## EC2 Instances
 
 - Rent Virtual machine (EC2)
 
@@ -80,41 +80,50 @@
 - When you `stop and start` the instance it will change the public IP which will result in `Connection refused` error
   when connecting with `SSH`
 
-- Creating a new instance can make use of existing key/pair and the security group
+- Creating a new instance can make use of existing `key/pair` and the `security group`
 
 #### Connect to the running instance with SSH in mac/linux
 
-- SSH - Secure Shell - allows to control remote machine securely using the command line
+- `SSH` - Secure Shell - allows to control remote machine securely using the command line
 
 - Copy the IPv4 Public IP from `running instance's Description tab`  
+
+- Download `.pem` file by clicking on `Connect` button on an `EC2` running instance.
 
 - Make sure `.pem` file has least privileges so that no one can access it, by default it has `0644`
   ```
   $ chmod 0400 <file-name.pem>
   ```
 
-- Use command line with download `.pem` file to access with `ec2-user@public-ip`
+- Use command line with download `.pem` file to access with `ec2-user@public-ip-of-an-ec2-instance`
+  you should be in the same folder where the `.pem` file exists to ssh into it or
+  you have to pass the path of the `.pem` file.
   ```
-  $ ssh -i <file-name.pem> ec2-user@<public-ip>
+  $ ssh -i <file-name.pem> ec2-user@public-ip-of-an-ec2-instance
   ```
 
-- Once login successful, opens the instance, check the user `whoami` command
+- Once login successful, it opens the instance
 
-#### Connect to running instance in windows with putty
+#### Connect to running instance in Windows with puTTY
 
 - Download and install the putty
 
-- Open `PuttyGen` to convert the `.pem` to `.ppk` which will be understood by `Putty`
+- Open `puTTYGen` to convert the `.pem` to `.ppk` which will be understood by `puTTY`
 
 - File -> Load the Private key -> Save the private key with/without passphrase
 
-- Open the `Putty` and connect to `EC2-instance`
-  - Host Name (or IP address): `ec2-user@<public-ip>`
-  - Port: `22` - always defaults to 22
-  - Load the `.ppk` file to the connection -> `Category (tree) -> Connection -> SSH -> Auth -> Browse`
-    and select the saved `.ppk` file
-  - Save the connection for future use
-  - Click on `Open` button to connect
+- Open the `puTTY` and connect to `EC2-instance`
+
+- Host Name (or IP address): `ec2-user@public-ip-of-an-ec2-instance`
+
+- Port: `22` - always defaults to 22
+
+- Load the `.ppk` file to the connection -> `Category (tree) -> Connection -> SSH -> Auth -> Browse`
+  and select the saved `.ppk` file
+
+- Save the connection for future use
+
+- Click on `Open` button to connect
 
 #### Connect with EC2 Instance Connect
 
@@ -126,8 +135,20 @@
 - They control how network traffic is allowed into or out of your EC2 machine
 
 - `Network & Security -> Security Groups` - To control the inbound and outbound connection to the instance
-  - Under `Inbound` tab edit and remove the rule added to port-22, then try to connect - which doesn't work
-  - Create one with `Type: SSH, Protocol: TCP, Port range: 22, Source: Custom 0.0.0.0/0`
+
+- Under `Inbound` tab edit and remove the rule added to `port: 22`, then try to connect - which doesn't work
+
+- Create one with inbound rule to access the EC2 on `port: 22` through SSH, as follows
+  ```
+  Type: SSH, Protocol: TCP, Port range: 22, Source: Custom 0.0.0.0/0`
+  ```
+
+- Add another inbound rule for HTTP,  
+  ```
+  HTTP, TCP, Port: 80 for 0.0.0.0/0` to access the http port of the ec2 instance
+  ```
+
+- Add an outbound rule, by default it is added while creating an SG
 
 ### Create an Elastic IP
 
@@ -135,7 +156,8 @@
   can be attached to one instance at a time. Only 5 IPs, can be increased. Try avoid using `Elastic IP`
 
 - `Network & Security -> Elastic Ips` -> Click on `Allocate new address` -> `Allocate`
-  - Right click on created Elastic IP -> `Associate address` -> select the instance  -> `Associate`
+
+- Right click on created Elastic IP -> `Associate address` -> select the instance  -> `Associate`
 
 - Associated Elastic IP will be assigned as public IPv4 address and won't be lost on stop and restarting an instance.
 
@@ -541,13 +563,13 @@
 
 - Within a region we can create a VPC
 
-- Each VPV contains subnets
+- Each VPC contains subnets
 
 - Each subnet must be mapped to an AZ
 
-- Public subnets usually contains, load balancers, static websites, files, public authentication layers
+- Public subnets usually contain, `load balancers`, `static websites`, `files`, `public authentication layers`
 
-- Private subnets usually contains, web application servers, databases
+- Private subnets usually contains, `web application servers`, `databases`
 
 ## Amazon S3
 
@@ -579,7 +601,8 @@
 
 - Search for `S3` -> `Create a bucket` -> `Name: Give a unique name, Region: Mumbai` and leave the other sections
   as it is and create one
-- Once bucket provisioned, upload the files, leave it to default values and upload the file
+- Once bucket provisioned, upload the files, leave it to default values and upload the file.
+- `Properties` -> tab provides us to specify the encryption method for the file being uploaded.
 
 ### S3 Versioning
 
@@ -604,7 +627,7 @@
 #### SS3-S3
 
 - Object is encrypted at server side
-- Type: `AES-256`
+- Type, `AES-256`
 - Must set the header: `"x-amz-server-side-encryption":"AES256"`
 
 #### SSE-KMS
@@ -616,11 +639,189 @@
 #### SSE-C
 
 - S3 doesn't store the encryption key provided
-- HTTPS must be used
+- `HTTPS` must be `mandatory`
 - Key must provided in HTTP headers, for every request made
 
 #### Client Side Encryption
 
-- Can be done with client library such as `Amazon S3 Encryption Client`
+- Can be done with client library such as `Amazon S3 Encryption Client` SDK
 - Client must `encrypt` the data before sending it to S3
 - Should `decrypt` the encrypted data received from the S3
+
+### Encryption in Transit (SSL/TLS)
+
+- AWS S3 exposes HTTP endpoint, non encrypted
+- And exposes HTTPS endpoint in flight
+
+### S3 Security
+
+- `User Based`: IAM Policies - Allow specific API calls for an IAM Role
+
+- `Resource Based`: There are 3 types
+  - `Bucket Policies`: Bucket wide rules from the S3 console - allows cross account access.
+    JSON based policies
+  - `Object Access Control List (ASL)` - Finer grain control
+  - `Bucket Access Control List (ASL)` - Less common
+
+> An IAM Principal can access an S3 object if, the user IAM permissions allow or
+  the resource policy allows it and there is no explicit deny
+
+## Create Policy for S3 Bucket
+
+- `S3` -> `Properties` -> `S3 Bucket Bucket Policy`
+
+- Open `AWS Policy Generator`
+  ```
+  1) Policy Type: S3 Bucket Policy
+  2) Add Statement(s)
+     Effect: Deny
+     Principal: * # On everthing
+     AWS Service: AWS S3
+     Actions: PutObject
+     ARN: arn..../* # Copy it from Properties -> S3 Bucket Bucket Policy section
+     Add Conditions:
+      Condition: null
+      Key: s3:x-amz-server-side-encryption
+      value: true
+  # Add the statement, multiple statements can be added
+  # Add another statement with same as above with changes to conditions as follows
+    Condition: StringNotEquals
+    Key: s3:x-amz-server-side-encryption
+    value: AES256
+
+  3) Generate the policy
+
+  # Copy the JSON object and paste it in Bucket Policy tab
+  ```
+
+### S3 Websites
+
+- S3 can host websites and have them accessible on the www
+
+- The URL would look like, `<bucket-name>.s3-website-<AWS-region>.amazonaws.com`
+
+- Upload the html files and go to `Properties -> Static Website hosting`
+  and specify the html file names and copy the URL `http://pk-web-bucket.s3-website.ap-south-1.amazonaws.com`
+
+- Make sure the bucket should be made public go to `Permissions -> Block Public Access` and uncheck the rule selected
+  And Add a bucket policy under  `Permissions -> Bucket Policy`, select `Policy Generator` to create the policy
+  ```
+  {
+    "Id": "Policy1596008821834",
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "Stmt1596008813648",
+        "Action": [
+          "s3:GetObject"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::pk-web-bucket/*",
+        "Principal": "*"
+      }
+    ]
+  }
+  ```
+
+#### CORS with S3 buckets
+
+- Header used, `Access-Control-Allow-Origin`
+
+- Need to enable CORS headers in the bucket, allow specific origin or all `*`
+
+- Make a `fetch` request from `index.html` to another html `extra-page.html`
+  ```html
+  <div class="fetch-sample"></div>
+  <script>
+    let fetchSample = document.querySelector(".fetch-sample");
+
+    fetch("extra-page.html")
+      .then((response) => response.text())
+      .then((html) => (fetchSample.innerHTML = html));
+  </script>
+  ```
+
+- Upload the files to bucket and request the file as,
+  `http://pk-web-bucket.s3-website.ap-south-1.amazonaws.com/extra-page.html`
+
+- It should work because it is in the same origin as that of bucket
+
+- To enable CORS, keep `extra-page.html` in another bucket
+  and enable `static website hosting` and set `public access`, the `bucket policy` and upload the file.
+
+- Open the link, `http://pk-cross-origin-bucket.s3-website.ap-south-1.amazonaws.com/extra-page.html`
+  to access the html file int the browser.
+
+- To enable CORS so that first bucket can access it,
+  go t0 `Permissions -> CORS Configuration` and update it with
+  ```xml
+  <CORSConfiguration>
+    <CORSRule>
+      <AllowedOrigin>bucket-url-or-*</AllowedOrigin>
+      <AllowedMethod>GET</AllowedMethod>
+      <AllowedMethod>PUT</AllowedMethod>
+      <MaxAgeSeconds>3000</MaxAgeSeconds>
+      <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+  </CORSConfiguration>
+  ```
+
+- Update the fetch url with `http://pk-cross-origin-bucket.s3-website.ap-south-1.amazonaws.com/extra-page.html`
+  to access the file from another bucket.
+
+## AWS CLI
+
+- Install the CLI based on your OS
+
+### Configuration on Local computer
+
+- Create an `IAM user`
+
+- Go to `Users` -> Select the user -> `Create access key` -> Generate the key and store it safely
+  never share it with anyone
+
+- Open the CLI and configure `aws` as follows
+  ```
+  $ aws configure
+  ```
+
+  - Enter `Access Key ID` and `Secret Access Key` when prompted
+
+  - Specify `default region name` and default output format as is
+
+### CLI on EC2
+
+- Best way is to use `IAM Roles`
+
+- `IAM Roles` can be attached to the EC2 instances
+
+- `IAM Roles` can come withe a policy authorizing exactly what the EC2 instance should be able to do
+
+- SSH into the EC2 instance created and it should have aws cli installed already
+  ```
+  $ aws configure
+  ```
+  > Don't specify the access ID and keys here, just enter the region name. That's it
+
+- Create an `IAM Role` from `IAM console` and attach it to running EC2 instance
+  ```
+  1) Create a Role: AWS Service -> EC2 option
+  2) Permissions -> search for s3 -> select -> S3 Readonly Access
+  3) Specify an Unique name and Create Role
+  ```
+
+- Go to EC2 running instance -> right click -> `Instance Settings` -> `Attach or Replace IAM Role`
+
+- Go to EC2 console, to list all the S3 buckets created
+  ```
+  $ aws s3 ls
+
+  # List the files in the bucket
+  $ aws s3 ls s3://<bucket-name>
+  ```
+  > Without the access the IAM Role it wont let access s3 from AWS CLI
+
+- Try creating an bucket, it fails because of readonly policy of the `IAM Role` attached to the EC2 instance
+  ```
+  $ aws s3 mb s3://another-bucket
+  ```
