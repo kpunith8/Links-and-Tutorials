@@ -17,3 +17,11 @@ $ cat package.json | grep -A 20 "scripts"
 ```
 $ cat /etc/os-release
 ```
+
+
+## Run a command without sudo
+
+- For Ubuntu
+  ```
+  $ sudo usermod -aG docker $USER
+  ```

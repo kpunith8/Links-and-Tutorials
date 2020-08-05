@@ -240,3 +240,20 @@ const arrowFunc = (data) => ({
   payload: data
 })
 ```
+
+### Generate Grid
+
+```js
+const generateGrid = (rows, columns, mapper) =>
+	Array(rows).fill().map(() => Array(columns).map(mapper))
+
+// Usage
+generateGrid(3, 3, () => null)
+// Generates an array of 3x3 with null values
+```
+
+### Create the deep clone of an object
+
+```js
+const cloneDeep = x => JSON.parse(JSON.stringify(x))
+```

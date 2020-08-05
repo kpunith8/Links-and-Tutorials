@@ -10,7 +10,7 @@
 
 ## Youtube channels
 
-- [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg)
+- [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg) - Automation Step by Step - Raghav Pal 
 
 - [DS] - https://www.youtube.com/channel/UCD8yeTczadqdARzQUp29PJw
 
