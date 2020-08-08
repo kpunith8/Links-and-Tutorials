@@ -28,6 +28,7 @@ $ ls -al | pbcopy
 
 - `Ctrl + Cmd + Space` - Emoji Icons
 
+- `Cmd + Shift + .` - To `show or hide hidden files` starting with `.`
 
 ### List the running services in brew
 

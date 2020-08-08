@@ -221,7 +221,6 @@ Object.entries(style).map(entry => {
 });
 ```
 
-
 ### Create an empty array of some length and return some object
 
 ```js
@@ -241,7 +240,7 @@ const arrowFunc = (data) => ({
 })
 ```
 
-### Generate Grid
+### Generate a dynamic grid 2*2 with null values
 
 ```js
 const generateGrid = (rows, columns, mapper) =>

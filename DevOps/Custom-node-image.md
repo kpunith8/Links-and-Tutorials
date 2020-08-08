@@ -41,7 +41,6 @@ $ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress
 & docker run --volume `pwd`:/app --workdir /app node-img:latest bash -c "npm ci && npm run test:cypress"
 ```
 
-
 ### Node image with least permissions
 
 ```

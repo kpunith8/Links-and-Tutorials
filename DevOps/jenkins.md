@@ -25,3 +25,20 @@ docker ps -a
 ```
 docker logs <container-id>
 ```
+
+## Add Slaves
+
+- Go to `Configure Global Security` -> `Agents` -> `Fixed: 50000`
+
+- Go to `Manage Nodes` -> `New Node` -> Give a name -> Select Launch Method as `Launch agent by connecting it to the master`
+
+- If you are using `ubuntu docker image` or `AWS EC2 instance` make sure to install `open_jdk_8` on them.
+  ```
+  $ apt-get install -y openjdk-8-jdk
+  ```
+
+- We need to download the `agent.jar` from slave node and copy it to `ubuntu image` using `fileZilla` and run the command
+  given in the slave page on the machine.
+
+> If you are using docker containers as slaves while executing the command to register use the ip address of
+  the master node instead of localhost in the url

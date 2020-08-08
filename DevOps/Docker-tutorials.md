@@ -5,47 +5,65 @@
 - Enable `Hyper-V` feature in `Control Panel -> Programs and Features -> Turn windows features on or off -> Check - Hyper-V`
 - If Hyper-V is not running, enable `Intel VT/VT-x` or `AMD-V in BIOS`
 
-### Basic commands
+## Basic commands
 
-- List the sever and docker version installed on the system
-  ```
-  $ docker version
-  ```
-
-- Displays all the information about the docker images, containers and more details
-  ```
-  $ docker info
-  ```
-
-- To run the docker container
+### To run the docker container
   ```
   $ docker run <container-name>
+
+  # Give a name to container and run it in background with -d option
+  $ docker run --name ubuntu_slave1 -it -d ubuntu
   ```
 
-- List the containers running or stopped
-  ```
-  $ docker ps
-  ```
+### Execute commands on running container
 
-- List the running containers
-  ```
-  $ docker ps -a
-  ```
+```
+$ docker exec -it ubuntu_slave1 bash
 
-- List all the images
-  ```
-  $ docker image ls
-  ```
+```
+### List the containers running or stopped
 
-- List the only running containers
-  ```
-  $ docker container ls
-  ```
+```
+$ docker ps
+```
 
-- Remove all the running dockers in AWS machine (ubuntu)
-  At least one docker container should be running before deleting
+### List the running containers
+
+```
+$ docker ps -a
+```
+
+### List all the images
+
+```
+$ docker image ls
+```
+
+### List the only running containers
+
+```
+$ docker container ls
+```
+
+### Copy files from host machine to docker container
+
+```
+$ docker cp foo.txt mycontainer:/foo.txt
+
+$ docker cp src/. mycontainer:/target
+```
+
+### Docker inspect to get the ip address
+
+```
+$ docker inspect <container>
+```
+
+### Remove all the running dockers in AWS machine (ubuntu)
+
+- At least one docker container should be running before deleting
   ```
-  sudo docker rm -f $(sudo docker ps -a -q)
+  $ sudo docker rm -f $(sudo docker ps -a -q)
   ```
 
 - Installing the docker gives the client and the daemon
@@ -66,7 +84,7 @@
   By contrast, a virtual machine (VM) runs a full-blown `guest` operating system with virtual access to host resources through a `hypervisor`.
   In general, VMs provide an environment with more resources than most applications need.
 
-- Pull an image of the Ubuntu OS and run an interactive terminal inside the spawned container:
+- Pull an image of the Ubuntu OS and run an interactive terminal inside the spawned container
   ```
   $ docker run --interactive --tty ubuntu bash
   ```

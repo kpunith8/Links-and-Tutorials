@@ -874,16 +874,16 @@
 
 ### AWS CLI Profiles
 
-- In macOS the `config` and `credentials` files stored under `~/.aws` file
+- In macOS the `config` and `credentials` files are stored under `~/.aws` folder
 
-- Access multiple AWS accounts, create a profile as follows
+- Access multiple AWS accounts: create a profile as follows
   ```
   $ aws configure --profile personal-aws
   ```
 
 - Enter `Access Key ID` and `Secret Access Key` when prompted
 
-- Specify `default region name` and default output format as is
+- Specify `default region name` and leave `Default output format` as is
 
 - While running specific commands on CLI provide `--profile` option as follows,
   ```
@@ -969,3 +969,140 @@
 - Using `SDK` or `CLI` will automatically sign all the HTTP requests.
 
 - Otherwise, need to be signed using, `Signature v4(SigV4)`
+
+## Advanced S3 and Athena
+
+### S3 MFA-Delete
+
+- MFA forces users to generate code on a device before performing any operations on S3
+
+- To use `MFA-Delete`, enable versioning on the S3 bucket.
+
+- MFA needed to `permanently delete an object version` and `suspend versioning on the bucket`.
+
+- MFA not needed for `enabling the versioning` and `listing deleted versions`
+
+- Only the bucket owner can enable/disable MFA-Delete.
+
+- It can only be enabled using CLI
+  ```
+  1) Create an bucket with versioning enabled.
+  2) Go to root account select MFA, make sure MFA has been enabled
+  3) Create an access key for the root account
+  4) Create a profile in the CLI and add the access id and key with the profile
+    $ aws configure --profile root-mfa-delete
+  5) Use the profile and list all the buckets
+    $ aws s3 ls --profile root-mfa-delete
+  ```
+
+- Enable the MFA delete as follows, copy the `arn` from MFA console and Code from registered device
+  ```
+  $ aws s3api put-bucket-versioning --bucket <bucket-name> --versioning-configuration
+    Status=Enabled,MFADelete=Enabled --mfa "<arn> <mfa-code>" --profile root-mfa-delete
+  ```
+
+- Go to the bucket and try deleting an file marker or try to disable the versioning,
+  It throws an error.
+
+- It can be disabled again by changing `--versioning-configuration Status=Enabled,MFADelete=Disabled`
+
+### S3 Access logs
+
+- Used to access the logs for audit purposes
+
+- Do not set logging bucket to be monitoring bucket, which will create a `logging loop`
+  and bucket will grow in size exponentially.
+  ```
+  1) Create a bucket to put all the logs for the bucket to be monitored
+  2) Go to App bucket to add the access logs -> Properties -> Enable, Server Access Logging
+     And choose a target bucket and do some action like adding file and deleting
+     Everything gets logged to targeted bucket
+  ```
+
+### S3 pre-signed URLs
+
+- To give access to files for a while
+
+- Need to use CLI to sign the URL to give access to.
+  ```
+
+  ```
+
+### S3 Replication (Cross and Same region)
+
+- Must enable versioning in both source and destination
+
+- Copying is asynchronous
+
+- Must give proper IAM permissions to S3
+
+- CRR good for compliance, lower latency and replication across accounts
+
+- SRR good for log aggregation, live replication between test and prod accounts
+
+- There is no chaining of replication any changes to A will only replicate in B but
+  not in C, if C was referring to B
+
+- Create two S3 buckets in 2 different regions and make sure to `enable the versioning` on both
+  of the S3 buckets
+  ```
+  1) Create and enable versioning for both the buckets
+  2) Enable Replication for the target bucket -> Management -> Replication
+     Add a Rule -> Entire Bucket -> Choose the destination bucket
+     Create a new IAM Role -> name it -> Review and Save it
+  ```
+
+- Delete markers or any delete action are not replicated
+
+### S3 Storage Classes
+
+- There are 6 types
+
+1. `Amazon S3 Standard`
+
+  - `High durability` across multiple AZ (99.999999999%)
+  - Sustain 2 concurrent facility failures
+  - Use cases: `Big data analytics`, `mobile and gaming apps`, `content   distribution`
+
+2. `Amazon S3 Standard-Infrequent Access (IA)`
+  - Required for data that is less frequently accessed - requires rapid access when needed
+  - `Highly durability` across multiple AZ
+  - `Low cost` compared to s3 standard
+  - Sustain 2 concurrent facility failures
+  - Use cases: `Disaster recovery`, `backups`
+
+3. `Amazon S3 one zone-Infrequent Access`
+  - Same as IA, but data is stored in `single AZ`, 99.5% durability
+  - High durability, `data is lost when AZ is destroyed`
+  - Low latency and high throughput performance
+  - Low cost compared to IA
+  - Use cases: `Storing secondary backup copies` of on-premise data, data that can be recreated
+  - Minimum storage duration `30 days`
+
+4. `Amazon S3 Intelligent Tiering`
+  - Same durability as of standard S3,
+  - Low latency and high throughput performance
+  - `Monthly monitoring` and `auto-tiering fees`
+  - Resilient against events that impact an entire AZ
+  - Minimum storage duration `30 days`
+
+5. `Amazon Glacier`
+  - `Low cost` meant for `archiving` and `backup`
+  - Data retained for `long duration` (10s of years)
+  - Alternative to `on-premise magnetic tape strorage`
+  - High durability
+  - Cost per GB is very low `$0.004/GB/Month` + `retrieval cost`
+  - Each item called as an `Archive` `(upto 40 TB)`
+  - They are stored in `Valuts`
+  - There are `3 Retrieval Options`
+    - `Expedited` (1 to 5 mins)
+    - `Standard` (3 to 5 hours)
+    - `Bulk` (5 to 12 hours)
+  - Minimum storage duration `90 days`
+
+6. `Amazon Deep Glacier`
+  - For `long term storage` - `cheaper`
+  - There are 2 `Retrieval Options`
+    - `Standard` (12 hours)
+    - `Bulk` (48 hours)
+  - Minimum storage duration is `180 days`
