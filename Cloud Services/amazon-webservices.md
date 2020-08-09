@@ -1278,3 +1278,178 @@
   - `Standard` (12 hours)
 
   - `Bulk` (48 hours)
+
+### S3 Lifecycle Rules - Move between storage classes
+
+- Rules can be created for specific prefix ex: `s3://my-bucket/mp3/*`
+
+- Rules can be created for certain object tags
+  ```
+  1) Go to bucket, Management
+
+  2) Add a Lifecycle rule
+
+  3) Specify Transition actions and expiration actions
+  ```
+
+#### Transition Actions
+
+- Defines when objects are Transitioned to another storage class
+
+- Move objects to Standard IA class 60 days after the creation
+
+- Move to Glacier after 6 months
+
+#### Expiration Actions
+
+- Configure objects to expire after some time
+
+- Access log files can be set to be deleted after 365 days
+
+- Delete older versions of the files (If versioning was enabled)
+
+- Cleanup incomplete multi part uploads
+
+### S3 Event Notifications
+
+- There are 3 types
+
+  - `SNS`: Simple Notifications Service - Send notification in emails
+
+  - `SQS`: Simple Queue Service - To add messages in to the queue
+
+  - `Lambda functions` - To generate some custom code
+
+- To make sure every single event notification is delivered, you need to enable versioning on your bucket.
+  ```
+  1) Go to bucket, enable versioning and goto Properties -> Events -> Choose SQS -> create one
+
+  2) SQS needs SQS ARN, go to SQS service and create one SQS queue
+     Add a permission to allow everyone with send message action
+  ```
+
+### Athena
+
+- `Serverless` service to perform `analytics` directly against S3 files
+
+- Uses `SQL` language to query the files
+
+- Has a `ODBC/JDBC` driver
+
+- Charged per query and amount of data scanned
+
+- Supports many file formats `.csv`, `.json`, `.orc`, `.avro`, and `.parquet` (built on Presto)
+
+- Use cases: `Business Intelligence`, `analytics`, `reporting`, analyse and query
+  VPC flow logs, `ELB Logs`, `CLoudTrails` etc
+
+- Create athena
+  ```
+  1) Search for Athena service
+
+  2) Query Editor -> Choose query result location from the settings
+
+  3) Create a new database and follow the AWS documentation
+  ```
+
+### S3 Objects Lock and Glacier Vault Lock
+
+- S3 Objects adopts to `WORM` (Write Once Read Many) model, block an object version
+  deletion for specified amount of time.
+
+- Glacier Vault adopts to `WORM` (Write Once Read Many) model, Lock the policy
+  for future edits (can no longer be changed)
+
+## CloudFront -  CDN - Content Delivery Network
+
+- Content distribution, improves read performance, content is cached at the edge
+
+- Provides `DDoS protection`, integration with `shield`, AWS web application `firewall`
+
+- Can expose external `HTTPS` and can talk to internal HTTPS `backends`
+
+- We can restrict who can access the distribution, `blacklist` or `whitelist` the
+  countries so that the content can be given least access
+
+### CloudFront Origins
+
+### S3 Bucket
+
+- For distributing and caching at the edge
+
+- Enhanced security with CloudFront `Origin Access Identity (OAI)`
+
+- CloudFront can be used as an `ingress` (to upload files to S3)
+
+### Custom Origin (HTTP)
+
+- `Application Load Balancer`
+
+- `EC2 Instance`
+
+- `S3 Website`
+
+- Any HTTP Backend you want
+
+- Example
+  ```
+  1) Create a bucket or use the existing one
+
+  2) Select CloudFront Service,
+
+  3) Create a distribution -> Select Web option, fill the details
+
+  a) Origin Settings:
+     Origin Name: bucket name
+     Origin Path: <empty>
+     ID: <as-is>
+     Origin Access Identity: Create new one
+     Grant Read Permissions: Yes
+
+  b) Default Cache Behaviour Settings: <as-is>
+
+  4) Create distribution
+
+  5) Go back to bucket and check the Bucket Policy added under Permissions
+
+  6) Grab the link from CloudFront -> Domain Name and access it,
+     May take couple of hours to access because of DNS Propogation
+     To access the files make the files in S3 public by individually giving
+     permission to each file
+  ```
+
+### Caching and Caching Invalidations
+
+- Caching can be based on `Headers`, `Session Cookies`, and `Query String Parameters`
+
+- All the caching lives at each CloudFront edge location
+
+- Maximize the cache hit rate to minimize the requests on the origin
+  by separating `static` (no `headers/session` caching rules required, S3 buckets can be used) and
+  `dynamic` distributions (Cache based on `correct headers` and `cookie`, dynamic content -
+  `REST`, `HTTP Server` using `ALB + EC2`)
+
+- Control the `TTL` (0 Seconds to 1 year), can be set by the origin
+  using the `Cache-Control Header`, `Expires Header`
+
+- Part of the cache can be invalidated using `CreateInvalidation API`
+  ```
+  1) Go to CloudFront select the distribution created
+
+  2) Select Invalidations -> Create Invalidation -> Provide Object Path
+     as * to invalidate everything, can be configured to match different rule
+  ```
+
+### CloudFront Signed URL / Cookies
+
+- Attach a policy with `URL expiration`, `IP ranges to access the data from`, `trusted signers`
+
+- URL can be valid for short time to long period based on the content
+
+- `Signed URL`: access to individual files (one signed URL per file)
+
+- `Signed Cookies`: access to multiple files (one signed cookie for many files)
+
+## AWS ECS, ECR & Fargate - Docker in AWS
+
+- 
