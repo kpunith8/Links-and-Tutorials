@@ -42,3 +42,13 @@ docker logs <container-id>
 
 > If you are using docker containers as slaves while executing the command to register use the ip address of
   the master node instead of localhost in the url
+
+- Use `docker inspect` to get IP address of the docker node, could change on each launch
+  ```
+  $ docker inspect <container>  
+  ```
+
+- Using `agent.jar`, `secret file` and `IP address` of the ubuntu docker image, run the command to connect to master
+```
+$ java -jar agent.jar -jnlpUrl http://172.17.0.2:8080/computer/slave-1/slave-agent.jnlp -secret @secret-file -workDir ""
+```

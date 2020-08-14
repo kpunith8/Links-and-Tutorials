@@ -256,3 +256,18 @@ generateGrid(3, 3, () => null)
 ```js
 const cloneDeep = x => JSON.parse(JSON.stringify(x))
 ```
+
+## Missing letters
+
+- Find the missing letter in the passed letter range and return it.
+
+- If all letters are present in the range, return undefined. `stvwx` => `u`, `abce` => `d`
+	```js
+	function fearNotLetter(str) {
+		const letters = "abcdefghijklmnopqrstuvwxyz".split("")
+		const startingIndexOfSearchStr = letters.indexOf(letters.find(e => str.split("").includes(e)))
+		const filteredText  = letters.filter(letter => !str.includes(letter))
+
+		return filteredText.length === 0 ? undefined : filteredText[startingIndexOfSearchStr];
+	}
+	```

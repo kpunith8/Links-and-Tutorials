@@ -298,6 +298,7 @@ window.onload = function() {
 ```
 
 ## Regular expressions
+
 - https://regex101.com/
 
 - `test()` function to test whether the given pattern exists in a given string, pattern should be
@@ -307,7 +308,8 @@ window.onload = function() {
 	const pattern = /test/;
 	pattern.test(str); // returns true if given string matches the pattern
 	```
-- add flag `i` to ignore the case-sensitiveness in the string to be matched eg: `const pattern=/test/i`
+
+- Add flag `i` to ignore the case-sensitiveness in the string to be matched eg: `const pattern=/test/i`
 
 - `match()` function can be used to extract the actual matches, returns an array of matched string only one string is matched
 	```javascript
@@ -318,14 +320,27 @@ window.onload = function() {
 	ourStr.match(ourRegex);
 	// Returns ["expressions"]
 	```
-- add flag `g` to pattern to match more than once in a given string eg: `const pattern=/test/g`
 
+- Add flag `g` to pattern to match more than once in a given string eg: `const pattern=/test/g`
 
-- `/text/gi` - `g` specifies all matches in the file or object, `i` specifies for case insensitive.
+- `/text/gi` `g` specifies all matches in the file or object, `i` specifies for case insensitive.
 
-- `/[ti]ext/g` - matches `t` or `i` as first character in the text.
+- `/[ti]ext/g` matches `t` or `i` as first character in the text.
 
-- `/[^aeiou]man/g` - excludes `a or e or i or o or u` from the first character being matched.
+- `/[^aeiou]man/g` excludes `a or e or i or o or u` from the first character being matched.
+
+- `^` matches the start of the input string
+
+- `$` matches the end.
+
+- `/^\d+$/` matches a string consisting entirely of one or more digits
+
+- `/^!/` matches any string that `starts` with an `exclamation mark`
+
+-  `/x^/` does not match any string (there cannot be an x before the start of the string)
+
+- `\b\b` word boundary `/\b\d+ (pig|cow|chicken)s?\b/`
+	`Pipe(|)` character denotes a choice between the pattern to its left and pattern to its right.
 
 - `/[a-zA-Z]man/g` - first character can be any character and can be case insensitive. It can be any range a-f, k-q and can be number
 	range as well 0-9, 1-6; To make the whole sentence case insensitive add `i` flag to it or it applies to first character.
@@ -356,24 +371,26 @@ window.onload = function() {
 
 	`[a-z]{5}$` - matches 5 characters at the end
 
-- Regular expression capture groups:
-- Capturing groups in regex is simply extracting a pattern from `() `.
-	You can capture groups with `/regex/.exec(string)` and with `string.match`.
-	Regular capture group is created by wrapping a pattern in `(pattern)`.
+### Regular expression capture groups
+
+- Capturing groups in regex is simply extracting a pattern from `()`.
+	You can capture groups with `/regex/.exec(string)` and with `"string".match()`.
+
+- Regular capture group is created by wrapping a pattern in `(pattern)`.
 	But to create groups property on resulting object use: `(?<name>pattern)`
 
 ## Examples
 
 -  https://www.regextester.com/
 
-- Domain
-	- `^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$`
+- Binary or Hexa/decimal numbers `/\b([01]+b|[\da-f]+h|\d+)\b/`
+- Domain `^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$`
 
 - IPv4 address
-	- `^(?:(?:25[0-5]{1}.)|(?:2[0-4]{1}[0-9]{1}.)|(?:1{1}[0-9]?[0-9]?.)|(?:[0-9]{1}[0-9]?.)){3}(?:(?:25[0-5]{1})|(?:2[0-4]?[0-9]?)|(?:1{1}[0-9]?[0-9]?)|(?:[0-9]{1}[0-9]?)){1}$`
+	`^(?:(?:25[0-5]{1}.)|(?:2[0-4]{1}[0-9]{1}.)|(?:1{1}[0-9]?[0-9]?.)|(?:[0-9]{1}[0-9]?.)){3}(?:(?:25[0-5]{1})|(?:2[0-4]?[0-9]?)|(?:1{1}[0-9]?[0-9]?)|(?:[0-9]{1}[0-9]?)){1}$`
 
 - IPv6 address
-  - `^((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7}$`
+  `^((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7}$`
 
 ```javascript
 const domainPattern = '^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$'
@@ -387,6 +404,53 @@ const ipAddressAndDomainRegExp = new RegExp(`${domainRegExp.source}|${ipv4Addres
 domainRegExp.test('123.11.11.22') // true
 domainRegExp.test('256.11.11.22') // false
 ```
+
+## replace() and replaceAll() on string
+
+- String values have a `replace()` method that can be used to replace part of the string with another string
+ 	```js
+	"Borobudur".replace(/[ou]/, "a")) // Barobudur
+
+	"Borobudur".replace(/[ou]/g, "a")); // Barabadar
+
+	"Liskov, Barbara\nMcCarthy, John\nWadler, Philip".replace(/(\w+), (\w+)/g, "$2 $1"));
+	// Barbara Liskov
+	// John McCarthy
+	// Philip Wadler
+
+	// The $1 and $2 in the replacement string refer to the parenthesized groups in the pattern
+	```
+
+- We can pass a `function` rather than a string as the second argument to `replace`
+	```js
+	let s = "the cia and fbi";
+	s.replace(/\b(fbi|cia)\b/g, str => str.toUpperCase()) // CIA and FBI
+
+	let stock = "1 lemon, 2 cabbages, and 101 eggs";
+	function minusOne(match, amount, unit) {
+	  amount = Number(amount) - 1;
+	  if (amount == 1) { // only one left, remove the 's'
+	    unit = unit.slice(0, unit.length - 1);
+	  } else if (amount == 0) {
+	    amount = "no";
+	  }
+	  return amount + " " + unit;
+	}
+	console.log(stock.replace(/(\d+) (\w+)/g, minusOne));
+	// → no lemon, 1 cabbage, and 100 eggs
+	```
+
+- Replace all the comments in the JS code
+	```js
+	function stripComments(code) {
+	  return code.replace(/\/\/.*|\/\*[^]*?\*\//g, "");
+	}
+	//  [^] (any character that is not in the empty set of characters) as a way to match any character
+	// We cannot just use a period here because block comments can continue on a new line,
+	// and the period character does not match newline characters.
+	stripComments("1 /* a */+/* b */ 1") // 1 + 1
+	```
+
 
 ## Design Patterns
 

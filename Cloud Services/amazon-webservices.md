@@ -1452,4 +1452,107 @@
 
 ## AWS ECS, ECR & Fargate - Docker in AWS
 
-- 
+### ECS Clusters
+
+- Logical grouping of EC2 instances
+
+- EC2 instances run the ECS agent (Docker container)
+
+- The ECS agents registers the instances to the ECS Cluster
+
+- EC2 instances run a special `AMI`, made specifically for ECS
+  ```
+  1) Search for ECS service
+
+  2) Clusters -> Create cluster
+
+  3) Select EC2 Linux + Networking
+
+  a) Instance Configuration:
+     Provisioning Model: On-demand instance
+     EC2 instance type: t2.micro
+     Number of instances: 1
+     Key Pair: use the existing one
+
+  b) Networking:
+     VPC: Choose if already created one or create one
+     Subnets: Choose multiple subnets, create if doesn't exist
+     Security Group: Create a new SG
+     Inbound rules: 0.0.0.0/0
+
+  c) Container Instance IAM Role:
+     Create a new IAM role
+
+  5) Create
+
+  6) Go to EC2 console -> Auto Scaling Groups
+     It adds an ASG to the created cluster having the instance
+     Click on the ASG -> Instances to access the EC2 instance attached to the ASG
+
+  7) Creates a Launch configuration as well
+
+  8) SSH into EC2 instance and take a look at /etc/ecs/ecs.config
+
+     $ ssh ec2-user@<ip> -i <key>.pem
+
+     $ cat /etc/ecs/ecs.config
+
+     $ docker ps # To check the containers running in the container
+  ```
+
+### ECS Task Definitions
+
+- Task definition is a `metadata` in the form of `JSON` to tell ECS how to run a docker container
+
+- It contains, `image name`, `Port binding` for container and host, `memory and cpu` required
+  `environment variables`, `networking information` and etc.
+  ```
+  1) Select the cluster created
+
+  2) Select task definitions -> Create a new task definition -> EC2
+     Name it, task role and network mode leave as is
+
+  3) Assign Task memory: 300 and CPU: 250
+
+  4) Add a container
+     Contaier name: httpd
+     Image: httpd:2.4
+     Memory Limits: 300
+     Port Mapping: 8080/80
+     Leave the other config options as is, for the simple use
+
+  5) Create
+  ```
+
+### ECS Service
+
+- Helps define how many tasks should run and how they should be run
+
+- They ensure that the number of tasks desired is running across fleet of EC2 instances
+
+- They can be linked to ELB/NLB/ALB if needed
+  ```
+  1) Select the Cluster created -> Services
+
+  a) Create a service
+     Launch type: EC2
+     Task definition: Created above
+     Service Name: Name it
+     Service Type: Daemon
+     Number of tasks: 1
+     Minimum healthy percent: 0
+     Maximum percent: 200
+
+  b) Deployments
+     Deployment type: Rolling update
+
+  c) Task placement: AZ Balanced Spread
+
+  d) Load balancing: None
+
+  d) Disable service discovery integration
+
+  e) Dont setup ASG
+
+  2) Review and create
+  ```
