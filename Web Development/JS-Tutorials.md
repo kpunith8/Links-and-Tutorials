@@ -645,6 +645,16 @@ domainRegExp.test('256.11.11.22') // false
 
 - `console.time('name')` and `console.timeEnd('name')` - to measure the time it takes to execute the code
 
+- `performance.now()` to measure the time it takes to execute a block of code
+	```js
+	let t0 = performance.now()
+
+	// Code
+
+	let t1 = perfomance.now()
+	let res = t1 - t0
+	```
+
 - `debug(methodName)` - in the console pass the function name to debug and it takes to that function
 	if it exists in the current scope or in the project and `unregister` it by, `undebug(methodName)`
 

@@ -1,4 +1,13 @@
-## Visualisation using D3
+## Visualisation using D3 - Data Driven Documents
+
+- Libraries built on top of D3, `NVD3`, `Dimple.js`, and `Rickshaw` most popular
+
+- `RAW` and `Chartio` to define charts on top of D3
+
+- Involves three steps for data visualization, `HCI - Human Computer Interaction`,
+  `Data Wragling`, and `EDA - Exploratory Data Analysis`
+
+## Examples
 
 ### Bar Graph with labels using svg
   ```js
@@ -180,3 +189,7 @@
      .attr("transform", "translate(60," + (0) + ")")
      .call(yAxis);
   ```
+
+## Links
+
+- [Visual Encoding](https://www.targetprocess.com/articles/visual-encoding/)

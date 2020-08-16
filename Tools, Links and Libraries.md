@@ -10,7 +10,7 @@
 
 ## Youtube channels
 
-- [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg) - Automation Step by Step - Raghav Pal 
+- [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg) - Automation Step by Step - Raghav Pal
 
 - [DS] - https://www.youtube.com/channel/UCD8yeTczadqdARzQUp29PJw
 
@@ -403,6 +403,13 @@
 - [CMS](https://www.contentful.com/developers/)
 
 - [Nested resolvers in Apollo Server](https://reactgo.com/nested-resolvers-relationaldata-graphql/)
+
+- [Resume Maker](resumemaker.online)
+
+- [Job Scan](jobscan.co)
+
+- [Resume Samples](https://www.cakeresume.com/Engineering-resume-samples)
+
 
 ### React
 
