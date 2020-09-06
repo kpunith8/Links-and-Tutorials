@@ -1,4 +1,4 @@
-# NEST
+# NestJS
 
 - Install the CLI and create the project
   ```
@@ -9,7 +9,7 @@
 
 ## Controllers
 
-- Responsible handling incoming requests and returning responses to the client.
+- Responsible for handling incoming requests and returning responses to the client.
 
 - It receives specific requests for the application. The routing mechanism controls
   which controller receives which requests. Frequently, each controller `has more
@@ -39,7 +39,7 @@
 
 - When a request handler returns a JavaScript object or array, it will automatically be `serialized` to JSON
 
-- Response's status code is always `200 by default`, except for `POST` requests which use `201`
+- Response's status code is always `200 by default`, except for `POST` requests which is `201`
 
 ###  Request object
 
@@ -62,7 +62,7 @@
 
 - Use dedicated decorators instead of using all the request object props, such as `@Body()` or `@Query()`
 
-- Supported below decorators
+- List of supported decorators
   ```
   @Request()	             req
   @Response(), @Res()*	   res
@@ -103,7 +103,7 @@
 
 ### Headers
 
-- To specify a custom response header, you can either use a @`Header()` decorator
+- To specify a custom response header, you can either use a `@Header()` decorator
   or a library-specific response object (`res.header()`)
   ```js
   @Post()
@@ -210,7 +210,7 @@
   }
   ```
 
-### Using express resonse object
+### Using express response object
 
 - The second way of manipulating the response is to use a `library-specific response` object.
   In order to inject a particular response object, we need to use the `@Res()` decorator.
@@ -242,7 +242,6 @@
     providers: [AppService],
   })
   ```
-
 
 ## Providers
 
@@ -278,7 +277,7 @@
   }
   ```
 
-- Use it in controller as,
+- Use it in `Controller` as,
   ```js
   import { Controller, Get, Post, Body } from '@nestjs/common';
   import { CreateCatDto } from './cat.dto';
@@ -618,4 +617,4 @@
 
 ## Exception Filters
 
-- 
+-

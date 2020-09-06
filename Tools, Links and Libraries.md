@@ -73,6 +73,27 @@
 - `Uncle Robert C Martin` - Clean code
 - `Victor Rentea` - Clean Code
 
+
+# Online Courses - Programming
+
+- [Scrimba](https://scrimba.com/)
+
+- [Egghead](https://egghead.io)
+
+- [Codecademy](codecademy.com/)
+
+- [Educative](https://www.educative.io/)
+
+- [Eduonix](https://www.eduonix.com/)
+
+- Coursera
+
+- Udemy
+
+- Udacity
+
+- Codegym
+
 # Libraries
 
 ## JS
@@ -183,6 +204,10 @@
 - https://github.com/jxnblk/mdx-deck - `Markdown based Presentation`
 
 - `mdx-deck-code-surfer` - Create better code slides
+
+- `the-platform` - `Suspense` ready helper functions
+
+- `react-cache` - for suspense to cache the resource
 
 ### Testing
 
@@ -423,7 +448,6 @@
 
 - https://www.scrimba.com/g/gflexbox
 
-
 ### Mobile development
 
 - https://www.expo.io - React-Native
@@ -561,3 +585,8 @@
 - forward-ref
 - Hooks
 - Concurrent API
+
+
+## Deployed Apps
+
+- https://node-mongo-jwt-auth.herokuapp.com/
