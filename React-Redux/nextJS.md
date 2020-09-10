@@ -178,8 +178,9 @@
 
 ### Static Generation  with data using getStaticProps
 
-- `export` an `async` function called `getStaticProps` from the component, which runs at build time
+- `export` an `async` function called `getStaticProps()` from the component, which runs at build time
   in production, Inside the function, you can `fetch` external data and send it as props to the page.
+  `export` `getStaticPaths()` from the component to get the path ids with `fallback` set to true
   ```js
   export default function Home(props) { ... }
 
@@ -197,5 +198,132 @@
 
 ## Dynamic Routes
 
-- Create a page called `[id].js` under `pages/posts`. Pages that begin with 
+- Create a page called `[id].js` under `pages/posts`. Pages that begin with
   `[ and end with ]` are dynamic routes in Next.js.
+
+## getInitialProps to make Client Side Rendering
+
+- getInitialProps() usage
+  ```js
+  export default function Page({people}) {
+    return <pre>JSON.stringify(people, null, 2)</pre>
+  }
+
+  Page.getInitialProps = async ctx => {
+    const res = await fetch("https://api.com/people")
+    const people = await res.json();
+    return {people}
+  }
+  ```
+
+- Consider using `getStaticProps()` instead of `getInitialProps()` from Next 9.3
+
+## getServerSideProps (Client side rendering)
+
+- getServerSideProps() usage
+  ```js
+  export const getServerSideProps = async ctx => {
+    const res = await fetch("https://api.com/people")
+    // Can be used to get the data from DB directly
+    const people = await res.json();
+    return {props: {people}}
+  }
+  ```
+
+- `Router.events` can be used to listen to different events happening inside the `Next.js Router` and we can add
+  progress using `nprogress` using `custom App`, keep `_app.js` under `/pages`
+
+## Environment variables
+
+- Use `cross-env` or `dotenv` npm package
+
+  ```json
+  "scripts": {
+    "build": "cross-env MY_VAR=hello MY_SECRET=1234 next build"
+  }
+  ```
+
+- These env variables are not available at build time for next we need to update `next.config.js` as follows
+
+- Refer `Runtime configuration` to get the configuration at run time  
+  ```js
+  // import dotenv here if you are consider using it
+  // require('dotenv').config()
+  // it needs .env file to be created in the root folder with variables declared and should not be committed to git or source control
+  module.exports = {
+    env: {
+      // These env variables will only be available in build time
+      MY_VAR: process.env.MY_VAR,
+      API_END_POINT: `/api/people`
+    },
+    serverRuntimeConfig: {
+      MY_SECRET: process.env.MY_SECRET
+    },
+    publicRuntimeConfig: {
+      API_END_POINT: '/api/version/1'
+    }
+  }
+  ```
+
+- Use the runtime config by `import getConfig from 'next/config'`, which returns,
+  `serverRuntimeConfig`, `publicRuntimeConfig` objects
+
+## Incremental Static Regeneration and SSG
+
+If the requested page is not built at the build time, it is better
+to generate on the fly, in case of thousands of pages, generating all the pages
+during the build time will have a slow building time which is not the
+ideal thing to do, instead set `fallback: true` when returning data from
+`getStaticPaths()` and set `revalidate` to any value (in seconds) to `revalidate`
+the SSG after a certain delay, from `getStaticProps()`
+
+Update the database and keep requesting the page, page revalidates after 3 seconds,
+if we have any new data in the backend, it revalidates for the mentioned time
+  ```js
+  // inside posts/[id].js file for dynamic routes
+  import { useRouter } from 'next/router';
+
+  export default function PageDetail(data) {
+    const {brand, model, price, imageUrl} = data
+    // To details about fallback so that we can so loading indicators to users
+    // while data is being fetched for incremental static generation
+    const router = useRouter();
+
+    if (router.isFallback) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <div>
+        <div>{brand}</div>
+        <div>{model}</div>
+        <div>{price}</div>
+        <div>{imageUrl}</div>
+      </div>
+    );
+  }
+
+  export const getStaticProps = async ctx => {
+    const id = ctx.params.id;
+    const db = await openDB();
+    // Could be a fetch call to external API
+    const data = await db.get('SELECT * from microphone where id = ?', + id)
+
+    return {
+      props: data,
+      revalidate: 3, // in secs
+    }
+  }
+
+  export const getStaticPaths = async () => {
+    const db = await openDB();
+    const microphones = await db.all('select * from microphone');
+    const paths = microphones.map((a) => {
+      return { params: { id: a.id.toString() } };
+    });
+
+    return {
+      fallback: true, // to incremental static generation
+      paths,
+  };
+  ```

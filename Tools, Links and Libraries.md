@@ -106,6 +106,7 @@
 - `vinyl-source-stream`- Use conventional text streams with gulp
 - `LABjs` - JS job loader
 - `npm-run-all` - run parallel tasks
+- `nprogress` - to show the indicator on top of the page
 
 ## Backend
 
@@ -264,6 +265,7 @@
 
 - [imgix](https://imgix.com) - Image compressing - no free tiers
 
+- [boxsvg](https://boxy-svg.com/) - online svg editor
 
 ## Free hosting
 

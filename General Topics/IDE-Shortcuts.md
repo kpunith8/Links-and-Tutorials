@@ -65,6 +65,7 @@ Settings -> set, javascript.validate.enable": false
 
 - `Cmd + Shift + \` - Goto matching bracket
 
+---
 
 ## VS Code plugins
 
@@ -83,6 +84,7 @@ Settings -> set, javascript.validate.enable": false
 - `REST Client` - to make rest calls from VS code
   - Create `requests.rest` - file in the route folder
   - Put `###` to send separate request in the same page
+- `dash` - Documentation - `ctrl + h`, `ctrl + alt + h` - for see the documentation
 
   ```
   GET http://localhost:3000/posts HTTP/1.1

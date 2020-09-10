@@ -54,16 +54,16 @@
 
   - The install directory is controlled by the `GOPATH` and `GOBIN`
 
-  - If `GOPATH` is set, binaries are installed to the `bin subdirectory` of the first directory in the GOPATH list.
-    Otherwise, binaries are installed to the `bin subdirectory` of the default `GOPATH`
+  - If `GOPATH` is set, binaries are installed to the `/bin sub directory` of the first directory in the GOPATH list.
+    Otherwise, binaries are installed to the `bin sub directory` of the default `GOPATH`
 
 ### Importing packages from your module
 
 - Create a `ds` package and use it from the `sample.go` program
 
 - Create a directory `ds` under `gosamples` and add a file named `ds.go` and add some code,
-  to export some code it should start with a `uppercase letter` for ex: function name should
-  start with a uppercase letter
+  to export some code it should start with a `uppercase letter` for eg, function name should
+  start with a uppercase letter, `GetName`
 
 - File name can be different but it should have the package name as its parent folder, here,
   `ds` is the package name and file name can be `func-utils.go`
@@ -91,7 +91,7 @@
   - This won't produce an output file. Instead it saves the compiled package in the local build cache.
 
 - Use it in `sample.go`, import and use it,
-  ```
+  ```go
   package main
 
   import (
@@ -124,7 +124,7 @@
 
 - It should have `main()` function to execute the code
 
-- Function with 2 params and type at last
+- Function with 2 params and type declaration after the variable declaration
   ```
   func add(x int, y int) int {
     return x + y
