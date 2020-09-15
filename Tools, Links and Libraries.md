@@ -73,6 +73,12 @@
 - `Uncle Robert C Martin` - Clean code
 - `Victor Rentea` - Clean Code
 
+### Go Lang
+
+- https://tutorialedge.net/course/golang/
+
+- Rest APIs with `mux`
+
 
 # Online Courses - Programming
 
@@ -401,9 +407,19 @@
 - Echo JS
 - Front-End Front
 - JavaScript Weekly
-- Dev.to
 - Best of JS
-- [Alligator](https://alligator.io/js/push-api/)
+- [Alligator.io](https://alligator.io)
+- https://davidwalsh.name/
+
+### Blogs I'm posting to
+
+- Dev.to
+
+- [Hashnode](https://hashnode.com/#)
+
+- medium
+
+- codementor.io
 
 ### Podcasts
 

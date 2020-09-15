@@ -257,7 +257,7 @@ HEAD~5 -> Five commits back from the current commit, it is equivalent to HEAD^^^
 - Best Practice: Only change the history for commits that have not yet been pushed
 `eg:` `master` has changed since started my feature and to bring feature branch up to date with `master`
 
-- rebase finds the merge base, cherry-picks all the commits, and reassings the branch pointer
+- rebase finds the merge base, cherry-picks all the commits, and re assings the branch pointer
 ```
 git rebase master
 ```

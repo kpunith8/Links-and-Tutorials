@@ -129,3 +129,22 @@ $ curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New item", "
 
 $ curl -i -X PUT -H 'Content-Type: application/json' -d '{"name": "Updated item", "year": "2010"}' http://rest-api.io/items/5069b47aa892630aae059584
 ```
+
+
+# Netlify
+
+## Netlify - _headers file or netlify.toml to include .well-known folder content
+
+- https://stellar.stackexchange.com/questions/2870/reactjs-netlify-hosting-stellar-toml-downloading-when-navigating-to-well
+
+- https://github.com/11ty/eleventy/issues/1049
+
+- Can be useful adding Brave token subscription, create `_headers` file in the project root
+  ```
+  # the brave-rewards-verification.txt
+  /.well-known/brave-rewards-verification.txt
+    Access-Control-Allow-Origin: *
+    Content-Type: text/plain
+  ```
+
+- Create `.well-known` folder and move the files inside
