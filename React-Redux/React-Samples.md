@@ -1029,7 +1029,7 @@ useEffect(() => {
   }
   ```
 
-### Install and initialise eslint
+### Install and initialize eslint
 
 - Install the plugins
   ```

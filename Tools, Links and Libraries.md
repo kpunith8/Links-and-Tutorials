@@ -12,7 +12,7 @@
 
 - [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg) - Automation Step by Step - Raghav Pal
 
-- [DS] - https://www.youtube.com/channel/UCD8yeTczadqdARzQUp29PJw
+- [DS](https://www.youtube.com/channel/UCD8yeTczadqdARzQUp29PJw)
 
 ### Devops
 
@@ -83,22 +83,16 @@
 # Online Courses - Programming
 
 - [Scrimba](https://scrimba.com/)
-
 - [Egghead](https://egghead.io)
-
 - [Codecademy](codecademy.com/)
-
 - [Educative](https://www.educative.io/)
-
 - [Eduonix](https://www.eduonix.com/)
-
 - Coursera
-
 - Udemy
-
 - Udacity
-
 - Codegym
+- https://www.theodinproject.com/ (web and full stack)
+- Daily.dev
 
 # Libraries
 
@@ -204,7 +198,7 @@
 
 - `SWR` - `React Hooks for Remote Data Fetching`
 
-- `react-query`
+- `react-query` - Similar to SWR
 
 - [React Hook Form](https://react-hook-form.com/get-started)
 
@@ -240,26 +234,30 @@
 
 - `strapi` - Open source
 
-- `contentful` - Freeium - has very good ecosystem
+- `contentful` - Freemium - has very good ecosystem - Headless CMS
 
-- `netlifycms` - Using github as backend for data storage and API
+- `netlifycms` - Using github as backend for data storage and API - Headless CMS
 
-### SPA
+### Static Site Generation
 
-- `NextJS` - React library for SPA
+- `NextJS` - `Static site generation`, `Server side rendering`
 
-- `Gatsby` - React library for SPA
+- `Gatsby` - `Static site generation`, ` can be used CMS`, templates
 
 ### State management
 
 - `redux`  
+
 - `mobX`
+
 - `xstate`
+
 - `recoil`
+
 - https://kea.js.org/
 
 
-## Tools
+## Common Tools
 
 - `JFrog` - Artifactory to host the packages (npm, jars etc)
 
@@ -272,6 +270,20 @@
 - [imgix](https://imgix.com) - Image compressing - no free tiers
 
 - [boxsvg](https://boxy-svg.com/) - online svg editor
+
+- [Markdown editor](https://typora.io/)
+
+- Daily.dev - 
+
+## Productivity tools
+
+- Google Keep
+
+- Trello - Task management and todo
+
+- [notionHQ](https://www.notion.so/) - To do App
+
+- WunderList - Microsoft To do
 
 ## Free hosting
 
