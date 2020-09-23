@@ -2,316 +2,275 @@
 
 ## Installing a package with pip
 
-- Install a package
-  ```
-  python3 -m pip install <package-name>
-  ```
+Install a package
+```
+python3 -m pip install <package-name>
+```
 
-- Updating pip
-  ```
-  python3 -m pip install --upgrade pip
-  ```
+Updating pip
+```
+python3 -m pip install --upgrade pip
+```
+
+## List and list comprehension
+
+`squares = [x**2 for x in range(1, 100)]` returns `[1, 4, 9, ..upto 100]`
+
+`even_numbers = [x for x in range(1, 10) if x % 2 == 0]` returns the list of even numbers
+
+`reverse an array` using list comprehension
+```py
+mylist = [1, 2, 3, 4]
+rev_list = [::-1]
+```
+
+### Create a copy of a list without mutating the original list
+
+```py
+my_list = [1, 2, 3, 4, 5]
+
+# create using a list function
+list_copy = list(my_list)
+
+# Using the slicing
+list_copy = my_list[:]
+
+# Use the copy() method
+list_copy = my_list.copy()
+
+# Using list comprehension
+list_copy = [i for i in my_list]
+
+list_copy.append(6)
+# my_list is not modified and list_copy is appended with an item
+
+# Appending an item to list_copy without copying mutates the my_list
+```
+
+## Tuples
+
+Ordered, Immutable collection and allows duplicate elements
+```py
+# brackets are optional if more than one item is present in the tuple
+my_tuple = ("name", 1, 2)  
+
+# Treated as a string if has only one item
+my_tuple = ("name")
+type(my_tuple) # returns string
+
+# Fix the issue adding an trailing comma after the entry
+my_tuple = ("name",)
+
+# Create an tuple from tuple() function passing iterables such as list
+my_tuple = tuple([1, 2, "name", 1, 2])
+
+# Access items specifying an index
+my_tuple[1]
+
+# Get the length of a tuple
+len(my_tuple)
+
+#  Count the occurrence of an item in a tuple using count property
+my_tuple.count(1) # returns 2
+
+# Get the index of an item
+my_tuple.index(1)
+
+# Convert to a list using list() function
+list(my_tuple)
+
+# Slicing works the same way as that of lists
+
+# Unpacking the tuple to a variables, number of variables should be equal to
+# number of items in the tuple not less or not more
+my_tuple = "Punith", "Bangalore", 25
+name, city, age = my_tuple
+
+# Unpack the items using * operator
+my_tuple = 1, 2, 3, 4, 5, 6, 7
+first, *others, last = my_tuple # *others returns, [2, 3, 4, 5, 6] as a list
+
+```
+
+### Get the size of a list or tuple in bytes
+
+```py
+import sys
+
+my_list = [1, 2, 3, 4, 5, 6, 7]
+my_tuple = 1, 2, 3, 4, 5, 6, 7
+
+sys.getsizeof(my_list)
+sys.getsizeof(my_tuple)
+```
+
+> Use timeit util to test the time taken to execute a statement or block of code,
+  https://docs.python.org/3/library/timeit.html
+
+## Dictionary
+
+
+
+
+## File Operations
+
+Open a file in read mode
+```
+my_file = open('file_name.txt, 'r')
+```
+
+`my_file.read()` reads the content of the file, reading the file again for the
+second time returns the `blank` string, this is because of, in the first read
+operation file cursor is already at the end of the file content, when we try
+to read the content for the second time, it returns empty because no content
+found after the last cursor, to read again the content from the beginning
+reset the cursor using `my_file.seek(0)`
+
+`file_content = my_file.readlines()`  returns the content line by line
+
+Once the file operations done close the file using, `my_file.close()` or
+file can be automatically closed using `with` for ex
+```python
+with open('file.txt') as my_file:
+    lines = my_file.read()
+```
+
+File content can be read using `lines` variable later
+
+`open()` accepts second parameter as mode, it can be read, write, append, and so on
+
+Write to a file using file handler, `myfile.write('Some content')` by default
+file is in read mode, enable `write` mode to write something, it
+`overrides the content` of the file, creates the new file if not exists.
+To append something to a file use `append` mode; use `a+` option to `append and read`
+
+Use `len(my_file)` to get the number of lines in the file
+
+Use `file_content[4]` returns the 5th lines in the file_content
+
+## Conditional Loops
+
+`if`, `elif`, and `else` loops
+```py
+if condition:
+    # execute statements
+elif:
+    # execute statements
+else:
+    # execute statements
+```
+
+For loops
+```py
+for item in items:
+    print(item)
+# Tuple looping, tups = [(1,2), (3,4), (5,6)]
+for (item1, item2) in tups: # Ignore () just mention the values in the tuples
+    print(item1, item2)
+# Dictionary looping, d = {"a": 1, "b": 2, "c": 3}
+for item from d: # d.keys() or d.items() used get the keys or items of the dictionary
+    print(item) # Prints only keys i.e. a, b, c
+for key in d:
+    print(d[k]) # to print value of the key in the dictionary
+```
+
+## Python Operators
+
+`range(0, 11, 2)` from 0 to 10 numbers are generated, third param is step, here 2 means it skips 2 items.
+
+`list(enumerate('abc'))` creates a tuple with indexes starting from 0 for each char in the string, works on any iterable object.
+
+`zip(list1, list2)` combines the list1 and list2 to create a tuple. Params to the `zip()` can be the same list, it zips till the shortest list among the lists passed, other elements in the bigger list are skipped.
+
+Create a list of tuples from 2 lists `list(zip(list1, list2))`
+
+`in` can be used to check for items in any iterable object, returns `True` if item exists, `False` otherwise.
+
+`min()` accepts iterable object and finds the minimum item in the list, passing the string `vndjdjz` to `min()` prints `d`
+
+`max()` accepts iterable object and finds the reverse of `min()`
+
+`shuffle()` accepts list object and shuffles the items, it can be imported from `random` as follows, `from random import shuffle`
+
+`and`, `or`, and `not` can be used for checking conditions
+
+### Error handling
+
+```py
+try:
+    # some code
+expect Exception1:
+    # some code
+expect Exception2:
+    # some code
+else:
+    # some code
+finally:
+    # this block runs irrespective of the error
+```
+
+## Debugging
+
+`import pdb` python debugger module to debug the code
+
+Set the trace in any code, `pdb.set_trace()` and `quit` to come out of the debugger
+
+## DateTime
+
+`import datetime`
+
+`datetime.time(1,12,12)` to set the time
+
+`datetime.date.today()` to get the today's date
+
+## Modules and Packages
+
+A module  is a file that can be imported under one import ex: `import my_module`
+
+A package is a collection of modules in directories that  give a package hierarchy
+```python
+# To load specific functions from a module
+from some_file import some_func, someother_func
+```
+
+Module can be imported using an alias, `import my_module as mm`
+
+To install publicaly availble modules using, `pip install <module-name>`
+
+## __name__
+
+`if __name__ == "__main__"` is designed to help indicate where function calls are coming from when
+working with multiple script files
+
+`__name__` is a built-in variable which evaluates to the name of the current module.
+However, if a module is being run directly, then __name__ instead set to the string `"__main__"`
+
+It tests whether your script is being run directly or being imported by somewhere else.
 
 ## Links
 
-- `pypi.org` - For python packages
-- `Kaggle.com` - To download the data sets for machine learning
+- https://docs.python.org/3/library/functions.html
 
+- https://pythonprogramming.net/
+
+## References
+
+- `pypi.org` - For python packages
+
+- `Kaggle.com` - To download the data sets for machine learning
 
 ## Libraries
 
 - `openpyxl` - Excel operations and charts
+
 - `django` - web framework
 
 ### For Machine learning
 
 - `numpy` - 2D array processing
+
 - `pandas` - Data analysis lib, data frame
+
 - `matplotlib` - 2d plotting graphs
+
 - `scikit-learn`
-
-
-## File operations
-
-- Open a file in read mode
-  ```
-  my_file = open('file_name.txt, 'r')
-  ```
-
-- `my_file.read()` reads the content of the file, reading the file again for the
-  second time returns the `blank` string, this is because of, in the first read
-  operation file cursor is already at the end of the file content, when we try
-  to read the content for the second time, it returns empty because no content
-  found after the last cursor, to read again the content from the beginning
-  reset the cursor using `my_file.seek(0)`
-
-- `file_content = my_file.readlines()`  returns the content line by line
-
-- Once the file operations done close the file using, `my_file.close()` or
-  file can be automatically closed using `with` for ex
-  ```python
-  with open('file.txt') as my_file:
-      lines = my_file.read()
-  ```
-
-- File content can be read using `lines` variable later
-
-- `open()` accepts second parameter as mode, it can be read, write, append, and so on
-
-- write to a file using file handler, `myfile.write('Some content')` by default
-  file is in read mode, enable `write` mode to write something, it
-  `overrides the content` of the file, creates the new file if not exists.
-  To append something to a file use `append` mode; use `a+` option to `append and read`
-
-- use `len(my_file)` to get the number of lines in the file
-
-- use `file_content[4]` returns the 5th lines in the file_content
-
-- Reading a list using `for` loop
-  ```python
-  words = ['cat', 'window', 'defence']
-  for word in words:
-      print(word, len(word))
-  for w in words[:]:  # Loop over a slice copy of the entire list.
-      if len(w) > 6: # inserts an element to the words array by making a copy
-          words.insert(0, w)
-  ```
-
-- Using `range()` to read the list
-  ```python
-  a = ['Mary', 'had', 'a', 'little', 'lamb']
-  for i in range(len(a)):
-      print(i, a[i])
-  ```
-
-- Fibonacci series, function
-  ```python
-  def fib(n):    # write Fibonacci series up to n
-      a, b = 0, 1
-      while a < n:
-          print(a)
-          a, b = b, a+b
-  ```
-
-- Can be invoked as follows `fib(10)`
-
-## Conditional loops
-
-- if, elif, and else loops
-  ```python
-  if condition:
-      # execute statements
-  elif:
-      # execute statements
-  else:
-      # execute statements
-  ```
-
-- For loop
-  ```python
-  for item in items:
-      print(item)
-  # Tuple looping, tups = [(1,2), (3,4), (5,6)]
-  for (item1, item2) in tups: # Ignore () just mention the values in the tuples
-      print(item1, item2)
-  # Dictionary looping, d = {"a": 1, "b": 2, "c": 3}
-  for item from d: # d.keys() or d.items() used get the keys or items of the dictionary
-      print(item) # Prints only keys i.e. a, b, c
-  for key in d:
-      print(d[k]) # to print value of the key in the dictionary
-  ```
-
-### Python operators
-
-- `range(0, 11, 2)` from 0 to 10 numbers are generated, third param is step, here 2 means it skips 2 items.
-
-- `list(enumerate('abc'))` creates a tuple with indexes starting from 0 for each char in the string, works on any iterable object.
-
-- `zip(list1, list2)` combines the list1 and list2 to create a tuple. Params to the `zip()` can be the same list, it zips till the shortest list among the lists passed, other elements in the bigger list are skipped.
-
-- Create a list of tuples from 2 lists `list(zip(list1, list2))`
-
-- `in` can be used to check for items in any iterable object, returns `True` if item exists, `False` otherwise.
-
-- `min()` accepts iterable object and finds the minimum item in the list, passing the string `vndjdjz` to `min()` prints `d`
-
-- `max()` accepts iterable object and finds the reverse of `min()`
-
-- `shuffle()` accepts list object and shuffles the items, it can be imported from `random` as follows, `from random import shuffle`
-
-- `and`, `or`, and `not` can be used for checking conditions
-
-### List comprehensions:
-
-- `squares = [x**2 for x in range(1, 100)]` returns `[1, 4, 9, ..upto 100]`
-
-- `even_numbers = [x for x in range(1, 10) if x % 2 == 0]` returns the list of even numbers
-
-### Select only the words in a string starting with specific character
-
-  ```python
-  # Select only the words in a string starting with specific character
-  sample_str = 'Secret agents are super good at staying hidden.'
-  for word in sample_str.split():
-      first_char = word.lower()[0]
-
-      if first_char == 's':
-          print(word)
-  # Print the first char of a word
-  first_char_of_a_word = [word[0] for word in sample_str.split()]
-  print("First character of a word:", first_char_of_a_word)
-  ```
-
-### Error handling
-
-  ```python
-  try:
-      # some code
-  expect Exception1:
-      # some code
-  expect Exception2:
-      # some code
-  else:
-      # some code
-  finally:
-      # this block runs irrespective of the error
-  ```
-
-### Debugging
-
-- `import pdb` python debugger module to debug the code
-
-- set the trace in any code, `pdb.set_trace()` and `quit` to come out of the debugger
-
-### DateTime
-
-- `import datetime`
-
-- `datetime.time(1,12,12)` to set the time
-
-- `datetime.date.today()` to get the today's date
-
-### Modules and Packages
-
--	A module  is a file that can be imported under one import ex: `import my_module`
-
-- A package is a collection of modules in directories that  give a package hierarchy
-	```python
-	# To load specific functions from a module
-  from some_file import some_func, someother_func
-  ```
-
-- Module can be imported using an alias, `import my_module as mm`
-
-- To install publicaly availble modules using, `pip install <module-name>`
-
-### __name__
-
-- `if __name__ == "__main__"` is designed to help indicate where function calls are coming from when
-	working with multiple script files
-
-- `__name__` is a built-in variable which evaluates to the name of the current module.
-	However, if a module is being run directly, then __name__ instead set to the string `"__main__"`
-
-- It tests whether your script is being run directly or being imported by somewhere else.
-
-
-## Django app - https://github.com/kpunith8/django-products-app
-
-- Install Django and run the following command in a folder
-
-```
-django-admin startproject djangoapp .
-```
-
-- Creates the project with predefined files init
-
-- Run the server and open the port, `http://127.0.0.1:8000/` to check the server running
-```
-python3 manage.py runserver
-```
-
-- Create a separate project in the same folder to modularise
-```
-python3 manage.py startapp products
-```
-
-- Open the `views.py` in products folder to update the UI
-
-
-### Mapping urls
-
-- Create `urls.py` in the `products` root folder. (naming conventions must be followed)
-
-- Add the `urlpatterns` list with the same name and map the `views index`
-
-- Open and add an entry `products/` in `urlpatterns` list in `djangoapp/urls.py`
-
-> Restart the server and access '/products' page
-
-### Add models
-
-- `products/models.py` - add the model for the product, fields can be used create DB entry
-
-- Add a class here for each model being created and run `makemigrations` followed by `migrate`
-  commands each time `models.py` is being added or modified with a new entry
-
-### Migrations
-
-- Run the following commands to create a migrations for `sqlite DB`, so that we can create the
-  DB for testing
-  ```
-  python3 manage.py makemigrations
-  ```
-
-- Prints out `No changes detected`, because django needs to know how to add these apps
-
-- Open `products/apps.py` and copy the class name it created, `ProductsConfig`. need to add
-  this to `djangoapp/settings.py`'s  `INSTALLED_APPS` list as follows, `products.apps.ProductsConfig`
-
-- After adding the entry run the `makemigrations` command again
-  ```
-  python3 manage.py makemigrations
-  ```
-
-- It creates a migration in `products/migrations` folder
-
-### Generate the table in SQLite based on the migrations
-
-- Run the following,
-  ```
-  python3 manage.py migrate
-  ```
-
-## Django Admin Panel
-
-- Access it from `http://http://127.0.0.1:8000/admin`
-
-- Create a super user to access the admin panel, run the following and fill in the details
-  ```
-  python manage.py createsuperuser
-  ```
-
-- Open the admin to manage other apps
-
-- To manage `products` in the `admin` panel go to `products/admin.py` to specify the Models
-  to be manged
-
-- Once done, visit admin page to add and delete the products directly from the admin page.
-
-## Templates - To display the html content
-
-- Create `templates` folder in `products` and add `index.html` to templates folder
-
-- Show the markup in `products` page, use `render()` in `views.py` to render the markup.
-
-- Add bootstarp and other frameworks for css and look and feel
-
-- Move the `base template` outside so that we can reuse in multiple places, and need to update the
-  `TEMPLATES -> DIRS` list in `settings.py` with `os.path.join(BASE_DIR, 'templates')`
-  so that django can look for templates
-
-
-### Links
-- https://docs.python.org/3/library/functions.html
-- https://pythonprogramming.net/
