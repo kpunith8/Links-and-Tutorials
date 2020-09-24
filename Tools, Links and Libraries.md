@@ -273,7 +273,7 @@
 
 - [Markdown editor](https://typora.io/)
 
-- Daily.dev - 
+- Daily.dev -
 
 ## Productivity tools
 
