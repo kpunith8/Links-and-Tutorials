@@ -66,15 +66,17 @@ Adding `clear: both` to `p` removes the wrapping with image.
 
 ## Display property
 
-`div` by default has `display: block` which takes up the whole line.
+`div` by default has `display: block` which takes up the whole width. They can have
+width, height, margin, and padding properties
 
 `span` by default has `display: inline` which takes minimal space possible.
 multiple spans can sit in a same line. They `cannot` have `width` and `height` properties
 to set the height and width. To set these properties set the `display: inline-block`
+`inline` elements can have only `left and right`, `padding` and `margin` not the top and bottom
 
-`img` tag buy default has `display: inline-block`
+`img` tag by default has `display: inline-block`
 
-`display: none` property makes a `div` or any elements disappear from the dom.
+`display: none` property makes a `div` or any elements disappear from the DOM.
 
 ## CSS Variables
 

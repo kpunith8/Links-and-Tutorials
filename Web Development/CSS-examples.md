@@ -3,15 +3,15 @@
 ### Animating a square
 
 ```css
-#square {
+.square {
   margin: 100px;
   width: 100px;
   height: 100px;
   background: #cc0;
-  animation: spin1 4s linear infinite;
+  animation: spin 4s linear infinite;
 }
 
-@keyframes spin1 {
+@keyframes spin {
   from {
     transform:rotate(360deg);
   }
@@ -131,345 +131,177 @@ body {
 }
 ```
 
-### Select checked checkbox with custom label
-
-Immediate label after a checkbox with a class name `custom-checkbox`
-```css
-[type="checkbox"]:checked + label .custom-checkbox {
-  background: grey;
-}
-```
-
-### Make a navbar stick to the top of the screen
-
-```html
-<!DOCTYPE html>
-<html>
-<style>
-  #navbar {
-    display: flex;
-    overflow: hidden;
-    background-color: #333;
-  }
-
-  #navbar a {
-    color: #f2f2f2;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 27px;
-  }
-
-  .sticky {
-    position: fixed;
-    top: 0; /* must set to top */
-    width: 100%
-  }
-</style>
-
-<body onscroll="scroll()">
-  <div id="navbar">
-    <a class="active" href="javascript:void(0)">Home</a>
-    <a href="javascript:void(0)">News</a>
-    <a href="javascript:void(0)">Contact</a>
-  </div>
-  <div>
-    Some content
-  <div>
-
-  <script>
-  let navbar = document.getElementById("navbar");
-  let sticky = navbar.offsetTop;
-
-  function scroll() {
-    if(window.pageYOffset >= sticky) {
-      navbar.classList.add("sticky")
-    } else {
-      navbar.classList.remove("sticky");
-    }
-  }
-  </script>
-</body>
-</html>
-```
-
-### Scroll aware navbar - Hide on scrollDown and show on scrollUp
-
-```html
-<body>
-  <nav id="navbar">
-    <ul>
-      <li><a>Link1</a></li>
-      <li><a>Link2</a></li>
-      <li><a>Link3</a></li>
-      <li><a>Link4</a></li>
-    </ul>
-  </nav>
-  <p class="some-content">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-    in culpa qui officia deserunt mollit anim id est laborum.
-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-    in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-</body>
-<style>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 80px; /* top: -80px on scroll */
-  padding: 0 100px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  transition: 0.5s;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-ul li {
-  list-style: none;
-}
-
-ul li a {
-  color: blue;
-  padding: 0 20px;
-  font-weight: bold;
-}
-</style>
-
-<script type="text/javascript">
-  let lastScrollTop = 0;
-  let navbar = document.querySelector('.navbar');
-
-  window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset ||
-      document.documentElement.scrollTop
-
-      if(scrollTop > lastScrollTop) {
-        navbar.style.top = "-80px";
-      } else {
-        navbar.style.top = 0;
-      }
-
-      lastScrollTop = scrollTop;
-  })
-</script>
-```
-
-## Tricks
-
-Show the border of each element in a page to see how they are organized
-```css
-/* Select all elements and set the border */
-* {
-  border: 1px solid yellow;
-}
-```
-it makes border moves the UI by pixel size, instead use `outline` property to inspect
-
-
-### How to keep content of the website to center - responsive:
-
-Set `margin-left and margin-right` properties to `auto` or `margin: 0 auto`
-and set the `width: 70%`, so that it keeps the same size and auto adjusts with
-the screen size, adding `max-width: 1000px` will stop resizing after it reaches 1000px.
-```css
-body {
-  margin: 0 auto;
-  width: 70%; /* can be 70vw */
-  max-width: 1000px;
-}
-```
-
-### Select checked checkbox with custom label
-
-Immediate label after a checkbox with a class name `custom-checkbox`
-```css
-[type="checkbox"]:checked + label .custom-checkbox {
-  background: grey;
-}
-```
-
-### Make a navbar stick to the top of the screen
-
-```html
-<!DOCTYPE html>
-<html>
-<style>
-  #navbar {
-    display: flex;
-    overflow: hidden;
-    background-color: #333;
-  }
-
-  #navbar a {
-    color: #f2f2f2;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 27px;
-  }
-
-  .sticky {
-    position: fixed;
-    top: 0; /* must set to top */
-    width: 100%
-  }
-</style>
-
-<body onscroll="scroll()">
-  <div id="navbar">
-    <a class="active" href="javascript:void(0)">Home</a>
-    <a href="javascript:void(0)">News</a>
-    <a href="javascript:void(0)">Contact</a>
-  </div>
-  <div>
-    Some content
-  <div>
-
-  <script>
-  let navbar = document.getElementById("navbar");
-  let sticky = navbar.offsetTop;
-
-  function scroll() {
-    if(window.pageYOffset >= sticky) {
-      navbar.classList.add("sticky")
-    } else {
-      navbar.classList.remove("sticky");
-    }
-  }
-  </script>
-</body>
-</html>
-```
-
-### Scroll aware navbar - Hide on scrollDown and show on scrollUp
-
-```html
-<body>
-  <nav id="navbar">
-    <ul>
-      <li><a>Link1</a></li>
-      <li><a>Link2</a></li>
-      <li><a>Link3</a></li>
-      <li><a>Link4</a></li>
-    </ul>
-  </nav>
-  <p class="some-content">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-    in culpa qui officia deserunt mollit anim id est laborum.
-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-    in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-</body>
-<style>
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 80px; /* top: -80px on scroll */
-  padding: 0 100px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  transition: 0.5s;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-ul li {
-  list-style: none;
-}
-
-ul li a {
-  color: blue;
-  padding: 0 20px;
-  font-weight: bold;
-}
-</style>
-
-<script type="text/javascript">
-  let lastScrollTop = 0;
-  let navbar = document.querySelector('.navbar');
-
-  window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset ||
-      document.documentElement.scrollTop
-
-      if(scrollTop > lastScrollTop) {
-        navbar.style.top = "-80px";
-      } else {
-        navbar.style.top = 0;
-      }
-
-      lastScrollTop = scrollTop;
-  })
-</script>
-```
-
 ### Align content to center of the page using flex box
 
 ```html
-<html>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
+<div class="box">
+  <div>Content to align center</div>
+</div>
+```
+
+```css
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box div {
+  width: 100px;
+  height: 100px;
+}
+```
+
+### Align the content and a div to center
+
+```html
+<div>
+  <p>Lorem ipsum dolor sit amet</p>
+</div>
+<style>
+  div {
+    width: 80%;
+    height: 100vh;
+    text-align: center;
+    background: teal;
+    margin: 0 auto;
+    line-height: 100vh;
+  }
+</style>
+```
+
+### Select checked checkbox with custom label
+
+Immediate label after a checkbox with a class name `custom-checkbox`
+```css
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: grey;
+}
+```
+
+### Make a navbar stick to the top of the screen
+
+```html
+<body onscroll="scroll()">
+  <div id="navbar">
+    <a class="active" href="javascript:void(0)">Home</a>
+    <a href="javascript:void(0)">News</a>
+    <a href="javascript:void(0)">Contact</a>
+  </div>
+  <div>
+    Some content
+  <div>
+
+  <script>
+    let navbar = document.getElementById("navbar");
+    let sticky = navbar.offsetTop;
+
+    function scroll() {
+      if(window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+  </script>
+<body>
+```
+
+```css
+#navbar {
+  display: flex;
+  overflow: hidden;
+  background-color: #333;
+}
+
+#navbar a {
+  color: #f2f2f2;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 27px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0; /* must set to top */
+  width: 100%
+}
+```
+
+### Scroll aware navbar - Hide on scrollDown and show on scrollUp
+
+```html
+<body>
+  <nav id="navbar">
+    <ul>
+      <li><a>Link1</a></li>
+      <li><a>Link2</a></li>
+      <li><a>Link3</a></li>
+      <li><a>Link4</a></li>
+    </ul>
+  </nav>
+  <p class="some-content">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit
+  </p>
+</body>
+```
+
+```css
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px; /* top: -80px on scroll */
+  padding: 0 100px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  color: blue;
+  padding: 0 20px;
+  font-weight: bold;
+}
+```
+
+```js
+let lastScrollTop = 0;
+let navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', function() {
+  let scrollTop = window.pageYOffset ||
+    document.documentElement.scrollTop
+
+    if(scrollTop > lastScrollTop) {
+      navbar.style.top = "-80px";
+    } else {
+      navbar.style.top = 0;
     }
 
-    .box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .box div {
-      width: 100px;
-      height: 100px;
-    }
-  </style>
-
-  <body>
-    <div class="box">
-      <div>Content to align center</div>
-    </div>
-  </body>
-</html>
+    lastScrollTop = scrollTop;
+})
 ```
 
 ### Set custom property value using DOM API
@@ -500,7 +332,7 @@ body {
 }
 ```
 
-## pointer-events: none to disable click or any action on any element
+### pointer-events - Disable click or any action on any element
 
 ```css
 button {
@@ -519,6 +351,106 @@ button {
 }
 ```
 
+### Change the selection style and first letter big
+
+```css
+p::selection {
+  background-color: #333;
+  color: white;
+}
+
+p::first-letter {
+  font-size: 2rem;
+  font-weight: bold;
+}
+```
+
+### Jump to section on click and add smooth transition
+
+```html
+<div>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+  <a href="#gallery">Jump to Gallery</a>
+</div>
+<section id="gallery">
+  <p>Hi there</p>
+</section>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  div, section {
+    height: 100vh;
+  }
+</style>
+```
+
+### Dark mode with filter: invert(1)
+
+```css
+.dark-mode {
+  background: black;
+  /* Use hue-rotate(180deg) to give link and other text colors to retain its original color
+  in dark mode */
+  filter: invert(1) hue-rotate(180deg);
+}
+
+p {
+  color: white;
+}
+```
+
+### Fix a font-size to relative pixel from rem
+
+If you want `18px` as `1.8rem` which is technically means more, because 1rem is 16px,
+it may translate to around 29px. Converting to rem to pixel would be cumbersome, hence
+set `font-size` as `62.5%`. Which will increase the accessibility when the user changes
+the font size, rem adapts to it
+```css
+html {
+  font-size: 62.5%;
+}
+
+h1 {
+  font-size: 2rem; /* translates to 20px */
+}
+
+p {
+  font-size: 1.6rem; /* translates to 16px */
+}
+
+@media screen and (max-width: 700px) {
+  html {
+    font-size: 75%;
+  }
+}
+```
+
+### Gradient Text
+
+```css
+h2 {
+  display: inline;
+  font-size: 2rem;
+  background: linear-gradient(to left, rgb(112, 101, 214), rgb(230, 106, 213));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+```
+
+## Tips
+
+Show the border of each element in a page to see how they are organized
+```css
+/* Select all elements and set the border */
+* {
+  border: 1px solid yellow;
+}
+```
+it makes border moves the UI by pixel size, instead use `outline` property to inspect
+
 ## codepen.io samples
 
 [Add image overlay and heading style](https://codepen.io/kevinpowell/pen/ZrMzre)
@@ -531,7 +463,7 @@ button {
 
 ### Conditional rendering in emotion styled components
 
-```
+```css
 const Tab = styled(Basic)`
 ${({isVisible, primary}) => isVisible && `
   font-size: 10px;
