@@ -422,6 +422,8 @@
 - Best of JS
 - [Alligator.io](https://alligator.io)
 - https://davidwalsh.name/
+- https://addyosmani.com/
+- https://www.toptal.com/developers/blog
 
 ### Blogs I'm posting to
 

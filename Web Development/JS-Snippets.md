@@ -1,25 +1,33 @@
-## Tips and tricks:
+## Tips and Tricks
 
-* add `debugger` text in the source code, so that chrome developer tools takes to that point when that point is hit.
+Add `debugger` text in the source code, so that chrome developer tools takes to that point when that point is hit.
 
-## Lint errors and fixes:
+## Lint errors and fixes
 
-* no-undef lint error fix: can be added global section of webpack.config
+`no-undef` lint error fix: can be added global section of webpack.config
 https://github.com/chaijs/type-detect/issues/98
-* lint error while using single return statement in arrow function:
+
+Lint error while using single return statement in arrow function:
 unexpected block statement surrounding arrow body
+
+Disable ESLint errors in-line
+```
+// eslint-disable-next-line no-use-before-define
+
+/* eslint-disable no-unused-vars */
+```
 
 ## Code Snippets
 
 ### Filter an array based on type
 
-```javascript
+```js
 const requiredOrders = orders.filter(order => order.required);
 ```
 
 ### Converting array to JSON Data
 
-```javascript
+```js
 function convertToJSON(items) {
 	return JSON.parse(JSON.stringify(items));
 }
@@ -27,7 +35,7 @@ function convertToJSON(items) {
 
 ### Get the data from event object
 
-```javascript
+```js
 saveUserData(event) {
 	var field = event.target.name;
 	var value = event.target.value;
@@ -39,13 +47,13 @@ saveUserData(event) {
 
 ### Passing Parameters to function from render
 
-```javascript
+```js
 onClick={() => this.deleteRow(index)}
 ```
 
 ### Unique Array: Pass concatenated array as input
 
-```javascript
+```js
 uniqueArray (arrArg) {
  return arrArg.filter((elem, pos, arr) => {
 	 return arr.indexOf(elem) === pos;
@@ -61,19 +69,19 @@ array1 = array1.filter(val => !array2.includes(val));
 
 ### Remove the item already present in an array
 
-```javascript
+```js
 arr.filter(item => item !== itemToRemove);
 ```
 
 ### Sorting array based on Parameters
 
-```javascript
+```js
 array.sort((last, first) => last.displayValue > first.displayValue);
 ```
 
 ### Debouncing the search to happen after certain amount time use `lodash.debounce()`
 
-```javascript
+```js
 doSearch = debounce(() => {}, 300);
 handleSearch = (event) => {
 	this.setState({ searchTerm: event.target.value}, () => {
@@ -84,7 +92,7 @@ handleSearch = (event) => {
 
 ### Perform search on object using `lodash.pickby`
 
-```javascript
+```js
 render() {
 	let { articles, searchTerm } = this.state;
 
@@ -96,9 +104,9 @@ render() {
 }
 ```
 
-### Get Cheapest items first - custom sort
+### Get Cheapest items first custom sort
 
-```javascript
+```js
 function newItemsCheapestFirst(items) {
   return items
     .filter(item => item.isNew) // filters only new items
@@ -116,7 +124,7 @@ function newItemsCheapestFirst(items) {
 
 ### Compute the square of positive integers (don't consider negative numbers)
 
-```javascript
+```js
 const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
 
 const squareList = arr => {
@@ -129,7 +137,7 @@ const squareList = arr => {
 
 ### Custom string repeat method like `String.prototype.repeat(n)`
 
-```javascript
+```js
 String.prototype.customRepeat = function(num) {
 	return Array(num).fill(this).join(""); // any thing can be joined
 }
@@ -139,15 +147,14 @@ String.prototype.customRepeat = function(num) {
 
 ### Generates random colours
 
-```javascript
+```js
 const randomColour = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 ```
 
 ### Remove array duplicates
 
-```javascript
+```js
 const arr = [1, 2, 3, 4, 1, 2, 6];
-
 const uniqueArray = [...new Set(array)];
 
 // indexOf() returns the first index at which a given element can be found in the array.
@@ -155,16 +162,16 @@ const uniqueArray = [...new Set(array)];
 const uniqueArray = arr.filter((item, index) => arr.indexOf(item) === index);
 ```
 
-- Create array with `Array.from()`
+Create array with `Array.from()`
 
-```javascript
+```js
 // Creates 4 items with index value, [0, 1, 2, 3]
 const items = Array.from({length: 4}, (_, i) => i + 1)
 ```
 
 ### Storing and retrieving object from local storage
 
-```javascript
+```js
 const todos = [{
 	id: 1,
 	item: 'item-1',
@@ -179,11 +186,11 @@ localStorage.removeItem('todos')
 
 ### Fetch the data from REST end point until all the pages reached
 
-- If an API end point gives all the jobs then no need of this
+If an API end point gives all the jobs then no need of this
 
-- [Github Jobs API](https://jobs.github.com/positions.json)
+[Github Jobs API](https://jobs.github.com/positions.json)
 
-```javascript
+```js
 // one of the way to do
 var fetch = require('node-fetch');
 
@@ -211,7 +218,7 @@ fetchGithubJobs();
 
 ### Assign CSS styles to an element
 
-```javascript
+```js
 let element = document.createElement("div");
 let style = { position: "absolute", left: 0, top: 0 };
 
@@ -233,7 +240,7 @@ Object.entries(style).map(entry => {
 
 ### Returning an object from an arrow function
 
-```javascript
+```js
 const arrowFunc = (data) => ({
   type: 'ACTION_CLOSE',
   payload: data
@@ -259,15 +266,15 @@ const cloneDeep = x => JSON.parse(JSON.stringify(x))
 
 ## Missing letters
 
-- Find the missing letter in the passed letter range and return it.
+Find the missing letter in the passed letter range and return it.
 
-- If all letters are present in the range, return undefined. `stvwx` => `u`, `abce` => `d`
-	```js
-	function fearNotLetter(str) {
-		const letters = "abcdefghijklmnopqrstuvwxyz".split("")
-		const startingIndexOfSearchStr = letters.indexOf(letters.find(e => str.split("").includes(e)))
-		const filteredText  = letters.filter(letter => !str.includes(letter))
+If all letters are present in the range, return undefined. `stvwx` => `u`, `abce` => `d`
+```js
+function fearNotLetter(str) {
+	const letters = "abcdefghijklmnopqrstuvwxyz".split("")
+	const startingIndexOfSearchStr = letters.indexOf(letters.find(e => str.split("").includes(e)))
+	const filteredText  = letters.filter(letter => !str.includes(letter))
 
-		return filteredText.length === 0 ? undefined : filteredText[startingIndexOfSearchStr];
-	}
-	```
+	return filteredText.length === 0 ? undefined : filteredText[startingIndexOfSearchStr];
+}
+```

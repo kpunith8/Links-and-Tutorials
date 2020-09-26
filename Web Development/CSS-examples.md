@@ -21,10 +21,10 @@
   }
 ```
 
-## ::before and ::after pseudo selectors
+### ::before and ::after pseudo selectors
 
-- `content` can be specified with `open-quote` or `close-quote` property to
-  display quotes using `:before` and `::after` respectively.
+`content` can be specified with `open-quote` or `close-quote` property to
+display quotes using `:before` and `::after` respectively.
 
 ### Tooltip with pseudo elements
 
@@ -285,7 +285,6 @@ Show the border of each element in a page to see how they are organized
 ```
 it makes border moves the UI by pixel size, instead use `outline` property to inspect
 
-## Code Examples
 
 ### How to keep content of the website to center - responsive:
 
@@ -501,15 +500,32 @@ body {
 }
 ```
 
+## pointer-events: none to disable click or any action on any element
+
+```css
+button {
+  animation: fade 1s ease forwards;
+}
+
+@@keyframes fade {
+  from {
+    opacity: 1;
+    pointer-events: all;
+  }
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+```
+
 ## codepen.io samples
 
-### Add image overlay and heading style
+[Add image overlay and heading style](https://codepen.io/kevinpowell/pen/ZrMzre)
 
-- https://codepen.io/kevinpowell/pen/ZrMzre
+[Animated progress bar](https://codepen.io/kpunith8/pen/JjYmEre)
 
-### Animated progress bar
-
-- https://codepen.io/kpunith8/pen/JjYmEre
+[Align content in a row with equal space](https://codepen.io/kpunith8/pen/GRZzEqE)
 
 ## Emotion-UI - React styling
 

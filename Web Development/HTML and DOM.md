@@ -1,13 +1,12 @@
-### DOM
+## DOM - Document Object Model
 
-#### classList
+### classList
 
-- The `classList` property returns the class name(s) of an element, as a `DOMTokenList` object.
+The `classList` property returns the class name(s) of an element, as a `DOMTokenList` object.
 
-- This property is useful to `add`, `remove` and `toggle` CSS classes on an element.
+This property is useful to `add`, `remove` and `toggle` CSS classes on an element.
 
-- The `classList` property is `read-only`, however, you can modify it by using the `add()` and `remove()` methods.
-
+The `classList` property is `read-only`, however, you can modify it by using the `add()` and `remove()` methods.
 ```javascript
 document.getElementById("myDIV").classList.add("mystyle", "another-style");
 
@@ -24,12 +23,11 @@ document.getElementById("myDIV").classList.toggle("newClassName");
 document.getElementById("myDIV").classList.item(0);
 ```
 
-#### className
+### className
 
-- The `className` property sets or returns the class name of an element.
+The `className` property sets or returns the class name of an element.
 
-- To apply multiple classes, separate them with spaces, like "test demo"
-
+To apply multiple classes, separate them with spaces, like "test demo"
 ```javascript
 document.getElementById("myDIV").className = "mystyle other-style";
 // or
@@ -39,20 +37,19 @@ document.getElementById("myDIV").classList.add('sample-class')
 const divClass = document.getElementById("myDIV").className;
 ```
 
-#### clientHeight, clientWidth, clientTop, and clientLeft
+### clientHeight, clientWidth, clientTop, and clientLeft
 
-- The `clientHeight` property returns the `viewable height` of an element in `pixels`,
+The `clientHeight` property returns the `viewable height` of an element in `pixels`,
 including `padding`, but not the border, scrollbar or margin.
 
-- The reason why the `viewable` word is specified, is because if the element's content is taller
+The reason why the `viewable` word is specified, is because if the element's content is taller
 than the actual height of the element, this property will only return the height that is visible.
 
-- The `clientLeft` property returns the width of the left border of an element, in pixels.
+The `clientLeft` property returns the width of the left border of an element, in pixels.
 This property does not include the element's `left padding` or the `left margin`.
 
-- The `clientTop` property returns the width of the top border of an element, in pixels.
+The `clientTop` property returns the width of the top border of an element, in pixels.
 This property does not include the element's `top padding` or `top margin`.
-
 ```javascript
 var elmnt = document.getElementById("myDIV");
 let height =  elmnt.clientHeight;
@@ -61,13 +58,12 @@ let left = elmnt.clientLeft;
 let top = elmnt.clientTop;
 ```
 
-#### cloneNode()
+### cloneNode()
 
-- The `cloneNode()` method creates a copy of a node, and returns the clone.
+The `cloneNode()` method creates a copy of a node, and returns the clone.
 The cloneNode() method clones `all attributes` and their `values`.
 
-- Set the deep parameter value to `true` if you want to `clone all descendants` (children), otherwise false.
-
+Set the deep parameter value to `true` if you want to `clone all descendants` (children), otherwise false.
 ```javascript
 // Adds Milk item to MyList1 by cloning
 <ul id="myList1"><li>Coffee</li><li>Tea</li></ul>
@@ -78,45 +74,40 @@ var cln = itm.cloneNode(true); // false will add an empty <li> element
 document.getElementById("myList1").appendChild(cln);
 ```
 
-#### contentEditable
+### contentEditable
 
-- The `contentEditable` property sets or returns whether the content of an element is editable or not.
-  can be set on body to make the website like an `editor`
-
+The `contentEditable` property sets or returns whether the content of an element is editable or not.
+can be set on body to make the website like an `editor`
 ```javascript
 document.getElementById("myP").contentEditable = "true";
 ```
 
-#### getAttribute(attrName)
+### getAttribute(attrName)
 
-- The `getAttribute()` method returns the value of the attribute with the specified name, of an element.
-
+The `getAttribute()` method returns the value of the attribute with the specified name, of an element.
 ```javascript
 var x = document.getElementById("myAnchor").getAttribute("target");
 ```
 
-#### getAttributeNode(attrName)
+### getAttributeNode(attrName)
 
-- The `getAttributeNode()` method returns the attribute node with the specified name of an element, as an Attr object.
-
+The `getAttributeNode()` method returns the attribute node with the specified name of an element, as an Attr object.
 ```javascript
 var elmnt = document.getElementsById("id");
 var attr = elmnt.getAttributeNode("class").value;
 ```
 
-#### scrollIntoView()
+### scrollIntoView()
 
-- The `scrollIntoView()` method scrolls the specified element into the visible area of the browser window.
-
+The `scrollIntoView()` method scrolls the specified element into the visible area of the browser window.
 ```javascript
 var elmnt = document.getElementById("content");
 elmnt.scrollIntoView();
 ```
 
-#### setAttribute(attributename, attributevalue)
+### setAttribute(attributename, attributevalue)
 
-- The `setAttribute()` method adds the specified attribute to an element, and gives it the specified value.
-
+The `setAttribute()` method adds the specified attribute to an element, and gives it the specified value.
 ```javascript
 let btnInput = document.querySelector('.input1');
 btnInput.setAttribute("type", "button");
@@ -124,60 +115,57 @@ btnInput.setAttribute("type", "button");
 document.getElementById("myAnchor").setAttribute("href", "https://www.w3schools.com");
 ```
 
-#### style
+### style
 
-- The `style` property returns a `CSSStyleDeclaration` object, which represents an element's style attribute.
+The `style` property returns a `CSSStyleDeclaration` object, which represents an element's style attribute.
 
-- The style property is used to get or set a specific style of an element using different CSS properties.
-style names were used as camel case.
-
-- https://www.w3schools.com/jsref/dom_obj_style.asp
-
+The style property is used to get or set a specific style of an element using different CSS properties.
+style names were used as camel case. [DOM Object Style](https://www.w3schools.com/jsref/dom_obj_style.asp)
 ```javascript
 element.style.backgroundColor = "red";
 ```
 
--  The `tabIndex` property sets or returns the value of the tab index attribute of an element.
+The `tabIndex` property sets or returns the value of the tab index attribute of an element.
 
 ### Events
 
-- Adding events to the DOM
-  ```javascript
-  let btn = document.getElementById('btn');
-  // click listener
-  btn.addEventListener('click', function() {
-    console.log('btn clicked');
-  });
+Adding events to the DOM
+```javascript
+let btn = document.getElementById('btn');
+// click listener
+btn.addEventListener('click', function() {
+  console.log('btn clicked');
+});
 
-  // Checking for whether Ctrl+C is pressed
-  btn.addEventListener("keypress", function() {
-    if(event.keyCode == 32 && event.ctrlKey) {
-      console.log('Ctrl+C pressed');
-    }
-  })
-  ```
+// Checking for whether Ctrl+C is pressed
+btn.addEventListener("keypress", function() {
+  if(event.keyCode == 32 && event.ctrlKey) {
+    console.log('Ctrl+C pressed');
+  }
+})
+```
 
 ### Coordinates of an Event
 
-- The `event.screenX` and `event.screenY `properties show the `number of pixels` from
-  the left and top of the screen respectively `where the event took place`.
+The `event.screenX` and `event.screenY `properties show the `number of pixels` from
+the left and top of the screen respectively `where the event took place`.
 
-- The `event.clientX` and `event.clientY` properties show the `number of pixels` from
-  the left and top of the `client that is being used` (usually the browser window).
+The `event.clientX` and `event.clientY` properties show the `number of pixels` from
+the left and top of the `client that is being used` (usually the browser window).
 
-- The `event.pageX` and `event.pageY` properties `show the coordinates` (in pixels)
-  where the event took place from the left and top of the document respectively.
-  This property takes account of whether the page has been scrolled.
+The `event.pageX` and `event.pageY` properties `show the coordinates` (in pixels)
+where the event took place from the left and top of the document respectively.
+This property takes account of whether the page has been scrolled.
 
-- `event.which` returns which mouse button or key was pressed
+`event.which` returns which mouse button or key was pressed
 
-- The `event.shiftKey`,` event.ctrlKey`, `event.altKey`, and `event.metaKey` are all
-  properties of the event object and return `true` if the `relevant key is held down`
-  when the event occurred.
+The `event.shiftKey`,` event.ctrlKey`, `event.altKey`, and `event.metaKey` are all
+properties of the event object and return `true` if the `relevant key is held down`
+when the event occurred.
 
 ### Forms
-- Sample search page with a form
 
+Sample search page with a form
 ```html
 <!doctype html>
 <html lang="en">
@@ -194,10 +182,10 @@ element.style.backgroundColor = "red";
 <html>
 ```
 
-- The `action` attribute is the `URL` that the form will be submitted to so
-  that it can be processed on the server side
+The `action` attribute is the `URL` that the form will be submitted to so
+that it can be processed on the server side
 
-#### Accessing Form Elements
+### Accessing Form Elements
 
 ```javascript
 // Use any of these methods to access the form
@@ -216,28 +204,27 @@ let submitButton = form.elements[1]
 let inputElement = form['searhBox']
 ```
 
-#### Form properties and methods
+### Form properties and methods
 
-- The `form.submit()` method will submit the form `automatically`.
+The `form.submit()` method will submit the form `automatically`.
 
-  - A form can be `submitted manually` by the user employing a `button or input`
-    element with a `type attribute` of `submit`, or even an input element
-    with a `type attribute of image`
+A form can be `submitted manually` by the user employing a `button or input`
+element with a `type attribute` of `submit`, or even an input element
+with a `type attribute of image`
 
-- The `form.reset()` method will `reset` all the form controls back to their
-  initial values specified in the HTML
+The `form.reset()` method will `reset` all the form controls back to their
+initial values specified in the HTML
 
-  - A `button` with the `type attribute` of `reset` can also be used to do this
-    without the need for additional scripting
+A `button` with the `type attribute` of `reset` can also be used to do this
+without the need for additional scripting
 
 ## Browser Object Model - BOM
 
-- `window.alert()`, `window.confirm()`, `window.prompt()`
+`window.alert()`, `window.confirm()`, `window.prompt()`
 
 ### window.navigator
 
-- contains information about the browser.
-
+Contains information about the browser.
 ```javascript
 // returns the information about the browser, OS
 navigator.userAgent
@@ -272,8 +259,7 @@ navigator.javaEnabled();
 
 ### window.location
 
-- Object that contains information about the `URL of the current page`
-
+Object that contains information about the `URL of the current page`
 ```javascript
 // property is an object that contains information about the URL of the current page
 window.location
@@ -317,8 +303,7 @@ window.location.replace()
 
 ### window.history
 
-- Used to access information about any previously visited pages in the current browser session.
-
+Used to access information about any previously visited pages in the current browser session.
 ```javascript
 // goes forward 1 page, pass -1 to go backwards
 history.go(1)
@@ -330,8 +315,7 @@ window.history.back()
 
 ### Controlling Windows
 
-- `window.open()` - A new window can be opened using the
-
+`window.open()` - A new window can be opened using the
 ```javascript
 let popup = window.open('https://sitepoint.com','SitePoint',
   'width=400, height=400, resizable=yes');
@@ -349,8 +333,7 @@ window.resizeTo(600, 400)
 
 ### window.screen
 
-- contains information about the screen that the browser is displayed on.
-
+Contains information about the screen that the browser is displayed on.
 ```javascript
 // Visible screen height and width
 screen.height
@@ -366,8 +349,7 @@ screen.colorDepth
 
 ### Document object
 
-- Each `window` object contains `document` object
-
+Each `window` object contains `document` object
 ```javascript
 // writes to the document
 document.write("Hello")
@@ -375,15 +357,14 @@ document.write("Hello")
 
 ### document.cookie
 
-- Cookies are small files that are saved locally on a user’s computer
+Cookies are small files that are saved locally on a user’s computer
 
-- A restriction of cookies is that they `can only be read` by a web page from the same domain that set them.
+A restriction of cookies is that they `can only be read` by a web page from the same domain that set them.
 
-- Cookies are also limited to storing up to `4KB` of data, although `20 cookies` are allowed per domain
+Cookies are also limited to storing up to `4KB` of data, although `20 cookies` are allowed per domain
 
-- Cookies can be used for personalising a user’s `browsing experience`, storing user preferences,
-  keeping track of user choices (such as a shopping cart), `authentication` and `tracking users`.]
-
+Cookies can be used for personalising a user’s `browsing experience`, storing user preferences,
+keeping track of user choices (such as a shopping cart), `authentication` and `tracking users`.]
 ```javascript
 // Creating a cookie
 document.cookie = "name=Superman"

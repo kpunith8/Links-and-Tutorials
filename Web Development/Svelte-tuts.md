@@ -1,16 +1,19 @@
 ## Svelte - Yet another UI Library
 
-- Compiler
-- Component based components can be created
-- No virtual DOM
-- Truly Reactive
+Compiler
 
+Component based components can be created
+
+No virtual DOM
+
+Truly Reactive
+
+Get Started
 ```
 $ npx degit sveltejs/template svelte-example
 $ npm install
 $ npm run start
 ```
-
 
 ## Conditional rendering
 
@@ -58,9 +61,9 @@ let cats = [
 </ul>
 ```
 
-- When you modify the value of an each block, it will add and remove items at
-  the end of the block, and update any values that have changed, which is not the
-  desired behaviour, to avoid this, use `keyed each` blocks
+When you modify the value of an each block, it will add and remove items at
+the end of the block, and update any values that have changed, which is not the
+desired behaviour, to avoid this, use `keyed each` blocks
 
 ```javascript
 {#each things as thing (thing.id)} // or (thing)
@@ -129,7 +132,7 @@ function handleMousemove(event) {
 </div>
 ```
 
-- inline handlers
+inline handlers
 
 ```javascript
 // written without the quotes
@@ -140,9 +143,8 @@ function handleMousemove(event) {
 
 ### Event modifiers
 
-- DOM event handlers can have modifiers that alter their behaviour. For example,
-  a handler with a `once` modifier will only run a single time:
-
+DOM event handlers can have modifiers that alter their behaviour. For example,
+a handler with a `once` modifier will only run a single time:
 ```javascript
 <script>
 function handleClick() {
@@ -155,8 +157,7 @@ function handleClick() {
 </button>
 ```
 
-- The full list of modifiers:
-
+- The full list of modifiers
   - `preventDefault` — calls `event.preventDefault()` before running the handler. Useful for client-side form handling.
   - `stopPropagation` — calls `event.stopPropagation()`, preventing the event reaching the next element.
   - `passive` — improves scrolling performance on touch/wheel events (Svelte will add it automatically where it's safe to do so)
@@ -168,8 +169,7 @@ function handleClick() {
 
 ### Component events
 
-- Components can also dispatch events. To do so, they must create an event dispatcher.
-
+Components can also dispatch events. To do so, they must create an event dispatcher.
 ```javascript
 // Hello.svelte
 <script>
@@ -202,9 +202,8 @@ function handleMessage(event) {
 
 ### Events forwarding
 
-- Unlike DOM events, component events `don't bubble`. If you want to listen to an event
-  on some deeply nested component, the intermediate components must forward the event.
-
+Unlike DOM events, component events `don't bubble`. If you want to listen to an event
+on some deeply nested component, the intermediate components must forward the event.
 ```javascript
 // App.svelte
 <script>
@@ -244,8 +243,7 @@ function sayHello() {
 </button>
 ```
 
-- Event forwarding works for `DOM events` too.
-
+Event forwarding works for `DOM events` too.
 ```javascript
 // App.svelte
 <script>
@@ -289,8 +287,7 @@ button:hover {
 
 ### Text inputs
 
-- Binding to value instead of event handlers.
-
+Binding to value instead of event handlers.
 ```javascript
 <script>
 let name = 'world';
@@ -301,10 +298,9 @@ let name = 'world';
 <h1>Hello {name}!</h1>
 ```
 
-- In the DOM, everything is a string. That's unhelpful when dealing with numeric inputs
-  `type="number" and type="range"` — it is important to remember to coerce `input.value` before using it.
-  With bind:value, Svelte takes care of coercing
-
+In the DOM, everything is a string. That's unhelpful when dealing with numeric inputs
+`type="number" and type="range"` — it is important to remember to coerce `input.value` before using it.
+With `bind:value`, Svelte takes care of coercing
 ```javascript
 <script>
 let a = 1;
@@ -324,10 +320,9 @@ let b = 2;
 <p>{a} + {b} = {a + b}</p>
 ```
 
-- Check boxes
+### Check boxes
 
-- Checkboxes are used for toggling between states. Instead of binding to `input.value`, bind to `input.checked`
-
+Checkboxes are used for toggling between states. Instead of binding to `input.value`, bind to `input.checked`
 ```javascript
 <script>
 let yes = false;
