@@ -440,6 +440,29 @@ h2 {
 }
 ```
 
+### Images - Lazy loading native CSS
+
+Set image element attribute `<img loading="lazy" src="" />` default loading option `eager`
+Set `height` and `width` properties to `img` when using `lazy` so that it leaves a
+specified dimension until the image loads instead of jumps while displaying the content.
+
+When specifying height and width make sure to have `height` property set to `auto`
+or fixed height
+```html
+<img height="800" width="1024" loading="lazy" src="" alt=""/>
+```
+
+### Fit images without loosing the image
+
+```css
+.image {
+  overflow: hidden;
+  width: 100%;
+  object-fit: cover;
+  height: 400px; /* auto - to fit the image */
+}
+```
+
 ## Tips
 
 Show the border of each element in a page to see how they are organized
