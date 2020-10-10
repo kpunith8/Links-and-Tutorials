@@ -7,7 +7,7 @@ Install a package
 python3 -m pip install <package-name>
 ```
 
-Updating pip
+Update `pip` itself
 ```
 python3 -m pip install --upgrade pip
 ```
@@ -49,7 +49,7 @@ list_copy.append(6)
 
 ## Tuples
 
-Ordered, Immutable collection and allows duplicate elements
+`Ordered`, `Immutable` collection and allows `duplicate elements`
 ```py
 # brackets are optional if more than one item is present in the tuple
 my_tuple = ("name", 1, 2)  
@@ -76,7 +76,7 @@ my_tuple.count(1) # returns 2
 # Get the index of an item
 my_tuple.index(1)
 
-# Convert to a list using list() function
+# Convert to a list using list(tuple) function
 list(my_tuple)
 
 # Slicing works the same way as that of lists
@@ -107,10 +107,98 @@ sys.getsizeof(my_tuple)
 > Use timeit util to test the time taken to execute a statement or block of code,
   https://docs.python.org/3/library/timeit.html
 
+Working with tuples can be more efficient
+
 ## Dictionary
 
+Collection of key-value pairs, `un-ordered` and `mutable`
+`Key` can be a `tuple` or `a number` but not a list cannot be `hashable`
+```py
+my_dict = {"name": "Punith", 'age': 30}
 
+# Create with dict(key='value')
+my_dict = dict(name="Punith", age=30)
 
+# Access the dictionary by key name
+my_dict['name']
+
+# Add an item
+my_dict['email'] = 'kpunith8@gmail.com'
+
+# new value will be over written if key and value exists in the dictionary
+
+# Delete an item in the key
+del my_dict['email']
+
+# delete with pop(key) or popitem() - removes the last item
+my_dict.pop('email')
+
+# Look for an existence of a key
+for "name" in my_dict
+    print(my_dict['name'])
+
+try:
+    print(my_dict['name'])
+except:
+    print('Error')
+
+# use keys() and values() functions on a dictionary get keys and values respectively,
+# and use items() on dictionary to access both keys and values
+for key, value in my_dict.items():
+    print(key, value)
+
+# Assign to a new dict to copy and modifying the copied dictionary
+# will result in updating the original dictionary
+
+# To avoid mutating the original dictionary use copy() function on dictionary to be copied
+# or use dict(original_dictionary)
+new_dict = my_dict.copy()
+new_dict = dict(my_dict)
+
+# Merge 2 dictionaries with update(new_dict), all the values are overwritten for
+# the key in original dictionary with the new dictionary
+# update() does not return a new dict, it updates the original dictionary
+other_dict = dict(name="Sam", email="hello@abc.com")
+
+my_dict.update(other_dict)
+```
+
+## Sets
+
+`Unordered`, `mutable`, and does not allow `duplicates`
+
+```py
+my_set = {1, 2, 3, 1}
+
+# Set also be created with set(iterables)
+my_set = set("hello")
+
+# creating an empty set with empty braces, {} will have a type dictionary
+# use set() instead
+
+# add(item) to add an item, remove(item) to remove an item
+# clear() to empty a set and discard(item) to remove the item which is not in the set without errors
+# pop() removes the arbitrary item
+
+# union with sets, odds.union(evens)
+# intersection with sets, odds.intersection(evens)
+# difference between sets, odds.difference(primes)
+# symmetric_difference between sets, odds.symmetric_difference(primes)
+```
+
+## Strings
+
+Ordered and immutable
+```py
+# Formatting strings with format()
+my_str = "Heloo"
+my_var = 1.2345333
+formatted_str = "The variables are {} and {:.2f}".format(my_str, my_var)
+
+# Formatting with f-strings above python 3.6
+formatted_str = f"The variables are {my_str} and {my_var * 2}"
+
+```
 
 ## File Operations
 

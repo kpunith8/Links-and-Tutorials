@@ -867,7 +867,8 @@ function* watchFetchData() {
   ```
 
 ### Find the scroll position to fix the header
-- https://www.w3schools.com/howto/howto_js_sticky_header.asp
+
+https://www.w3schools.com/howto/howto_js_sticky_header.asp
 
 ```javascript
 import {useEffect} from 'react';

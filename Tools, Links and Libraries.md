@@ -273,7 +273,7 @@
 
 - [Markdown editor](https://typora.io/)
 
-- Daily.dev -
+- [11nty](https://www.11ty.dev/) - static site generator
 
 ## Productivity tools
 

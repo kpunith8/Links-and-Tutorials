@@ -1454,105 +1454,112 @@
 
 ### ECS Clusters
 
-- Logical grouping of EC2 instances
+Logical grouping of EC2 instances.
+EC2 instances run the ECS agent (Docker container).
+The ECS agents registers the instances to the ECS Cluster.
+EC2 instances run a special `AMI`, made specifically for ECS
+```
+1) Search for ECS service
 
-- EC2 instances run the ECS agent (Docker container)
+2) Clusters: create a cluster
 
-- The ECS agents registers the instances to the ECS Cluster
+3) Select EC2 Linux + Networking
 
-- EC2 instances run a special `AMI`, made specifically for ECS
-  ```
-  1) Search for ECS service
+a) Instance Configuration:
+   Provisioning Model: On-demand instance
+   EC2 instance type: t2.micro
+   Number of instances: 1
+   Key Pair: use the existing one
 
-  2) Clusters -> Create cluster
+b) Networking:
+   VPC: Choose if already created one or create one
+   Subnets: Choose multiple subnets, create if doesn't exist
+   Security Group: Create a new SG
+   Inbound rules: 0.0.0.0/0
 
-  3) Select EC2 Linux + Networking
+c) Container Instance IAM Role:
+   Create a new IAM role
 
-  a) Instance Configuration:
-     Provisioning Model: On-demand instance
-     EC2 instance type: t2.micro
-     Number of instances: 1
-     Key Pair: use the existing one
+5) Create
 
-  b) Networking:
-     VPC: Choose if already created one or create one
-     Subnets: Choose multiple subnets, create if doesn't exist
-     Security Group: Create a new SG
-     Inbound rules: 0.0.0.0/0
+6) Go to EC2 console -> Auto Scaling Groups
+   It adds an ASG to the created cluster having the instance
+   Click on the ASG -> Instances to access the EC2 instance attached to the ASG
 
-  c) Container Instance IAM Role:
-     Create a new IAM role
+7) Creates a Launch configuration as well
 
-  5) Create
+8) SSH into EC2 instance and take a look at /etc/ecs/ecs.config
 
-  6) Go to EC2 console -> Auto Scaling Groups
-     It adds an ASG to the created cluster having the instance
-     Click on the ASG -> Instances to access the EC2 instance attached to the ASG
+   $ ssh ec2-user@<ip> -i <key>.pem
 
-  7) Creates a Launch configuration as well
+   $ cat /etc/ecs/ecs.config
 
-  8) SSH into EC2 instance and take a look at /etc/ecs/ecs.config
-
-     $ ssh ec2-user@<ip> -i <key>.pem
-
-     $ cat /etc/ecs/ecs.config
-
-     $ docker ps # To check the containers running in the container
-  ```
+   $ docker ps # To check the containers running in the container
+```
 
 ### ECS Task Definitions
 
-- Task definition is a `metadata` in the form of `JSON` to tell ECS how to run a docker container
+Task definition is a `metadata` in the form of `JSON` to tell ECS how to run a docker container.
+It contains, `image name`, `Port binding` for container and host, `memory and cpu` required `environment variables`, `networking information` and etc.
+```
+1) Select the cluster created
 
-- It contains, `image name`, `Port binding` for container and host, `memory and cpu` required
-  `environment variables`, `networking information` and etc.
-  ```
-  1) Select the cluster created
+2) Select task definitions -> Create a new task definition -> EC2
+   Name it, task role and network mode leave as is
 
-  2) Select task definitions -> Create a new task definition -> EC2
-     Name it, task role and network mode leave as is
+3) Assign Task memory: 300 and CPU: 250
 
-  3) Assign Task memory: 300 and CPU: 250
+4) Add a container
+   Contaier name: httpd
+   Image: httpd:2.4
+   Memory Limits: 300
+   Port Mapping: Host port: 8080; Container port: 80; Protocol: tcp
+   Leave the other config options as is, for the simple use
 
-  4) Add a container
-     Contaier name: httpd
-     Image: httpd:2.4
-     Memory Limits: 300
-     Port Mapping: 8080/80
-     Leave the other config options as is, for the simple use
-
-  5) Create
-  ```
+5) Create
+```
 
 ### ECS Service
 
-- Helps define how many tasks should run and how they should be run
+Helps define how many tasks should run and how they should be run.
+They ensure that the number of tasks desired is running across fleet of EC2 instances.
+They can be linked to `ELB/NLB/ALB` if needed
+```
+1) Select the Cluster created -> Services tab
 
-- They ensure that the number of tasks desired is running across fleet of EC2 instances
+a) Create a service
+   Launch type: EC2
+   Cluster: Select the one created above
+   Task definition: Created above
+   Service Name: http-service
+   Service Type: Replica
+   Number of tasks: 1
+   Minimum healthy percent: 0
+   Maximum percent: 200
 
-- They can be linked to ELB/NLB/ALB if needed
-  ```
-  1) Select the Cluster created -> Services
-
-  a) Create a service
-     Launch type: EC2
-     Task definition: Created above
-     Service Name: Name it
-     Service Type: Daemon
-     Number of tasks: 1
-     Minimum healthy percent: 0
-     Maximum percent: 200
-
-  b) Deployments
+  i) Deployments
      Deployment type: Rolling update
 
-  c) Task placement: AZ Balanced Spread
+  ii) Task placement: AZ Balanced Spread
 
-  d) Load balancing: None
+b) Configure Network:
+  Load balancing: None
+  Disable service discovery integration
 
-  d) Disable service discovery integration
+c) Dont setup ASG
 
-  e) Dont setup ASG
+d) Review and create
+```
 
-  2) Review and create
-  ```
+### Verify that it is running
+
+Select the cluster created, go to `Tasks` tab and click on `Container Instance` it
+is running and grab the public IP and access the `port 8080`
+
+> Make sure security group inbound rule added to port: 8080 to access the port 8080, add inbound rules for the security group attached to the instance if it has none.
+
+Scale the number of instances running for the cluster, select the cluster created
+go to `ECS instances` tab and select `Scale ECS Instances` change it to desired number
+
+
+### ECS Services with load balancers

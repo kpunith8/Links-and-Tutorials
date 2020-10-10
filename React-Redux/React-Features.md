@@ -338,3 +338,9 @@ const [state, setState] = useReducer(
   {isLoaded: false, fetching: false, data: null, error: null}
 );
 ```
+
+## Tips
+
+1. Wrap each callbacks within `useCallback` so that it runs only when there are changes
+
+2. Use `e.preventDefault()` to stop the default behaviour of `<a href="mailto:..." />` action
