@@ -1546,20 +1546,146 @@ b) Configure Network:
   Load balancing: None
   Disable service discovery integration
 
-c) Dont setup ASG
+c) Don't setup ASG
 
 d) Review and create
 ```
 
 ### Verify that it is running
 
-Select the cluster created, go to `Tasks` tab and click on `Container Instance` it
-is running and grab the public IP and access the `port 8080`
+Select the cluster created, go to `Tasks` tab and click on `Container Instance`
+running and grab the public IP and access the `port 8080`
 
-> Make sure security group inbound rule added to port: 8080 to access the port 8080, add inbound rules for the security group attached to the instance if it has none.
+> Make sure security group inbound rule added to port: 8080 to access the port 8080,
+add inbound rules for the security group attached to the instance if it has none.
 
-Scale the number of instances running for the cluster, select the cluster created
-go to `ECS instances` tab and select `Scale ECS Instances` change it to desired number
+Scale the number of instances running for the cluster,
+Select the cluster created go to `ECS instances` tab and select `Scale ECS Instances`
+change it to desired number
 
 
 ### ECS Services with load balancers
+
+Application Load Balancers will dynamically do the post forwarding
+
+1. Select `Task Definition` created and select `Create new revision`, name it
+and use the same settings and in `Container Definitions` select the container
+and remove the Remove the `Port Mapping` for `Host Port` from `8080` and `Create`
+
+2. Update the `Service` with new revision created, select the created `Cluster`, select
+the service and `Update` and in the `Task definition` select the `Revision 2` and
+`Update` it.
+
+3. Go to `Tasks` tab to verify that 4 tasks are listed and running
+
+Adding load balancers to existing service is not possible it should be done at the
+time of creation.
+
+### Create ALB service
+
+1. Go to `Clusters` `Services` tab and `create`
+
+2. Select the `task definition` created already with a verison 2, and name it.
+  keep the same same defaults as that of basic service.
+
+3. Under `Load Balancing` section select `ALB`
+  `Service IAM Role`:  `create a new role`
+  Create a load balancer
+
+4. Create a new `Security Group` for the ALB and assign that security group for
+  all inbound traffic
+
+5. `Container to load balance` create one
+    Production listener port: `80:http`
+    Target Group Name: `create new`
+    Path Pattern: `/`, Evaluation Order: `1`
+    Health check path: `/`
+
+6. Disable service discovery
+
+7. Next, Create leaving other configs default
+
+8. Once the tasks are running, go to `Load Balancers` created and
+  select it copy the `DNS Name` under description and test it
+
+> Delete a service first by updating the service by setting number of tasks to 0
+  once done, delete the service
+
+## ECR - Private docker image repository
+
+Access is controlled through `IAM Role`
+
+Logginng into ECR using `AWS CLI v1`
+```
+$ $(aws ecr get-login --no --include-email --region eu-west-1)
+```
+
+Logginng into ECR using `AWS CLI v2`
+```
+$ aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin
+123456789.dkr.ecr.eu-west-1.amazonaws.com
+```
+
+Docker `push` and `pull`
+```
+$ docker push 123456789.dkr.ecr.eu-west-1.amazonaws.com/demo:latest
+
+$ docker pull 123456789.dkr.ecr.eu-west-1.amazonaws.com/demo:latest
+```
+
+Create a ECR
+```
+1. Create a docker image before push it to ECR,
+  install docker to your computer and build an docker image
+
+2. Amazon ECS -> Amazon ECR -> Select Repositories
+  Create the repository - Name it create the repository
+
+3. Follow the instructions to login and push the image to repository
+```
+
+Update the `ECS Task definition` with the image created
+```
+1. create the revision for task definition attached
+  and for in the container section update the image name with URL of the image
+  uploaded to ECR
+
+2. Go to ALB service created and update the service with new revison created above
+```
+
+## FARGATE
+
+It is `Serverless` and don't need to provision EC2 instances. Create task definitios
+AWS will run our container for us, to scale, just increase the task numbers
+
+Create a cluster for Fargate setup and service
+```
+1. Create a cluster -> Networking only
+  Name it -> Create
+
+2. Create a task definition for fargate
+  Select Fargate, name it
+  Set task memory and task CPU
+  Add Container definition - from the image created
+
+3. Create a service under the cluster created
+  Launch type: Fargate
+  Task Definition: Created above
+  Number of Tasks: based on the need
+
+  Configure network:
+  Select a VPC
+  Subnets
+  Create a security group or make use of the existing one
+
+  Container to load balance:
+  Add the load balancer with same setup
+  If the path pattern / was taken already for the ALB go and delete it from
+  Load Balancer -> Listeners -> Edit the rules -> Delete the route mapping for /
+
+  Next -> Create
+
+4. Once successful verify that the tasks are running
+```
+
+### ECS IAM Roles
