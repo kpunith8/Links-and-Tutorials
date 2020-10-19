@@ -410,3 +410,36 @@ fs.createReadStream(file)
 ```
 require('crypto').randomBytes(64).toString('hex')
 ```
+
+## Udemy Course - Maximilian Schwarzmüller
+
+Create a http server and handle routing and data
+```js
+const server = http.createServer((req, res) => {
+  const url = req.url
+  const method = req.method
+
+  if(url === '/message' && method === 'POST') {
+    const body = []
+
+    // Listen to data event on request to read the data
+    req.on('data', chunk => {
+      body.push(chunk)
+    })
+
+    // Listen to end event to and process/convert the received data
+    req.on('end', () => {
+      const parsedBody = Buffer.concat(body).toString()
+    })
+
+    res.statusCode = 302
+    res.setHeader('Location', '/')
+
+    return res.end()
+  }
+})
+
+server.listen(3000, () => console.log('server running on PORT: 3000'))
+```
+
+## ExpressJS
