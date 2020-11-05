@@ -463,6 +463,30 @@ or fixed height
 }
 ```
 
+### Dynamic input field width based on editing content
+
+Use `ch` unit to have the dynamic width
+```js
+<input style={{width: `${email.length}ch`}} value={value}/>
+```
+
+### Keep the second item in the flex row next to first element
+
+```css
+.box {
+  display: flex;
+}
+
+.item-1 {
+  width: '100%'
+}
+
+.item-2 {
+  /* Pushes the item to left in the row */
+  margin-right: auto;
+}
+```
+
 ## Tips
 
 Show the border of each element in a page to see how they are organized

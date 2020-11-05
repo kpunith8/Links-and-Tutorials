@@ -56,6 +56,37 @@ they are hoisted up to function declaration
 Only `function declarations` will be visible to `window/this/global object` not the `function
 expressions` or `arrow` functions.
 
+### Scope Chain
+
+```js
+function b() {
+	console.log(myVar) // Returns 1
+}
+
+function a() {
+	var myVar = 2
+	b()
+}
+
+var myVar = 1
+a()
+```
+Because myVar was declared in the `global execution context` and is hoisted to the top
+
+```js
+function a() {
+	function b() {
+		console.log(myVar) // Returns 2
+	}
+
+	var myVar = 2
+	b()
+}
+
+var myVar = 1
+a()
+```
+
 ### Objects and Properties
 
 Constructor function
@@ -121,8 +152,10 @@ var cat = {name: 'abc'};
 display(cat); // returns undefined, it has no prototype, it has __proto__ property, accessed using object.__proto__
 ```
 
-A Function prototype: is an object `instance` that will become the prototype for all objects created using this function as a constructor.
-An Object's prototype: is the object instance from which the object is inherited.
+`Function prototype` is an object `instance` that will become the prototype for all
+objects created using this function as a constructor.
+
+`An Object's prototype` is the object instance from which the object is inherited.
 ```js
 function Cat(name, color) {
 	this.name = name;
@@ -144,7 +177,7 @@ fluffy.age = 5; // it adds new property to fluffy object and display(fluffy.age)
 #### Create prototype chains
 
 ```js
-Function Animal(voice) {
+function Animal(voice) {
 	this.voice = voice || 'grunt';
 }
 

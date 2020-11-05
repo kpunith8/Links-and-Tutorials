@@ -99,3 +99,6 @@ $ ps ax | grep <PID>
   ```
 
   - here, flags `-f` means `from`, `-t` means `to`, `-o` filename of the pdf output file and the engine name
+
+
+## iBoysSoft NTFS to mac to format Pendrive to NTFS and resolve read only error

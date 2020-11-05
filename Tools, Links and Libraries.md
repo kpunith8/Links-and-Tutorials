@@ -113,7 +113,7 @@
 - `nock` - mocking http calls for nodejs
 - `axios` - To fetch data and post data from rest services
 - `LoveField` - for Mysql ORM - https://google.github.io/lovefield/
-- `sequelize` - ORM
+- `sequelize` - ORM - Object Relational Mapping - For SQL and many databases
 - `async` - for asynchrous JS
 - `node-orm2` - node.js ORM library
 - `SpiderNode` - `Node.js` variant for `SpiderMonkey` from Mozilla

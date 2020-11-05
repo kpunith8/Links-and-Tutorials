@@ -712,6 +712,8 @@ $ source ~/.bash_profile
 
 ### References
 
+- `Git Guardian` third party app for github to scan passoword/secrets sharing incidents
+
 - [Display branch name in command line in macOS](https://gist.github.com/joseluisq/1e96c54fa4e1e5647940)
 
 -	[PR, Branching, Merging](https://www.youtube.com/watch?v=oFYyTZwMyAg)
