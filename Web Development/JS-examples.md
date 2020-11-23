@@ -278,3 +278,42 @@ function fearNotLetter(str) {
 	return filteredText.length === 0 ? undefined : filteredText[startingIndexOfSearchStr];
 }
 ```
+
+
+## Tricky JS
+
+### [] == ![]; // -> true
+
+💡Explanation:
+The abstract equality operator (==) converts both sides to numbers to compare them, and both sides become the number 0 for different reasons.
+Arrays are `truthy`, so on the right, the opposite of a truthy value is false, which is then coerced to 0.
+On the left, however, an empty array is coerced to a number without becoming a boolean first, and empty arrays are coerced to 0, despite being truthy.
+
+```js
++[] == +![];
+0 == +false;
+0 == 0;
+true;
+```
+
+```js
+false == []; // -> true
+false == ![]; // -> true
+```
+
+💡Explanation:
+```JS
+false == []; // -> true
+
+toNumber(false); // -> 0
+toNumber([]); // -> 0
+
+0 == 0; // -> true
+
+false == ![]; // -> true
+// if it finds right hand side type is matching with left hand side,
+// it compares them immediately before converting it to number.
+![]; // -> false
+
+false == false; // -> true
+```

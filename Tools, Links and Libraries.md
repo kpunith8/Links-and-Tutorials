@@ -79,7 +79,6 @@
 
 - Rest APIs with `mux`
 
-
 # Online Courses - Programming
 
 - [Scrimba](https://scrimba.com/)
@@ -107,6 +106,12 @@
 - `LABjs` - JS job loader
 - `npm-run-all` - run parallel tasks
 - `nprogress` - to show the indicator on top of the page
+
+## Email clients and libraries
+
+- `SendGrid` Email delivery service
+
+- `nodemailer` and `nodemailer-sendgrid-transport`
 
 ## Backend
 
@@ -488,7 +493,7 @@
 
 - https://www.baeldung.com - Java blog
 
-### Online playgrounds
+### Online coding playground
 
 - https://runkit.com - node packages installed
 
@@ -501,6 +506,8 @@
 - https://ckeditor.com/ - WYSIWYG editor
 
 - https://repl.it - For JS, python, Node
+
+- https://jsfiddle.net - JS
 
 # References
 

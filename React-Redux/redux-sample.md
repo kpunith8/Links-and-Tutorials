@@ -39,3 +39,28 @@ store.subscribe(() => {
   });
 });
 ```
+
+
+## Create dispatch table for reducer instead of switch
+
+```js
+const dispatchTable = {
+  CREATE: (state, action) => {
+    return newState;
+  },
+  DELETE: (state, action) => {
+    return newState;
+  },
+  UPDATE: (state, action) => {
+    return newState;
+  }
+};
+```
+
+```js
+function doAction(state = initialState, action) {
+  return dispatchTable[action.type]
+  ? dispatchTable[action.type](state, action)
+  : state;
+}
+```

@@ -1,41 +1,46 @@
-## ES6 Fundamentals: Mark Zamoyta - Pluralsight
+## ES6 Fundamentals
 
-- Check the browser compatibility list for ES6, http://kangax.github.io/
+Check the browser compatibility list for ES6, http://kangax.github.io/
 
-- `let` and `const` have block scoping
+`let` and `const` have block scoping
 
-- Invoking the function within a function
-  ```javascript
-  const invoice = {
-    number: 123,
-    process: function() {
-      return () => console.log(this.number);
-    }
-  };
-  invoice.process()(); // returns 123
-  ```
+Invoking the function within a function
+```javascript
+const invoice = {
+  number: 123,
+  process: function() {
+    return () => console.log(this.number);
+  }
+};
+invoice.process()(); // returns 123
+```
 
-- It is not allowed to bind new object to the arrow function or call or apply methods on new object
+### Arrow functions
 
-- Putting arrow symbol on next line throws, Syntax error: `unexpected token =>`
- 	```javascript
-  var getPrice = ()
-    => 100;
-  ```
+Arrow functions can `implicitly` return a value, the value of `this` is `not bound`, and there is no `arguments` object.
+
+It is not allowed to `bind` new object to the `arrow function` or `call` or `apply` methods on new object
+
+`Arrow functions` cannot be used as `constructors`, they do not have a `prototype` property, and they cannot be
+used as `generators` because they `don't allow the yield keyword`.
+
+Putting arrow symbol on next line throws, Syntax error: `unexpected token =>`
+```js
+var getPrice = ()
+  => 100;
+```
 
 ### Default Function Parameters
 
-- Passing product as `undefined` sets default value 100
-  ```javascript
-  let sample = function(product = 100, type='software') {
-
-  }
-  // accepts price passed to the function to compute tax, function or variables in the context can be
-  // passed to the function for eg: tax = price * getTax()
-  let getTotal = function(price, tax= price * 0.75) {
-    console.log(tax);
-  }
-  ```
+Passing product as `undefined` sets default value as 100
+```javascript
+let sample = function(product = 100, type='software') { }
+// accepts price passed to the function to compute tax, function or variables in the context can be
+// passed to the function for eg: tax = price * getTax()
+let getTotal = function(price, tax= price * 0.75) {
+  console.log(tax);
+}
+```
 
 ### Spread and Rest Operator (...)
 
@@ -693,9 +698,9 @@ array.copyWithin(copyToIndex, copyFromIndex);
 
 ## Weakmap
 
-- `WeekMap` can have only objects as its keys not any other primitive types.
+- `WeekMap` can have `only objects` as its `keys` not any other primitive types.
 
-- `WeekMap` are not iterable
+- `WeekMap`s are not iterable
 
 - Individual entries in the weekmap can be `garbage collected` though they exists.
   ```javascript

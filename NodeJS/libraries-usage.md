@@ -217,4 +217,9 @@ Make a fetch call to `api/users` anywhere in the app while in development mode
 to get the live data.
 
 
-## Template Engines
+## Jest
+
+Code coverage with Jest using npm script
+```
+jest --watchAll --coverage
+```

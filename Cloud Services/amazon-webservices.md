@@ -1688,4 +1688,4 @@ Create a cluster for Fargate setup and service
 4. Once successful verify that the tasks are running
 ```
 
-### ECS IAM Roles
+### Elastic Beanstalk - Deploying applications
