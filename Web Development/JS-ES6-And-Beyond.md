@@ -34,7 +34,7 @@ var getPrice = ()
 
 Passing product as `undefined` sets default value as 100
 ```javascript
-let sample = function(product = 100, type='software') { }
+let sample = function(product = 100, type = 'software') { }
 // accepts price passed to the function to compute tax, function or variables in the context can be
 // passed to the function for eg: tax = price * getTax()
 let getTotal = function(price, tax= price * 0.75) {

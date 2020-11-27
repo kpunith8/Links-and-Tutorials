@@ -1689,3 +1689,37 @@ Create a cluster for Fargate setup and service
 ```
 
 ### Elastic Beanstalk - Deploying applications
+
+It is a Platform as a service (PaaS), is a developer centric view of deploying an
+app on AWS. It uses all the components, EC2, ASG, ELB, RDS, etc.,
+
+It's managed service, instance configuration/OS is handled by Beanstalk
+Deployment strategy is configurable but is performed by Beanstalk.
+
+It has `3 architecture` models
+
+- Single instance deployment - For development purpose
+
+- LB + ASG - Good for pre-production and production deployments
+
+- ASG only - Great for non-web apps in production (workers etc.,)
+
+It has `3 Components`
+
+- Application
+
+- Application version - Each deployment gets assigned a version
+
+- Environment name - dev, test, prod (name can be configurable)
+
+`Rollback` of a particular version is supported. Full control over the life cycle of environments.
+
+Supports Go Lang, Java, .NET, JS, Python, Ruby, PHP, single container docker and can be configurable.
+
+```
+1. Create Application
+  Application name
+  Platform: Select
+  Application code: Sample Application
+
+```

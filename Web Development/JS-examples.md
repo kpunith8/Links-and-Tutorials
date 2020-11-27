@@ -279,6 +279,29 @@ function fearNotLetter(str) {
 }
 ```
 
+## Reverse a string using reduceRight()
+
+```js
+const reverseString = str =>
+	str.split("").reduceRight((x, y) => x + y, "");
+```
+
+## Factorial of a number using range and reduce
+
+```js
+const range = (start, stop) => new Array(stop - start).fill(0).map((v, i) => start + i)
+
+const factorialByRange = n => range(1, n + 1).reduce((x, y) => x * y, 1);
+```
+
+## Gerenate Alphabets using range
+
+```js
+const alphabets = range("A".charCodeAt(), "Z".charCodeAt() + 1).map(x => String.fromCharCode(x));
+//
+```
+
+### Higher order functions
 
 ## Tricky JS
 

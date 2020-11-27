@@ -56,6 +56,8 @@ they are hoisted up to function declaration
 Only `function declarations` will be visible to `window/this/global object` not the `function
 expressions` or `arrow` functions.
 
+`Diadic functions` - function with 2 params
+
 ### Scope Chain
 
 ```js
@@ -539,7 +541,7 @@ Object.assign(myDetails, firstName, lastName, occupation, nationality);
 
 `Object.assign` composes only dynamic objects, and `copies` the properties, not the whole object
 
-## Debugging in Chrome Developer tools
+## Debugging in Chrome
 
 Use `DevTool snippets` to configure the dev tool, https://bgrins.github.io/devtools-snippets/
 will be available across the websites

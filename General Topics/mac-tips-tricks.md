@@ -102,3 +102,8 @@ $ ps ax | grep <PID>
 
 
 ## iBoysSoft NTFS to mac to format Pendrive to NTFS and resolve read only error
+
+
+## Check whether softwares are ready for Apple Silicon
+
+https://isapplesiliconready.com/
