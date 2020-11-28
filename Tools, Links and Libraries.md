@@ -140,7 +140,9 @@
 - `CSS Modules`
 - `Toaster` - Library to notifications
 - `font-awesome` for icons
--	`grips` - templating engine
+- `https://www.iconfinder.com/` - Free Icons
+- `https://heroicons.com/`
+- `grips` - templating engine
 - `tailwind css` - Utility first CSS - Offers low level API
 
 ## Common
@@ -153,6 +155,7 @@
 - `contentful` - CMS - content management system
 - `DukTape`, `JerryScript` - IoT JS Engines
 - `Grid.js` - HTML Table
+- `fast-memoize.js` - memoise the results
 
 ## Testing
 
@@ -214,6 +217,8 @@
 - `the-platform` - `Suspense` ready helper functions
 
 - `react-cache` - for suspense to cache the resource
+
+- `next-auth` - Authentication for next-js apps
 
 ### Testing
 

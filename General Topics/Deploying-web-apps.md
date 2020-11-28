@@ -8,7 +8,7 @@ download `heroku-cli`, if you want to use `heroku-git` to store your files)
 - Add the `Procfile` to your project root folder, and should be committed to source control
   `Procfile` should have the following content, name of the file should be `case sensitive`.
 ```
-web: node index.js // It should point to the folder you are deploying could be auth/index.js
+web: node index.js # It should point to the folder you are deploying could be auth/index.js
 ```
 
 - Add `app.json` file to the root folder, it should have the following content
