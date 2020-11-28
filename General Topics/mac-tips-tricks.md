@@ -16,19 +16,21 @@ $ ls -al | pbcopy
 
 ## Mac terminal
 
-- `Cmd + K` - To clear the command line permanently
+- `Cmd + K` - To clear the command line content permanently
 
 ## Mac General Shortcuts
 
-- `Cmd + Ctrl + Q` - Lock the system
-
-- `Cmd + Shift + F` - Toggle full screen
-
-- `Cmd + C` - Copy and `Cmd + Option + V` - Cut/Paste
+- `Ctrl + Cmd + Q` - Lock the system
 
 - `Ctrl + Cmd + Space` - Emoji Icons
 
-- `Cmd + Shift + .` - To `show or hide hidden files` starting with `.`
+- `Cmd + C` - Copy
+
+- `Option + Cmd + V` - Cut/Paste
+
+- `Shift + Cmd + .` - Show or hide hidden files starting with `.`
+
+- `Shift + Cmd + F` - Toggle Full screen
 
 ### List the running services in brew
 
@@ -50,7 +52,7 @@ $ brew services list
   $ chsh -s /bin/zsh
   ```
 
-- zsh auto suggestions, https://github.com/zsh-users/zsh-autosuggestions
+- `zsh` auto suggestions, https://github.com/zsh-users/zsh-autosuggestions
 
 - Remove the computer name in the shell prompt, add this line to `~/.zshrc`
   ```

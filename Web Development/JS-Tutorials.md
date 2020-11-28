@@ -58,7 +58,11 @@ expressions` or `arrow` functions.
 
 `Diadic functions` - function with 2 params
 
-### Scope Chain
+### Temporal Dead Zone
+
+Variables with the `let` keyword and `const` are `hoisted`, but unlike var, `don't get initialized`. They are not accessible before the line we declare (initialize) them. This is called the `temporal dead zone`. When we try to access the variables before they are declared, JavaScript throws a `ReferenceError`.
+
+## Scope Chain
 
 ```js
 function b() {
@@ -89,7 +93,7 @@ var myVar = 1
 a()
 ```
 
-### Objects and Properties
+## Objects and Properties
 
 Constructor function
 ```js
@@ -132,7 +136,7 @@ function display(data) {
 }
 ```
 
-### Prototypes
+## Prototypes
 
 Defining prototype to get the last element of an array
 ```js
@@ -176,7 +180,7 @@ fluffy.age = 5; // it adds new property to fluffy object and display(fluffy.age)
 // and fluffy.__proto__.age will still display '4' since it is a prototype not an property
 ```
 
-#### Create prototype chains
+### Create prototype chains
 
 ```js
 function Animal(voice) {
@@ -205,7 +209,7 @@ Cat.prototype.constructor = Cat
 fluffy.__proto__ // returns Cat and fluffy.__proto__.__proto__ returns Animal
 ```
 
-#### Prototypes with classes
+### Prototypes with classes
 
 ```js
 Class Animal {
@@ -483,7 +487,7 @@ And all of these probably expose some version of `addProduct` and `removeProduct
 
 Use Composition over class inheritance
 
-Product list
+`product-list.js`
 ```js
 function makeProductList({productDb}) {
   return Object.freeze({
@@ -495,7 +499,7 @@ function makeProductList({productDb}) {
 }
 ```
 
-Shopping cart
+`shopping-cart.js`
 ```js
 function makeShoppingCart(productList) {
   return Object.freeze({
@@ -541,7 +545,83 @@ Object.assign(myDetails, firstName, lastName, occupation, nationality);
 
 `Object.assign` composes only dynamic objects, and `copies` the properties, not the whole object
 
+## JS Modules 
+
+1. `CommonJS Modules` - server side - Foundation for nodeJS module system.
+
+2. `AMD (Asynchronous Module Definition)` - Clinet side - `RequireJS` is most popular implementation
+```js
+define(['./other-module1.js', './other-module2.js'],
+  function (otherModule1, otherModule2) {
+    var importedFunc1 = otherModule1.importedFunc1;
+    var importedFunc2 = otherModule2.importedFunc2;
+
+    function internalFunc() {
+      // ···
+    }
+    function exportedFunc() {
+      importedFunc1();
+      importedFunc2();
+      internalFunc();
+    }
+    
+    return {
+      exportedFunc: exportedFunc,
+    };
+  });
+```
+AMD modules can be executed directly. In contrast, CommonJS modules must either be `compiled before deployment` or custom source code must be generated and evaluated `dynamically`.
+
+3. `ECMAScript modules` - Introduced in ES6, With CommonJS ES modules `share the compact syntax` and `support for cyclic dependencies.` With AMD, ES modules share being designed for asynchronous loading.
+
+Modules have `static` structures (which can’t be changed at runtime). That helps with `static checking`, `optimized access of imports`, `dead code elimination`, and more. 
+
+Support for `cyclic imports is completely transparent.`
+
+1. Named exports and imports
+```js
+// named-export.mjs
+export const square = x => x * x
+const function double = x => x * 2
+
+export {double}
+```
+
+```js
+// named-import.mjs
+import {sqaure} from './named-export.mjs'
+import {double as db} from './named-export.mjs'
+
+// Namespace imports are an alternative to named imports. 
+import * as utils from './named-export.mjs'
+// If we namespace-import a module, it becomes an object whose properties are the named exports.
+assert.deepEqual(Object.keys(utils), ['square', 'double']);
+```
+
+2. Default exports and imports
+
+Each module can have at most one default export. 
+> Avoid mixing named exports and default exports. A module can have both named exports and a default export, but it’s usually better to stick to one export style per module.
+
+```js
+// default-export.mjs
+export default function square(x) {
+    return x * x;
+}
+```
+
+```js
+// default-import.mjs
+import square from './default-export.mjs';
+```
+
 ## Debugging in Chrome
+
+### Shortbuts
+
+`Cmd + Shift + O` To search for functions in the current file
+
+`Cmd + Shift + P` To search for anything in the dev tools
 
 Use `DevTool snippets` to configure the dev tool, https://bgrins.github.io/devtools-snippets/
 will be available across the websites
@@ -559,21 +639,20 @@ Protect variables with scope
 })();
 ```
 
+### Logging 
+
 `console.table(data, ['name', 'email']);` To print the JSON data in table form
 
 `console.log('%c Error', 'color: white, background: red');` Apply the style to log
 
 `console.dir(names, {colors: true, depth:null});` shows the array of objects in colors
 
-The `console` method `dir()` displays an interactive list of the properties of the specified js object.
+The `console()` and `dir()` methods displays an interactive list of the properties of the specified js object.
 The output is presented as a hierarchical listing with disclosure triangles that let you see the contents of child objects.
 
 `console.trace()` to print the trace
 
-Use `Event Listener Breakpoints` -> select the `mouse -> click` option which opens the first line
-where the event listener added
-
-use `console.log` with `JSON.parse(JSON.stringify(arr))`
+Use `console.log()` with `JSON.parse(JSON.stringify(arr))`
 ```js
 let arr = [1, 2, 3]
 
@@ -586,7 +665,12 @@ arr.push(4)
 // It prints 4 items and the above console prints 3
 console.log('arr before pushing:', JSON.parse(JSON.stringify(arr)))
 ```
+### Event Listener breakpoints
 
+Use `Event Listener Breakpoints` -> select the `mouse -> click` option which opens the first line
+where the event listener added
+
+## Measure the performance of the JS code
 `console.time('name')` and `console.timeEnd('name')` to measure the time it takes to execute the code
 
 `performance.now()` to measure the time it takes to execute a block of code
@@ -598,15 +682,13 @@ let t1 = perfomance.now()
 let res = t1 t0
 ```
 
+## Other usefull methods
+
 `debug(methodName)` in the console pass the function name to debug and it takes to that function
 	if it exists in the current scope or in the project and `unregister` it by, `undebug(methodName)`
 
 `monitor(methodName)` gives the details about the params passed to the function, `unmonitor(methodName)`
 	to not to monitor anymore
-
-`Cmd + Shift + O` To search for functions in the current file
-
-`Cmd + Shift + P` To search for anything in the dev tools
 
 Make the changes made in `devtools` reflect in actual files, go to `Source -> File System Tab` -> add the folder
 
@@ -625,7 +707,9 @@ it copies to `temp1` variable, use `copy(temp1)` method to copy to `clipboard`
 
 ### Style the hover elements or context menus with the help of debugger
 
-Open the developer tools and go to console and type this code
+Open the developer tools and go to console and type this code, and trigger the action on
+elements within 3 seconds of the delay so that the debugger stops and you can start 
+debugging or inspect elements and apply style.
 ```js
 setTimeout(() => {debugger}, 3000);
 ```

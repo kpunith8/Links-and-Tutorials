@@ -301,8 +301,6 @@ const alphabets = range("A".charCodeAt(), "Z".charCodeAt() + 1).map(x => String.
 //
 ```
 
-### Higher order functions
-
 ## Tricky JS
 
 ### [] == ![]; // -> true

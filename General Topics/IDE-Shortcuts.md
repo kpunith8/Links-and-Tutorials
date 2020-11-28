@@ -67,6 +67,20 @@ Settings -> set, javascript.validate.enable": false
 
 ---
 
+## VS code doesn't locate git in M1
+
+Update the xcode if you have installed the updates or for the first time 
+```
+$ xcode-select --install
+```
+
+Get the location of the location where git installed
+```
+$ where git
+```
+
+Update the `git.path` in VSCode preferences for eg, `/usr/bin/git` and restart
+
 ## VS Code plugins
 
 - `quokka.js` - Same line evalution

@@ -5,7 +5,7 @@
 ### Set user name and email address
 ```
 git config --global user.name "Punith K"
-$ git config --global user.email "PunithK@gmail.com"
+git config --global user.email "kpunith8@gmail.com"
 ```
 
 - Set `notepad++` as your default editor, it can be any text editor of your choice, by default git ships, `vim` as default editor.
@@ -52,10 +52,11 @@ git clean -fd
 
 - Initialize a empty git repository
 ```
-git init
+git init <project-name>
 ```
 
-- Add all the files changed to staging, make sure you added `.gitignore` file to not to commit binary and `node_modules` folder to git
+- Add all the files changed to staging, make sure you add `.gitignore` file to not to commit binaries 
+and `node_modules` folder to git
 ```
 git add .
 ```
@@ -97,11 +98,6 @@ git log --oneline -5 --author <author-name>
 git shortlog -> groups commits by user
 ```
 
-### Reset all the staged files
-```
-git reset HEAD -- .
-```
-
 ### Git `fetch` and `pull`
 
 ```
@@ -130,7 +126,7 @@ option -b creates the branch and checkout to the branch created.
 ```
 git merge --no-ff <target-branch>
 ```
-The --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature
+The `--no-ff` flag causes the `merge to always create a new commit object`, even if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature
 
 ```
 git merge <target-branch-to-merge-with>
@@ -191,7 +187,7 @@ git config --global alias.ra ra="!f() {\
 git reset --hard
 git clean -df
 ```
--d for untraced directories and -f for untracked files
+-d for untracked directories and -f for untracked files
 
 ## Advanced git commands - David Baumgold - Advanced git - PyCon - 2015
 ```
@@ -364,9 +360,8 @@ git rebase --continue
 - Force push your changes to remote branch
 ```
 git push -f origin <feature-branch>
-````
-
-#### Remove the commit:
+```
+#### Remove the commit
 ```
 git rebase -i HEAD~2 or <commit-hash>
 ```
@@ -530,12 +525,23 @@ $ git switch -
 
 - Refer: https://github.com/git-tips/tips
 
+- Reset all the staged files
+```
+git reset HEAD -- .
+```
+
+- Reset the specific staged file 
+```
+git restore --staged <file-name>
+```
+
 - Checkout to last checked out branch
 ```
 git checkout -
 ```
 
 - To check whether a branch is merged with `master` or any other branch
+
 - To check merged branches
 ```
 git branch --merged
@@ -562,7 +568,7 @@ git log -S'<search-string>'
 ```
 
 - Add the modified and un-committed files to the previous commit without changing the commit message, new files should
-be added to the staging.
+be added to the staging
 ```
 git commit -a --amend -C HEAD
 ```
@@ -600,7 +606,6 @@ git branch -D <branch-name>
 - Fetch all the changes from remote
 ```
 git fetch -p
-git remote prune origin
 ```
 
 - Get the `total number of files` changed in the `latest commit`
@@ -611,9 +616,9 @@ git log --oneline --name-status <HEAD/commit-hash> -1 | wc -l
 #### If pre-commit hooks are corrupted and not allowing to proceed
 
 - Stop the verification on git commit with hooks
-  ```
-  git commit -n or --no-verify
-  ```
+```
+git commit -n or --no-verify
+```
 
 ### gitbash on Windows doesn't show chars once git log prints or Ctrl+C pressed (Cursor blinks)
 
@@ -622,9 +627,9 @@ git log --oneline --name-status <HEAD/commit-hash> -1 | wc -l
 ### Sort the branches by last updated date
 
 - Sort branches by last date
-  ```
-  git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'
-  ```
+```
+git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'
+```
 
 # macOS Related
 
@@ -673,16 +678,16 @@ $ ssh-add -K ~/.ssh/id_rsa_personal
 ```
 
 - Change the permission of your `id_rsa_personal` key
-  ```
-  $ chmod 400 ~/id_rsa_personal
-  ```
+```
+$ chmod 400 ~/id_rsa_personal
+```
 
 - If you have already cloned using `https` remove the `origin` and reset the origin to `ssh` as follows,
-  ```
-  $ git remote rm origin
+```
+$ git remote rm origin
 
-  $ git remote add origin git@github.com:kpunith8/<repo-name>.git
-  ```
+$ git remote add origin git@github.com:kpunith8/<repo-name>.git
+```
 
 - Clone the projects with `ssh` option to push the changes
 
@@ -706,9 +711,9 @@ $ source ~/.bash_profile
 ## github-linguist package to know the percentage of code (different programming languages in a repo)
 
 - Install the package and run this command on any git project in local
-  ```
-  $ github-linguist --breakdown
-  ```
+```
+$ github-linguist --breakdown
+```
 
 ### References
 
