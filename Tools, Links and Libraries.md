@@ -220,6 +220,8 @@
 
 - `next-auth` - Authentication for next-js apps
 
+- `netlify forms`
+
 ### Testing
 
 - `Jest`, `Enzyme` - React testing
@@ -636,3 +638,18 @@
 ## Deployed Apps
 
 - https://node-mongo-jwt-auth.herokuapp.com/
+
+
+## Download youtube videos 
+
+1. Change YouTube to ssyoutube
+youtube.com/watch?v=C6MVEwl0ceI&t=2s -> ssyoutube.com/watch?v=C6MVEwl0ceI&t=2s
+
+2. Change YouTube to youpak
+youtube.com/watch?v=C6MVEwl0ceI&t=2s -> youpak.com/watch?v=C6MVEwl0ceI&t=2s
+
+3. Insert "pp" after "youtube"
+youtube.com/watch?v=C6MVEwl0ceI&t=2s -> youtubepp.com/watch?v=C6MVEwl0ceI&t=2s
+
+4. Add "pwn" before "youtube"
+youtube.com/watch?v=C6MVEwl0ceI&t=2s -> pwnyoutube.com/watch?v=C6MVEwl0ceI&t=2s

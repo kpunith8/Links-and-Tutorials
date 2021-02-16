@@ -109,3 +109,11 @@ $ ps ax | grep <PID>
 ## Check whether softwares are ready for Apple Silicon
 
 https://isapplesiliconready.com/
+
+
+## xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
+
+Run the following command in the commandline to fix it
+```
+$ xcode-select --install
+```
