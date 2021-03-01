@@ -59,7 +59,7 @@ $ brew services list
   export DEFAULT_USER="$(whoami)"
   ```
 
-## Symobols Shortcuts
+## Symbols Shortcuts
 
 - `Opt + [` for `“`
 
@@ -111,7 +111,8 @@ $ ps ax | grep <PID>
 https://isapplesiliconready.com/
 
 
-## xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
+## xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools - VSCode doesn't recognize git
+
 
 Run the following command in the commandline to fix it
 ```

@@ -43,6 +43,8 @@ Settings -> set, javascript.validate.enable": false
 
 - `Cmd + Shift + F` - Search for highlighted string in the selected path
 
+- `Cmd + Shift + L` - add cursors to all occurrences of the current selection, click/select the text and use shortcut to select all the text starting with that text in the whole file
+
 - `Cmd + P` - Recently opened files
 
 - `Cmd + P` then `@` - Symbols used in the file or `@:` group the symbols
@@ -56,6 +58,8 @@ Settings -> set, javascript.validate.enable": false
 - `Shift + Option + Up/Down Arrow` - Copy the line up/down
 
 - `Shift + Tab` - un-tab the tabs
+
+- `Shift + Alt` - select blocks of text while you drag your mouse.
 
 - `Cmd + D` - Select entries starting from the word under the cursor
 

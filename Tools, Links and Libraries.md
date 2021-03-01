@@ -106,6 +106,8 @@
 - `LABjs` - JS job loader
 - `npm-run-all` - run parallel tasks
 - `nprogress` - to show the indicator on top of the page
+- `minimist` - Parse node argument options
+- `slatejs` - Rich text editor 
 
 ## Email clients and libraries
 
@@ -156,6 +158,8 @@
 - `DukTape`, `JerryScript` - IoT JS Engines
 - `Grid.js` - HTML Table
 - `fast-memoize.js` - memoise the results
+- `ngrok` - to tunnel local development and create a temp server to test
+- `twilio` - Communication APIs for SMS, chat and so on, can be used to `serverless` functions using twilio JS package
 
 ## Testing
 
@@ -285,7 +289,9 @@
 
 - [Markdown editor](https://typora.io/)
 
-- [11nty](https://www.11ty.dev/) - static site generator
+- [11nty](https://11ty.dev/) - static site generator
+
+- [Uptime Robot](https://uptimerobot.com) - Ping server to keep alive
 
 ## Productivity tools
 
@@ -329,7 +335,7 @@
 
 - [Weather API](https://api.openweathermap.org/data/2.5/weather)- needs API KEY
 
-
+- `zenquotes.io` - Random Quotes API
 ### Java
 
 - `Jackson` - JSON serializer and deserializer
