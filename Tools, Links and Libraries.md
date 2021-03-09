@@ -79,6 +79,10 @@
 
 - Rest APIs with `mux`
 
+- `fiber` - express like framework
+
+- `gorm` - ORM for `MySQL, SQLite, PostgreSQL, and SQL Server`
+
 # Online Courses - Programming
 
 - [Scrimba](https://scrimba.com/)
@@ -109,6 +113,11 @@
 - `minimist` - Parse node argument options
 - `slatejs` - Rich text editor 
 
+## Cross Platform desktop apps 
+
+- `electronjs`
+- [Neutralinojs](https://neutralino.js.org/)
+- [Tauri](https://tauri.studio/en/)
 ## Email clients and libraries
 
 - `SendGrid` Email delivery service

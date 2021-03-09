@@ -8,10 +8,13 @@ download `heroku-cli`, if you want to use `heroku-git` to store your files)
 - Add the `Procfile` to your project root folder, and should be committed to source control
   `Procfile` should have the following content, name of the file should be `case sensitive`.
 ```
-web: node index.js # It should point to the folder you are deploying could be auth/index.js
+# It should point to the main entry file for it can be eg., auth/index.js, because index.js inside auth folder has the entry point
+web: node index.js 
+# Refer https://stackoverflow.com/questions/31092538/heroku-node-js-error-r10-boot-timeout-web-process-failed-to-bind-to-port-w
+worker: node index.js # If it is not a server, for services like discord bots this is the best option
 ```
 
-- Add `app.json` file to the root folder, it should have the following content
+- Add `app.json` file to the root folder, it should have the following content (Optional)
 ```javascript
 {
   "name": "mongo API",

@@ -99,10 +99,11 @@ Update the `git.path` in VSCode preferences for eg, `/usr/bin/git` and restart
 - `Prettier`
 - `npm`
 - `npm intellisense`
+- `dash` - Documentation - `ctrl + h`, `ctrl + alt + h` - for see the documentation
+
 - `REST Client` - to make rest calls from VS code
   - Create `requests.rest` - file in the route folder
   - Put `###` to send separate request in the same page
-- `dash` - Documentation - `ctrl + h`, `ctrl + alt + h` - for see the documentation
 
   ```
   GET http://localhost:3000/posts HTTP/1.1

@@ -38,6 +38,11 @@ git config --global merge.conflictstyle diff3
 git config core.ignorecase false
 ```
 
+### Unset the config 
+```
+git config --global --unset merge.conflictstyle
+```
+
 ### Cache the password for an hour
 ```
 git config --global credential.helper cache --timeout=3600
@@ -95,7 +100,7 @@ git push origin <branch-name>
 ### To get the last 5 log entries for the specific user
 ```
 git log --oneline -5 --author <author-name>
-git shortlog -> groups commits by user
+git shortlog # groups commits by user
 ```
 
 ### Git `fetch` and `pull`

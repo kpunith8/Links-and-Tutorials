@@ -57,6 +57,18 @@
   - If `GOPATH` is set, binaries are installed to the `/bin sub directory` of the first directory in the GOPATH list.
     Otherwise, binaries are installed to the `bin sub directory` of the default `GOPATH`
 
+### Creating a module for a project
+
+```
+$ go mod init github.com/kpunith8/package-name
+```
+
+And run `mod tidy` to install the missing dependencies
+
+```
+$ go mod tidy
+```
+
 ### Importing packages from your module
 
 - Create a `ds` package and use it from the `sample.go` program
