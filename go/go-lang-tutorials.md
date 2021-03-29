@@ -1005,3 +1005,80 @@ $ go mod tidy
     // receiving from c would block
   }
   ```
+
+## https://astaxie.gitbooks.io/
+
+### iota 
+
+- Go has one keyword called `iota`, this keyword is to make `enum`, it begins with 0, increased by 1.
+```go
+const(
+    x = iota  // x == 0
+    y = iota  // y == 1
+    z = iota  // z == 2
+    w  // If there is no expression after the constants name, it uses the last expression,
+    //so it's saying w = iota implicitly. Therefore w == 3, and y and z both can omit "= iota" as well.
+)
+
+const v = iota // once iota meets keyword `const`, it resets to `0`, so v = 0.
+
+const (
+  e, f, g = iota, iota, iota // e=0,f=0,g=0 values of iota are same in one line.
+)
+```
+
+- Define variables or const by a group 
+```go
+const(
+    i = 100
+    pi = 3.1415
+    prefix = "Go_"
+)
+
+var(
+    i int
+    pi float32
+    prefix string
+)
+```
+
+### Arrays 
+
+- When you use `arrays` as arguments, `functions get their copies instead of references`. If you want to use references, use `slice` instead.
+
+```go
+b := [10]int{1, 2, 3}
+// define a int array with 10 elements, of which the first three are assigned.
+//The rest of them use the default value 0.
+
+c := [...]int{4, 5, 6} // use `…` to replace the length parameter and Go will calculate it for you.
+
+// define a two-dimensional array with 2 elements, and each element has 4 elements.
+doubleArray := [2][4]int{[4]int{1, 2, 3, 4}, [4]int{5, 6, 7, 8}}
+
+// The declaration can be written more concisely as follows.
+easyArray := [2][4]int{{1, 2, 3, 4}, {5, 6, 7, 8}}
+```
+
+### Slice
+
+- slice a reference type. slice points to an underlying array whose declaration is similar to array, but doesn't need length.
+
+- Any changes will affect other variables pointing to the same slice or array.
+
+- slice is like a `struct` by definition and it contains 3 parts.
+  - A pointer that points to where slice starts.
+  - The length of slice.
+  - Capacity, the length from start index to end index of slice
+
+- There are some `built-in` functions for slice.
+  - `len` gets the length of slice.
+  - `cap` gets the maximum length of slice
+  - `append` appends one or more elements to slice, and returns slice .
+  - `copy` copies elements from one slice to the other, and returns the number of elements that were copied.
+
+> append will change the array that slice points to, and affect other slices that point to the same array. Also, if there is not enough length for the slice ((cap-len) == 0), append returns a new array for this slice. When this happens, other slices pointing to the old array will not be affected
+
+### map
+
+- 

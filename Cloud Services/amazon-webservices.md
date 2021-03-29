@@ -1723,3 +1723,263 @@ Supports Go Lang, Java, .NET, JS, Python, Ruby, PHP, single container docker and
   Application code: Sample Application
 
 ```
+
+## Dynamo DB
+
+- NoSQL serverless DB
+- Fully managed, highly available with replication across 3 AZ
+- Scales to massive workload, and distributed DB, scales horizontaly
+- Fast and consistent performance (low latency on retrieval)
+- Integrated with IAM for security, authorization and adminstration
+- Enables event driven programming with `DynamoDB Streams`
+- Low cost and has autoscaling capabilities
+
+### Basics 
+
+- Made of tables, each table has a `primary key`(must be decided on creation time)
+- Each table can have infinte number of items and each item has attributes
+- Maximum size of a row is `4000KB`
+- Supports, Scalar types (String, Number, Boolean, Null, Binary), Document types (List and Map)
+  and Set types (String Set, Number Set, and Binary Set)
+
+### Primary key
+
+1. Partition key only(HASH)
+  - It should be unique for each item
+  - It should be diverse so that data is distributed
+  ex: users table with user_id as partition key
+
+2. Partition Key + Sort Key
+  - It should be unique 
+  - Data is grouped by partition key
+  - sort key is called range key
+  ex: user-games table with, user_id for partirion key and game_id for sort key
+
+### Throughputs
+
+- Read Capacity Units (RCU) - read throughput
+- Write Capacity Units (WRU) - write throughput
+- Throughput can be exceeded temporarily using `burst credit`
+- If `burst credit` are empty, throws `ProvisionedThroughputException`
+- It's advised to do an `exponential back-off retry`
+
+1. `WCU` 
+  - 1 WCU = 1 write/second for an item up to `1KB`
+  ex: 6 objects/second of 4.5KB each = 6 x 5 = 30 WCU (4.5 rounded to upper KB, i.e., 5)
+
+2. `RCU`
+  - Strongly Consistent Read - Read after a write, get the proper data
+  - Eventually Consistent Read - Read just after a write, may get unexpected response because of replication
+
+  DynamoDB uses `Eventually Consistent Reads`, but GetItem, Query, and Scan can provide a `ConsistentRead` param set to true
+
+  - 1 RCU = `1 strongly consistent read/second`, or `2 eventually consistent reads/second`, for an item up to `4KB`
+
+### Partitions internal
+
+- Data is divided into partitions
+- Partition keys go through a hashing algorithm to know which partition they go to
+- Compute the total number of partitions
+  - By Capacity: (Total RCU / 3000) + (Total WCU / 1000)
+  - By Size: Total size / 10 GB
+  - By Partitions: Ceiling(Max(Capacity, Size))
+- WCUs And RCUs are spread evenly between partitions
+
+### Throttling
+
+- Exceeding RCUs and WCUs throws, `ProvisionedThroughputExceededException`
+  Reasons:
+  - Hot keys: one partition key is being read too many times
+  - Hot partitions
+  - Very large items
+
+- Solution for the above exception is `Exponentional back-off` or distribute the partition key, for an 
+RCU issue use, `DynamoDB Accelerator(DAX)`
+
+### Basic APIs
+
+1. Writing Data
+  - `PutItem` - Write data (create or full replace)
+  - `UpdateItem` - Partial updates to attributes
+
+- Conditional writes, helps with concurrent access to items and there is no performance impact
+
+
+2. Deleting Data
+
+  - `DeleteItem` - Delete an individual item, conditional delete possible
+  - `DeleteTable` - Deletes the whole table and its items
+
+3. Batching writes
+  - `BatchWriteItem` - Upto 25 PutItem or DeleteItem in one call, upto `16MB`of data wriiten and upto `400KB/item`
+  - Batching allows to save latency by reducing the number of API calls done against DynamoDB
+  - Operations are done in parallel for better performance
+  - Use `exponential back-off algorithm` to retry write the fialed items (Upto the user)
+
+4. Reading data
+  - `GetItem` - Read based on PK, PK = HASH or HASH-RANGE
+  - Eventually consistent reads by default
+  - Option to choose Strongly consistent reads, takes more RCU and take loger time
+  - `ProjectionExpression` can be specified to include only certain attributes
+
+  - `BatchGetItem` - Upto 100 items, upto 16MB of data and are retrieved in parallel to minimize the latency
+
+5. Query
+  - Returns data based on `PartitionKey` value (must be = operator)
+  - `SortKey` value (=, <, >, <= , =>, Between, Begin) - optional
+  - `FilterExpression` to further filter (client side filtering)
+  - Returns upto `1MB`of data or number of items specified in `Limit`
+  - Able to do `pagination` on the result
+  - Can query a `table`, a `local secondary index`, or a `global secondary index`
+
+6. Scan
+  - Scans the entire table and then filter out the data (inefficient)
+  - Returns upto `1MB` - use pagination to keep reading
+  - Consumes of a lot of RCU
+  - Limit the impact using `Limit` or reduce the size of the result and pause
+  - For faster performance, use `parallel scans`
+    - Multiple instances scan multiple partitions at the same time
+    - Increases the throughput and RCU Consumed
+  - Use `ProjectionExpression` and `FilterExpression`, no change to RCU
+
+### Indexes
+
+1. LSI - `Local Secondary Index`
+  - Its an alternate range key for the table, local to the hash key
+  - Upto 5 LSI/table
+  - the sort key consists of exactly `one scalar attribute`
+  - The attribute choosen must be a scalar Number, Binary or String
+  - Must be defined at the `table creation time`
+
+2. GSI - `Global Secondart Index`
+  - Use to speed up queries on non-key attributes
+  - GSI = partition key + optional sort key
+  - The index is a `new table` and attributes can be projected on it
+    - The partition key and sort key of the original table are always protected (KEYS_ONLY)
+    - Can specify extra attributes to project (INCLUDE)
+    - Can use all the attributes from the main table (ALL)
+  - Must define RCU/WCU for the index
+  - It's possible to add/modify GSI (not LSI)
+
+### Indexes and Throttling
+
+1. GSI
+  - If the writes are throttled on the GSI, then the main table will be throttled
+  - Even if the WCU on the main tables are fine
+  - Choose the right partition key for GSI
+  - Assign WCU carefully
+
+1. LSI
+  - Uses the same WCU/LCU of the main table
+  - No special throttling considerations
+
+### Concurrency
+
+- Conditioal update or delete makes sure an item hasn't changed before altering it, that makes DynamoDB
+an `optimistic locking/concurrency` DB.
+
+### DAX - DynamoDB Accelerator
+
+- `Seamless cache` for DynamoDB, no application re-write
+- Writes go through DAX to DynamoDB
+- There is a micro second latency for cached reads and queries
+- Solves the `Hot Key Problem` (too many reads)
+- `5 minutes` TTL for cache by default
+- Upto 10 nodes in the cluster, must be provisioned in advance
+- Multi AZ (3 nodes minimum recommended for production)
+- Can be secured (Encryption at rest with KMS, VPC, IAM, CloudTrail etc)
+- Improves the performance of the DB
+
+### DAX vs Elastic Cache
+
+- DAX will be ideal for individual objects cache query / scan cache
+- Elastic cache to store aggregation results performed on the DB
+
+### Streams
+
+- Changes in DB (create, update, delete) can end up in a DynamoDB stream
+- The stream can be `read by AWS Lambda or EC2 instances`, then we can,
+  - React to changes in real time (eg: welcome email to new users)
+  - Perform some analytics
+  - Create derivative tables/views
+  - Insert into ElasticSearch
+- Can be used to implement the `cross region replication`
+- Steams have only `24 hours of data retention`
+- Choose the information that will be written to the stream whenever the data in the stream is modified:
+  - `KEYS_ONLY` - Only the key attributes of the modified item
+  - `NEW_IMAGE` - The entire item, as it appears after it was modified  
+  - `OLD_IMAGE` - The entire item, as it appears before it was modified
+  - `NEW_AND_OLD_IMAGES` - Both old and new images of the item
+- They are made of `Shards`, just like `Kinesis Data Streams`, 
+  user don't provision shards, it's automated by AWS
+- Records are not retroactively populated in a stream after enabling it, previous records won't
+  be populated.
+
+### DynamoDB and Lambda
+
+- Define an `Event Source Mapping` to read from a DynamoDB Streams, Lambda with event souce mapping will poll the DB
+Streams and returned batch streams are invoked  by event batch by lambda function.
+- Ensure that the Lambda function has appropriate permissions
+- Lambda function is invoked `synchronously`
+
+eg: Select the `Table` - `Overview` tab and `Stream details` - `Manage Stream` and select any of the information
+once done, go to `Triggers tab` for the table - `Create trigger` - `N`ew function` and create a lambda function
+filling the necessary details - Enable the triggerc- Make the chages to the table data and go to lambda function 
+created and check the `CloudWatch` logs
+
+### TTL - Time To Live
+
+- Automatically delete an item after an expiry date/time
+- TTL is provided at no extra cost, deletion don't use `WCU/RCU`
+- Is a background task operated by DynamoDB itself, done in the background periodically
+- Helps to reduce the storage and manage the table size over time
+- TTL is enabled per item, add TTL column with a date
+- DynamoDB deletes expired items within 48 hours of expiration
+- Deleted items due to TTL are also deleted from LSI/GSI
+- DynamoDB Streams can help recover the expired items if needed
+
+eg: Add an number attribute with any name having `epoc` value using the online EPOC converter to any item
+and under the `Overview` tab select `manage TTL` to add the created value as TTL attribute to look for.
+
+### CLI
+
+- `--projection-expression` - attributes to retrive
+- `--filter-expression` - to filter the results
+- General CLI pagination options including DynamoDB/S3
+  - Optimization: `--page-size` - full dataset retrieved but each API call will request less data (helps to avoid timeouts)
+  - Pagination: `--max-items` - maximum items returned by CLI, returns `NextToken`, `--starting-token` - specify the last received NextToken to keep on reading
+
+- Examples
+```
+$ aws dynamodb scan --table-name users --projection-expression "user_id, content" --region us-east-1
+
+$ aws dynamodb scan --table-name users --filter-expression "user_id = :u" --expression-attribute-values 
+'{ ":u": {"S": "1234"}}' --region us-east-1
+
+$ aws dynamodb scan --table-name users --region us-east-1 --page-size 1
+
+$ aws dynamodb scan --table-name users --region us-east-1 --max-items 1
+```
+
+### Transactions
+
+- Ability to create, delete, or update multiple rows in multiple tables at the same time
+- It's an `all or nothing` type of operation
+- Write Modes: `Standard` and `Transactional`
+- Read Modes: `Eventual Consistency`, `Strong Consistency`, and `Transactional`
+- Consumes 2X of WCU/RCU
+
+- Can be used as `Session State Cache`
+
+
+## Links 
+
+- Install `aws-cli` using `Homebrew`
+
+- [Install `aws-sam` on Apple M1](https://arkeetect.medium.com/aws-installing-aws-sam-clion-macos-m1-f2e7995a61de)
+
+```
+$ xcode-select --install
+
+$ brew install aws-sam-cli
+```

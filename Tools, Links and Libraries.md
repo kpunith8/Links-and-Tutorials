@@ -668,3 +668,10 @@ youtube.com/watch?v=C6MVEwl0ceI&t=2s -> youtubepp.com/watch?v=C6MVEwl0ceI&t=2s
 
 4. Add "pwn" before "youtube"
 youtube.com/watch?v=C6MVEwl0ceI&t=2s -> pwnyoutube.com/watch?v=C6MVEwl0ceI&t=2s
+
+### Grammer or spell checker tools
+
+- [Ginger Software](https://gingersoftware.com)
+- [Reverso](https://reverso.net)
+- [Grammarly](https://grammrly.com)
+- [Grammarly Check](https://grammarlycheck.net)

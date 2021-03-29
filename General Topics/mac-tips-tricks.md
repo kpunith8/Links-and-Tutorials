@@ -118,3 +118,9 @@ Run the following command in the commandline to fix it
 ```
 $ xcode-select --install
 ```
+
+## Updates to a tool from the commandline default macOS command
+
+```
+$ softwareupdate --install-rosetta
+```
