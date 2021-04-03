@@ -76,7 +76,7 @@ ex: `Oracle`, `MySQL`, `MS SQL Server`, `PostgreSQL`, `DB2`
 
 - Can be public, private or hybrid cloud
 
-ex: `AWS`, `Microsift Azure`, `Google Cloud` and etc,.
+ex: `AWS`, `Microsift Azure`, `Google Cloud` and etc,. SAP's SAP-HANA, in includes Sybase tool
 
 ### Advantages 
 
@@ -91,6 +91,8 @@ ex: `AWS`, `Microsift Azure`, `Google Cloud` and etc,.
 - Show the data points between connections
 
 - Used to analyze the data such as pattern of online buying
+
+Applicatios of graphDB, machine learning, fraud detection, regulatory compliance, and identitu and access management
 
 ex: `Neo4j`, `Dgraph` are most widely used ones
 

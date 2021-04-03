@@ -1006,6 +1006,12 @@ $ go mod tidy
   }
   ```
 
+### Concurrency Patterns
+
+[youtube-video](https://www.youtube.com/watch?v=YEKjSzIwAdA)
+
+
+
 ## https://astaxie.gitbooks.io/
 
 ### iota 
@@ -1082,3 +1088,16 @@ easyArray := [2][4]int{{1, 2, 3, 4}, {5, 6, 7, 8}}
 ### map
 
 - 
+
+
+### Libraries
+
+- [sockets inspired by js lib](https://github.com/googollee/go-socket.io)
+
+- `gorilla/websocket`
+
+- [mux](https://github.com/gorilla/mux) - HTTP Router
+
+- [gin](https://github.com/gin-gonic/gin) - HTTP Web Framework
+
+- [env-variables](github.com/joho/godotenv) - To read env variables from .env files, inspired by JS's dotenv package

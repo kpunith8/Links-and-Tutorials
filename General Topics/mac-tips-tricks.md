@@ -110,17 +110,15 @@ $ ps ax | grep <PID>
 
 https://isapplesiliconready.com/
 
-
-## xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools - VSCode doesn't recognize git
-
-
-Run the following command in the commandline to fix it
-```
-$ xcode-select --install
-```
-
 ## Updates to a tool from the commandline default macOS command
 
 ```
 $ softwareupdate --install-rosetta
+```
+
+## xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools - VSCode doesn't recognize git
+
+Run the following command in the commandline to fix it
+```
+$ xcode-select --install
 ```

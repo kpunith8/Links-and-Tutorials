@@ -125,22 +125,18 @@ Consists of 4 layers
 
 Its the way the network is arranged, it plays a vital role when it comes to structuring the network. It can be physical or logical. 
 
-`Physical topology` refers to tangible conections such as wires, cables, devices etc., shows how the network is structured.
+- `Physical topology` refers to tangible conections such as wires, cables, devices etc., shows how the network is structured.
 
-`Logical topology` is the conceptual and strategic structure of the network, shows how the data will be transmitted
+- `Logical topology` is the conceptual and strategic structure of the network, shows how the data will be transmitted.
 
 ### Types of topologies 
 
 #### Star topology
 
-Every node is directly connected to the `centralized hub or switch`.
-
-Connections are connected with `coaxial`, `twisted` or a `fibre optic cable`. 
-
-A centralized node manages the transmission of the data across the topology.
+Every node is directly connected to the `centralized hub or switch`. Connections are connected with `coaxial`, `twisted` or a `fibre optic cable`. A centralized node manages the transmission of the data across the topology.
 
 Advantages
-- Easily Managed, 
+- Easy to Manage
 - In case of a network attack, if one of the node goes offline, the other part of the network is still functional.
 - Easily scalable  
 
@@ -150,9 +146,7 @@ Disadvantages
 
 #### Bus Topology
 
-Devices are connected along a single cable, running from one to another on the network.
-
-Commonly described as line topology where dara is transmitted from one to another on a line.
+Devices are connected along a single cable, running from one to another on the network. Commonly described as line topology where dara is transmitted from one to another on a line.
 
 Advantages
 - Structure makes it very cost effective in design implementation.
@@ -164,14 +158,12 @@ Disadvantages
 
 #### Ring Topology
 
-The nodes arranged in circle format
-
-The neighbouring nodes will give the flow of data in a circular direction.
+The nodes arranged in circle format. The neighbouring nodes will give the flow of data in a circular direction.
 
 Advantages
 - Greatly reduces the risk of collision on the network - only one node can transmit the data at a time.
 - Good structure of flow of data, i.e., data flows in a circular path until it gets to its destination.
-- It is cost effective and cheap to install and manage
+- Cost effective and cheap to install and manage
 
 Disadvantages
 - Very vulnerable to network failure - if one node goes down, whole network connected next to it will disconnected.
@@ -190,9 +182,7 @@ Disadvantages
 
 #### Tree topology
 
-The centralized node is directly connected to a secondary node and devices in the network are connected to the secondary node.
-
-There is a form of trunking from centralized node to the secondary node.
+The centralized node is directly connected to a secondary node and devices in the network are connected to the secondary node. There is a form of trunking from centralized node to the secondary node.
 
 Advantages
 - Good management efficient
@@ -204,9 +194,7 @@ Disadvantages
 
 #### Mesh Topology
 
-Has a complex structure, each node in the network connected to the other node in the network
-
-There is a point to point connection from every device in the network to the centralised node, gives lots of redundancy.
+Has a complex structure, each node in the network connected to the other node in the network. There is a point to point connection from every device in the network to the centralised node, gives lots of redundancy.
 
 Advantages
 - Its more stable and reliable because of its structure
@@ -217,9 +205,7 @@ Disadvantages
 
 #### Hybrid Topology
 
-Evolved topology combining one or more types of network topology.
-
-Mostly found in large organizations where each deparment needs are different and vary.
+Evolved topology combining one or more types of network topology. Mostly found in large organizations where each deparment needs are different and vary.
 
 Advantages
 - Flexible - Topologies can be chanegs according to the needs
@@ -227,3 +213,6 @@ Advantages
 Disadvantages
 - More the number of topologies added, harder to manage
 - Not cost efficient
+
+## Setting up a network
+
