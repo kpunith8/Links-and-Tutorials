@@ -1,4 +1,4 @@
-## Util function to read environment variables using godotenv
+### Util function to read environment variables using godotenv
 
 ```go
 package utils
@@ -21,7 +21,7 @@ func GetEnvVariable(key string) string {
 }
 ```
 
-## Setup basic http server using built-in net/http package
+### Setup basic http server using built-in net/http package
 
 ```go
 package main
@@ -42,3 +42,9 @@ func main() {
 	log.Fatal(http.ListenAndServe(":3030", nil))
 }
 ```
+
+
+### Concurrency Patterns
+
+[youtube-video](https://www.youtube.com/watch?v=YEKjSzIwAdA)
+

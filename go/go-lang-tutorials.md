@@ -81,7 +81,7 @@ $ go mod tidy
   `ds` is the package name and file name can be `func-utils.go`
 
 - It should not contain main function
-  ```
+  ```go
   package ds
 
   // Adder function closure example
@@ -134,22 +134,24 @@ $ go mod tidy
 
 ## Functions
 
+- Functions allows to organize logic into `repeatable procedures` that can `use different arguments each time` they run.
+
 - It should have `main()` function to execute the code
 
 - Function with 2 params and type declaration after the variable declaration
-  ```
+  ```go
   func add(x int, y int) int {
     return x + y
   }
   ```
 
 - When two or more consecutive named function parameters `share a type`, `omit the type from all but the last`.
-  ```
+  ```go
   func add(x, y int) int {}
   ```
 
 - A function can return any number of results
-  ```
+  ```go
   func swap(x, y string) (string, string) {
     return y, x
   }
@@ -161,7 +163,7 @@ $ go mod tidy
 - A return statement `without arguments` returns the named return values. This is known as a `naked return`.
 
 - Naked return statements should be `used only in short functions`. They can harm readability in longer functions.
-  ```
+  ```go
   func split(sum int) (x, y int) {
     x = sum * 4 / 9
     y = sum - x
@@ -176,24 +178,24 @@ $ go mod tidy
 - The `var` statement declares a list of variables; as in function argument lists, the `type` is last.
 
 - A var statement can be at package or function level.
-  ```
+  ```go
   var c, python, java bool
   ```
 
 ### Variable Initializers
 
 - A var declaration can include initializers, one per variable.
-  ```
+  ```go
   var val1, val2 int = 12, 22
   ```
 
 - If an initializer is present, the `type can be omitted`; the variable will take the type of the initializer.
-  ```
+  ```go
   var c1, python1, java1 = true, false, "no!"
   ```
 
 - Variable declarations may be `factored` into blocks, as with import statements.
-  ```
+  ```go
   var (
     ToBe   bool       = false
     MaxInt uint64     = 1<<64 - 1
@@ -211,7 +213,7 @@ $ go mod tidy
 ## Basic Types
 
 - Basic types
-  ```
+  ```go
   bool
   string
 
@@ -232,7 +234,7 @@ $ go mod tidy
 ## Type Conversions
 
 - The expression T(v) converts the value v to the type T.
-  ```
+  ```go
   integerVal := 42
   floatVal := float64(integerVal)
   uIntVal := uint(floatVal)
@@ -250,7 +252,7 @@ $ go mod tidy
 - Constants can be character, string, boolean, or numeric values.
 
 - Constants `cannot be declared` using the `:=` syntax.
-  ```
+  ```go
   const Pi = 3.14
   const Truth = true
   ```
@@ -261,14 +263,14 @@ $ go mod tidy
 
 - The deferred call's arguments are evaluated immediately, but the function call is not
   executed until the surrounding function returns.
-  ```
+  ```go
   defer fmt.Println("Defer")
   ```
 
 ## For
 
 - For loop can have `init`, `post` and `condition` statements
-  ```
+  ```go
   sum := 0
   for i := 0; i < 10; i++ {
     sum += i
@@ -276,7 +278,7 @@ $ go mod tidy
   ```
 
 - The init and post statements are optional. It can also be used as `while`
-  ```
+  ```go
   sum1 := 1
   for sum1 < 1000 {
     sum1 += sum1
@@ -284,7 +286,7 @@ $ go mod tidy
   ```
 
 - Omit the `loop condition` it loops forever, so an `infinite` loop is compactly expressed, like `while`
-  ```
+  ```go
   for { // infinite loop
   }
   ```
@@ -294,7 +296,7 @@ $ go mod tidy
 - Like `for`, the `if` statement can start with a short statement to execute before the condition.
 
 - Variables declared by the if statement are only `in scope until the end of the if`
-  ```
+  ```go
   func powerOfX(x, n, limit float64) float64 {
     if v := math.Pow(x, n); v < limit {
       return v
@@ -306,7 +308,7 @@ $ go mod tidy
 ## If and Else
 
 - Variables declared inside an if short statement are also available inside any of the else blocks.
-  ```
+  ```go
   func pow1(x, n, limit float64) float64 {
     if v := math.Pow(x, n); v < limit {
       return v
@@ -321,7 +323,7 @@ $ go mod tidy
 ## Switch Block
 
 - Switch block
-  ```
+  ```go
   import "runtime"
 
   switch os := runtime.GOOS; os {
@@ -347,7 +349,7 @@ $ go mod tidy
 - The `&` operator generates a pointer to its operand.
 
 - The `*` operator denotes the pointer's underlying value. This is known as `dereferencing` or `indirecting`.
-  ```
+  ```go
   i, j := 42, 2701
 
   p := &i         // point to i
@@ -360,19 +362,166 @@ $ go mod tidy
   fmt.Println(j) // see the new value of j
   ```
 
+- [Pointers in go](https://www.digitalocean.com/community/conceptual_articles/understanding-pointers-in-go)
+
+### Function Pointer Receivers
+
+When you write a function, you can define arguments to be `passed either by value`, or `by reference`. 
+
+Passing by value means that a `copy of that value is sent to the function`, and any changes to that argument within that function only effect that variable within that function, and not where it was passed from. 
+
+However, if you pass by reference, meaning you pass a `pointer to that argument`, you can change the value from within the function, and also `change` the value of the `original variable` that was passed in.
+
+- Example passing arguments by value
+```go
+package main
+
+import "fmt"
+
+type Creature struct {
+    Species string
+}
+
+func main() {
+    var creature Creature = Creature{Species: "shark"}
+
+    fmt.Printf("1) %+v\n", creature)
+    changeCreature(creature)
+    fmt.Printf("3) %+v\n", creature)
+}
+
+func changeCreature(creature Creature) {
+    creature.Species = "jellyfish"
+    fmt.Printf("2) %+v\n", creature)
+}
+```
+
+Output
+```
+1) {Species:shark}
+2) {Species:jellyfish}
+3) {Species:shark}
+```
+
+- Example passing arguments by reference
+```go
+package main
+
+import "fmt"
+
+type Creature struct {
+    Species string
+}
+
+func main() {
+    var creature Creature = Creature{Species: "shark"}
+
+    fmt.Printf("1) %+v\n", creature)
+    changeCreature(&creature)
+    fmt.Printf("3) %+v\n", creature)
+}
+
+func changeCreature(creature *Creature) {
+    creature.Species = "jellyfish"
+    fmt.Printf("2) %+v\n", creature)
+}
+```
+
+Output
+```
+1) {Species:shark}
+2) &{Species:jellyfish}
+3) {Species:jellyfish}
+```
+
+
+- Make sure you don’t have a `nil pointer` that was passed into your function or method.
+for eg., Passing the pointer to a struct or any type without initializing it. In the below snippet, `creature`
+variable's instance is not created.
+```go
+var creature *Creature
+```
+
+- Create an instance of `Creature` as follows to go no to panic,
+```go 
+var creature *Creature
+creature = &Creature{Species: "shark"}
+```
+
+### Method Pointer Receivers
+
+A receiver in go is the argument that is defined in a method declaration.
+```go
+type Creature struct {
+    Species string
+}
+
+func (c Creature) String() string {
+    return c.Species
+}
+```
+
+The receiver in the above method is `c Creature`. It is stating that the `instance of c` is of type Creature and you will reference that type via that instance variable.
+
+If you define a `method with a value receiver`, you are not able to make changes to the instance of that type that the method was defined on.
+
+If you want the method to be able to update the instance of the variable, make the receiver a pointer.
+
+```go
+func (c *Creature) Reset() {
+    c.Species = ""
+}
+
+var creature *Creature = Creature{Species: "shark"}
+
+// creature will have the value Species as 'shark'
+
+// Invoke on the Species type as follws
+creature.reset()
+// Prints the empty string after reset was executed
+```
+
 ##  Structs
+
+- Structs are collections of heterogenous data defined by programmers to organize information.
 
 - A struct is a collection of fields.
 
 - Struct fields are accessed using a dot `.`.
 
 - Struct fields can be accessed through a struct pointer.
-  ```
+  ```go
   type Vertex struct {
     X int
     Y int
+    z int
   }
   ```
+- In the struct `Vertex` both fields `X`, `Y` are exported and `z` is not exported.
+Only the fields that are starting with `Capital` letters are exported and can be accessed outside of the package and values can be set to those fields.
+
+### Inline Structs
+
+These are the on-the-fly struct definitions. Inline struct definitions appear on the right-hand side of a variable assignment. 
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    c := struct {
+        Name string
+        Type string
+    }{
+        Name: "Sammy",
+        Type: "Shark",
+    }
+    fmt.Println(c.Name, "the", c.Type)
+}
+```
+
+Rather than defining a new type describing the struct with the `type` keyword. Define an inline struct by placing the `struct` definition immediately following the short-assignment operator, immediately supply another pair of braces and the values that each field will assume.
 
 ## Pointers to Structs
 
@@ -386,7 +535,7 @@ $ go mod tidy
 - List a subset of fields by using the Name: syntax. And the order of named fields is irrelevant.
 
 - The special prefix `&` returns a pointer to the struct value.
-  ```
+  ```go
   var (
     v1 = Vertex{1, 2}  // has type Vertex
     v2 = Vertex{X: 1}  // Y:0 is implicit
@@ -395,6 +544,121 @@ $ go mod tidy
   )
   ```
 
+## Struct Tags
+
+Struct tags are small pieces of `metadata` attached to `fields of a struct` that provide instructions to other Go code that works with the struct.
+
+Struct tags have no effect on the operation of your code without some other code that examines them.
+```go
+type User struct {
+    Name string `example:"name"`
+}
+```
+
+The standard library has packages that use struct tags as part of their operation. The most popular of these is the `encoding/json` package.
+
+### Encoding JSON
+
+JSON is commonly used to `communicate data between different programs` as the format is simple enough that libraries exist to decode it in many different languages.
+
+- Convert the strcut type to a json notation without using the struct tags, but the output has keys starting with capital letter
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "log"
+    "os"
+    "time"
+)
+
+type User struct {
+    Name          string 
+    Password      string
+    PreferredFish []string 
+    CreatedAt     time.Time
+}
+
+func main() {
+    u := &User{
+        Name:      "Sammy the Shark",
+        Password:  "fisharegreat",
+        CreatedAt: time.Now(),
+    }
+
+    out, err := json.MarshalIndent(u, "", "  ")
+    if err != nil {
+        log.Println(err)
+        os.Exit(1)
+    }
+
+    fmt.Println(string(out))
+}
+```
+
+- Output
+```
+{
+  "Name": "Sammy the Shark",
+  "Password": "fisharegreat",
+  "CreatedAt": "2019-09-23T15:50:01.203059-04:00"
+}
+```
+
+- Changing the fields of `Name` struct to use camel case while declaring, the above code prints `{}`, `json.MarshalIndent()` because of the visibility of the field outside of the package of `encoding/json`.
+
+### Use tags to control encoding
+
+- Program to convert to json format using struct tags
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "log"
+    "os"
+    "time"
+)
+
+type User struct {
+    Name          string    `json:"name"`
+    Password      string    `json:"password"` // add - instead of password to treat this field as a private field while displaying    
+    PreferredFish []string  `json:"preferredFish,omitempty"` // add omitempty to remove empty JSON values
+    CreatedAt     time.Time `json:"createdAt"`
+}
+
+func main() {
+    u := &User{
+        Name:      "Sammy the Shark",
+        Password:  "fisharegreat",
+        CreatedAt: time.Now(),
+    }
+
+    out, err := json.MarshalIndent(u, "", "  ")
+    if err != nil {
+        log.Println(err)
+        os.Exit(1)
+    }
+
+    fmt.Println(string(out))
+}
+```
+
+- Output
+```
+{
+  "name": "Sammy the Shark",
+  "password": "fisharegreat",
+  "preferredFish": null, 
+  "createdAt": "2019-09-23T18:16:17.57739-04:00"
+}
+```
+
+- Add `omitempty` string to the `PreferredFish` field as `json:"preferredFish,omitempty"` in the struct to remove the `empty` or `null` values
+
+- `Ignoring private fields`: Use `-` special value in the tag, as  `json:"-"` to ignore the password field.
 ## Array
 
 - The type `[n]T` is an array of n values of type T.
@@ -423,12 +687,12 @@ $ go mod tidy
 - A slice literal is like an array literal without the length.
 
 - This is an array literal
-  ```
+  ```go
   [3]bool{true, true, false}
   ```
 
 - And this creates the same array as above, then builds a slice that references it:
-  ```
+  ```go
   []bool{true, true, false}
   ```
 
@@ -439,7 +703,7 @@ $ go mod tidy
 - The default is zero for the low bound and the length of the slice for the high bound.
 
 - These slice expressions are equivalent
-  ```
+  ```go
   a[0:10]
   a[:10]
   a[0:]
@@ -464,12 +728,12 @@ $ go mod tidy
 - Slices can be created with the built-in `make` function; this is how to create dynamically-sized arrays.
 
 - The `make` function `allocates a zeroed array` and returns a slice that refers to that array
-  ```
+  ```go
   a := make([]int, 5)  // len(a)=5
   ```
 
 - To specify a capacity, pass a third argument to make:
-  ```
+  ```go
   b := make([]int, 0, 5) // len(b)=0, cap(b)=5
   b = b[:cap(b)]         // -len(b)=5, cap(b)=5
   b = b[1:]              // -len(b)=4, cap(b)=4
@@ -479,7 +743,7 @@ $ go mod tidy
 ### Slices of Slices
 
 - Slices can contain any type, including other slices.
-  ```
+  ```go
   // tic-tac-toe board
   board := [][]string{
     []string{"_", "_", "_"},
@@ -491,12 +755,12 @@ $ go mod tidy
 ### Appending to a Slice
 
 - It is common to append new elements to a slice, and so Go provides a built-in `append` function
-  ```
+  ```go
   func append(s []T, vs ...T) []T
   ```
 
 - The first parameter `s` of append is a slice of type T, and the rest are T values to append to the slice.
-  ```
+  ```go
   var s2 []int
   printSlice(s2)s
 
@@ -517,7 +781,7 @@ $ go mod tidy
 
 - When `ranging` over a slice, `two values are returned` for each iteration.
   The first is the `index`, and the second is a `copy of the element` at that index.
-  ```
+  ```go
   var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
 
   func main() {
@@ -530,7 +794,7 @@ $ go mod tidy
 - Skip the `index` or `value` by assigning to `_`
 
 - Only want the `index`, omit the `second` variable.
-  ```
+  ```go
   pow := make([]int, 10)
   for i := range pow {
     pow[i] = 1 << uint(i) // == 2**i
@@ -547,7 +811,7 @@ $ go mod tidy
 - The `zero value` of a map is `nil`. A `nil` map has `no keys`, nor can keys be added.
 
 - The `make` function returns a map of the given type, initialized and ready for use.
-  ```
+  ```go
   type Vertex struct {
 	Lat, Long float64
   }
@@ -564,7 +828,7 @@ $ go mod tidy
   ```
 
 - Map literals are like struct literals, but the keys are required.
-  ```
+  ```go
   var m = map[string]Vertex{
     "Bell Labs": Vertex{
       40.68433, -74.39967,
@@ -576,7 +840,7 @@ $ go mod tidy
   ```
 
 - If the `top-level type` is just a `type name`, `omit it from the elements` of the literal.
-  ```
+  ```go
   var m = map[string]Vertex{
     "Bell Labs": {40.68433, -74.39967},
     "Google":    {37.42202, -122.08408},
@@ -616,7 +880,7 @@ $ go mod tidy
 - Functions are values too. They can be passed around just like other values.
 
 - Function values may be used as function arguments and return values.
-  ```
+  ```go
   func compute(fn func(float64, float64) float64) float64 {
     return fn(3, 4)
   }
@@ -634,7 +898,7 @@ $ go mod tidy
 - Go functions may be closures. A closure is a function value that references variables from outside its body.
 
 - The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
-  ```
+  ```go
   func adder() func(int) int { // func(int) int, is the return type of the func adder()
     sum := 0
     return func(x int) int {
@@ -661,22 +925,29 @@ $ go mod tidy
 
 - A method is a function with a special `receiver` argument.
 
+- Methods purpose is to operate on `instances of some specific type`, called a `receiver`. Adding methods to types allows you to communicate not only what the data is, but also how that data should be used.
+
 - The receiver appears in its own argument list between the func keyword and the method name.
-  ```
-  type Vertex struct {
-    X, Y float64
-  }
 
-  func (v Vertex) Abs() float64 {
-    return math.Sqrt(v.X*v.X + v.Y*v.Y)
-  }
+- The receiver is a declaration of the type that you wish to define the method on.
+```go
+type Vertex struct {
+  X, Y float64
+}
 
-  v := Vertex{3, 4}
-  fmt.Println(v.Abs())
-  ```
+func (v Vertex) Abs() float64 {
+  return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+v := Vertex{3, 4}
+fmt.Println(v.Abs())
+
+// Methods can also be called by passing instance to the method
+fmt.Println(Vertex.Abs(v))
+```
 
 - Method is a `function` with a `receiver` argument, same can be written as,
-  ```
+  ```go
   func Abs(v Vertex) float64 {
     return math.Sqrt(v.X*v.X + v.Y*v.Y)
   }
@@ -686,7 +957,7 @@ $ go mod tidy
   ```
 
 - Method can be declared on `non-struct types`, too.
-  ```
+  ```go
   type MyFloat float64
 
   func (f MyFloat) Abs() float64 {
@@ -699,11 +970,45 @@ $ go mod tidy
 
 - Method can be declared with a `receiver` whose type is defined in the `same package` as the method.
 
+- Example to chain the methods and call them using dot notation and passing type to the method
+```go
+package main
+
+import "fmt"
+
+type Creature struct {
+    Name     string
+    Greeting string
+}
+
+func (c Creature) Greet() Creature {
+    fmt.Printf("%s says %s!\n", c.Name, c.Greeting)
+    return c
+}
+
+func (c Creature) SayGoodbye(name string) {
+    fmt.Println(name, "says, farewell to", c.name, "!")
+}
+
+func main() {
+    sammy := Creature{
+        Name:     "Sammy",
+        Greeting: "Hello!",
+    }
+    sammy.Greet().SayGoodbye("gophers")
+
+    Creature.SayGoodbye(Creature.Greet(sammy), "gophers")
+}
+```
+
+- In the above example, `Greet()` method returns the instance of Creature so that we can chain the method invocation as 
+shown, `sammy.Greet().SayGoodbe('Sammy')`
+
 ### Pointer receivers
 
 - It is possible to declare methods with `pointer receivers`. This means the receiver type has the literal syntax `*T` for some type T.
   (Also, T cannot itself be a pointer such as `*int`)
-  ```
+  ```go
   func (v *Vertex) Scale(f float64) { // try without the pointer to check the behavior of the method
     v.X = v.X * f
     v.Y = v.Y * f
@@ -715,7 +1020,7 @@ $ go mod tidy
 ## Methods and pointer indirection
 
 - Functions with a pointer argument must take a pointer
-  ```
+  ```go
   func ScaleFunc(v *Vertex, f float64) {
     v.X = v.X * f
     v.Y = v.Y * f
@@ -725,7 +1030,7 @@ $ go mod tidy
   ```
 
 - While methods with pointer receivers `take either a value` or `a pointer as the receiver` when they are called
-  ```
+  ```go
   v := Vertex{3,4}
   v.Scale(5)
 
@@ -734,7 +1039,7 @@ $ go mod tidy
   ```
 
 - Functions that take a `value argument` must take a value of that specific type
-  ```
+  ```go
   func AbsFunc(v Vertex) float64 {
     return math.Sqrt(v.X*v.X + v.Y*v.Y)
   }
@@ -745,7 +1050,7 @@ $ go mod tidy
   ```
 
 - While methods with `value receivers` take either a `value` or a `pointer` as the receiver when they are called
-  ```
+  ```go
   v := Vertex{3,4}
   fmt.Println(v.Abs()) // OK
 
@@ -756,14 +1061,14 @@ $ go mod tidy
 ### Choosing a value or pointer receiver
 
 - There are two reasons to use a pointer receiver.
-
   - The method can `modify the value` that its receiver points to.
   - `Avoid copying` the value on each method call. This can be more efficient if the receiver is a large struct.
 
 - In general, all methods on a given type should have either value or pointer receivers, but `not a mixture of both`.
 
-
 ## Interfaces
+
+An interface type is a specification of methods used by the compiler to guarantee that a type provides implementations for those methods. Any type that has methods with the same name, same parameters, and same return values as those found in an interface’s definition are said to implement that interface and are allowed to be assigned to variables with that interface’s type.
 
 - An `interface type` is defined as a `set of method signatures`.
 
@@ -784,7 +1089,7 @@ $ go mod tidy
 - An interface value holds a value of a specific underlying concrete type.
 
 - Calling a method on an interface value executes the method of the same name on its underlying type.
-  ```
+  ```go
   type I interface {
     M()
   }
@@ -813,7 +1118,7 @@ $ go mod tidy
   that gracefully handle being called with a nil receiver.
 
 - Note that an `interface value` that holds a `nil concrete value` is itself non-nil.
-  ```
+  ```go
   func (t *T) M() {
     if t == nil {
       fmt.Println("<nil>")
@@ -846,7 +1151,7 @@ $ go mod tidy
 - An empty interface may `hold values of any type`. (Every type implements at least zero methods.)
 
 - Empty interfaces are used by code that handles values of `unknown type`
-  ```
+  ```go
   var i interface{}
   fmt.Printf("(%v, %T)\n", i, i) // returns (<nil>, <nil>)
 
@@ -860,7 +1165,7 @@ $ go mod tidy
 ## Stringers
 
 - One of the most ubiquitous interfaces is `Stringer` defined by the `fmt` package.
-  ```
+  ```go
   type Stringer interface {
     String() string
   }
@@ -871,14 +1176,14 @@ $ go mod tidy
 ## Errors
 
 - Go programs express error state with `error` values. The `error type` is a built-in interface
-  ```
+  ```go
   type error interface {
     Error() string
   }
   ```
 
 - Functions often return an `error value`, and calling code should handle errors by testing whether the error equals `nil`.
-  ```
+  ```go
   i, err := strconv.Atoi("42")
   if err != nil {
     fmt.Printf("couldn't convert number: %v\n", err)
@@ -895,7 +1200,7 @@ $ go mod tidy
 - The `io` package specifies the `io.Reader` interface, which represents the read end of a stream of data.
 
 - The `io.Reader` interface has a `Read` method:
-  ```
+  ```go
   func (T) Read(b []byte) (n int, err error)
   ```
 
@@ -906,7 +1211,7 @@ $ go mod tidy
 ## Goroutines
 
 - A `goroutine` is a `lightweight thread` managed by the Go runtime.
-  ```
+  ```go
   go f(x, y, z)
   ```
 
@@ -919,10 +1224,15 @@ $ go mod tidy
 
 - Goroutines `run` in the `same address space`, so access to shared memory must be `synchronized`.
 
+Use `-race` flag to print out the log on the console if there are any race conditions in the code written
+```
+$ go run -race main.go
+```
+
 ## Channels
 
 - Channels are a `typed conduit` through which you can `send` and `receive` values with the channel operator, `<-`
-  ```
+  ```go
   ch <- v    // Send v to channel ch.
   v := <-ch  // Receive from ch, and assign value to v.
   ```
@@ -930,7 +1240,7 @@ $ go mod tidy
 - The data flows in the direction of the arrow.
 
 - Like maps and slices, channels must be created before use:
-  ```
+  ```go
   ch := make(chan int)
   ```
 
@@ -939,7 +1249,7 @@ $ go mod tidy
 
 - The example code sums the numbers in a slice, distributing the work between two goroutines.
   Once both goroutines have completed their computation, it   calculates the final result.
-  ```
+  ```go
   func sum(s []int, c chan int) {
     sum := 0
     for _, v := range s {
@@ -963,7 +1273,7 @@ $ go mod tidy
 ### Buffered Channels
 
 - Channels can be `buffered`. Provide the `buffer length` as the second argument to `make` to initialize a buffered channel:
-  ```
+  ```go
   ch := make(chan int, 100)
   ```
 
@@ -973,7 +1283,7 @@ $ go mod tidy
 
 - A `sender` can `close` a channel to indicate that no more values will be sent.
   Receivers can test whether a channel has been closed by assigning a second parameter to the receive expression: after
-  ```
+  ```go
   v, ok := <-ch
   ```
   - `ok` is `false` if there are `no more values` to receive and the channel is closed.
@@ -997,7 +1307,7 @@ $ go mod tidy
 - The `default` case in a `select` is run if no other case is ready.
 
 - Use a default case to try a send or receive `without blocking`
-  ```
+  ```go
   select {
     case i := <-c:
     // use i
@@ -1005,13 +1315,6 @@ $ go mod tidy
     // receiving from c would block
   }
   ```
-
-### Concurrency Patterns
-
-[youtube-video](https://www.youtube.com/watch?v=YEKjSzIwAdA)
-
-
-
 ## https://astaxie.gitbooks.io/
 
 ### iota 
@@ -1089,15 +1392,54 @@ easyArray := [2][4]int{{1, 2, 3, 4}, {5, 6, 7, 8}}
 
 - 
 
+### Building for different OSs and architectures
+
+To find the list of possible platforms, run the following:
+```
+$ go tool dist list
+```
+
+- Sample output
+```
+darwin/386       
+darwin/amd64     
+darwin/arm
+darwin/arm64 
+windows/386
+windows/amd64
+windows/arm
+```
+
+The output is a set of `key-value pairs` separated by a `/`. 
+The first part of the combination, before the /, is the `operating system`. 
+In Go, these operating systems are possible values for the environment variable `GOOS`, which stands for Go Operating System. 
+The second part, after the /, is the `architecture`.
+These are all possible values for an environment variable, `GOARCH`, and stands for Go Architecture.
+
+- To know the OS and architecture you are developing the code, run
+```
+$ go env GOOS GOARCH
+```
+
+- Outputs `darwin` and `arm64` if you are on Apple M1
+
+- Pass GOOS and GOARCH while building the app to build it for specific OS and architecture
+```
+$ GOOS=linux GOARCH=ppc64 go build
+```
 
 ### Libraries
 
 - [sockets inspired by js lib](https://github.com/googollee/go-socket.io)
 
-- `gorilla/websocket`
+- [gorilla/websocket](https://github.com/gorilla/websocket) - Websockets 
 
 - [mux](https://github.com/gorilla/mux) - HTTP Router
 
 - [gin](https://github.com/gin-gonic/gin) - HTTP Web Framework
 
-- [env-variables](github.com/joho/godotenv) - To read env variables from .env files, inspired by JS's dotenv package
+- [gofiber](https://gorm.io/)  - expres.js inspired web framework
+
+- [env-variables](github.com/joho/godotenv) - To read env variables from `.env files`, inspired by JS's dotenv package
+
+- [gorm](https://gorm.io/) - ORM for `sqlite`, `MySQL`, and `PostgreSQL`

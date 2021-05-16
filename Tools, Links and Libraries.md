@@ -235,6 +235,8 @@
 
 - `netlify forms`
 
+- `@headlessui/react` - Accesible components styled using tailwindcss
+
 ### Testing
 
 - `Jest`, `Enzyme` - React testing

@@ -93,6 +93,9 @@ $ docker inspect <container>
 - Pull and run a Dockerized `nginx` web server that we name, `webserver`:
   ```
   $ docker run --detach --publish 80:80 --name webserver nginx
+
+  or
+  $ docker run -d -p 80:80 --name webserver ngnix
   ```
   - Open the local web browser and point to `http://localhost` to see the server running on port `80`
 

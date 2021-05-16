@@ -19,6 +19,28 @@ Disable ESLint errors in-line
 
 ## Code Snippets
 
+## Fetch API for a POST request 
+
+```js
+async function fetchGraphQL(text, variables) {
+  // Fetch data from GitHub's GraphQL API:
+  const response = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      Authorization: `bearer <token>`, // Get it from,  github.com/settings/tokens
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: text,
+      variables,
+    }),
+  });
+
+  // Get the response as JSON
+  return await response.json();
+}
+```
+
 ### Filter an array based on type
 
 ```js
