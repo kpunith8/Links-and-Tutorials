@@ -324,6 +324,8 @@
 
 - `firebase` - Static website and database and more
 
+- `Digital Ocean` - Cloud service
+
 ## REST end points
 
 -  Star wars APIs

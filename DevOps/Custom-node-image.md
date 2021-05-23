@@ -215,6 +215,12 @@ services:
 $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 ```
 
+- Update the connected volumes when the new dependencies are added, which creates new annonymous volumes with
+updated node_modules, since we are linking node_modules volume to docker image
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build -V
+```
+
 ## Create mongo service
 
 - Connect to mongo inside the container
@@ -277,4 +283,175 @@ mongoose
   .connect("mongodb://root:root@mongo:27017/?authSource=admin")
   .then(() => console.log("DB connection successful!!"))
   .catch((err) => console.log("Error connecting to DB", err));
+```
+
+- Once `ngnix` container configured to load balance the requests we can scale the node-app to 
+serve multiple requests.
+
+## Scale specific service with docker-compose
+
+Scale `node-express-app` service to have 2 instances using,
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --scale node-express-app=2
+```
+
+It starts multiple instances of `node-express-app`(name of the service defined in the docker-compose.yml), using `ngnix` we can proxy the requests to these instances.
+
+## Deploying docker images to cloud
+
+- Make sure to push your code including `Dockerfile` and `docker-compose.yml` files to `git/gitlab` or any version control system that you use. Don't push envirionment variables stored in `docker-compose.prod.yml` file, they can be directly stored in the ubuntu container where the prod app runs.
+- Select any cloud provider of your choice and run an ubuntu instance
+- Install `docker` and `docker-compose` on the running instance by logging in using `ssh` from your local machine
+### Setting/stroing environment variables in the running container
+
+- Exporting the environment variables
+```
+$ EXPORT MONGO_USER=root
+```
+
+> We may loose the environemnt variables set using this approach each time ubuntu instance restarts.
+
+- Store all the environmanet variables in a `.env` file in the ununtu instance and load them each time
+it restarts
+
+Create a file `.env` in the root and store all the environemnt variables
+```
+MONGO_USER=root
+MONGO_PASSWORD=root
+```
+
+- Open the `.profile` file and edit it to load the `.env` file each time instance restarts
+```
+set -o allexport; source /root/.env; set +o allexport
+```
+
+> There are better ways to store the creds. Consider the best option, so that we don't compromise prod creds.
+
+- Create a folder called to `/app` to store the code in the `prod server`
+
+- Clone the source code into `/app` folder, install `git` on ubuntu server if it wasn't installed before.
+
+- Run the `docker-compose up` on in the server and verify that it works.
+
+- Request an API endpoint using the `public IP address` of the ubuntu server.
+
+### Make the changes and push the changes to prod
+
+- Once the changes are made, login to server and pull the latest changes to the `/app` folder
+and rebuild only `node-app` container using `docker-compose`.
+
+- Pass `--no-deps` option to make sure any dependent services for `node-express-app` are not rebuilt,
+in this case our `node-express-app` depends on `mongo` service, it is avoid docker-compose to rebuild the `mongo` image.
+
+- Start only the `node-express-app` container because only the source code of th app has been changed.
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --no-deps node-express-app
+```
+
+## Build and publish image to dockerhub and deploy to prod server instead of git pull
+
+- Instead of building docker images and starting services on prod server everytime the code changes, we can build the docker images and publish it to our private repo and pull those images and start the service quickly in the prod server.
+
+- Specify the image name pushed to the dockerhub in  `docker-compose.yml` adding an `image` key under `node-express-app`
+
+- Make the changes to the source and rebuild the image using docker-compose as,
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml build node-express-app
+```
+
+- Push the newly built image to the docker hub using docker-compose, push only the `node-express-app`
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml push node-express-app
+```
+> You can also push the image using `docker push` command too
+
+- Go to the prod server and pull the latest image build using docker-compose
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull 
+```
+
+- Start the services
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps node-express-app
+```
+
+## Container Orchestration using docker swarm
+
+- To push changes without impacting prod being down.
+
+- Setup docker swarm in the prod server and is shipped with docker and is disabled by default verify that by checking
+```
+$ docker info
+```
+
+- Enable the docker swarm
+```
+$ docker swarm init
+```
+
+- If it throws an error with multiple IP addressing being used in the prod server, update the swarm with `--advertise-addr` option
+```
+$ docker swarm init --advertise-addr 124.1.2.3
+```
+
+- Use `docker service --help` command to access docker swarm related commands
+
+- Add `deploy` and other options to `docker-compose.prod.yml` file to have swarm related commands, [doc](https://docs.docker.com/compose/compose-file/compose-file-v3/#deploy)
+
+- Add this under `node-express-app` for `docker-compose.prod.yml`
+```yml
+version: "3"
+  services:
+    node-express-app:
+      deploy:
+        replicas: 8
+        restart_policy:
+          condition: any
+        update_config:
+          parallelism: 2 # Updates 2 containers at a time
+          delay: 15s
+```
+
+- Pull the changes to prod server and kill all the running containers and start the services using `docker stack`
+```
+$ docker stack deploy -c docker-compose.yml docker-compose.prod.yml my-node-app
+```
+
+### Docker swarm related commands
+
+- List all the running nodes
+```
+$ docker node ls
+```
+
+- List all the running stacks
+```
+$ docker stack ls
+```
+
+- List all the services running in a container
+```
+$ docker stack services
+$ docker service ls
+```
+
+- Verify that 8 replicas created running
+```
+$ docker ps
+```
+
+### Push the changes and roll the updates without impacting the service
+
+- Make the changes in the source code
+
+- Build the brand new `node-express-app` image and push it to the dockerhub or pull the code changes in prod server.
+
+- Build the stack again
+```
+$ docker stack deploy -c docker-compose.yml docker-compose.prod.yml my-node-app
+```
+
+- Verify that how docker-swarm in rolling the updates only to 2 containers at a time, this is because of the `parallelism` key we set on `depoly`s `update_config`
+```
+$ docker stack ps my-node-app
 ```
