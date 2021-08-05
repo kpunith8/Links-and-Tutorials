@@ -190,14 +190,34 @@ my_set = set("hello")
 
 Ordered and immutable
 ```py
+# Tripple quotes can be used as documentation string or to have strings in multiple lines
+# String will be printed in two different lines
+str1 = """Hello
+there"""
+
+# String will be continued not in the next line but as a single string
+str2 = """Hello \
+there"""
+
+my_str = "Hello World"
+
+# Accessing string based on index, 0 based index
+# Prints 'He' - From index 0 to 1, excludes the char at index 2
+str3 = my_str[:2] 
+
+# Prints 'llo World' - From index 2 to the end of string
+str4 = my_str[2:] 
+
+# prints 'llo' - From index 2 to 4, excluding the char at index 5
+str5 = my_str[2:5]
+
+
 # Formatting strings with format()
-my_str = "Heloo"
 my_var = 1.2345333
 formatted_str = "The variables are {} and {:.2f}".format(my_str, my_var)
 
 # Formatting with f-strings above python 3.6
 formatted_str = f"The variables are {my_str} and {my_var * 2}"
-
 ```
 
 ## File Operations

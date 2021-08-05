@@ -112,12 +112,14 @@
 - `nprogress` - to show the indicator on top of the page
 - `minimist` - Parse node argument options
 - `slatejs` - Rich text editor 
+- `nx` - Monorepo - Generates react, next, express, nest and more apps as monorepo
 
 ## Cross Platform desktop apps 
 
 - `electronjs`
 - [Neutralinojs](https://neutralino.js.org/)
 - [Tauri](https://tauri.studio/en/)
+
 ## Email clients and libraries
 
 - `SendGrid` Email delivery service
@@ -144,6 +146,8 @@
 - `TypeGraphQL`
 - `Apollo GraphQL`
 - `Hasura` - GraphQL client with PostgreSQL
+- `fastify` - Express alternative
+- `nestjs` - Node.js Framework - Typescript based
 
 ## CSS
 
@@ -237,6 +241,8 @@
 
 - `@headlessui/react` - Accesible components styled using tailwindcss
 
+- `quill`, `monaco` - editors
+
 ### Testing
 
 - `Jest`, `Enzyme` - React testing
@@ -265,6 +271,8 @@
 
 - `netlifycms` - Using github as backend for data storage and API - Headless CMS
 
+- `sanity` - Free has lot of free limits
+
 ### Static Site Generation
 
 - `NextJS` - `Static site generation`, `Server side rendering`
@@ -283,6 +291,9 @@
 
 - https://kea.js.org/
 
+### Full stack 
+
+- [Blitz](https://blitzjs.com/)
 
 ## Common Tools
 
@@ -373,6 +384,8 @@
 
 -  https://altairviz.github.io/getting_started/starting.html
 
+- https://mybinder.org/ - jupyter web interface
+
 ### Books
 
 - `Test driven development` - Kent Beck
@@ -399,7 +412,7 @@
 
 - https://www.egghead.io
 
--	https://www.scotch.io/@codebeast
+- https://www.scotch.io/@codebeast
 
 - https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays
 

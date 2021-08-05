@@ -498,6 +498,51 @@ Show the border of each element in a page to see how they are organized
 ```
 it makes border moves the UI by pixel size, instead use `outline` property to inspect
 
+- use `clamp(min-width, scale-with-view, max-width)` to change the border size based on the screen size
+```css
+/* To center the items to center */
+.body {
+  display: flex;
+  background-color: #ddd;
+  margin: 0;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background-color: white;
+  padding: 0.5rem;
+  width: 50px;
+  height: 50px;
+  border: clamp(8px, 5vw, 12px) solid black;
+}
+```
+
+- `@supports` property
+```css
+/* Apply this block only if browser supports subgrid */
+@supports(grid-template-columns: subgrid) {
+
+}
+```
+
+- `scroll-snap` to bring the scrollable div to the top on scrolling 
+```css
+body, html {
+  /* Scroll on y axis, mandatorilu */
+  scroll-snap-type: y mandatory;
+  /* Snap it to the closest element */
+  scroll-snap-type: y proximity;
+}
+
+.child {
+  scroll-snap-align: start;
+}
+```
+
+- `Logical properties` 
+
 ## codepen.io samples
 
 [Add image overlay and heading style](https://codepen.io/kevinpowell/pen/ZrMzre)
@@ -543,3 +588,56 @@ const Card = styled('a')({
   props => ({borderTop: props.isConnected ? '5px solid red' : null})
 )
 ```
+
+
+### Using `em` and `rem` units along with `font-size` property 
+
+```html 
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <h1>My Title</h1>
+            <p>This is a small sentence that will help us demonstrate CSS units.</p>
+        </div>
+    </body>
+</html>
+```
+
+```css
+html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: white;
+    font-family: 'Poppins';
+}
+
+html {
+    font-size: 16px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    background: rgb(255,255,255,0.2);
+    border-radius: .3em;
+    font-size: 1.5rem; /* It scales well with media queries */
+    margin: 1rem;
+    padding: 1rem;
+}
+/* rem unit ignores the font-size property on the nearest element until it sees html or :root selector with font-size in it and margin and padding will not adjust */
+/* em unit applies the font-size property on the nearest element and ignores font-size defined in the :root or html selector but adjusts the padding and margin with font-size defined */
+
+@media only screen and (min-width: 500px) {
+  html {
+    font-size: 20px;
+  }
+}
+````

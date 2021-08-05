@@ -1041,3 +1041,54 @@ useEffect(() => {
   ```
   $ npx eslint --init # Select the appropriate options and it creates the .eslintrc.js file
   ```
+
+## Errors and fixes 
+
+### TypeError: Cannot add property, object is not extensible - when adding quill editor using ref
+
+```js
+import React, {useEffect, useRef} from 'react'
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
+
+const TextEditor = () => {
+  const wrapperRef = useRef() 
+
+  useEffect(() => {
+    const editor = document.createElement('div')
+    wrapperRef.current = editor
+    // Pass the container as first parameter to Quill, to avoid re-rendering the toolbar on each refresh
+    // use ref
+    new Quill(editor, {theme: 'snow'})
+
+    return () => {
+      wrapperRef.innnerHTML = ''
+    }
+  })
+
+  return <div id="container" ref={wrapperRef} />
+}
+```
+- Above sample throws the typeError, though the code is technically correct.
+
+- Fix this by wrapping the wrapper as an callback instead of an useEffect as,
+```js
+import React, {useCallback} from 'react'
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
+
+const TextEditor = () => {
+
+  const wrapperRef = useCallback(wrapper => {
+    if (wrapper == null) return 
+    wrapper.innerHTML = ''
+    const editor = document.createElement('div')
+    wrapper.append(editor)
+    // Pass the container as first parameter to Quill. To avoid re-rendering the toolbar on each refresh
+    // use refs to attach the it to another div and set to empty on first render
+    new Quill(editor, {theme: 'snow'})
+  }, [])
+
+  return <div id="container" ref={wrapperRef} />
+}
+```

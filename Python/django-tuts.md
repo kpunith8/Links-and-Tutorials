@@ -1,5 +1,11 @@
 ## Django Sample App
 
+### Install django
+
+```
+$ pip3 install django
+```
+
 ### Example code
 
 [github-repo](https://github.com/kpunith8/django-products-app)
@@ -8,16 +14,16 @@ Install `Django` and run the following command in a folder
 ```
 django-admin startproject djangoapp .
 ```
-above command creates the project with predefined files in it
+above command creates the `djangoapp` project
 
 Run the server and open the port, `http://127.0.0.1:8000/` to check the server running
 ```
-python3 manage.py runserver
+$ python3 manage.py runserver
 ```
 
 Create a separate project in the same folder to modularise
 ```
-python3 manage.py startapp products
+$ python3 manage.py startapp products
 ```
 
 Open the `views.py` in `products` folder to update the UI

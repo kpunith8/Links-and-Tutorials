@@ -64,19 +64,27 @@ they will overlap.
 
 Adding `clear: both` to `p` removes the wrapping with image.
 
-## Display property
+## Display properties
 
-`div` by default has `display: block` which takes up the whole width. They can have
-width, height, margin, and padding properties
+### block
 
-`span` by default has `display: inline` which takes minimal space possible.
-multiple spans can sit in a same line. They `cannot` have `width` and `height` properties
-to set the height and width. To set these properties set the `display: inline-block`
-`inline` elements can have only `left and right`, `padding` and `margin` not the top and bottom
+- `div`, `p` elements are `block` by default, which takes up the whole width. They can have
+`width`, `height`, `margin`, and `padding` properties
 
-`img` tag by default has `display: inline-block`
+### inline 
 
-`display: none` property makes a `div` or any elements disappear from the DOM.
+- `span`, `button` elements are `inline` by default, which takes minimal space possible.
+multiple spans can sit in a same line. 
+- They cannot have `width` and `height` properties to set the height and width. To set these properties set the `display: inline-block`
+- `inline` elements can have only `left and right, padding and margin` not the top and bottom
+
+### inline-block
+
+- `img` tag by default has `display: inline-block`, they respect the height, width, margin and padding and the content around moves
+
+### none
+
+- `none` property makes a `div` or any elements disappear from the DOM.
 
 ## CSS Variables
 

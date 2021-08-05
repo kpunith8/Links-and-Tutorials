@@ -262,7 +262,7 @@ pattern.test(str); // returns true if given string matches the pattern
 
 Add flag `i` to ignore the case-sensitiveness in the string to be matched eg: `const pattern=/test/i`
 
-`match()` function can be used to extract the actual matches, returns an array of matched string only one string is matched
+`match()` function can be used to extract the actual matches, returns an array of matched strings
 ```js
 "Hello, World!".match(/Hello/);
 // Returns ["Hello"]
@@ -286,9 +286,11 @@ Add flag `g` to pattern to match more than once in a given string eg: `const pat
 
 `/^\d+$/` matches a string consisting entirely of one or more digits
 
+`/\d/` matches a string consisting of one signle digit, ex: "Hello 123" matched as ['1', '2', '3']
+
 `/^!/` matches any string that `starts` with an `exclamation mark`
 
- `/x^/` does not match any string (there cannot be an x before the start of the string)
+`/x^/` does not match any string (there cannot be an x before the start of the string)
 
 `\b\b` word boundary `/\b\d+ (pig|cow|chicken)s?\b/`
 	`Pipe(|)` character denotes a choice between the pattern to its left and pattern to its right.
@@ -296,7 +298,7 @@ Add flag `g` to pattern to match more than once in a given string eg: `const pat
 `/[a-zA-Z]man/g` first character can be any character and can be case insensitive. It can be any range a-f, k-q and can be number
 	range as well 0-9, 1-6; To make the whole sentence case insensitive add `i` flag to it or it applies to first character.
 
-`/[0-9]+/g` matches at between one and unlimited numbers for ex: 123030330030003.....
+`/[0-9]+/g` matches between one and unlimited numbers for ex: 123030330030003.....
 
 `/[0-9]{11}/g` matches exact 11 numbers.
 
@@ -354,6 +356,11 @@ domainRegExp.test('http://example.com') // false
 const ipAddressAndDomainRegExp = new RegExp(`${domainRegExp.source}|${ipv4AddressRegExp.source}|${ipv6AddressRegExp.source}`)
 domainRegExp.test('123.11.11.22') // true
 domainRegExp.test('256.11.11.22') // false
+
+// Binary string
+const notBinary = /[^01]/
+notBinary.test("1100100010100110") // false 
+notBinary.test("1100100020100110") // true
 ```
 
 ### replace() and replaceAll() on string
@@ -364,7 +371,7 @@ String values have a `replace()` method that can be used to replace part of the 
 
 "Borobudur".replace(/[ou]/g, "a")); // Barabadar
 
-"Liskov, Barbara\nMcCarthy, John\nWadler, Philip".replace(/(\w+), (\w+)/g, "$2 $1"));
+"Liskov, Barbara\nMcCarthy, John\nWadler, Philip".replace(/(\w+), (\w+)/g, "$2 $1");
 // Barbara Liskov
 // John McCarthy
 // Philip Wadler
@@ -379,9 +386,9 @@ s.replace(/\b(fbi|cia)\b/g, str => str.toUpperCase()) // CIA and FBI
 
 let stock = "1 lemon, 2 cabbages, and 101 eggs";
 function minusOne(match, amount, unit) {
-  amount = Number(amount) 1;
+  amount = Number(amount) - 1;
   if (amount == 1) { // only one left, remove the 's'
-    unit = unit.slice(0, unit.length 1);
+    unit = unit.slice(0, unit.length - 1);
   } else if (amount == 0) {
     amount = "no";
   }
@@ -786,6 +793,14 @@ $('#MyTable tr').on({
 // hover(mouseEnter, mouseleave);
 // toggle() // toggels through functions defined within
 ```
+
+## Modular JS - Nicolas Bevacqua 
+
+- The fewer touchpoints an interface has, the smaller its surface area, and the simpler the interface becomes.
+
+- An interface allows us to develop new bits and pieces of the component, `exposing only functionality` that’s ready for public consumption while keeping private everything that’s not meant to be shared with other components.
+
+- An interface allows consumers—components or systems that are leveraging our interface to reap the benefits of the functionality exposed, without concerning themselves with the details of the implementation.
 
 ###	Ajax in jQuery
 

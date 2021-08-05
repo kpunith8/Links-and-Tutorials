@@ -27,10 +27,14 @@ $ cat /etc/os-release
 ## Run a command without sudo
 
 - For Ubuntu
-  ```
-  $ sudo usermod -aG docker $USER
-  ```
+```
+$ sudo usermod -aG docker $USER
+```
 
+## Go back to the previous path
+```
+$ cd -
+```
 ## find command
 
 The find command can be used to find files or folders matching a particular search pattern.

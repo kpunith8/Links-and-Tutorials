@@ -290,7 +290,7 @@ const cloneDeep = x => JSON.parse(JSON.stringify(x))
 
 Find the missing letter in the passed letter range and return it.
 
-If all letters are present in the range, return undefined. `stvwx` => `u`, `abce` => `d`
+If all letters are present in the range, return `undefined`. `stvwx` => `u`, `abce` => `d`
 ```js
 function fearNotLetter(str) {
 	const letters = "abcdefghijklmnopqrstuvwxyz".split("")
@@ -320,7 +320,15 @@ const factorialByRange = n => range(1, n + 1).reduce((x, y) => x * y, 1);
 
 ```js
 const alphabets = range("A".charCodeAt(), "Z".charCodeAt() + 1).map(x => String.fromCharCode(x));
-//
+```
+
+## Find the difference between two arrays
+
+```js
+const arrayDiff = (firstArr, secondArr) => {
+	const uniqueSecondArr = new Set(secondArr);
+	return firstArr.filter(item => !uniqueSecondArr.has(elem));
+}
 ```
 
 ## Tricky JS
