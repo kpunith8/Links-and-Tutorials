@@ -308,6 +308,12 @@ const reverseString = str =>
 	str.split("").reduceRight((x, y) => x + y, "");
 ```
 
+## ## Reverse a string using reduce()
+```js
+const reverseString = str =>
+	str.split("").reduce((x, y) => y + x, "");
+```
+
 ## Factorial of a number using range and reduce
 
 ```js

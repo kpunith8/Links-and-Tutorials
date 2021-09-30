@@ -219,7 +219,7 @@ function handleMessage(event) {
 // Outer.svelte
 // Outer forwarding the event to Inner
 <script>
-import Inner from './Inner.svelte';
+  import Inner from './Inner.svelte';
 </script>
 
 // Just pass the event coming from parent
@@ -233,7 +233,7 @@ const dispatch = createEventDispatcher();
 
 function sayHello() {
   dispatch('message', {
-  text: 'Hello!'
+    text: 'Hello!'
   });
 }
 </script>
