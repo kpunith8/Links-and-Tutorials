@@ -5,5 +5,4 @@
 
 ## Portfolio website
 
-- `cv-punith.netlify.app`
-- `cv.punith.now.sh`
+- [Personal blog](https://pktechblog.netlify.app)
