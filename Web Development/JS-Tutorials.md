@@ -252,7 +252,15 @@ window.onload = function() {
 
 https://regex101.com/
 
-`test()` function to test whether the given pattern exists in a given string, pattern should be
+### Flags 
+
+- `g` to pattern to match more than once in a given string eg: `const pattern=/test/g`
+
+- `i` to ignore the case-sensitiveness in the string to be matched eg: `const pattern=/test/i`
+
+### Methods and explanation
+
+- `test()` function to test whether the given pattern exists in a given string, pattern should be
 mentioned with in `/test-pattern/`
 ```js
 const str = "test string";
@@ -260,9 +268,7 @@ const pattern = /test/;
 pattern.test(str); // returns true if given string matches the pattern
 ```
 
-Add flag `i` to ignore the case-sensitiveness in the string to be matched eg: `const pattern=/test/i`
-
-`match()` function can be used to extract the actual matches, returns an array of matched strings
+- `match()` function can be used to extract the actual matches, returns an array of matched strings
 ```js
 "Hello, World!".match(/Hello/);
 // Returns ["Hello"]
@@ -272,57 +278,72 @@ ourStr.match(ourRegex);
 // Returns ["expressions"]
 ```
 
-Add flag `g` to pattern to match more than once in a given string eg: `const pattern=/test/g`
+- `/text/gi` `g` specifies all matches in the file or object, `i` specifies for case insensitive.
 
-`/text/gi` `g` specifies all matches in the file or object, `i` specifies for case insensitive.
+- `/[ti]ext/g` matches `t` or `i` as first character in the text.
 
-`/[ti]ext/g` matches `t` or `i` as first character in the text.
+- `/[^aeiou]man/g` excludes `a or e or i or o or u` from the first character being matched.
 
-`/[^aeiou]man/g` excludes `a or e or i or o or u` from the first character being matched.
+- `^` matches the start of the input string outside the `[]`(square brackets) - inside [] it inverts the pattern inside it
 
-`^` matches the start of the input string
+- `$` matches the end.
 
-`$` matches the end.
+- `/^\d+$/` matches a string consisting entirely of one or more digits
 
-`/^\d+$/` matches a string consisting entirely of one or more digits
+- `/\d/` matches a string consisting of one signle digit, ex: "Hello 123" matched as ['1', '2', '3']
 
-`/\d/` matches a string consisting of one signle digit, ex: "Hello 123" matched as ['1', '2', '3']
+- `/^!/` matches any string that `starts` with an `exclamation mark`
 
-`/^!/` matches any string that `starts` with an `exclamation mark`
+- `/x^/` does not match any string (there cannot be an x before the start of the string)
 
-`/x^/` does not match any string (there cannot be an x before the start of the string)
-
-`\b\b` word boundary `/\b\d+ (pig|cow|chicken)s?\b/`
+- `\b\b` word boundary `/\b\d+ (pig|cow|chicken)s?\b/`
 	`Pipe(|)` character denotes a choice between the pattern to its left and pattern to its right.
 
-`/[a-zA-Z]man/g` first character can be any character and can be case insensitive. It can be any range a-f, k-q and can be number
+- `/[a-zA-Z]man/g` first character can be any character and can be case insensitive. 
+	It can be any range a-f, k-q and can be number
 	range as well 0-9, 1-6; To make the whole sentence case insensitive add `i` flag to it or it applies to first character.
 
-`/[0-9]+/g` matches between one and unlimited numbers for ex: 123030330030003.....
+- `/[0-9]+/g` matches between one and unlimited numbers for ex: 123030330030003.....
 
-`/[0-9]{11}/g` matches exact 11 numbers.
+- `/[0-9]{11}/g` matches exact 11 numbers.
 
-`/[0-9]{11, 15}/g` matches between 11 to 15(inclusive) numbers.
+- `/[0-9]{11, 15}/g` matches between 11 to 15(inclusive) numbers.
 
-`/[0-9]{5, }/g` Matches at least 5 and any number, not less than 5.
+- `/[0-9]{5, }/g` Matches at least 5 and any number, not less than 5.
 
-`\d` matches any digit, `\w` matches any word character `(a-z, A-Z, 0-9, and _'s)`,
-	`\s` match a white space, `\t` matches only tabs
+- `\d` matches any digit
+	`\w` matches any word character `(a-z, A-Z, 0-9, and _)`,
+	`\s` match a white space
+	`\t` matches only tabs
 
-`/\d{3}\w{10}` matches 3 digits followed by 10 word characters.
+- `/\d{3}\w{10}` matches 3 digits followed by 10 word characters.
 
-`+` at lease one or more
-
-`?` zero-or-one qualifier (makes a preceding char optional)
-
-`.` any character whatsoever (except new line character)
-
-`*` zero-or-more qualifier
-
-`^[a-z]{5}$` it takes only 5 characters, in the beginning and ending with 5 characters, doesn't matches anything else
+- `^[a-z]{5}$` it takes only 5 characters, in the beginning and ending with 5 characters, doesn't matches anything else
 ex: `abcde` matched not the `abc` or  `abdjdkjdjd`
 
-`[a-z]{5}$` matches 5 characters at the end
+- `[a-z]{5}$` matches 5 characters at the end
+
+### Wildcard characters
+
+- `+` at lease one or more
+
+- `?` zero-or-one qualifier (makes a preceding char optional)
+
+- `.` any character whatsoever (except new line character)
+
+- `*` zero-or-more qualifier
+
+### Groping and subexpressions
+
+- To use an operator like `* or +` on more than one element at a time, you have to use parentheses `()`.
+```js
+let cartoonCrying = /boo+(hoo+)+/i;
+console.log(cartoonCrying.test("Boohooho")); // → true
+```
+- The first and second `+` wildcard charcters apply only to the seconf `o` in `boo` and `hoo`, respectively. The thire `+` applies to the 
+whole group `(hoo+)`, matching one or more sequences like that.
+
+- A part of a regular expression that is enclosed in parentheses counts as a single element as far as the operators following it are concerned.
 
 ### Regular expression capture groups
 
@@ -331,37 +352,6 @@ You can capture groups with `/regex/.exec(string)` and with `"string".match()`.
 
 Regular capture group is created by wrapping a pattern in `(pattern)`.
 But to create groups property on resulting object use: `(?<name>pattern)`
-
-### Examples
-
-https://www.regextester.com/
-
-Binary or Hexa/decimal numbers `/\b([01]+b|[\da-f]+h|\d+)\b/`
-Domain `^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$`
-
-IPv4 address
-	`^(?:(?:25[0-5]{1}.)|(?:2[0-4]{1}[0-9]{1}.)|(?:1{1}[0-9]?[0-9]?.)|(?:[0-9]{1}[0-9]?.)){3}(?:(?:25[0-5]{1})|(?:2[0-4]?[0-9]?)|(?:1{1}[0-9]?[0-9]?)|(?:[0-9]{1}[0-9]?)){1}$`
-
-IPv6 address
-  `^((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7}$`
-
-```js
-const domainPattern = '^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$'
-const domainRegExp = new RegExp(domainPattern)
-// Usage
-domainRegExp.test('example.com') // true
-domainRegExp.test('http://example.com') // false
-
-// Combining domain, ip address patterns, tests both domain or IP addresses
-const ipAddressAndDomainRegExp = new RegExp(`${domainRegExp.source}|${ipv4AddressRegExp.source}|${ipv6AddressRegExp.source}`)
-domainRegExp.test('123.11.11.22') // true
-domainRegExp.test('256.11.11.22') // false
-
-// Binary string
-const notBinary = /[^01]/
-notBinary.test("1100100010100110") // false 
-notBinary.test("1100100020100110") // true
-```
 
 ### replace() and replaceAll() on string
 
@@ -379,7 +369,7 @@ String values have a `replace()` method that can be used to replace part of the 
 // The $1 and $2 in the replacement string refer to the parenthesized groups in the pattern
 ```
 
-We can pass a `function` rather than a string as the second argument to `replace`
+- We can also pass a `function` rather than a string as the second argument to `replace`
 ```js
 let s = "the cia and fbi";
 s.replace(/\b(fbi|cia)\b/g, str => str.toUpperCase()) // CIA and FBI
@@ -398,7 +388,7 @@ console.log(stock.replace(/(\d+) (\w+)/g, minusOne));
 // → no lemon, 1 cabbage, and 100 eggs
 ```
 
-Replace all the comments in the JS code
+- Replace all the comments in the JS code
 ```js
 function stripComments(code) {
   return code.replace(/\/\/.*|\/\*[^]*?\*\//g, "");
@@ -407,6 +397,42 @@ function stripComments(code) {
 // We cannot just use a period here because block comments can continue on a new line,
 // and the period character does not match newline characters.
 stripComments("1 /* a */+/* b */ 1") // 1 + 1
+```
+
+### Interesting and edge cases 
+
+- [\d.] - Means any digit or a period character. Perions loses its special meaning between the brackets. The same goes for other 
+special characters, such as `+`.
+
+- 
+### Examples
+
+https://www.regextester.com/
+
+- Binary or Hexa/decimal numbers: `/\b([01]+b|[\da-f]+h|\d+)\b/`
+
+- Domain: `^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$`
+
+- IPv4 address: `^(?:(?:25[0-5]{1}.)|(?:2[0-4]{1}[0-9]{1}.)|(?:1{1}[0-9]?[0-9]?.)|(?:[0-9]{1}[0-9]?.)){3}(?:(?:25[0-5]{1})|(?:2[0-4]?[0-9]?)|(?:1{1}[0-9]?[0-9]?)|(?:[0-9]{1}[0-9]?)){1}$`
+
+- IPv6 address: `^((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7}$`
+
+```js
+const domainPattern = '^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$'
+const domainRegExp = new RegExp(domainPattern)
+// Usage
+domainRegExp.test('example.com') // true
+domainRegExp.test('http://example.com') // false
+
+// Combining domain, ip address patterns, tests both domain or IP addresses
+const ipAddressAndDomainRegExp = new RegExp(`${domainRegExp.source}|${ipv4AddressRegExp.source}|${ipv6AddressRegExp.source}`)
+domainRegExp.test('123.11.11.22') // true
+domainRegExp.test('256.11.11.22') // false
+
+// Binary string
+const notBinary = /[^01]/
+notBinary.test("1100100010100110") // false 
+notBinary.test("1100100020100110") // true
 ```
 
 ## Design Patterns

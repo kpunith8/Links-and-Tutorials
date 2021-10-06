@@ -449,6 +449,7 @@ const Example = ({ render, ...props }) => {
 ```
 
 - Re-write toggler functionality with render prop
+
 ```js
 const Toggler = ({render, defaultToggled, ...props}) =>{
   const [isToggled, setToggled] = useState(defaultToggled)
@@ -476,6 +477,110 @@ const FavoriteButton = ({ on, onToggle, ...props }) => {
   )
 }
 ```
+
+- This also can be written as children component instead of render prop to the component
+
+```js
+const Toggler = ({ children, defaultToggled, ...props }) => {
+  const [isToggled, setToggled] = useState(defaultToggled)
+  return (
+    <div>
+      {children({
+        on: isToggled,
+        onToggle: () => setToggled(!isToggled),
+        ...props,
+      })}
+    </div>
+  )
+}
+
+const FavoriteButton = ({ on, onToggle, ...props }) => {
+  return (
+    <Toggler defaultToggled={false}>
+      {({ onToggle, on, ...props }) => (
+        <div onClick={onToggle} {...props}>
+          Favorite is {on ? "On" : "Off"}
+        </div>
+      )}
+    </Toggler>
+  )
+}
+```
+
+- Data fetcher example with children prop
+
+```js
+const DataFetcher = ({ children, url, ...props }) => {
+  const [data, setData] = useState({})
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  // async-await can be used instead of a promise
+  useEffect(() => {
+    // To set the data only if component mounted
+    let mounted = true
+    setLoading(true)
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        if (mounted) {
+          setData(data)
+          setLoading(false)
+        }
+      })
+      .catch((error) => {
+        setLoading(false)
+        setError(error)
+      })
+    // Cleanup function
+    return () => {
+      mounted = false
+    }
+  }, [url])
+
+  // data fetching with abortController to cancel the request if component unmounts
+  useEffect(() => {
+    let controller = new AbortController()
+    setLoading(true)
+    const loadData = async () => {
+      try {
+        const response = await fetch(url, { signal: controller.signal })
+        const data = await response.json()
+        setData(data)
+        setLoading(false)
+      } catch (error) {
+        setLoading(false)
+        setError(error)
+      }
+    }
+
+    loadData()
+
+    // Cleanup function
+    return () => {
+      controller.abort()
+    }
+  }, [url])
+
+  return children({ data, error, loading, ...props })
+}
+
+const Todos = (props) => {
+  return (
+    <DataFetcher url="https://link-goes-here">
+      {({ data, loading, error, ...props }) => (
+        <div>
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error.message}</div>}
+          {data && data.map((todo) => <div key={todo.id}>{todo.title}</div>)}
+        </div>
+      )}
+    </DataFetcher>
+  )
+}
+```
+
+## Performance
 
 ## Tips
 

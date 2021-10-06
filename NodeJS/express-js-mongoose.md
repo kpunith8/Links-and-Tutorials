@@ -1,8 +1,7 @@
 
 ## Basic connection example using
 
-- Install this plugins using `npm` or `yarn`, all the requires mentioned in the examples
-should be download before running the example.
+- Install this plugins using `npm` or `yarn`.
 
 ```javascript
 var express = require('express');

@@ -95,7 +95,7 @@
   $ chmod 0400 <file-name.pem>
   ```
 
-- Use command line with download `.pem` file to access with `ec2-user@public-ip-of-an-ec2-instance`
+- Use command line with downloaded `.pem` file to access with `ec2-user@public-ip-of-an-ec2-instance`
   you should be in the same folder where the `.pem` file exists to ssh into it or
   you have to pass the path of the `.pem` file.
   ```
