@@ -2008,7 +2008,185 @@ writes to S3 bucket and reverses the steps to getback or copy
 
 ## API Gateway
 
-- 
+- Support for the WebSocket Protocol
+- AWS Lambda + API Gateway: No Infra to manage
+- Handles API provisioning
+- Handles security (Authentication and Authorization)
+- Create API keys, handle request throttling
+- Swagger / Open API import to define APIs quickly
+- Transform and validate requests and responses
+- Generate SDK and API specifications
+- Cache API responses
+
+### API Gateway Deployments - End-point Types 
+
+- `Edge-Optimized` 
+  - Default - For Global clients 
+  - Requests are routed through the CF edge locations (Improves latency)
+  - API gateway still lives in a one region
+- `Regional`
+  - For clients within the same region 
+  - More control over caching control
+- `Private`
+ - Can only be accessed from VPC using an interface VPC endpoint (ENI)
+ - Use a resource policy to define access
+
+#### Example - Create a simple API Gateway
+
+- Select API Gateway
+- Build a REST API
+  - Create a new REST API - Name it - Choose End-Point Type (Regional)
+- Actions 
+  - Create Method - GET 
+    - Choose Integration Type (Lambda)
+    - Check Lambda Proxy Integration
+    - Choose Lambda Function - Create one before hand - Choose Python or NodeJS
+    - Save
+- Test 
+- Create a resource
+  - `/users` - Enable API Gateway CORS 
+  - Create a method - GET - Lambda Function
+  - Save 
+- Actions
+   - Deploy - Create a new stage - name it (dev)
+- Copy the `invoke URL` once deployed
+
+
+#### Example - API Gateways with stages 
+
+- Update the lambda function and deploy it (updated lambda can be used for test and dev stages)
+- Create `lambda aliases` for `dev`, `test`, and `prod` in CF, `prod` alias pointing to the older version and
+   `dev` and `test` aliases pointing to the latest version.
+- Create a resource `/stagevars` under the existing API Gateway
+  - Add a `GET` method
+  - Lambda Function - having the name of the lambda followed by, `:${stageVariables.lambdaAlias}`
+  - We need to set the `lambdaAlias` when creating stages for `dev`, `test`, and `prod`
+  - Save 
+  - Lambda function created as `stage variables`, need appropriate `Function policy` on all the functions.
+    `Run the command` shown in the modal (popup) in the `AWS-CLI` - which will add the resouce based policies
+    to each lambda function referenced by API Gateway stages.
+  - Make sure to replace the `${stageVariables.lambdaAlias}` with the appropriate alias in the command line, pass `--region eu-west-2`
+- Save - Test it - Pass `lambdaAlias Stage Variable` with a value, for eg., `dev`
+- Action - Deploy the API changes to the existing deployment stage, `dev` - Add the Stage Variable  `lambdaAlias` under 
+  `Stage Variables` tab under `Stages -> dev`-. Deploy the same API to the `test` stage - Add the Stage Variable  `lambdaAlias` under 
+  `Stage Variables` tab under `Stages -> test`
+- Repeat the same step for `prod` as well
+- Copy the invoke URL and test it.
+
+
+### Canary Deployments
+
+- Enable Canary Deployments for any stage (usually prod)
+- Choose the % of traffic the canary channel recieves
+- This is blue/green deployment with AWS lambda and API gateway
+
+#### Example 
+
+- Make sure to update the lambda function to point to `Lambda function version-1`(update under, Integration Request), for eg., `Lambda Function: lambda-function-name:1`
+- Deploy the API to prod stage 
+  - Actions - Deploy API - Prod stage - Deploy
+- Open the `Stages -> Prod Stage -> Canary Tab` 
+  - Update the `Percentage of requests directed to Canary` to `50%`(typically 5% for Prod) under `Stage's Request Distribution` section
+- Go back to the resources, for `/` resource, update the Integration Request to point to `Lambda function version-2`
+- Deploy the API to prod stage 
+  - Actions - Deploy API - Select the stage - Prod (Canary Enabled) - Deploy
+- Test it using `Invoke URL` whether the canary deployment is working or not. Check the logs before promoting to next version.
+- `Promote Canary` once tested, so that the `lambda-function-version-2` is used for the next deployment.
+
+
+### Integration Types 
+
+- `Mock` 
+  - API Gateway returns a response without sending the request to the backend
+- `HTTP/AWS(Lambda & AWS Services)`  
+  - Setup data mapping using `mapping templates` for request and response
+- `AWS_PROXY (Lambda Proxy)`
+  - Incoming request from the client is input to the Lambda
+  - Lambda function is responsible for the logic of request/response
+  - No mapping templates, headers, query string params, are passed as arguments
+- `HTTP_PROXY`
+  - No mapping templates 
+  - The HTTP request is passed to the backend 
+  - The HTTP response from the backend is forwarded by the API Gateway
+
+### Mapping Templated (AWS and HTTP Integration)
+
+- Mapping templated can be used to modify request/responses
+- Rename/modify query string parameters
+- Modify the body content, add headers 
+- Uses `Velocity Template Language(VTL)`: `for` loop, `if` etc
+- Filter the output results (remove unnecessary data)
+
+
+#### Example 
+
+- Create a Lambda function, returning basic JSON response.
+- Create a resource `mapping` 
+ - Create a GET method 
+ - Assign the Lambda function created
+ - Uncheck, `Use Lambda Proxy Integration` option 
+ - Save
+- Update the `Integration Response` under `GET` method 
+  - Expand, `Mapping Templates` section 
+  - Click on `application/json`
+  - Generate template -> `Empty` - Update the VTL template as 
+    ```js
+    #set($inputRoot = $input.path('$'))
+    {
+      "renamedExample": $inputRoot.example,
+      "anotherKey": "anotherValue"
+    }
+    ```
+  - Save
+  - Test the API and it returns the JSON modifed in the mapped template
+
+### Swagger / Open API
+
+- Import the existing API definition from Swagger / Open API
+- Export the existing API as swagger / open API
+- Can be done while creating an API
+
+### Caching Responses
+
+- Caching reduces the number of calls made to the backend.
+- Default `TTL is 300 seconds` (min: 0s, max: 3600s)
+- Caches are defined per stage
+- Possible to override cache settings per method
+- Cache encryption is supported
+- Cache size between `0.5GB to 237GB`
+- Is expensive, makes sense only in Production
+
+#### API Cache Invalidation
+
+- Able to flush the entire cache from the UI
+- Clients can invalidate the cache with header, `Cache-Control: max-age=0`(with proper IAM authorization)
+  - IAM Policy that allows to client to invalidate the cache on a specific resource 
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement" : {
+      "Effect": "Allow",
+      "Action": [
+        "execute-api:InvalidateCache"
+      ],
+      "Resource": [
+        "arn:aws:execute-api:eu-west-2:123456789012:api-id/stage-name/GET/resource-path-specifier"
+      ]
+    }
+  }
+  ```
+- If we don't impose an invalidation cache policy then any client can invalidate the API cache (not recommended)
+
+- Can be enables under each stage or under each method
+  - Under `Settings` -> `Enable API Cache` -> Set `Cache capacity` and `Cache TTL` and check `Require authorization` - Save changes
+
+### Usage Plans and API Keys 
+
+- Enable an API available as an offering to customers
+- Who, how much, and how fast they can access them
+- Use API keys to identify API clients and meter access
+- Configure `throttling limits` and  `quota limits` that are enforced on individual clients
+
 
 ## Links, issues and fixes 
 

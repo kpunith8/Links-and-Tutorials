@@ -101,12 +101,6 @@
 
 ## JS
 
-- `webpack` - bundler
-- `gulp` - task runner like npm
-- `gulp-connect`- runs a local web dev server
-- `gulp-open` - opens a URL in the browser
-- `browserify` (bundles JS), reactify (transforms JSX to JS)
-- `vinyl-source-stream`- Use conventional text streams with gulp
 - `LABjs` - JS job loader
 - `npm-run-all` - run parallel tasks
 - `nprogress` - to show the indicator on top of the page
@@ -114,6 +108,14 @@
 - `slatejs` - Rich text editor 
 - `nx` - Monorepo - Generates react, next, express, nest and more apps as monorepo
 
+### Bundlers
+
+- `webpack`
+- `esbuild`
+- `vite`
+- `rollup`
+- `parcel`
+- `snowpack`
 ## Cross Platform desktop apps 
 
 - `electronjs`
@@ -159,6 +161,7 @@
 - `https://heroicons.com/`
 - `grips` - templating engine
 - `tailwind css` - Utility first CSS - Offers low level API
+- [Tailwind component](https://flowbite.com/)
 
 ## Common
 
@@ -243,6 +246,8 @@
 
 - `quill`, `monaco` - editors
 
+- `three-fiber` - 3D rendering 
+
 ### Testing
 
 - `Jest`, `Enzyme` - React testing
@@ -279,7 +284,7 @@
 
 - `Gatsby` - `Static site generation`, ` can be used CMS`, templates
 
-### State management
+### State management and obserbility
 
 - `redux`  
 
@@ -290,6 +295,8 @@
 - `recoil`
 
 - https://kea.js.org/
+
+- `RxJs`
 
 ### Full stack 
 
@@ -692,3 +699,7 @@ youtube.com/watch?v=C6MVEwl0ceI&t=2s -> pwnyoutube.com/watch?v=C6MVEwl0ceI&t=2s
 - [Reverso](https://reverso.net)
 - [Grammarly](https://grammrly.com)
 - [Grammarly Check](https://grammarlycheck.net)
+
+## Online earning 
+
+- https://www.teacheron.com/

@@ -13,7 +13,7 @@
 
 ## HTTP/2 
 
-- The primary goals for HTTP/2 are to `reduce latency` by enabling f`ull request and response multiplexing`, minimize protocol overhead via efficient `compression of HTTP header fields`, and add support for `request prioritization` and `server push`. 
+- The primary goals for HTTP/2 are to `reduce latency` by enabling `full request and response multiplexing`, minimize protocol overhead via efficient `compression of HTTP header fields`, and add support for `request prioritization` and `server push`. 
 
 - All the core concepts, such as HTTP methods, status codes, URIs, and header fields, remain in place.
 

@@ -10,3 +10,6 @@ const rootDir = path.dirname(process.mainModule.filename);
 // instead of __dirname use rootDir 
 path.join(rootDir, 'views', '404.html')
 ```
+
+
+## TIL connecting to "localhost:0" allows the kernel pick an open port for you 

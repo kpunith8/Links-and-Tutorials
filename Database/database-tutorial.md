@@ -96,4 +96,32 @@ Applicatios of graphDB, machine learning, fraud detection, regulatory compliance
 
 ex: `Neo4j`, `Dgraph` are most widely used ones
 
+### Structured Data 
 
+- Data consists of fixed schema
+- Organized in a tabular format consisting of rows and columns
+- Schema imposes constaints required to make the data consistent and computable
+- RDBMS is an example of a structured data
+- Similar entities are grouped together to form a relations betweem data tables.
+- An `Entity` can be a single thing, person, place or object that exists in a data.
+- Managed by `SQL - Structured Query Language`
+
+## SQL
+
+### SELECT TOP Clause 
+
+- Selects the top n rows from a table
+
+- Not supported by all DBMS
+
+- `SELECT TOP <number>  <PERCENT> <conditin>`
+
+- Select top 3 Students
+```sql
+SELECT TOP 3 * from Students;
+```
+
+- Select Top 50% Students
+```sql
+SELECT TOP 50 PERCENT * from Students WHERE Marks > 65;
+```
