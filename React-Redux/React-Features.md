@@ -323,7 +323,7 @@ import React, { Suspense } from "react"
 const Tilt = React.lazy(() => import("./tilt")) // Dynamic import, imports the library when needed.
 
 // It can be used with Suspense as follows
-;<Suspense fallback={<div>Loading...</div>}>
+<Suspense fallback={<div>Loading...</div>}>
   <Tilt />
 </Suspense>
 ```
@@ -579,6 +579,91 @@ const Todos = (props) => {
   )
 }
 ```
+
+## Suspense
+
+- `React.lazy()` used to load the components dynamically. It resolves the promise and returns the component.
+  wrap each `Suspense` component with `ErrorBoundary` to catch the error.
+
+```js
+const PokemanDetails = React.lazy(() => import("./pokeman-details"))
+
+// Grab ErrorBoundary code from React docs or use react-error-boundary package
+const Pokemon = () => (
+  <ErrorBoundary fallback="Error loading pokemon">
+    <React.Suspense fallback="loading...">
+      <PokemanDetail />
+    </React.Suspense>
+  </ErrorBoundary>
+)
+
+export default Pokemon
+```
+
+- Convert `fetch` calls, so that we can use them in Suspense component, similar to `React.lazy()`
+
+```js
+const suspensify = (promise) => {
+  let result
+  let status = "pending"
+
+  let suspender = promise.then(
+    (r) => {
+      result = r
+      status = "success"
+    },
+    (e) => {
+      status = "error"
+      result = e
+    }
+  )
+  return {
+    read() {
+      if (status === "pending") {
+        throw suspender
+      } else if (status === "error") {
+        throw result
+      }
+      return result
+    },
+  }
+}
+```
+
+- Load the pokeman dynamically with Suspense
+
+```js
+const fetchPokemon = (id) =>
+  fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => res.json())
+
+const initialPokemon = suspensify(fetcherPokemon(1))
+
+// Move state and button to parent component and keep only the rendering logic here by passing resource prop (pokemonResource)
+const PokemonDetail = () => {
+  const [pokemonResource, setPokemonResource] = useState(initialPokemon)
+  // timeout is added to wait between next rendering and switching from the receeding state
+  const [startTransition, isPending] = useTransition({timeoutMs: 1000})
+  const pokemon = pokemonResource.read()
+
+  return (
+    <div>
+      <h1>{pokemon.name}</h1>
+      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+      <button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(() => setPokemonResource(suspensify(fetchPokemon(pokemon.id + 1))))
+        }
+      >
+        Next Pokemon {isPending && "..."}
+      </button>
+    </div>
+  )
+}
+```
+
+- `useTransition` hook to not to block the updates to the UI while the data is loading.
 
 ## Performance
 

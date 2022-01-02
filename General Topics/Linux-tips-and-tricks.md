@@ -91,14 +91,74 @@ $ find . -type f -mtime -1
 
 You can delete all the files matching a search by adding the `-delete` option.
 This deletes all the files edited in the last 24 hours
-```
+```bash
 $ find . -type f -mtime -1 -delete
 ```
 
 You can execute a command on each result of the search.
 Run cat to print the file content:
-```
+```bash
 $ find . -type f -exec cat {} \;
 ```
 
 Notice the terminating \;. {} is filled with the file name at execution time.
+
+## Bash - From Egghead.io course
+
+### sed - String manupulation
+
+- Find and replace string with `sed`
+```bash
+# -i is the flag to edit in place, param to -i flag is a backup file name to store the original file
+# s for substitute, d for delete, and i for insert
+$ sed -i '' 's/old/new/g' file.txt 
+
+# Specifying the number in the sed command tells which line to replace
+$ sed -i '' '1,3 s/old/new/g' file.txt 
+
+# Specify regex instead of a line number, it is applied to first line, and use /dog/! to invert the match, 
+$ sed -i '' '/dog/ s/old/new/g' file.txt 
+```
+
+- Find and delete lines with `sed`
+```bash
+# Delete all empty lines in a file
+$ sed -i '' '/^$/ d' file.txt
+
+# Delete the first line
+$ sed -i '' '1 d' file.txt
+
+# Delte the last line
+$ sed -i '' '$ d' file.txt
+```
+
+- Insert text with `sed`
+```bash
+$ sed -i '' '1 i\// Copyright 2020' file.txt
+
+# Insert text to all JS files in a directory in macOS
+$ for f in $(ls *.js); do sed -i '' '1 i\// Copyright 2020' $f; done
+```
+
+### cut 
+
+```bash
+# cut by delimiter
+$ cut -d ',' -f 1,2,3 file.txt
+
+# cut by character
+$ cut -c 1-3 file.txt
+```
+
+### awk - String extraction from columns
+
+```bash
+$ ps aux | awk '{print $1, $2, $3}'
+
+# Print column 2 only having a value greater than 3
+$ ps aux | awk '{$2 > 3 {print $2}}'
+
+# Extract data from csv file
+$ awk -F ',' '$2 == "Engineering" && $3 > 10 {print $1}' file.csv
+```
+
