@@ -155,3 +155,15 @@ $ brew install jq
 
 $ curl 'URL' | jq
 ```
+
+## Homebrew 
+
+- Search for plugins
+```
+$ brew search <plugin-name>
+```
+
+- Get the info a plugin
+```
+$ brew info <plugin-name>
+```

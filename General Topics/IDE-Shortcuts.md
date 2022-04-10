@@ -31,6 +31,49 @@
 
 - `Ctrl + Shift + Y` for Lowercase, `Ctrl + Shift + X` for Uppercase.
 
+
+## IntelliJ Shortcuts - Mac
+
+- `Option + Enter` - Quick Fix
+
+- `F2` - Jump to next error suggestion 
+
+- `Cmd + 1` - Open the Project window / toggle
+
+- `Cmd + E` - Open the recently opened files
+
+- `Option + F7` - To find the all usages if an interface or concrete class
+
+- `Tap Ctrl twice` - To run anything
+
+- `Tab Shift twice` - Search anything
+
+- `Option + Up key or Option + down key` - Extend/decrease the selection
+
+- `Option + Cmd + /` - To add a block comment
+
+- `Shitft + Cmd + Enter` - Complete the current statement
+
+- `Cmd + B` - To go to the file declaration
+
+- `Cmd + N` - To show the option `Generate` based on file type
+
+- `Option + Cmd + B` - To go to the implementation of the code
+
+- `Option + Cmd + L` - To format the code
+
+- `Ctrl + Shift + R` - To run the code
+
+- `Ctrl + T` - Shows the shortcuts availbale on selection to refactor
+
+- `Shift + Cmd + A` - To find all the shortcuts
+
+- `Option + Enter` - To not to show the hint on parameter names 
+  - Turn off Inlay Hints in `Preferences -> Editor -> Inlay Hints`
+
+- Use inspections to fix or find errors, for ex, migrating from JUnit4 to JUnit5 inspection can be done under
+  `Inspections -> JUnit -> Migrate from JUnit4 to JUnit5`
+
 # Disable errors on optional chaining in VS Code
 
 Settings -> set, javascript.validate.enable": false

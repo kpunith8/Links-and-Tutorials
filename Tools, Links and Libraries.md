@@ -107,6 +107,7 @@
 - `minimist` - Parse node argument options
 - `slatejs` - Rich text editor 
 - `nx` - Monorepo - Generates react, next, express, nest and more apps as monorepo
+- `turbo-repo` - Monorepo for NextJS
 
 ### Bundlers
 
@@ -116,6 +117,7 @@
 - `rollup`
 - `parcel`
 - `snowpack`
+
 ## Cross Platform desktop apps 
 
 - `electronjs`
@@ -247,6 +249,8 @@
 - `quill`, `monaco` - editors
 
 - `three-fiber` - 3D rendering 
+
+- `react-window` - Virtualized list (improves performance of huge lists)
 
 ### Testing
 

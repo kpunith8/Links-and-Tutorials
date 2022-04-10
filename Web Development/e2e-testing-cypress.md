@@ -40,11 +40,119 @@
   ```javascript
   import '@cypress/code-coverage/support'
   ```
+## Stubing server calls 
+
+- `GET` API call
+```js
+describe('app initialization', () => {
+  it('should initialize and load the app', () => {
+    cy.seedAndVisit()
+
+    cy.get('.todo-list li').should('have.length', 2)
+  })
+})
+```
+
+- `POST` API call
+```js
+cy.server()
+cy.route({
+  method: 'POST',
+  url: '/api/todos',
+  // status: 500, // To throw an error, with an empty response body
+  response: {
+    id: 3,
+    title: 'A new todo',
+    completed: false
+  }
+})
+```
+
+- Update and delete an item 
+```js
+describe('List Item Behavior', () => {
+  it('Deletes an item', () => {
+    cy.server()
+    cy
+      .route({
+        method: 'DELETE',
+        url: '/api/todos/*',
+        response: {}
+      })
+      .as('delete')
+
+    cy.seedAndVisit()
+
+    cy.get('.todo-list li').as('list')
+
+    cy
+      .get('@list')
+      .first()
+      .find('.destroy')
+      .invoke('show')
+      .click()
+
+    cy.wait('@delete')
+
+    cy.get('@list').should('have.length', 3)
+  })
+
+  it.only('Marks an item complete', () => {
+    cy.server()
+    cy.seedAndVisit()
+    cy.fixture('todos').then(todos => {
+      const target = todos[0]
+      cy
+        .route(
+          'PUT',
+          `/api/todos/${target.id}`,
+          Cypress._.merge(target, { isComplete: true })
+        )
+        .as('update')
+    })
+
+    cy
+      .get('.todo-list li')
+      .first()
+      .as('first-todo')
+
+    cy
+      .get('@first-todo')
+      .find('.toggle')
+      .as('checkbox')
+
+    cy.get('@checkbox').click()
+
+    cy.wait('@update')
+
+    cy.get('@checkbox').should('be.checked')
+
+    cy.get('@first-todo').should('have.class', 'completed')
+
+    cy.get('.todo-count').should('contain', 3)
+  })
+})
+```
+
+## Extract the API route call used in multiple tests as a command 
+
+- Put it under `support/commands.js`
+```js
+Cypress.Commands.add('seedAndVisit', (seedData = 'fixture:todos.json') => {
+  cy.server()
+  cy.route('GET', '/api/todos', seedData) // Add todos.json file with mock data under fixtures folder
+    .as(load) // Assign an alias to refer it later in case to wait for the response
+  
+  cy.visit('/') 
+  cy.wait('@load') // Waits for the response to be received before asserting
+})
+```
+
+
+## Running in Docker
 
 - Running the cypress in docker and in Jenkins refer, `Docker-Intro.md` file's
   `Installing latest node on docker image` section
-
-## Running in Docker
 
 ## Cypress - xvfb issue
 
@@ -62,7 +170,7 @@
 - Installing latest node on docker image
 
 - https://gist.github.com/remarkablemark/aacf14c29b3f01d6900d13137b21db3a
-```
+```bash
 FROM ubuntu:latest
 
 RUN set -eux \
@@ -70,7 +178,7 @@ RUN set -eux \
     && apt-get install -y curl \
     && apt-get -y autoclean \
     && rm -rf /var/lib/apt/lists/*
-#install libs required to test cypress
+# install libs required to test cypress
 ENV NVM_VERSION v0.34.0
 ENV NODE_VERSION v13.7.0
 ENV NVM_DIR /usr/local/nvm
@@ -90,7 +198,7 @@ CMD ["bash"]
 
 - Running cypress from custom built docker image
 
-```
+```bash
 // use npm install with Cypress cache volume specified, instead of npm ci if you don't want caching and remove specifying volume for Cypress cache
 $ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress/4.0.2:/root/.cache/Cypress/4.0.2 --workdir /app custom-cy:latest bash -c "npm install && npm run test:cypress"
 

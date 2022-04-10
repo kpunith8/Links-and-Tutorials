@@ -116,7 +116,7 @@ handleSearch = (event) => {
 
 ```js
 render() {
-	let { articles, searchTerm } = this.state;
+	let { articles, searchTerm } = object;
 
 	if (searchTerm) {
 		articles = pickBy(articles, (value) => {
@@ -126,7 +126,7 @@ render() {
 }
 ```
 
-### Get Cheapest items first custom sort
+### Get Cheapest items first; custom sort
 
 ```js
 function newItemsCheapestFirst(items) {
@@ -184,7 +184,7 @@ const uniqueArray = [...new Set(array)];
 const uniqueArray = arr.filter((item, index) => arr.indexOf(item) === index);
 ```
 
-Create array with `Array.from()`
+### Create array with `Array.from()`
 
 ```js
 // Creates 4 items with index value, [0, 1, 2, 3]
@@ -269,7 +269,7 @@ const arrowFunc = (data) => ({
 })
 ```
 
-### Generate a dynamic grid 2*2 with null values
+### Generate a dynamic grid with null values
 
 ```js
 const generateGrid = (rows, columns, mapper) =>
@@ -305,13 +305,13 @@ function fearNotLetter(str) {
 
 ```js
 const reverseString = str =>
-	str.split("").reduceRight((x, y) => x + y, "");
+	str.split("").reduceRight((acc, char) => acc + char, "");
 ```
 
 ## ## Reverse a string using reduce()
 ```js
 const reverseString = str =>
-	str.split("").reduce((x, y) => y + x, "");
+	str.split("").reduce((acc, char) => char + acc, "");
 ```
 
 ## Factorial of a number using range and reduce
@@ -336,6 +336,40 @@ const arrayDiff = (firstArr, secondArr) => {
 	return firstArr.filter(item => !uniqueSecondArr.has(elem));
 }
 ```
+
+### Poll a service with some interval
+```js
+var sleep = time => new Promise(resolve => setTimeout(resolve, time))
+var poll = (promiseFn, time) => promiseFn().then(
+             sleep(time).then(() => poll(promiseFn, time)))
+
+// Greet the World every second
+poll(() => new Promise(() => console.log('Hello World!')), 1000)
+```
+
+### Create a bind polyfill
+```js
+Function.prototype.myBind = function (context, ...args1) {
+  let fn = this
+  return function (...arg2) {
+      fn.apply(context, [...args1, ...arg2])
+  }
+}
+
+let user = {
+  name: 'Punith',
+  age: 24
+}
+
+function callMe(city) {
+  console.log('Hi! my name is ' + this.name + ' and my age is ' + this.age + ' and my city is ' + arguments[0] + ' and state is ' + arguments[1]);
+}
+let callDefaultBind = callMe.bind(user, 'Bengaluru');
+let callmyBind = callMe.myBind(user, 'Bengaluru');
+callBinded('Karnataha'):
+mycallBinded('Karnataka');
+```
+
 
 ## Tricky JS
 
@@ -374,3 +408,4 @@ false == ![]; // -> true
 
 false == false; // -> true
 ```
+

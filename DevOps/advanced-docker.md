@@ -455,3 +455,93 @@ $ docker stack deploy -c docker-compose.yml docker-compose.prod.yml my-node-app
 ```
 $ docker stack ps my-node-app
 ```
+
+### Scale docker horizontally with ngnix load balancer
+
+- Create a node app
+```js
+var http = require('http');
+var serverName = process.env.SERVER_NAME || 'default';
+var port = process.env.PORT || 8000;
+
+var server = http.createServer(function (request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end(`Hello World from server ${serverName}\n`);
+});
+
+server.listen(port);
+
+console.log(`Server running at http://127.0.0.1:${port}/`);
+```
+
+- Create a `Dockerfile` to node app image
+```
+FROM mhart/alpine-node
+COPY index.js .
+EXPOSE 8000
+CMD node index.js
+```
+
+- Build a node image
+```shell
+$ docker build -t node-app .
+```
+
+- Start 2 NodeJS processes
+```shell
+$ docker run -d -e "SERVER_NAME=chicken" --name chicken node-app
+$ docker run -d -e "SERVER_NAME=steak" --name steak node-app
+```
+
+- Create a nginx load balancer using `ngnix` image
+
+- Create a `ngnix.conf` file in the root 
+```
+upstream app {
+    server chicken:8000;
+    server steak:8000;
+}
+
+server {
+  location / {
+    proxy_pass http://app;
+  }
+}
+```
+
+- Create a `Dockerfile` to build a ngnix image and to start the load balancer 
+```
+FROM nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+```
+
+- Build the ngnix image
+```shell
+$ docker build -t app-ngnix .
+```
+
+- Start the ngnix load balancer
+```shell
+$ docker run -d -p 8080:80 --link chicken --link steak app-nginx
+```
+
+### Dokcer image with high availabilty
+
+- `restart: always` can also be added in the `docker-compose.yml` file too.
+```shell
+$ docker run --restart always --name test-app hello-world
+```
+
+- `restart: always` can also be added in the `docker-compose.yml` file too and scale it using
+```shell
+$ docker-compose up --scale hello-world=3
+```
+
+### Pipe log output to STDOUT using Dokcerfile
+
+```
+FROM mhart/alpine-node
+COPY index.js .
+RUN ln -sf /dev/stdout ./docker.log
+CMD node index.js
+```
