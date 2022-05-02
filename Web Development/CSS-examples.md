@@ -440,7 +440,19 @@ h2 {
 }
 ```
 
-### Images - Lazy loading native CSS
+### Box Shadow
+```css
+/* syntax: xOffset yOffSet blurRadius spreadRadius color */
+/* Apply shadow equally to all the sides*/
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+/* Pseudo border - creates border like appearance - box-shadow sits outside of the element
+   and doesn't increase calculated dimensions  */
+box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.5);
+```
+
+## Images 
+
+### Lazy loading native CSS
 
 Set image element attribute `<img loading="lazy" src="" />` default loading option `eager`
 Set `height` and `width` properties to `img` when using `lazy` so that it leaves a
@@ -452,14 +464,94 @@ or fixed height
 <img height="800" width="1024" loading="lazy" src="" alt=""/>
 ```
 
-### Fit images without loosing the image
-
+### Fit images with in the available space
 ```css
 .image {
   overflow: hidden;
   width: 100%;
+  object-fit: cover; /* image acts like its own container */
+  /* object-fit: scale-down; Image content retains its aspect ratio, padding can be added to as we add to block container */ 
+  height: 25vh; /* auto - to fit the image */
+}
+```
+
+### Responsive image gallery using flex box 
+```css
+.body {
+  margin: 0.5rem;
+}
+
+/* Images are in a list element */
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gallery li {
+  flex: 1 1 20rem;
+  min-height: 30vh;
+  max-height: calc(50rem - 0.5rem); /* .5 rem from margin on body */
+}
+
+
+image {
   object-fit: cover;
-  height: 400px; /* auto - to fit the image */
+  height: 100%;
+  width: 100%;
+
+  opacity: 0.7;
+  transition: 180ms opacity ease-in-out;
+}
+
+image:hover {
+  opacity: 1;
+}
+```
+
+### Apply image filters
+```css
+img {
+  filter: grayscale(40%) blur(2px);
+  transition: 180ms filter;
+}
+
+img:hover {
+  filter: none;
+}
+```
+
+- `Vignette effect`
+```css
+img {
+  filter: grayscale(40%) blur(2px);
+  transition: 180ms filter;
+}
+
+span {
+  position: relative;
+}
+
+span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: inset 0 0 5rem rgba(7, 16, 48, 0.8);
+  transition: 180ms box-shadow;
+}
+
+span:hover img {
+  filter: none;
+}
+
+span:hover::after {
+  box-shadow: inset 0 0 0 rgba(7, 16, 48, 0.8);
 }
 ```
 
@@ -543,53 +635,6 @@ body, html {
 
 - `Logical properties` 
 
-## codepen.io samples
-
-[Add image overlay and heading style](https://codepen.io/kevinpowell/pen/ZrMzre)
-
-[Animated progress bar](https://codepen.io/kpunith8/pen/JjYmEre)
-
-[Align content in a row with equal space](https://codepen.io/kpunith8/pen/GRZzEqE)
-
-## Emotion-UI - React styling
-
-### Conditional rendering in emotion styled components
-
-```css
-const Tab = styled(Basic)`
-${({isVisible, primary}) => isVisible && `
-  font-size: 10px;
-  text-transform: uppercase;
-`};
-
-const Tab = styled.button`
-  width: 100%;
-  outline: 0;
-  border: 0;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  line-height: 0.2;
-
-  ${({ active }) => active && `
-    background: blue;
-  `}
-  <Tab active {...props} />
-`;
-```
-
-### Pass props to styled component - object style
-
-```javascript
-const Card = styled('a')({
-  border: '1px solid blue',
-
-  },
-  props => ({borderTop: props.isConnected ? '5px solid red' : null})
-)
-```
-
-
 ### Using `em` and `rem` units along with `font-size` property 
 
 ```html 
@@ -640,4 +685,51 @@ h1 {
     font-size: 20px;
   }
 }
-````
+```
+
+## SCSS 
+
+- Transpile `scss` to `css` using `node-sass` package
+```json
+"scripts": {
+  "build:css": "node-sass -o --source-map-embed ./src/styles/index.css ./src/styles/index.scss"
+}
+```
+
+- Order of partial imports is important
+
+- Access theme colors 
+```scss
+/* _components.scss - partials */
+h1 {
+  color: theme-color(primary);
+}
+```
+
+```scss
+// style.scss
+$color-primary: indigo;
+$color-secondary: blue;
+$color-support: pink;
+
+$theme-colors: (
+  primary: $color-primary,
+  secondary: $color-secondary,
+  support: $color-support
+);
+
+@function theme-color($key) {
+  @return map-get($theme-colors, $key);
+}
+
+/* import partials without the _ in the begining */
+@import "components";
+```
+
+## codepen.io samples
+
+[Add image overlay and heading style](https://codepen.io/kevinpowell/pen/ZrMzre)
+
+[Animated progress bar](https://codepen.io/kpunith8/pen/JjYmEre)
+
+[Align content in a row with equal space](https://codepen.io/kpunith8/pen/GRZzEqE)

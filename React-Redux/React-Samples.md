@@ -1,24 +1,5 @@
-## Links:
-
-- http://fullstackreact.com
-
-- https://gist.github.com/samerbuna
-
-- http://edgecoders.com  
-
-- https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
-
-- https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
-
-- https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
-
-- `shouldComponentUpdate(nextProps, nextState)` usage
-- https://egghead.io/lessons/react-component-lifecycle-updating
-
-- http://lucybain.com/blog/2017/react-js-when-to-rerender/
-
 - When component recieves props, update the state so that UI re-renders
-```javascript
+```js
 componentWillReceiveProps(nextProps) {
   console.log('Recieves the next props' + JSON.stringify(nextProps));
   this.updateOrderDisplays(nextProps);
@@ -35,7 +16,7 @@ updateOrderDisplays(nextProps) {
 
 - Grid system and deleting an item in the list using React
 
-```javascript
+```js
 const Stars = (props) => {
 	return(
   	<div className="col-5">
@@ -47,7 +28,7 @@ const Stars = (props) => {
 }
 ```
 
-```javascript
+```js
 const Button = (props) => {
 	return(1
   	<div className="col-2">
@@ -57,7 +38,7 @@ const Button = (props) => {
 }
 ```
 
-```Javascript
+```js
 const Answer = (props) => {
 	return(
   	<div className="col-5">
@@ -71,7 +52,7 @@ const Answer = (props) => {
 }
 ```
 
-```javascript
+```js
 const Numbers = (props) => {
 	const numberClassName = (number) => {
   	if(props.selectedNumbers.indexOf(number) >= 0) {
@@ -94,7 +75,7 @@ const Numbers = (props) => {
 }
 ```
 
-```javascript
+```js
 const NewList = (props) => {
 	return(
   	<div className="list">
@@ -104,7 +85,7 @@ const NewList = (props) => {
 }
 ```
 
-```javascript
+```js
 const List = (props) => {
 	this.state = { newList: [] };
 
@@ -135,11 +116,11 @@ const List = (props) => {
 ```
 
 - Will be used to store global variables
-```javascript
+```js
 Numbers.list = _.range(1, 10);
 ```
 
-```javascript
+```js
 class Game extends React.Component {
 	constructor(props) {
   	super(props);
@@ -219,7 +200,7 @@ class Game extends React.Component {
 }
 ```
 
-```javascript
+```js
 class App extends React.Component {
 	render() {
   	return(
@@ -309,7 +290,7 @@ ReactDOM.render(<App />, mountNode);
 ```
 
 ### React Routes:
-```javascript
+```js
 "use strict";
 
 var React = require('react');
@@ -339,7 +320,7 @@ module.exports = routes;
 
 ### react-router-dom v4 sample:
 
-```javascript
+```js
 import ReactRouter from 'react-router-dom';
 import Router from ReactRouter.BrowserRouter;
 import Switch from ReactRouter.Switch;
@@ -365,7 +346,7 @@ App extends React.Component {
 }
 ```
 
-```javascript
+```js
 import React from 'react';
 import ReactRouter from 'react-router-dom';
 import NavLink from ReactRouter.NavLink;
@@ -402,7 +383,7 @@ export default Nav;
 - use statics to make transitions to one page to another, and ask save the user data before transition to another page, using
   dirty state.
 
-```javascript
+```js
 mixins: [
 	Router.Navigation
 ],
@@ -419,7 +400,7 @@ this.transitionTo('authors'); // will take to the name of the page mentioned in 
 ```
 
 #### filter array:
-```javascript
+```js
 function searchMovies(query) {
 	return map.filter((movie) => {
 		return movie.title.includes(query);
@@ -428,7 +409,7 @@ function searchMovies(query) {
 ```
 
 #### Validating props of an array:
-```javascript
+```js
 order: PropTypes.arrayOf(PropTypes.shape({
   identifier: PropTypes.number.isRequired,
   displayValue: PropTypes.string.isRequired,
@@ -438,7 +419,7 @@ order: PropTypes.arrayOf(PropTypes.shape({
 
 #### Updating the state based on the condition in setState()
 
-```javascript
+```js
 this.setState(prevState => {(
 	if(prevState.usedNumbers.length === 9) {
 		return { doneStatus: 'Done!' };
@@ -450,7 +431,7 @@ this.setState(prevState => {(
 
 - `prevState` passed to an function can be destructured to process
 
-```javascript
+```js
 decideTheGame = ({param1, param2}) => {...};
 
 this.setState(prevState => {(
@@ -462,13 +443,13 @@ this.setState(prevState => {(
 
 - Update the state `twice`, calling setState in a callback is not allowed, `setState` accepts callback function
 
-```javascript
+```js
 this.setState(prevState => {(
   )}, this.updateAnotherState);
 ```
 
 - possibleCombination by Samer Buna - https://gist.github.com/samerbuna/aa1f011a6e42d6deba46
-```javascript
+```js
 var possibleCombinationSum = function(arr, n) {
   if (arr.indexOf(n) >= 0) { return true; }
   if (arr[0] > n) { return false; }
@@ -492,11 +473,11 @@ var possibleCombinationSum = function(arr, n) {
 
 # React and Redux: Dan Abramov
 
-- https://egghead.io/lessons/javascript-redux-simplifying-the-arrow-functions
+- https://egghead.io/lessons/js-redux-simplifying-the-arrow-functions
 
 - use `node-uuid` to generate unique id
 
-```javascript
+```js
 // Instead of return in the body cover the return in ()
 export const addToDo = (text) => ({
   type: 'SET_FILTER',
@@ -506,7 +487,7 @@ export const addToDo = (text) => ({
 
 - `createStore()` can take persisted state as second parameter.
 
-```javascript
+```js
 const store = createStore(todoApp, persistedState);
 render(
   <Provider store = {store}>
@@ -518,7 +499,7 @@ render(
 
 ## React-Ajax call using jQuery:
 
-```javascript
+```js
 var data = {};
 data.name = 'Punith';
 data.id = 1;
@@ -542,7 +523,7 @@ jquery.ajax({
 
 - Class can change the state of a class not the props of the class.
 
-```javascript
+```js
 class Button extends React.Component {
   state = {counter: 0};
 
@@ -597,13 +578,13 @@ ReactDOM.render(<App />, mountNode);
 - css style can be used with style={{display: 'inline-block', marginLeft:10}}
 
 - To get the data from a input field:
-```javascript
+```js
 // one way of getting the data from the input and can be accessed using `this.userInput.value`
 ref = {(input) => this.userInput = input}
 ```
 
 - Working with data - Add Github users using github api
-```javascript
+```js
 const Card = (props) => {
   return(
   	<div style={{margin: '1em'}}>
@@ -617,7 +598,7 @@ const Card = (props) => {
 };
 ```
 
-```javascript
+```js
 class Form extends React.Component {
 	state = { userName: ''};
 
@@ -645,7 +626,7 @@ class Form extends React.Component {
 }
 ```
 
-```javascript
+```js
 class App extends React.Component {
   state = {
   	cards: []
@@ -668,7 +649,7 @@ class App extends React.Component {
 }
 ```
 
-```javascript
+```js
 const CardList = (props) => {
 	return(
   	<div>
@@ -680,16 +661,14 @@ const CardList = (props) => {
 ReactDOM.render(<App />, mountNode);
 ```
 
-### Reusable components
-
-#### Eject create-react-app
+### Eject create-react-app
 
 - `ModuleScopePlugin()` comment this in plugins in `webpack.config.js` and `contentBase: paths.appPublic`,
 to import content from outside `/src` folder
 
 - `Webpack alias` - to remove the path identifiers when importing the components ex: `import Example from `../../components/Example`
   to `module/Example`, set the alias in
-```javascript
+```js
 alias:
   { 'name': path.resolve(__dirnname, '../src/components')
 }
@@ -709,7 +688,7 @@ alias:
 ```
 
 - Use `Proptypes` and `defaultProps`- generates runtime warnings to check the types of component.
-```javascript
+```js
 Component.propTypes = {
   message: PropTypes.string.isRequired,
   user: PropTypes.shape({
@@ -732,7 +711,7 @@ instead of using `<span>` and `<div>` for actual button element `<button>`.
 Add `label` attribute to input field for screen readers,  use keyboard navigation.
 
 - `Consider config objects for props` - API can evolve easily without adding new props as and when new fields needs to be added.
-```javascript
+```js
 <UserDetail name="Punith" title="Developer" />
 // instead use
 <UserDetail user={{name: "Punith", title: "Developer"}} />
@@ -741,16 +720,15 @@ Add `label` attribute to input field for screen readers,  use keyboard navigatio
 - Pass props via spread operator <UserDetail {...this.props} />
 
 - Use spread with de-structuring
-```javascript
+```js
 const UserDetail = ({name, ...props}) => {
   return <div {...props}>{name}</div>
 }
 ```
 
-
 ## redux-saga
 
-```javascript
+```js
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
@@ -770,7 +748,7 @@ const action = type => store.dispatch({type});
 ```
 
 - Asynchronous call
-```javascript
+```js
 import { put, takeEvery, call } from 'redux-saga/effects';
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
@@ -787,7 +765,7 @@ export function* watchIncrementAsync() {
 }
 ```
 
-```javascript
+```js
 import { call, put } from 'redux-saga/effects'
 
 export function* fetchData(action) {
@@ -814,7 +792,7 @@ function* watchFetchData() {
   is still running when another fetchData task is started, the previous task will be automatically `cancelled`.
 
 - If you have multiple Sagas watching for different actions, you can create `multiple watchers` with those built-in helpers.
-  ```javascript
+  ```js
   // FETCH_USERS
   function* fetchUsers(action) { ... }
 
@@ -838,7 +816,7 @@ function* watchFetchData() {
 - `take` will `suspend` the generator until a matching action is dispatched.
 
 - Using `takeEvery('*')` (with the wildcard * pattern), we can catch all dispatched actions regardless of their types.
-  ```javascript
+  ```js
   import { select, takeEvery } from 'redux-saga/effects';
 
   function* watchAndLog() {
@@ -852,7 +830,7 @@ function* watchFetchData() {
   ```
 
 - Using `take` effect
-  ```javascript
+  ```js
   import { select, take } from 'redux-saga/effects';
 
   function* watchAndLog() {
@@ -870,7 +848,7 @@ function* watchFetchData() {
 
 https://www.w3schools.com/howto/howto_js_sticky_header.asp
 
-```javascript
+```js
 import {useEffect} from 'react';
 import {useWindowScroll} from 'react-use';
 
@@ -898,7 +876,7 @@ fetch(`https://cors-anywhere.herokuapp.com/<url>`).then(...)
 
 ## Add css styles with hooks (passed as array)
 
-```javascript
+```js
 const [cardStyle, setCardStyle] = useState({})
 
 useEffect(() => {
@@ -1146,3 +1124,142 @@ export default function App() {
   );
 }
 ```
+
+- Load the data when reached the end of the page - whatfix interview question
+```js
+import { useEffect, useState } from "react";
+
+const useTodos = (isBottom) => {
+  const [todos, setTodos] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loadTodos = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+        const data = await res.json();
+        setTodos(data);
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+        setError(err);
+      }
+    };
+
+    loadTodos();
+  }, []);
+
+  return { todos, error, loading };
+};
+
+export default function App() {
+  const [isBottom, setIsBottom] = useState(false);
+  const { todos, loading, error } = useTodos();
+  const [allTodos, setAllTodos] = useState(todos);
+
+  const scrollHanlder = () => {
+    const isBottomOfThePage =
+      window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+      setIsBottom(isBottomOfThePage);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollHanlder);
+
+    return () => window.removeEventListener("scroll", scrollHanlder);
+  });
+
+  useEffect(() => {
+    setAllTodos(todos);
+  }, [todos]);
+
+  // Could be just passing the offset
+  useEffect(() => {
+    if (isBottom) {
+      const loadTodos = async () => {
+        try {
+          const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+          const data = await res.json();
+          console.log({ data });
+          setAllTodos((prevTodos) => [...prevTodos, ...data]);
+        } catch (err) {
+          console.log(err.message);
+        }
+      };
+
+      loadTodos();
+    }
+  }, [isBottom]);
+
+  return loading ? (
+    <div> loading... </div>
+  ) : (
+    allTodos.map((todo) => (
+      <div
+        key={todo.id}
+        style={{ padding: "20px", width: "100%", border: "1px solid #eee" }}
+      >
+        <div>{todo.title}</div>
+      </div>
+    ))
+  );
+}
+```
+
+## Emotion-UI
+
+### Conditional rendering in emotion styled components
+
+```css
+const Tab = styled(Basic)`
+${({isVisible, primary}) => isVisible && `
+  font-size: 10px;
+  text-transform: uppercase;
+`};
+
+const Tab = styled.button`
+  width: 100%;
+  outline: 0;
+  border: 0;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  line-height: 0.2;
+
+  ${({ active }) => active && `
+    background: blue;
+  `}
+  <Tab active {...props} />
+`;
+```
+
+### Pass props to styled component - object style
+
+```js
+const Card = styled('a')({
+  border: '1px solid blue',
+
+  },
+  props => ({borderTop: props.isConnected ? '5px solid red' : null})
+)
+```
+
+## Links:
+
+- http://fullstackreact.com 
+
+- https://gist.github.com/samerbuna
+
+- http://edgecoders.com  
+
+- https://medium.freecodecamp.org/react-pattern-centralized-proptypes-f981ff672f3b
+
+- https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45
+
+- https://egghead.io/lessons/react-redux-avoiding-array-mutations-with-concat-slice-and-spread
+
+- [shouldComponentUpdate usage](https://egghead.io/lessons/react-component-lifecycle-updating)
+
+- http://lucybain.com/blog/2017/react-js-when-to-rerender/
