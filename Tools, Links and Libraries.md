@@ -11,12 +11,16 @@
 ## Youtube channels
 
 - [Automation](https://www.youtube.com/channel/UCTt7pyY-o0eltq14glaG5dg) - Automation Step by Step - Raghav Pal
-
 - [DS](https://www.youtube.com/channel/UCD8yeTczadqdARzQUp29PJw)
 
 ### Devops
 
 - [intelliPaat](https://www.youtube.com/watch?v=QCXtNrIVdcw&list=PLVHgQku8Z934suC9LSE6vaAKjOH_MfRbE)
+
+
+### Tools 
+
+- https://www.mailinator.com/ - Temp email address generator for testing
 
 ### Web developement
 
@@ -73,14 +77,12 @@
 - `Uncle Robert C Martin` - Clean code
 - `Victor Rentea` - Clean Code
 
-### Go Lang
+### GoLang
 
 - https://tutorialedge.net/course/golang/
 
 - Rest APIs with `mux`
-
 - `fiber` - express like framework
-
 - `gorm` - ORM for `MySQL, SQLite, PostgreSQL, and SQL Server`
 
 # Online Courses - Programming
@@ -97,6 +99,11 @@
 - https://www.theodinproject.com/ (web and full stack)
 - Daily.dev
 
+### Database services
+
+- Supabase - Auth, data storage
+- Firebase - Auth, data storage
+
 # Libraries
 
 ## JS
@@ -108,6 +115,9 @@
 - `slatejs` - Rich text editor 
 - `nx` - Monorepo - Generates react, next, express, nest and more apps as monorepo
 - `turbo-repo` - Monorepo for NextJS
+- `pretty-ms`
+- `qnm` - Quick Node Module analyzer
+- `three.js` - 3D engine
 
 ### Bundlers
 
@@ -127,7 +137,6 @@
 ## Email clients and libraries
 
 - `SendGrid` Email delivery service
-
 - `nodemailer` and `nodemailer-sendgrid-transport`
 
 ## Backend
@@ -193,216 +202,149 @@
 ### Common
 
 - `react-app-rewired` - to modify or add babel and webpack config to `create-react-app` without ejecting
-
 - `docz` - For documentation site for react
-
 - `react-use` - custom react hooks
-
 - `restful-react`
-
 - `react-spring` - React animation
-
 - `GraphQL`, `relay`, `apolo`, `graphcool` - GraphQL
-
 - `reselect` and `recompose`
-
 - `react-cache` - To cache the data
-
 - `nwb` - React starter kit, like `create-react-app`
-
 - `react-docgen` - generate react components metadata
-
 - `chokidar` - watch files
-
 - `highlight.js` - syntax highlighted code examples
-
 - `immer` - Convert mutable state to immutable in react
-
 - `react-loading-skeleton` - skeleton loading for data or images
-
 - `formik`, `react-final-form`, `react-redux-form` - form library
-
 - `storybook` - component documentation
-
 - `react-ga` - Google analytics support (Refer dev-portfolio)
-
 - `SWR` - `React Hooks for Remote Data Fetching`
-
 - `react-query` - Similar to SWR
-
 - [React Hook Form](https://react-hook-form.com/get-started)
-
-- https://github.com/jxnblk/mdx-deck - `Markdown based Presentation`
-
+- [Markdown based Presentation](https://github.com/jxnblk/mdx-deck)
 - `mdx-deck-code-surfer` - Create better code slides
-
 - `the-platform` - `Suspense` ready helper functions
-
 - `react-cache` - for suspense to cache the resource
-
 - `next-auth` - Authentication for next-js apps
-
 - `netlify forms`
-
 - `@headlessui/react` - Accesible components styled using tailwindcss
-
 - `quill`, `monaco` - editors
-
 - `three-fiber` - 3D rendering 
-
+- `framer-motion` - animation library
 - `react-window` - Virtualized list (improves performance of huge lists)
+
+### State management and obserbility
+
+- `redux`  
+- `mobX`
+- `xstate`
+- `recoil`
+- `kea`
+- `RxJs`
+
+### CSS-in-JS
+
+- `styled-components`
+- `emotion`
 
 ### Testing
 
-- `Jest`, `Enzyme` - React testing
-
-- `react-testing-library` - Testing library - By `Kent C Dodds`
+- `Jest`, 
+- `Enzyme`
+- `react-testing-library`
 
 ### Component Libraries
 
 - `reactstrap` - wrapper for Bootstrap 4.0 for react
-
-- `styled-components` - To create styled components for react
-
-- `emotion` - Styled components, CSS in JS
-
-- [Material UI](https://material-ui.com/components/) - Material UI React components
-
+- [Material UI](https://material-ui.com/components/)
 - `Chakra UI`
-
 - `rebass` - React components, similar to bootstrap
 
 ### CMS - Content Management System
 
 - `strapi` - Open source
-
 - `contentful` - Freemium - has very good ecosystem - Headless CMS
-
 - `netlifycms` - Using github as backend for data storage and API - Headless CMS
-
 - `sanity` - Free has lot of free limits
 
 ### Static Site Generation
 
 - `NextJS` - `Static site generation`, `Server side rendering`
-
 - `Gatsby` - `Static site generation`, ` can be used CMS`, templates
-
-### State management and obserbility
-
-- `redux`  
-
-- `mobX`
-
-- `xstate`
-
-- `recoil`
-
-- https://kea.js.org/
-
-- `RxJs`
 
 ### Full stack 
 
 - [Blitz](https://blitzjs.com/)
+- Remix
+- Redwood
 
 ## Common Tools
 
 - `JFrog` - Artifactory to host the packages (npm, jars etc)
-
 - `Spinnaker` - Automated deployments
-
 - [Favicon Generator](https://realfavicongenerator.net/)
-
 - [cloudinary](https://cloudinary.com) - Image compressing - free tier
-
 - [imgix](https://imgix.com) - Image compressing - no free tiers
-
 - [boxsvg](https://boxy-svg.com/) - online svg editor
-
 - [Markdown editor](https://typora.io/)
-
 - [11nty](https://11ty.dev/) - static site generator
-
 - [Uptime Robot](https://uptimerobot.com) - Ping server to keep alive
 
 ## Productivity tools
 
 - Google Keep
-
 - Trello - Task management and todo
-
 - [notionHQ](https://www.notion.so/) - To do App
-
 - WunderList - Microsoft To do
 
 ## Free hosting
 
 - `vercel.com` - static and dynamic website
-
 - `netlify.com` - static and dynamic website
-
 - `heroku.com` - Node.js apps, backend API's
-
 - `firebase` - Static website and database and more
-
 - `Digital Ocean` - Cloud service
 
-## REST end points
+## REST APIs
 
 -  Star wars APIs
-	```json
-	{
-		"films": "https://swapi.co/api/films/",
-		"people": "https://swapi.co/api/people/",
-		"planets": "https://swapi.co/api/planets/",
-		"species": "https://swapi.co/api/species/",
-		"starships": "https://swapi.co/api/starships/",
-		"vehicles": "https://swapi.co/api/vehicles/"
-	}
-	```
-
+```json
+{
+	"films": "https://swapi.co/api/films/",
+	"people": "https://swapi.co/api/people/",
+	"planets": "https://swapi.co/api/planets/",
+	"species": "https://swapi.co/api/species/",
+	"starships": "https://swapi.co/api/starships/",
+	"vehicles": "https://swapi.co/api/vehicles/"
+}
+```
 - `jsonplaceholder`
-
 - `heroku endpoint with CORS`
-
 - https://jobs.github.com/positions.json - github jobs API
-
 - [Weather API](https://api.openweathermap.org/data/2.5/weather)- needs API KEY
-
 - `zenquotes.io` - Random Quotes API
+
 ### Java
 
 - `Jackson` - JSON serializer and deserializer
-
 - `Vert.X` - reactive programming library from eclipse
-
 - `RxJava` - Reactive programming library from Netflix
-
 - `Kafka`, `Aka` - Reactive Frameworks
-
 - `lombok` - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
-
 - `Spock` - Unit test framework
 
 ### Python
 
 - `jupyter` - interactive notebook
-
 - `altair` - https://altair-viz.github.io/ - data visualization with vega and vega lite
-
 - `nteract` - interactive code notebook like `jupyter`
-
--  https://altairviz.github.io/getting_started/starting.html
-
+- https://altairviz.github.io/getting_started/starting.html
 - https://mybinder.org/ - jupyter web interface
 
 ### Books
 
 - `Test driven development` - Kent Beck
-
 - `Growing object-oriented software guided by tests` - Steve Freeman, Nat Pryce
-
 - `Extreme programming explained` - Kent Beck
 
 ## Links:
@@ -410,57 +352,31 @@
 ### JS
 
 - [npm dependency visualiser](http://npm.anvaka.com/#!/)
-
 - [JS in depth articles](https://ponyfoo.com/articles)
-
 - https://www.steemit.com
-
 - https://www.itnext.io/
-
 - https://www.javascriptstuff.com/
-
 - https://www.webcodegeeks.com/html5/html5-internationalization-example/
-
 - https://www.egghead.io
-
 - https://www.scotch.io/@codebeast
-
 - https://www.telerik.com/blogs/functional-programming-with-javascript-object-arrays
-
 - http://www.osxdaily.com/2017/01/30/curl-post-request-command-line-syntax/
-
 - [Effectful.js](https://github.com/awto/effectfuljs)
-
 - [JS-meta-programing](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
-
 - [ES6-indepth-explorjs](https://exploringjs.com/)
-
 - [Javascript.info](https://javascript.info/)
-
 - [SpeakingJS.com](http://speakingjs.com/es5/ch19.html)
-
 - [Front end Magazine](https://increment.com/)
-
 - [40 Free Resources](https://dev.to/jfelx/40-high-quality-free-resources-for-web-development-10o3)
-
 - [Documentation aggregator](https://devdocs.io/)
-
 - [Dev hints](https://devhints.io/)
-
 - [Regex](https://ihateregex.io/)
-
 - [LogRocket Blog](https://blog.logrocket.com/)
-
 - Codewars
-
 - Codementor
-
 - Codeshare
-
 - Laracasts
-
 - Topcoder
-
 - Repl it
 
 ### Blogs
@@ -483,11 +399,8 @@
 ### Blogs I'm posting to
 
 - Dev.to
-
 - [Hashnode](https://hashnode.com/#)
-
 - medium
-
 - codementor.io
 
 ### Podcasts
@@ -504,35 +417,26 @@
 - Modern Web
 - CodePen Radio
 
-### Common web
+### General Programming
 
 - [Big O cheat sheet for data structures and algorithms](http://bigocheatsheet.com)
-
 - [Stock Images](https://picsum.photos/)
-
 - [Fake server API](https://miragejs.com/)
-
 - [CMS](https://www.contentful.com/developers/)
-
 - [Nested resolvers in Apollo Server](https://reactgo.com/nested-resolvers-relationaldata-graphql/)
-
 - [Resume Maker](resumemaker.online)
-
 - [Job Scan](jobscan.co)
-
 - [Resume Samples](https://www.cakeresume.com/Engineering-resume-samples)
 
 
 ### React
 
 - https://www.robinwieruch.de/
-
 - https://www.daveceddia.com/
 
 ### CSS
 
 - http://www.material-ui.com/#/
-
 - https://www.scrimba.com/g/gflexbox
 
 ### Mobile development
@@ -546,29 +450,19 @@
 ### Online coding playground
 
 - https://runkit.com - node packages installed
-
 - https://codesandbox.io - online code playground
-
 - https://codepen.io/ - JS Playground
-
 - https://scratchpad.io - HTML, CSS editor
-
 - https://ckeditor.com/ - WYSIWYG editor
-
 - https://repl.it - For JS, python, Node
-
 - https://jsfiddle.net - JS
 
 # References
 
 - https://javarevisited.blogspot.com/2017/01/how-to-prepare-for-java-interviews.html
-
 - https://javarevisited.blogspot.com/2018/07/java-multi-threading-interview-questions-answers-from-investment-banks.html
-
 - http://www.java67.com/2015/07/how-to-stop-thread-in-java-example.html
-
 - https://manojsatishkumar.github.io/
-
 - [Anti-patterns](https://sahandsaba.com/nine-anti-patterns-every-programmer-should-be-aware-of-with-examples.html)
 
 ### Mokito Video
@@ -633,15 +527,12 @@
 ## Jenkinsfile
 
 - https://stackoverflow.com/questions/43321026/can-i-define-multiple-agent-labels-in-a-declarative-jenkins-pipeline
-
 - https://stackoverflow.com/questions/44870978/how-to-run-multiple-stages-on-the-same-node-with-declarative-jenkins-pipeline
-
 - https://issues.jenkins-ci.org/browse/JENKINS-55561
 
 # Github issues
 
 - https://github.com/facebook/react/issues/13991 - React multiple versions error
-
 - https://github.com/facebook/react/issues/13991#issuecomment-435587809
 
 ## TODO
@@ -681,7 +572,6 @@
 ## Deployed Apps
 
 - https://node-mongo-jwt-auth.herokuapp.com/
-
 
 ## Download youtube videos 
 

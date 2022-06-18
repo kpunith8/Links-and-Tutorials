@@ -2038,41 +2038,40 @@ writes to S3 bucket and reverses the steps to getback or copy
   - Create a new REST API - Name it - Choose End-Point Type (Regional)
 - Actions 
   - Create Method - GET 
-    - Choose Integration Type (Lambda)
+    - Choose Integration Type (Lambda function)
     - Check Lambda Proxy Integration
     - Choose Lambda Function - Create one before hand - Choose Python or NodeJS
     - Save
 - Test 
-- Create a resource
+- Create another resource
   - `/users` - Enable API Gateway CORS 
   - Create a method - GET - Lambda Function
   - Save 
-- Actions
-   - Deploy - Create a new stage - name it (dev)
+- Deploy the API 
+   - Actions - Deploy - Create a new stage - name it (dev)
 - Copy the `invoke URL` once deployed
 
 
 #### Example - API Gateways with stages 
 
 - Update the lambda function and deploy it (updated lambda can be used for test and dev stages)
-- Create `lambda aliases` for `dev`, `test`, and `prod` in CF, `prod` alias pointing to the older version and
+- Create `lambda aliases` for `dev`, `test`, and `prod`, `prod` alias pointing to the older version and
    `dev` and `test` aliases pointing to the latest version.
+  - Select the lambda function - Actions -> Create Alias -> Create a alias and select specific version to each alias.
 - Create a resource `/stagevars` under the existing API Gateway
   - Add a `GET` method
   - Lambda Function - having the name of the lambda followed by, `:${stageVariables.lambdaAlias}`
-  - We need to set the `lambdaAlias` when creating stages for `dev`, `test`, and `prod`
+    > NOTE: We need to set the `lambdaAlias` when creating stages for `dev`, `test`, and `prod`
   - Save 
   - Lambda function created as `stage variables`, need appropriate `Function policy` on all the functions.
     `Run the command` shown in the modal (popup) in the `AWS-CLI` - which will add the resouce based policies
     to each lambda function referenced by API Gateway stages.
   - Make sure to replace the `${stageVariables.lambdaAlias}` with the appropriate alias in the command line, pass `--region eu-west-2`
 - Save - Test it - Pass `lambdaAlias Stage Variable` with a value, for eg., `dev`
-- Action - Deploy the API changes to the existing deployment stage, `dev` - Add the Stage Variable  `lambdaAlias` under 
-  `Stage Variables` tab under `Stages -> dev`-. Deploy the same API to the `test` stage - Add the Stage Variable  `lambdaAlias` under 
-  `Stage Variables` tab under `Stages -> test`
-- Repeat the same step for `prod` as well
+- Action - Deploy the API changes to the existing deployment stage, `dev` - Set the Stage Variable `lambdaAlias` to `dev` under 
+  `Stage Variables` tab under `Stages -> dev`
+- Repeat the same step for `prod`
 - Copy the invoke URL and test it.
-
 
 ### Canary Deployments
 
@@ -2087,7 +2086,7 @@ writes to S3 bucket and reverses the steps to getback or copy
   - Actions - Deploy API - Prod stage - Deploy
 - Open the `Stages -> Prod Stage -> Canary Tab` 
   - Update the `Percentage of requests directed to Canary` to `50%`(typically 5% for Prod) under `Stage's Request Distribution` section
-- Go back to the resources, for `/` resource, update the Integration Request to point to `Lambda function version-2`
+- Go back to the resources, for `/` resource, update the `Integration Request` to point to `Lambda function version-2`
 - Deploy the API to prod stage 
   - Actions - Deploy API - Select the stage - Prod (Canary Enabled) - Deploy
 - Test it using `Invoke URL` whether the canary deployment is working or not. Check the logs before promoting to next version.
@@ -2187,6 +2186,71 @@ writes to S3 bucket and reverses the steps to getback or copy
 - Use API keys to identify API clients and meter access
 - Configure `throttling limits` and  `quota limits` that are enforced on individual clients
 
+### Correct order for API keys
+
+- Create one or more APIs, configure the methods to require API key, and deploy the APIs to stages
+- Generate or import keys to distribute to application devs who will be using the APIs
+- Create a usage plan with the desired quota limits and throttling limits.
+- Associate API stages and API keys with the usage plan
+
+> Callers of the API must supply an assigned API key in the `X-API-KEY` header in requests to the API
+
+#### Example 
+
+- Create a resouce and a GET method, can be applied to any resource
+  - Click on `Method Request` -> Settings -> set `API key required` to `true`
+- Define a usage plan
+  - API Gateway -> Usage plans
+  - Create a usage plan with `Throttling limits` and `Quota limits`
+  - Add a usage plan to the API stage
+  - Create and add API key to the usage plan
+  - Once key created, can be seen under `Usage plans` -> `API keys`
+  - We can also configure the method throttling too
+- Deploy the API
+
+### API Gateway throttling 
+
+- API gateway throttles requests at 10000 requests per second across all APIs
+- Soft limit can be increased upon the request
+- In case of throttling error, `429 error code` - too many requests is thrown
+- Set the stage limit and method limits to increase the performance
+
+### API Gateway CORS 
+
+- The `OPTIONS` preflight request must contain the following headers,
+  - `Access-Control-Allow-Headers`
+  - `Access-Control-Allow-Methods`
+  - `Access-Control-Allow-Origin`
+
+- If the method we are accessing is a `Lambda Proxy` we need to send this header in the respose
+  `Access-Control-Allow-Origin: '*'`
+
+- Enabling the CORS for any resouce that is not using the `Lamda Proxy` integration work without any issues
+
+### API Gateway Security
+
+- IAM Permissions
+  - Create an IAM policy authorization and attach it to User/Role
+  - `Authentication` - `IAM` and `Authorization` - `IAM policy`
+  - Leverages `signature v4`
+
+- Congnito User Pools 
+  - Cognito fully manages user lifecycle, token expires automatically
+  - API gateway verifies idenitity automatically from Congnito
+  - `Authentication` - `Cognito User pools` and `Authorization` - `API Gateway methods`
+
+- Lambda Authorizer 
+  - Token based authorizer (bearer token) - eg., JWT or OAuth
+  - A request can be parameter based 
+  - Lamda will return an IAM policy for the user, result policy is cached
+  - `Authentication` - `External` and `Authorization` - `Lambda function` 
+
+- Example 
+  - Select the Request Method option on the method and select the Authorization type as `IAM policy`
+  it can be used with `Resouce Policy` option on the API - select and update the examples provided
+  - API Gateway -> Authorizers -> Select Lambda or Cognito based on the authorization type 
+
+- API Gateway can be used to create Websocket APIs
 
 ## Links, issues and fixes 
 

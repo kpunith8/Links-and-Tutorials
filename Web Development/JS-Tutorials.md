@@ -404,12 +404,21 @@ stripComments("1 /* a */+/* b */ 1") // 1 + 1
 - [\d.] - Means any digit or a period character. Perions loses its special meaning between the brackets. The same goes for other 
 special characters, such as `+`.
 
-- 
+
+### Backtracking
+ 
+When entering a branch, it remembers its current position so that it can go back and try another branch if the current one does not work out.
+for eg., check for binary or hexa/decimal numbers
+```js
+/\b([01]+b|[\da-f]+h|\d+)\b/
+```
+When matching the sring `103` expression, it will often happen that the top (binary) branch is entered even though the input does not actually contain a binary number,
+it becomes clear only at the 3 that we are in the wrong branch. The string does match the expression, after encountering the character `3`, it will start trying the branch for hexadecimal numbers, which fails again because there is no `h` after the number. So it tries the decimal number branch. This one fits, and a match is reported after all
+
+
 ### Examples
 
 https://www.regextester.com/
-
-- Binary or Hexa/decimal numbers: `/\b([01]+b|[\da-f]+h|\d+)\b/`
 
 - Domain: `^(?!://)([a-zA-Z0-9-_]+.)*[a-zA-Z0-9][a-zA-Z0-9-_]+.[a-zA-Z]{2,11}?$`
 
