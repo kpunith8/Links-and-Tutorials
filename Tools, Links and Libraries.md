@@ -118,6 +118,7 @@
 - `pretty-ms`
 - `qnm` - Quick Node Module analyzer
 - `three.js` - 3D engine
+- `msw` - service workers
 
 ### Bundlers
 
@@ -196,16 +197,15 @@
 - `testcafe` - Integration testing
 - [playwright](https://github.com/microsoft/playwright) - by Microsoft
 - `puppeteer` - by google
+- `msw` - service workers
 
 ## REACT
 
 ### Common
 
 - `react-app-rewired` - to modify or add babel and webpack config to `create-react-app` without ejecting
-- `docz` - For documentation site for react
 - `react-use` - custom react hooks
 - `restful-react`
-- `react-spring` - React animation
 - `GraphQL`, `relay`, `apolo`, `graphcool` - GraphQL
 - `reselect` and `recompose`
 - `react-cache` - To cache the data
@@ -214,24 +214,33 @@
 - `chokidar` - watch files
 - `highlight.js` - syntax highlighted code examples
 - `immer` - Convert mutable state to immutable in react
-- `react-loading-skeleton` - skeleton loading for data or images
-- `formik`, `react-final-form`, `react-redux-form` - form library
 - `storybook` - component documentation
-- `react-ga` - Google analytics support (Refer dev-portfolio)
-- `SWR` - `React Hooks for Remote Data Fetching`
-- `react-query` - Similar to SWR
 - [React Hook Form](https://react-hook-form.com/get-started)
+- `formik`, `react-final-form`, `react-redux-form` - form library
+- `netlify forms`
 - [Markdown based Presentation](https://github.com/jxnblk/mdx-deck)
+- `docz` - For documentation site for react
 - `mdx-deck-code-surfer` - Create better code slides
 - `the-platform` - `Suspense` ready helper functions
 - `react-cache` - for suspense to cache the resource
-- `next-auth` - Authentication for next-js apps
-- `netlify forms`
-- `@headlessui/react` - Accesible components styled using tailwindcss
+### Data fetching
+- `SWR` - `React Hooks for Remote Data Fetching`
+- `react-query` - Similar to SWR
+
+### Editors
 - `quill`, `monaco` - editors
+
+### Animation and lazy loading
 - `three-fiber` - 3D rendering 
+- `react-spring` - React animation
 - `framer-motion` - animation library
 - `react-window` - Virtualized list (improves performance of huge lists)
+- `react-loading-skeleton` - skeleton loading for data or images
+
+### Auth 
+
+- `next-auth` - Authentication for next-js apps
+- `useAuth` - Authentication for react projects
 
 ### State management and obserbility
 
@@ -259,6 +268,7 @@
 - [Material UI](https://material-ui.com/components/)
 - `Chakra UI`
 - `rebass` - React components, similar to bootstrap
+- `@headlessui/react` - Accesible components styled using tailwindcss
 
 ### CMS - Content Management System
 
@@ -330,7 +340,8 @@
 - `Vert.X` - reactive programming library from eclipse
 - `RxJava` - Reactive programming library from Netflix
 - `Kafka`, `Aka` - Reactive Frameworks
-- `lombok` - compile time annotation processor - to auto generate code for java classes, for ex: constructor, pojos, builder etc
+- `lombok` - compile time annotation processor - to auto generate code for java classes, 
+for ex: constructor, pojos, builder etc
 - `Spock` - Unit test framework
 
 ### Python

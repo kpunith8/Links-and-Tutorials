@@ -1,10 +1,11 @@
-## Creating package.json:
+# NPM 
 
-Initialize a npm project
+## Initialize a npm project
+
 ```
-$ npm init ## asks series of questions, answer them to create package.json or
+$ npm init # asks series of questions, answer them to create package.json or
 
-$ npm init -y ## supply -y option to accept defaults
+$ npm init -y # supply -y option to accept defaults
 ```
 
 Setting defaults
@@ -167,7 +168,7 @@ You need clean up the global link created for depended one
 $ npm uninstall
 ```
 
-## Updating all npm packages at once
+## Update all npm packages at once
 
 To discover new releases of the packages, run
 ```
@@ -192,15 +193,120 @@ $ npm install
 $ find / -name node_modules | xargs rm -rf
 ```
 
-## NVM - Node versioning manager
+## Monorepos
 
-After copying the script in `Mac` update the `.zshrc` or `.bashrc` and
-run this command to take an effect
+Add `workspaces` entry to package.json
+```json
+{
+	"name": "@monorepo",
+	"workspaces": [
+		"apps/*",
+		"libs/*"
+	]
+}
+```
+
+Create an `apps` folder and create a new app using `nextjs`, name it `dashboard`
+```
+$ npx create-next-app dashboard --use-npm 
+```
+
+Create a vite app, name it `blog`
+```
+$ npx create vite@latest
+```
+
+Update the names of each package in the respective `package.json` files, for eg., `@monorepo/dashboard` and `@monorepo/blog`.
+Only the root of the project will have a `package-lock.json` file
+
+Create a `libs` folder and create a new lib `utils` using `typescript` using `tsup`. 
+```json
+{
+	"name": "@monorepo/utils",
+	"version": "0.0.1",
+	"description": "Utils for monorepo",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"scripts": {
+		"dev": "tsup --watch",
+		"build": "tsup"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"tsup": "^6.1.0"
+	},
+	"tsup":{
+		"entry": ["src/index.ts"],
+		"dts": true,
+		"sourcemap": true,
+		"format": ["esm", "cjs"]
+	}
+}
+```
+
+### Installing packages 
+
+Install `tsup` package under `apps/utils` packge,
+```
+$ npm install -D tsup -w @monorepo/utils
+```
+
+Install a npm package in `all the packages` of a monorepo,
+```
+$ npm install lodash -ws
+```
+
+Install a npm package in the `root of a monorepo`,
+```
+$ npm install lodash -W
+```
+
+### Run a npm commands in a monorepo
+
+Run a `build` command in a specific package,
+```
+$ npm run build -w @monorepo/utils
+```
+
+Run a `build` command in a all packages,
+```
+$ npm run build -ws
+```
+
+Run dev scripts in all packages simultaneously, install `concurrently` package as a dev dependency
+```
+$ npm i -D concurrently -W
+```
+
+Add scripts to `package.json`
+```json
+{
+	"scripts": {
+		"dev:utils": "npm run dev -w @monorepo/utils",
+		"dev:dashboard": "npm run dev -w @monorepo/dashboard",
+		"dev:blog": "npm run dev -w @monorepo/blog",
+		"dev": "concurrently \"npm:dev:utils\" \"npm:dev:dashboard\" \"npm:dev:blog\""
+	}
+}
+```
+
+### Share code between monorepos
+
+Install `@monorepo/utils` package in `dashboard` and `blog` apps
+```
+$ npm i @monorepo/utils -w @monorepo/dashboard -w @monorepo/blog
+```
+
+## NVM - Node versioning manager (MacOS)
+
+Install `nvm` using `homebrew` and follow the steps mentioned, after copying a scripts, update the `.zshrc` or `.bashrc` and
+run,
 ```
 $ source ~/.zshrc
 ```
 
-nvm usage
+### nvm usage
 ```
 $ nvm install 8.0.0                     # Install a specific version number
 
@@ -215,7 +321,7 @@ $ nvm alias default 8.1.0               # Set default node version on a shell
 $ nvm alias default node                # Always default to the latest available node version on a shell
 ```
 
-## npx package runner
+## npx - Package Runner
 
 Temporarily install and invoke a package from `npm`
 
