@@ -31,7 +31,6 @@
 
 - `Ctrl + Shift + Y` for Lowercase, `Ctrl + Shift + X` for Uppercase.
 
-
 ## IntelliJ Shortcuts - Mac
 
 - `Option + Enter` - Quick Fix
@@ -102,7 +101,9 @@ Settings -> set, javascript.validate.enable": false
 
 - `Shift + Tab` - un-tab the tabs
 
-- `Shift + Alt` - select blocks of text while you drag your mouse.
+- `Shift + Option` - select blocks of text while you drag your mouse.
+
+- `Shift + Option + A` - Multiline commenting
 
 - `Cmd + D` - Select entries starting from the word under the cursor
 
@@ -111,6 +112,7 @@ Settings -> set, javascript.validate.enable": false
 - `Cmd + Shift + .` - Fast `Navigation` within the file
 
 - `Cmd + Shift + \` - Goto matching bracket
+
 
 ---
 

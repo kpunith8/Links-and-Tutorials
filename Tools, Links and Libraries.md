@@ -106,6 +106,12 @@
 
 # Libraries
 
+## JS Runtimes 
+
+- `nodejs`
+- `bun`
+- `deno`
+
 ## JS
 
 - `LABjs` - JS job loader
@@ -119,6 +125,10 @@
 - `qnm` - Quick Node Module analyzer
 - `three.js` - 3D engine
 - `msw` - service workers
+- `qwik` - JS Framework - Resumability - No JS until some action happens
+- `Astro` - JS Framework - Partial hydration - faster
+- `solidJS` - React like framework
+- `preact` - Built on top of React
 
 ### Bundlers
 
@@ -129,7 +139,7 @@
 - `parcel`
 - `snowpack`
 
-## Cross Platform desktop apps 
+## Cross Platform apps 
 
 - `electronjs`
 - [Neutralinojs](https://neutralino.js.org/)
@@ -180,6 +190,7 @@
 - `stripe` - payment and ui components
 - `vega` - Data visualization API
 - `lodash` - Reduces boiler plate for array, map and string and operations.
+- `ramda` - Functional programming utils
 - `express` - server container for node.js (hapi)
 - `underscore` - JS util functions for common tasks
 - `contentful` - CMS - content management system
@@ -198,6 +209,7 @@
 - [playwright](https://github.com/microsoft/playwright) - by Microsoft
 - `puppeteer` - by google
 - `msw` - service workers
+- `jest` - JS testing framework
 
 ## REACT
 
@@ -223,14 +235,21 @@
 - `mdx-deck-code-surfer` - Create better code slides
 - `the-platform` - `Suspense` ready helper functions
 - `react-cache` - for suspense to cache the resource
+
 ### Data fetching
+
 - `SWR` - `React Hooks for Remote Data Fetching`
 - `react-query` - Similar to SWR
 
 ### Editors
-- `quill`, `monaco` - editors
+
+- `quill`
+- `monaco`
+- `slate`
+- `plate` - Built on top of slate with plugins
 
 ### Animation and lazy loading
+
 - `three-fiber` - 3D rendering 
 - `react-spring` - React animation
 - `framer-motion` - animation library
@@ -246,7 +265,7 @@
 
 - `redux`  
 - `mobX`
-- `xstate`
+- `xstate` - state machine based
 - `recoil`
 - `kea`
 - `RxJs`
@@ -277,12 +296,12 @@
 - `netlifycms` - Using github as backend for data storage and API - Headless CMS
 - `sanity` - Free has lot of free limits
 
-### Static Site Generation
+### Static Site Generators
 
 - `NextJS` - `Static site generation`, `Server side rendering`
 - `Gatsby` - `Static site generation`, ` can be used CMS`, templates
 
-### Full stack 
+### Fullstack JSs
 
 - [Blitz](https://blitzjs.com/)
 - Remix
@@ -305,8 +324,7 @@
 - Google Keep
 - Trello - Task management and todo
 - [notionHQ](https://www.notion.so/) - To do App
-- WunderList - Microsoft To do
-
+- WunderList - Microsoft Todo App
 ## Free hosting
 
 - `vercel.com` - static and dynamic website
@@ -334,7 +352,7 @@
 - [Weather API](https://api.openweathermap.org/data/2.5/weather)- needs API KEY
 - `zenquotes.io` - Random Quotes API
 
-### Java
+## Java
 
 - `Jackson` - JSON serializer and deserializer
 - `Vert.X` - reactive programming library from eclipse
@@ -344,7 +362,7 @@
 for ex: constructor, pojos, builder etc
 - `Spock` - Unit test framework
 
-### Python
+## Python
 
 - `jupyter` - interactive notebook
 - `altair` - https://altair-viz.github.io/ - data visualization with vega and vega lite
@@ -352,13 +370,13 @@ for ex: constructor, pojos, builder etc
 - https://altairviz.github.io/getting_started/starting.html
 - https://mybinder.org/ - jupyter web interface
 
-### Books
+## Books
 
 - `Test driven development` - Kent Beck
 - `Growing object-oriented software guided by tests` - Steve Freeman, Nat Pryce
 - `Extreme programming explained` - Kent Beck
 
-## Links:
+## Links
 
 ### JS
 
@@ -438,7 +456,6 @@ for ex: constructor, pojos, builder etc
 - [Resume Maker](resumemaker.online)
 - [Job Scan](jobscan.co)
 - [Resume Samples](https://www.cakeresume.com/Engineering-resume-samples)
-
 
 ### React
 
