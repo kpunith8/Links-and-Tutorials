@@ -170,6 +170,7 @@
 - `TypeGraphQL`
 - `Apollo GraphQL`
 - `Hasura` - GraphQL client with PostgreSQL
+- `urql` - GgrapQL client for any JS frameworsk, like SolidJS
 - `fastify` - Express alternative
 - `nestjs` - Node.js Framework - Typescript based
 

@@ -8,7 +8,7 @@
 
 2. `O(log n)` `Logarithmic ` - searching algorithms
 
-3. `O(n)` `Constant Time` - loops, as the elements grow the number of operations grow too
+3. `O(n)` `Linear Time` - loops, as the elements grow the number of operations grow too
 
 4. `O(n*log(n))` `Logarithmic Linear` - sorting operations
 
