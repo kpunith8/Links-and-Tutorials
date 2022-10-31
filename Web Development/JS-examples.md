@@ -1,7 +1,3 @@
-## Tips and Tricks
-
-Add `debugger` text in the source code, so that chrome developer tools takes to that point when that point is hit.
-
 ## Lint errors and fixes
 
 `no-undef` lint error fix: can be added global section of webpack.config
@@ -19,8 +15,7 @@ Disable ESLint errors in-line
 
 ## Code Snippets
 
-## Fetch API for a POST request 
-
+### Fetch API for a POST request 
 ```js
 async function fetchGraphQL(text, variables) {
   // Fetch data from GitHub's GraphQL API:
@@ -65,12 +60,6 @@ saveUserData(event) {
 
 	return this.setState({ author: this.state.author});
 }
-```
-
-### Passing Parameters to function from render
-
-```js
-onClick={() => this.deleteRow(index)}
 ```
 
 ### Unique Array: Pass concatenated array as input
