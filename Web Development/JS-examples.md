@@ -359,6 +359,41 @@ callBinded('Karnataha'):
 mycallBinded('Karnataka');
 ```
 
+### Bind to create partial function
+
+Partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
+For instance, we have a function `send(from, to, text)`. Then, inside a user object we may want to use a partial variant of it: 
+`sendTo(to, text)` that sends from the current user.
+```js
+function mul(a, b) {
+  return a * b;
+}
+
+const triple = mul.bind(null, 3);
+// can be invoked as, tripple(4), tripple(5) and so on.
+```
+
+- Going partial without context
+```js
+function partial(func, ...argsBound) {
+  return function(...args) {
+    return func.call(this, ...argsBound, ...args);
+  }
+}
+
+const user = {
+  firstName: "John",
+  say(time, phrase) {
+    alert(`[${time}] ${this.firstName}: ${phrase}!`);
+  }
+};
+
+// add a partial method with fixed time
+user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
+
+user.sayNow("Hello");
+// [10:00] John: Hello!
+```
 
 ## Tricky JS
 

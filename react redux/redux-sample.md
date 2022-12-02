@@ -64,3 +64,8 @@ function doAction(state = initialState, action) {
   : state;
 }
 ```
+
+### Testing
+
+- https://github.com/xjamundx/redux-shopping-cart/tree/testing
+

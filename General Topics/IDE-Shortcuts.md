@@ -33,42 +33,55 @@
 
 ## IntelliJ Shortcuts - Mac
 
-- `Option + Enter` - Quick Fix
-
+### Sigle Keys
 - `F2` - Jump to next error suggestion 
+
+- `Tap Ctrl twice` - To run anything
+
+- `Tap Shift twice` - Search anything
+
+### Cmd + other keys
 
 - `Cmd + 1` - Open the Project window / toggle
 
 - `Cmd + E` - Open the recently opened files
 
-- `Option + F7` - To find the all usages if an interface or concrete class
-
-- `Tap Ctrl twice` - To run anything
-
-- `Tab Shift twice` - Search anything
-
-- `Option + Up key or Option + down key` - Extend/decrease the selection
-
-- `Option + Cmd + /` - To add a block comment
-
-- `Shitft + Cmd + Enter` - Complete the current statement
-
 - `Cmd + B` - To go to the file declaration
 
 - `Cmd + N` - To show the option `Generate` based on file type
+
+### Option + other keys
+
+- `Option + Enter` - Quick Fix
+
+- `Option + Enter` - To not to show the hint on parameter names 
+  - Turn off Inlay Hints in `Preferences -> Editor -> Inlay Hints`
+
+- `Option + F7` - To find the all usages if an interface or concrete class
 
 - `Option + Cmd + B` - To go to the implementation of the code
 
 - `Option + Cmd + L` - To format the code
 
-- `Ctrl + Shift + R` - To run the code
+- `Option + Cmd + /` - To add a block comment
+
+- `Option + Up key + down key` - Extend/decrease the selection
+
+### Ctrl + other keys
 
 - `Ctrl + T` - Shows the shortcuts availbale on selection to refactor
 
+### Shift + other keys
+
+- `Shift + Ctrl + R` - To run the code
+
 - `Shift + Cmd + A` - To find all the shortcuts
 
-- `Option + Enter` - To not to show the hint on parameter names 
-  - Turn off Inlay Hints in `Preferences -> Editor -> Inlay Hints`
+- `Shitf + Cmd + F` - Find in files
+
+- `Shitft + Cmd + Enter` - Complete the current statement
+
+### Other 
 
 - Use inspections to fix or find errors, for ex, migrating from JUnit4 to JUnit5 inspection can be done under
   `Inspections -> JUnit -> Migrate from JUnit4 to JUnit5`
@@ -93,6 +106,14 @@ Settings -> set, javascript.validate.enable": false
 
 - `Cmd + P` then `:` - Type the line number in the code to go to that line
 
+- `Cmd + D` - Select entries starting from the word under the cursor
+
+- `Cmd + K + M` - Tell editor to treat document in the selected format
+
+- `Cmd + Shift + .` - Fast `Navigation` within the file
+
+- `Cmd + Shift + \` - Goto matching bracket
+
 - `Option + Click` - select and edit multiple lines in source
 
 - `Option + Up/Down Arrow` - Move the selected lines up/down
@@ -104,15 +125,6 @@ Settings -> set, javascript.validate.enable": false
 - `Shift + Option` - select blocks of text while you drag your mouse.
 
 - `Shift + Option + A` - Multiline commenting
-
-- `Cmd + D` - Select entries starting from the word under the cursor
-
-- `Cmd + K + M` - Tell editor to treat document in the selected format
-
-- `Cmd + Shift + .` - Fast `Navigation` within the file
-
-- `Cmd + Shift + \` - Goto matching bracket
-
 
 ---
 

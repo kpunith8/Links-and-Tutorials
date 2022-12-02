@@ -434,7 +434,6 @@ Output
 3) {Species:jellyfish}
 ```
 
-
 - Make sure you don’t have a `nil pointer` that was passed into your function or method.
 for eg., Passing the pointer to a struct or any type without initializing it. In the below snippet, `creature`
 variable's instance is not created.
@@ -1066,6 +1065,26 @@ shown, `sammy.Greet().SayGoodbe('Sammy')`
 
 - In general, all methods on a given type should have either value or pointer receivers, but `not a mixture of both`.
 
+### User input - Accepting input from standard input
+
+```go
+// Helper function to read the value from the stdin
+func getInput(prompt string, r *bufio.Reader) (string, error) {
+  fmt.Print(prompt)
+  input, err := r.ReadString('/n')
+
+  return strings.TrimSpace(input), err
+}
+
+reader := bufio.NewReader(os.Stdin)
+fmt.Print("Enter a name: ")
+name, err := reader.ReadString('\n') // Read the value after user enters the new line key
+name = strings.TrimSpace(name)
+
+age, err := getInput("Enter your age: ", reader)
+fmt.Print(name, age)
+```
+
 ## Interfaces
 
 An interface type is a specification of methods used by the compiler to guarantee that a type provides implementations for those methods. Any type that has methods with the same name, same parameters, and same return values as those found in an interface’s definition are said to implement that interface and are allowed to be assigned to variables with that interface’s type.
@@ -1184,7 +1203,7 @@ An interface type is a specification of methods used by the compiler to guarante
 
 - Functions often return an `error value`, and calling code should handle errors by testing whether the error equals `nil`.
   ```go
-  i, err := strconv.Atoi("42")
+  i, err := strconv.Atoi("42") // strconv can be used to parse string values to appropriate types for eg., strconv.ParseFloat(item, 64)
   if err != nil {
     fmt.Printf("couldn't convert number: %v\n", err)
     return
