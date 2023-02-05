@@ -2,29 +2,108 @@
 
 Check the browser compatibility list for ES6, http://kangax.github.io/
 
-`let` and `const` have block scoping
-
-Invoking the function within a function
-```javascript
-const invoice = {
-  number: 123,
-  process: function() {
-    return () => console.log(this.number);
-  }
-};
-invoice.process()(); // returns 123
-```
-
 ### Arrow functions
 
-Arrow functions can `implicitly` return a value, the value of `this` is `not bound`, and there is no `arguments` object.
+- Arrow functions can `implicitly` return a value
+```js
+const getPrice = (itemCount, pricePerItem) => itemCount * pricePerItem
+// Implicitly returning an object
+const getUserName = user => ({...user, fullName: `${user.firstName} ${user.lastName}`})
+```
 
-It is not allowed to `bind` new object to the `arrow function` or `call` or `apply` methods on new object
+- They do not have their own `this` binding, `this` value is determined based on the lexical scope its defined.
+```js
+const printNumbers = {
+  phrase: 'The current value is:',
+  numbers: [1, 2, 3, 4],
 
-`Arrow functions` cannot be used as `constructors`, they do not have a `prototype` property, and they cannot be
-used as `generators` because they `don't allow the yield keyword`.
+  loop() {
+    this.numbers.forEach(function(number) {
+      console.log(this.phrase, number) // returns undefined 1, undefined 1 and so on, because `this` not determined by the scope its defined
+    })
+  },
+}
+```
 
-Putting arrow symbol on next line throws, Syntax error: `unexpected token =>`
+- To fix the issue with traditional functions we need to `bind this` to the annonymous function passed to `forEach`.
+```js
+const printNumbers = {
+  phrase: 'The current value is:',
+  numbers: [1, 2, 3, 4],
+
+  loop() {
+    this.numbers.forEach(function(number) {
+      console.log(this.phrase, number) // Now it returns, The current value is: 1, The current value is: 2 and so on
+    }.bind(this))
+  },
+}
+```
+
+With arrow functions we can write the `loop` function as shown below and fix the bug
+```js
+const printNumbers = {
+  phrase: 'The current value is:',
+  numbers: [1, 2, 3, 4],
+
+  loop() {
+    this.numbers.forEach(number => {
+      console.log(this.phrase, number) // returns The current value is: 1, The current value is: 2 and so on, because `this` is determined by the scope its defined
+    })
+  },
+}
+```
+
+- Arrow functions as object methods
+
+```js
+const printNumbers = {
+  phrase: 'The current value is:',
+  numbers: [1, 2, 3, 4],
+
+  loop: () => { // calling loop returns, Uncaught TypeError: Cannot read property 'forEach' of undefined
+    this.numbers.forEach((number) => {
+      console.log(this.phrase, number)
+    })
+  },
+}
+```
+Since the `object` does not create a `lexical scope`, the arrow function method looks for this in the outer scope `Window` in this example.
+Since the numbers property does not exist on the Window object, it throws an error.
+
+- It has no `arguments` object.
+- It is not allowed to `bind` new object to the `arrow function` or `call` or `apply` methods on new object
+- Arrow functions cannot be used as `constructors`, they do not have a `prototype` property.
+
+The traditional function has a constructor and prototype property.
+```js
+function myFunction() {
+  this.value = 12
+}
+
+// Log the prototype property of myFunction
+console.log(myFunction.prototype) // output: {constructor: ƒ}
+
+const instance = new myFunction()
+
+console.log(instance.value) // output: 12
+```
+
+In contrast, arrow functions do not have a prototype property. Create a new arrow function and try to log its prototype:
+```js
+const myArrowFunction = () => {}
+
+// Attempt to log the prototype property of myArrowFunction
+console.log(myArrowFunction.prototype) // output: undefined
+
+const arrowInstance = new myArrowFunction()
+
+console.log(arrowInstance) // Output: Uncaught TypeError: myArrowFunction is not a constructor
+```
+As a result of the missing `prototype` property, the `new keyword` is not available and you cannot construct an instance from the arrow function.
+
+- They cannot be used as `generators` because they `don't allow the yield keyword`.
+
+- Putting arrow symbol on next line throws, Syntax error: `unexpected token =>`
 ```js
 var getPrice = ()
   => 100;

@@ -48,13 +48,12 @@ window.a // returns 1
 
 `let` definitions are not available as a property on `window` object.
 
-All the `var` declarations are moved up the scope, called `Hoisting`. In case of function
-they are hoisted up to function declaration
+All the `var` declarations are moved up the scope, called `Hoisting`. 
+In case of function they are hoisted up to function declaration.
 
 `let` declarations are scoped to the `nearest block` and are `not hoisted`.
 
-Only `function declarations` will be visible to `window/this/global object` not the `function
-expressions` or `arrow` functions.
+Only `function declarations` will be visible to `window/this/global object` not the `function expressions` or `arrow` functions.
 
 `Diadic functions` - function with 2 params
 
@@ -147,7 +146,7 @@ let last = arr.last
 // Define last property on arr object, if you want to do it on Array object, replace arr with Array.prototype
 Object.defineProperty(arr, 'last', {
 	get: function() {
-			return this[this.length-1];
+		return this[this.length-1];
 	}
 });
 
