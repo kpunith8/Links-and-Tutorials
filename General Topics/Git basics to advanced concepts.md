@@ -8,7 +8,7 @@ git config --global user.name "Punith K"
 git config --global user.email "kpunith8@gmail.com"
 ```
 
-- Set `notepad++` as your default editor, it can be any text editor of your choice, by default git ships, `vim` as default editor.
+- Set `notepad++` as your default editor(windows only), it can be any text editor of your choice, by default git ships, `vim` as default editor.
 ```
 git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
 ```
@@ -43,7 +43,7 @@ git config core.ignorecase false
 git config --global --unset merge.conflictstyle
 ```
 
-### Cache the password for an hour
+### Cache the password for an hour (Windows)
 ```
 git config --global credential.helper cache --timeout=3600
 ```
@@ -77,14 +77,14 @@ git remote add origin <remote repository URL>
 git remote -v
 ```
 
-- Publish your changes to `master` branch
+- Publish your changes to `main` branch
 ```
-git push origin master
+git push origin main
 ```
 
 - Pull unrelated histories
 ```
-git pull origin master --allow-unrelated-histories
+git pull origin main --allow-unrelated-histories
 ```
 
 - List all branches in local working copy
@@ -98,26 +98,27 @@ git push origin <branch-name>
 ```
 
 ### To get the last 5 log entries for the specific user
+
 ```
 git log --oneline -5 --author <author-name>
 git shortlog # groups commits by user
 ```
 
-### Git `fetch` and `pull`
+### Git fetch and pull
 
 ```
-git fetch origin
+git fetch -p
 ```		
 - Fetches new branches from a remote repository - but it doesn't integrate any of this new data into your working files.
 fetch will never manipulate, destroy, or screw up anything. This means you can never fetch often enough.
 
 ```
-git pull origin master  
+git pull origin main --ff-only  
 ```
 - it does `git fetch` followed by `git merge`, updates current HEAD branch with the latest changes from the remote server. This means that pull not only downloads new data; it also directly integrates it into your current working copy files.
 
 This has a couple of consequences:
-- Since `git pull` tries to merge remote changes with your local ones, a so-called "merge conflict" can occur.
+- Since `git pull` tries to merge remote changes with your local ones, a "merge conflict" can occur.
 
 - It is highly recommended to start a `git pull` only with a clean working copy. This means that you should not have any uncommitted local changes before you pull.
 
@@ -125,7 +126,7 @@ This has a couple of consequences:
 ```
 git checkout -b <branch-name>  
 ```		
-option -b creates the branch and checkout to the branch created.
+option `-b` creates the branch and checks out to the branch created
 
 ### Merge two branches without fast-forward
 ```
@@ -146,28 +147,34 @@ git push origin :<brach_name>
 ```
 git branch -d <brach_name>
 ```
--d option deletes the branch
-> NOTE: use -D option if your branch is merged with master or use -d option
+`-d` option deletes the branch
+> NOTE: use `-D` option if your branch is merged with master or use -d option
 
 ### Undoing things
 
-- Unstaging a file:
+- Unstaging a file
 ```
 git reset HEAD CONTRIBUTING.md
 ```
 
-- Unmodifying a Modified File:
+- Unmodifying a Modified File
 ```
 git checkout -- CONTRIBUTING.md
 ```
 
-### Git alias: Type less in the command line
+### Git aliases
+
 ```
 git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.ci commit
 git config --global alias.st status
 git config --global alias.unstage 'reset HEAD --'
+```
+
+- Use them as,
+```
+git co
 ```
 
 - Put multiple commands in double quotes, edit `.gitconfig` add this under `[alias]` section as follows
@@ -179,24 +186,23 @@ sort-branch = !"git for-each-ref --sort=-committerdate refs/heads --format='%(HE
 sort-branch = !"git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(refname:short)|%(committerdate:relative)|%(subject)'|column -ts'|'"
 ```
 
-### Passing parameters to git alias
+### Remove untracked files
+
+- Resets the staged changes for the given commit-hash
 ```
-git config --global alias.ra ra="!f() {\
-    	git branch -D $1 \
-    }; f"
+git reset --hard <commit-hash>
 ```
 
-### Remove untracked files
-- resets the staged changes for the given commit-hash
+- To reset untracked files and directories
 ```
-git reset --hard
 git clean -df
 ```
--d for untracked directories and -f for untracked files
+`-d` option for untracked directories and `-f` option for untracked files
 
 ## Advanced git commands - David Baumgold - Advanced git - PyCon - 2015
+
 ```
-$ git show  <commit_hash>
+$ git show <commit_hash>
 ```
 Shows the information about current commit if no arguments passed to it, if commit hash passed it shows more info about that commit
 
@@ -211,7 +217,8 @@ git blame -L 12,22 <file-name>
 ```
 
 ### Cherry-pick
-- moving commits to other branches (if the commits are moved to `master` branch instead of `feature` branch)
+
+- Moving commits to other branches (if the commits are moved to `master` branch instead of `feature` branch)
 
 - `cherry-pick` doesn’t alter the existing history within a repository; instead, it adds to the history.
 As with other Git operations that introduce changes via the process of applying a diff,
@@ -245,7 +252,7 @@ HEAD^^ -> This commi's grand parent
 HEAD~5 -> Five commits back from the current commit, it is equivalent to HEAD^^^^^
 ```  
 
-### Rebase:
+### Rebase
 
 - https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview
 
@@ -336,6 +343,7 @@ git rebase --interactive HEAD~5 or <commit-hash>
 - Change the actions 'pick' from 'squash' for all the commits you wanted to squash them into one
 
 #### Splitting commits into small commits
+
 ```
 git rebase -i HEAD~3 or <commit-hash>
 ```
@@ -366,6 +374,7 @@ git rebase --continue
 ```
 git push -f origin <feature-branch>
 ```
+
 #### Remove the commit
 ```
 git rebase -i HEAD~2 or <commit-hash>
@@ -402,7 +411,7 @@ Once changes pushed, go to repo in the github, create pull request
 git commit --amend -m "YOUR-NEW-COMMIT-MESSAGE"
 ```
 
-- In case you’ve already pushed your commit to the remote branch then you need to force push the commit with this command:
+- In case you’ve already pushed your commit to the remote branch then you need to force push the commit with this command
 ```
 git push -f origin <branch>
 ```
@@ -439,7 +448,7 @@ git push origin :<old-branch-name>
 git push --set-upstream origin <new_branch>
 ```
 
-### Tags:
+### Tags
 
 #### Create a tag
 ```
@@ -467,22 +476,87 @@ git fetch --tags
 git checkout -b <new-branch> <tag-name>
 ```
 
-### Un-applying a Stash:
+## Stash
 
-- You can reapply the one you just stashed by using the command shown in the help output of the original stash command:
+-  It temporarily stashes changes you've made to your working copy so you can work on something else,
+and then come back and re-apply them later on.
+
+Stash your changes by running,
+```
+git stash
+```
+
+To provide a bit more context, it's good practice to annotate your stashes with a description, using 
+```
+git stash save "Add style to header"
+```
+Annotating your stash will be handly when you want to reapply from the multiple stashes.
+
+### Reapplying your stashed changes
+
+- You can reapply the one you just stashed by using,
 ```
 git stash apply
 ```
+> Note: It applies the changes to the branch you are in, make sure you are in the proper branch before applying.
 
-- If you want to apply one of the older stashes, you can specify it by naming it, like this:
+> Note: By default Git won't stash changes made to `untracked or ignored files`.
+
+- To stash untracked files use the option `-u` or `--include-untracked` as,
 ```
-git stash apply stash@{2}
+git stash -u
 ```
 
-- In some use case scenarios you might want to apply stashed changes, do some work,
+- To stash ignored files use the option `-a` as,
+```
+git stash -a
+```
+
+- We can stash multiple times in different branches, to see the list run,
+```
+git stash list
+```
+
+- If you want to apply one of the older stashes, you can specify it by naming it, like this
+```
+git stash apply/pop stash@{2}
+```
+
+#### Viewing stash diffs
+
+View a summary of a stash with,
+``` 
+git stash show
+```
+pass the -p option (or --patch) to view the full diff of a stash
+
+```
+git stash show -p
+```
+
+#### Creating a branch from the stash
+
+```
+git stash branch add-stylesheet stash@{1}
+```
+
+#### Cleaning up your stashes
+
+To drop a specific stash
+```
+git stash drop stash@{1}
+```
+
+To clear all the stashes
+```
+git stash clear
+```
+
+- In some scenarios you might want to apply stashed changes, do some work, 
 but then un-apply those changes that originally came from the stash.
-Git does not provide such a stash unapply command, but it is possible to achieve the effect by simply
- retrieving the patch associated with a stash and applying it in reverse:
+
+Git does not provide such a stash unapply command, but it is possible to achieve the effect by simply 
+retrieving the patch associated with a stash and applying it in reverse
 ```
 git stash show -p stash@{0} | git apply -R
 ```
@@ -500,6 +574,7 @@ git stash-unapply
 ```
 
 ### Kdiff3 - Resolivng conflicts
+
 - Download Kdiff-3 software and install it.
 
 ```
@@ -636,7 +711,7 @@ git commit -n or --no-verify
 git for-each-ref --sort='-committerdate' --format='%(refname)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--'
 ```
 
-# macOS Related
+# Mac Related
 
 ## Add multiple ssh-keys in Mac
 
