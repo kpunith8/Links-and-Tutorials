@@ -127,24 +127,41 @@ let getTotal = function(price, tax= price * 0.75) {
 
 - Rest operator is used in `function invocation`.
 
-- `...` used as rest operator before the argument
-  ```javascript
-  let sample = function(price, ...categories) {
-  };
-  // can be invoked as
-  sample(1, 'software', 'hardware');
-  ```
+- `...` used as rest operator and should be the last paramerter in the list.
+```js
+let sample = function(price, ...categories) {
+  //  categories will be collected as an array
+}
+// can be invoked as
+sample(1, 'software', 'hardware'); // price: 1, categories: ['software', 'hardware']
+```
 
 - `...` also used as `spread` operator, it accepts the array and splits into list of parameters
 
 - `..."45678"` - will be spread into `4,5,6,7,8`
 
-- It can also be used to `create a new object` without mutating
+- It can also be used to `create a new object` without mutating.
 
 - Person object added with the addPowers property and returns the new object without mutating person object
-  ```javascript
-  {...person, addPowers: 'superman'};
-  ```
+```js
+const newPerson = {...person, addPowers: 'superman'};
+```
+Earlier `Object.assign()` was used to copy an object
+
+- Preserves the data in a array 
+```js
+const users = [
+  { id: 1, name: 'Loki' },
+  { id: 2, name: 'Brad' },
+]
+
+// A new user to be added
+const newUser = { id: 3, name: 'Ron' }
+
+users.push(newUser) // mutates the users array
+// This preserves the users array
+const updatedUsers = [...users, newUser]
+```
 
 ### Object Literal Extensions
 
@@ -164,7 +181,7 @@ var productView = {
 
 - It returns object as follows, { price: 5.99, quantity: 10 } - it doesn't require `:` to be specified to set the value to the object
 
-### for of Loops
+### for..of Loop
 
 - Loops through elements of an array and characters of a string
   ```javascript
@@ -210,22 +227,60 @@ console.log(`Number is: ${"INV-" + number}`);
   }
   ```
 
-### De-structuring - arrays and objects
+### Destructuring
 
-- Array destructuring
-  ```javascript
-  let salary = ['32', '50', '75'];
-  // skip the elements by specifying , between elements for ex: [low, , high] second elementt is not assigned to any variable
-  let [low, average, high] = salary;
+- Arrays 
+In JavaScript are guaranteed to preserve their order.
+```js
+let salary = ['32', '50', '75'];
+// skip the elements by specifying , between elements for ex: [low, , high] second elementt is not assigned to any variable
+let [low, average, high] = salary;
 
-  console.log(average); // returns 50
-  ```
+const nestedArray = [1, 2, [3, 4], 5]
+const [one, two, [three, four], five] = nestedArray
 
-- Objects can be assigned to another name as follows,
-  ```javascript
-  const salary = {high: 25, average: 20};
-  {high: newHigh, average: newAvg} = salary;
-  ```
+console.log(average); // returns 50
+```
+
+- Objects
+
+The default assignment for object destructuring creates new variables with the same name as the object property, but objects can be assigned to another names as follows,
+```js
+const salary = {high: 25, average: 20};
+const {high: newHigh, average: newAvg} = salary;
+
+const user = {firstName: 'Punith', lastName: 'K', address: {street: 1, city: 'Madras', state: 'TN'}}
+// destructuring nested objects
+const {firtName, lastName, address: {street, city}} = user // Not able to access address property here
+
+// Access address property and destructure address object too
+const {firtName, lastName, address, address: {street, city}} = user
+```
+
+- Destructuring can be used to `access the object properties` of primitive values. 
+For example, String is a global object for strings, and has a length property
+```js
+const { length } = 'A string'
+```
+
+- Destructuring syntax can be applied to destructure the parameters in a function
+```js
+const todo = {
+  id: 1,
+  title: 'Get books',
+  date: '12/02/2023',
+}
+
+// Using forEach
+Object.entries(todo).forEach(([key, value]) => {
+  console.log(`${key}: ${value}`)
+})
+
+// Using a for..of
+for (let [key, value] of Object.entries(note)) {
+  console.log(`${key}: ${value}`)
+}
+```
 
 ### Classes and Modules
 
