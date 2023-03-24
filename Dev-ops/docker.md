@@ -132,9 +132,10 @@ $ docker inspect <container>
   ```
   $ docker container ls
   ```
+
   Stop the running container using,
   ```
-  $ docker container stop <Container NAME or ID>
+  $ docker stop <Container NAME or ID>
   ```
   Otherwise, you get an error response from the daemon when you try to re-run the container in the next step.
 
@@ -469,11 +470,11 @@ $ docker service create --replicas=100 nodejs
 
   $ docker container ls -a             # List all containers, even those not running
 
-  $ docker container stop <hash>           # Gracefully stop the specified container
-
   $ docker container kill <hash>         # Force shutdown of the specified container
 
-  $ docker container rm <hash>        # Remove specified container from this machine
+  $ docker stop <hash>           # Gracefully stop the specified container
+
+  $ docker rm <hash>        # Remove specified container from this machine
 
   $ docker container rm $(docker container ls -a -q)         # Remove all containers
 
