@@ -12,6 +12,11 @@ Update `pip` itself
 python3 -m pip install --upgrade pip
 ```
 
+- Updating with python 3.11
+```
+python3.11 -m pip install --upgrade pip
+```
+
 ## List and list comprehension
 
 `squares = [x**2 for x in range(1, 100)]` returns `[1, 4, 9, ..upto 100]`
@@ -355,6 +360,52 @@ However, if a module is being run directly, then __name__ instead set to the str
 
 It tests whether your script is being run directly or being imported by somewhere else.
 
+
+## Libraries
+
+- `openpyxl` - Excel operations and charts
+- `django` - Web framework
+- `fastAPI` - API
+
+### Machine learning
+
+- `numpy` - 2D array processing
+- `pandas` - Data analysis lib, data frame
+- `matplotlib` - 2d plotting graphs
+- `scikit-learn`
+- `sklearn`
+
+### Other packages
+
+- yfinance
+- statsmodels
+- pandas_datereader
+- PyPortfolioOpt
+
+### Jupyter notebook
+
+Open the jupyter notebook in mac
+```bash
+$ jupyter notebook
+```
+`Ctrl + C` to stop the server
+
+- Install a package in jupyter
+```
+!pip3 install pandas
+```
+
+- Using the latest python version for jupyter
+install the `ipykernel` module for python3.11 on your system and activate it for jupyter
+```
+$ pip3.11 install ipykernel
+$ python3.11 -m ipykernel install --user
+```
+
+## Code Editors
+
+- Thonny - Free python editor enables to debug
+
 ## Links
 
 - https://docs.python.org/3/library/functions.html
@@ -366,19 +417,3 @@ It tests whether your script is being run directly or being imported by somewher
 - `pypi.org` - For python packages
 
 - `Kaggle.com` - To download the data sets for machine learning
-
-## Libraries
-
-- `openpyxl` - Excel operations and charts
-
-- `django` - web framework
-
-### For Machine learning
-
-- `numpy` - 2D array processing
-
-- `pandas` - Data analysis lib, data frame
-
-- `matplotlib` - 2d plotting graphs
-
-- `scikit-learn`
