@@ -1,3 +1,27 @@
+# Linux Tips
+
+## Add user and elevate their privileges
+
+```bash
+# Should be a root user to create
+$ sudo useradd test-user
+
+# Set the password 
+$ sudo passwd test-user
+
+# Give privileges
+$ sudo usermod -aG sudo test-user 
+
+# Change the user 
+$ sudo su test-user
+
+# Create a test-user directory in the /home 
+$ sudo mkdir test-user
+
+# Go to newly created home directory 
+$ cd ~
+```
+
 ## grep
 
 ### Print 20 lines from where the pattern matches
