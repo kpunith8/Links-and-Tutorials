@@ -1,31 +1,31 @@
-## Installing latest node on docker image
+# Installing latest node on docker image
 
 - Refer https://gist.github.com/remarkablemark/aacf14c29b3f01d6900d13137b21db3a
-  ```
-  FROM ubuntu:latest
+```dockerfile
+FROM ubuntu:latest
 
-  RUN set -eux \
-      && apt-get update \
-      && apt-get install -y curl \
-      && apt-get -y autoclean \
-      && rm -rf /var/lib/apt/lists/*
+RUN set -eux \
+    && apt-get update \
+    && apt-get install -y curl \
+    && apt-get -y autoclean \
+    && rm -rf /var/lib/apt/lists/*
 
-  ENV NVM_VERSION v0.34.0
-  ENV NODE_VERSION v13.7.0
-  ENV NVM_DIR /usr/local/nvm
-  RUN mkdir $NVM_DIR
-  RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+ENV NVM_VERSION v0.34.0
+ENV NODE_VERSION v13.7.0
+ENV NVM_DIR /usr/local/nvm
+RUN mkdir $NVM_DIR
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-  ENV NODE_PATH $NVM_DIR/$NODE_VERSION/lib/node_modules
-  ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+ENV NODE_PATH $NVM_DIR/$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 
-  RUN echo "source $NVM_DIR/nvm.sh && \
-      nvm install $NODE_VERSION && \
-      nvm alias default $NODE_VERSION && \
-      nvm use default" | bash
+RUN echo "source $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default" | bash
 
-  CMD ["bash"]
-  ```
+CMD ["bash"]
+```
 
 - Build the custom image
 ```
@@ -43,27 +43,67 @@ $ docker run --volume `pwd`:/app --volume /Users/punith.k/Library/Caches/Cypress
 $ docker run --volume `pwd`:/app --workdir /app node-img:latest bash -c "npm ci && npm run test:cypress"
 ```
 
-### Node image with least permissions
+### Node image with least permissions (security)
 
-```
+```dockerfile
 FROM node:12-slim
+
 EXPOSE 3000
+
 RUN mkdir /app && chown -R node:node /app
 
 WORKDIR /app
+
 USER node
 
 COPY --chown=node:node package.json package-lock*.json ./
+
 RUN npm install && npm cache clean --force
 
 COPY --chown=node:node . .
+
 CMD ['node', 'start']
+```
+
+### Node docker for secure and optimized containers
+
+```dockerfile
+FROM node:alpine-19.6
+
+WORKDIR /usr/src/app 
+
+ENV NODE_ENV production
+
+# Copy the package.json and package-lock.json files first and then install the packages,
+# copying the /src folder first would invalidate layers cached by docker previously as we might have
+# changes in the /src folder 
+COPY package*.json ./
+
+# use `ci` clean install option instead of `install` as it installs the exact version each time and maintains
+# the consistency and use --only=production to install only dependencies and it doesn't install dev dependencies
+# as they are not required to run in production
+
+# Using the mount type cache is a buildkit feature, it should enabled and set DOCKER_BUILDKIT=1
+# This installs the packages to .npm cache folder on subsequent installs it checks the cache and 
+# installs if it is not found in the cache. This improves the build speed.
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+    npm set cache /usr/src/app/.npm && \ 
+    npm ci --only=production
+
+# Set the user as node, its non-root user, it doesn't have all the permission to make changes to the root
+USER node
+
+COPY --chown=node:node ./src .
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
 ```
 
 - Accessing the file system for node image is not allowed
 
 - Give the root permissions, as follows,
-```
+```sh
 $ docker-compose exec -u root node bash
 ```
 
@@ -133,6 +173,15 @@ $ docker logs node-express-app
 $ docker rm node-express-app -fv
 // or
 $ docker volume prune
+```
+
+## Heredocs - Allow for specifying multiple command to be run with in a single step 
+
+```dockerfile
+RUN <<EOF
+apt update
+apt install node -y
+EOF
 ```
 
 ## Docker compose
@@ -539,7 +588,7 @@ $ docker-compose up --scale hello-world=3
 
 ### Pipe log output to STDOUT using Dokcerfile
 
-```
+```dockerfile
 FROM mhart/alpine-node
 COPY index.js .
 RUN ln -sf /dev/stdout ./docker.log

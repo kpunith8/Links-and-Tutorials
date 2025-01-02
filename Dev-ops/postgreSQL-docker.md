@@ -7,7 +7,7 @@
 version: '3.8'
 services:
   db:
-    image: postgres:12
+    image: postgres:15.1-alpine
     ports:
       - "5432:5432"
     volumes:
@@ -17,9 +17,11 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=studentdb
     restart: always
+volumes:
+  pgdata:
 ```
 
-- Start the docker-compose
+- Start the docker-compose in detatching mode (run in the background)
 ```
 $ docker-compose up -d
 ```
@@ -37,4 +39,16 @@ $ docker-compose run db bash
 - Login to the psql inside the bash
 ```
 $ psql --host=db --username=postgres --dbname=studentdb
+```
+
+### Run the container using docker run command 
+
+```
+$ docker run -d \
+  --name db \
+  -e POSTGRES_PASSWORD=password \
+  -v pgdata:/var/lib/postgresql/data \
+  -p 5432:5432 \
+  --restart unless-stopped \
+  postgres:15.1-alpine
 ```

@@ -531,3 +531,5 @@ $ docker service create --replicas=100 nodejs
 - https://docs.docker.com/develop/develop-images/multistage-build/ - multi stage build - build with more than one images
 - https://goinbigdata.com/docker-run-vs-cmd-vs-entrypoint/
 - https://aboullaite.me/docker-hacks/
+- https://www.docker.com/blog/how-to-dockerize-react-app/
+- https://www.docker.com/blog/8-top-docker-tips-tricks-for-2024/
