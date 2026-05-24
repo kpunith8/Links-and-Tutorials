@@ -289,7 +289,7 @@ services:
     volumes:
       - mongo-db:/data/db
 
-# This is make sure mongo-db named volume works without any errors
+# This is to make sure mongo-db named volume works without any errors
 volumes: 
   mongo-db:
 ```

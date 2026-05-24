@@ -1,2 +1,0 @@
-## AWS Solution Architect - Freecodecamp
-

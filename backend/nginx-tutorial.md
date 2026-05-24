@@ -1,17 +1,17 @@
-## Ngnix - Code tested on Mac M1
+## Nginx - Code tested on Mac M1
 
 - It is a high performance web server to handle http requests. 
 - It can also acts as a `load balancer`.
 - It sits betweeen servers as a `proxy server` and distributes the requests to different servers based on the load. Load distribution happens based on a selected algorithm.
 - Caching is a core feature of Nginx proxy.
-- It provides security through encrypted communication, ngnix handles SSL/TLS encryption
+- It provides security through encrypted communication, nginx handles SSL/TLS encryption
 and decryption and enforces https.
 - It can also compress the response to reduce the bandwidth and improve load times, and
 also it sends responses as chunks (video or audio streaming)
 
 ### Configuration 
 
-- The main config file is typically named `ngnix.conf` and usually located in `/etc/ngnix` folder and we can use directives or blocks to define the configuration.
+- The main config file is typically named `nginx.conf` and usually located in `/etc/nginx` folder and we can use directives or blocks to define the configuration.
 
 - Example of simple web server serving static files
 ```conf
@@ -211,18 +211,18 @@ services:
 $ docker-compose up --build -d
 ```
 
-### Configure ngnix proxy
+### Configure nginx proxy
 
-- Install and configure the ngnix proxy
+- Install and configure the nginx proxy
 ```sh
-$ brew install ngnix
+$ brew install nginx
 ```
 
 ```conf
 # Main context (this is the global configuration)
 worker_processes 1; 
 # It can be changed based on the number of processors where the server runs
-# to process the requests parallely, pass `auto` to let ngnix decide based
+# to process the requests parallely, pass `auto` to let nginx decide based
 # on the available cores
 
 events {
@@ -234,7 +234,7 @@ http {
 
     # Upstream block to define the Node.js backend servers
     upstream nodejs_cluster {
-        # Specify the algorithm for load balancing, by default ngnix uses round robin
+        # Specify the algorithm for load balancing, by default nginx uses round robin
         # Refer documentation for other algos, for eg, least connections, IP hash,
         # Weighted round robin, and weighted least connections.
         server 127.0.0.1:3001;
@@ -273,7 +273,7 @@ http {
 
 ### Obtain a SSL/TLS certificate
 
-- SSL certs enable cryption by using a `public key`.
+- SSL certs enable encryption using a `public key`.
 - When user accesses a website via https, the server provides its SSL cert, which
 contains a public key
 - The client(browser) can use this key to establish a `secure, encrypted session`
@@ -284,10 +284,10 @@ with the server.
 $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt
 ```
 
-- Private key must be kept secret and is for the server, `ngnix-selfsigned.key`
-and `ngnix-selfsigned.crt` is a public key.
+- Private key must be kept secret and is for the server, `nginx-selfsigned.key`
+and `nginx-selfsigned.crt` is a public key.
 
-- Restart the ngnix to apply cert changes.
+- Restart the nginx to apply cert changes.
 
 ### Commands reference
 
@@ -296,9 +296,9 @@ and `ngnix-selfsigned.crt` is a public key.
 $ nginx
 ```
 
-- Check more about ngnix options, eg., --config-path
+- Check more about nginx options, eg., --config-path
 ```sh
-$ ngnix -V
+$ nginx -V
 ```
 
 - Get options

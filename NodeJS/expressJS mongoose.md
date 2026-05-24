@@ -153,11 +153,11 @@ var blog = mongoose.model('Blog', blogSchema);
 
 ### Instance methods
 
-- Instances of Models are `documents`. Documents have many of their own built-in instance methods. We can also define custom document instance methods.
-
+- Instances of Models are `documents`. Documents have many of their own built-in instance methods. 
+We can also define custom document instance methods.
 - Overwriting a default mongoose document method may lead to unpredictable results.
-
-- Do not declare methods using ES6 `arrow functions` (=>). Arrow functions explicitly `prevent binding` `this`, so your method will not have access to the document.
+- Do not declare methods using ES6 `arrow functions` (=>). 
+Arrow functions explicitly `prevent binding` `this`, so your method will not have access to the document.
 
 ```javascript
 // define a schema
@@ -227,10 +227,8 @@ Each of these functions `returns` a mongoose `Query object`.
 	- Model.updateMany()
 	- Model.updateOne()
 
-
 -  mongoose query can be executed in one of two ways. First, if you pass in a `callback` function.
 Mongoose will execute the query `asynchronously` and pass the results to the `callback`.
-
 - A query also has a `.then()` function, and thus can be used as a `promise`.
 
 ### Executing
